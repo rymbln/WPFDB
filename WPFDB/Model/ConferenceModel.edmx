@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ConferenceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ConferenceModelStoreContainer">
+    <EntitySet Name="Persons" EntityType="ConferenceModel.Store.Persons" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ScienceDegrees" EntityType="ConferenceModel.Store.ScienceDegrees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ScienceStatuses" EntityType="ConferenceModel.Store.ScienceStatuses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sexes" EntityType="ConferenceModel.Store.Sexes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Specialities" EntityType="ConferenceModel.Store.Specialities" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ScienceDegreePerson" Association="ConferenceModel.Store.FK_ScienceDegreePerson">
+      <End Role="ScienceDegrees" EntitySet="ScienceDegrees" />
+      <End Role="Persons" EntitySet="Persons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ScienceStatusPerson" Association="ConferenceModel.Store.FK_ScienceStatusPerson">
+      <End Role="ScienceStatuses" EntitySet="ScienceStatuses" />
+      <End Role="Persons" EntitySet="Persons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SexPerson" Association="ConferenceModel.Store.FK_SexPerson">
+      <End Role="Sexes" EntitySet="Sexes" />
+      <End Role="Persons" EntitySet="Persons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SpecialityPerson" Association="ConferenceModel.Store.FK_SpecialityPerson">
+      <End Role="Specialities" EntitySet="Specialities" />
+      <End Role="Persons" EntitySet="Persons" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Persons">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SecondName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ThirdName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BirthDate" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="WorkPlace" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Post" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SpecialityId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ScienceDegreeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ScienceStatusId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SexId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ScienceDegrees">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ScienceStatuses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sexes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Specialities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ScienceDegreePerson">
+    <End Role="ScienceDegrees" Type="ConferenceModel.Store.ScienceDegrees" Multiplicity="1" />
+    <End Role="Persons" Type="ConferenceModel.Store.Persons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ScienceDegrees">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Persons">
+        <PropertyRef Name="ScienceDegreeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ScienceStatusPerson">
+    <End Role="ScienceStatuses" Type="ConferenceModel.Store.ScienceStatuses" Multiplicity="1" />
+    <End Role="Persons" Type="ConferenceModel.Store.Persons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ScienceStatuses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Persons">
+        <PropertyRef Name="ScienceStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SexPerson">
+    <End Role="Sexes" Type="ConferenceModel.Store.Sexes" Multiplicity="1" />
+    <End Role="Persons" Type="ConferenceModel.Store.Persons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sexes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Persons">
+        <PropertyRef Name="SexId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SpecialityPerson">
+    <End Role="Specialities" Type="ConferenceModel.Store.Specialities" Multiplicity="1" />
+    <End Role="Persons" Type="ConferenceModel.Store.Persons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specialities">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Persons">
+        <PropertyRef Name="SpecialityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ConferenceModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ConferenceEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Persons" EntityType="ConferenceModel.Person" />
+          <EntitySet Name="ScienceDegrees" EntityType="ConferenceModel.ScienceDegree" />
+          <EntitySet Name="ScienceStatuses" EntityType="ConferenceModel.ScienceStatus" />
+          <EntitySet Name="Sexes" EntityType="ConferenceModel.Sex" />
+          <EntitySet Name="Specialities" EntityType="ConferenceModel.Speciality" />
+          <AssociationSet Name="FK_ScienceDegreePerson" Association="ConferenceModel.FK_ScienceDegreePerson">
+            <End Role="ScienceDegrees" EntitySet="ScienceDegrees" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScienceStatusPerson" Association="ConferenceModel.FK_ScienceStatusPerson">
+            <End Role="ScienceStatuses" EntitySet="ScienceStatuses" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SexPerson" Association="ConferenceModel.FK_SexPerson">
+            <End Role="Sexes" EntitySet="Sexes" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpecialityPerson" Association="ConferenceModel.FK_SpecialityPerson">
+            <End Role="Specialities" EntitySet="Specialities" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SecondName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ThirdName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BirthDate" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="WorkPlace" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Post" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SpecialityId" Type="Guid" Nullable="false" />
+          <Property Name="ScienceDegreeId" Type="Guid" Nullable="false" />
+          <Property Name="ScienceStatusId" Type="Guid" Nullable="false" />
+          <Property Name="SexId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="ScienceDegree" Relationship="ConferenceModel.FK_ScienceDegreePerson" FromRole="Persons" ToRole="ScienceDegrees" />
+          <NavigationProperty Name="ScienceStatus" Relationship="ConferenceModel.FK_ScienceStatusPerson" FromRole="Persons" ToRole="ScienceStatuses" />
+          <NavigationProperty Name="Sex" Relationship="ConferenceModel.FK_SexPerson" FromRole="Persons" ToRole="Sexes" />
+          <NavigationProperty Name="Speciality" Relationship="ConferenceModel.FK_SpecialityPerson" FromRole="Persons" ToRole="Specialities" />
+        </EntityType>
+        <EntityType Name="ScienceDegree">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Persons" Relationship="ConferenceModel.FK_ScienceDegreePerson" FromRole="ScienceDegrees" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="ScienceStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Persons" Relationship="ConferenceModel.FK_ScienceStatusPerson" FromRole="ScienceStatuses" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="Sex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Persons" Relationship="ConferenceModel.FK_SexPerson" FromRole="Sexes" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="Speciality">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Persons" Relationship="ConferenceModel.FK_SpecialityPerson" FromRole="Specialities" ToRole="Persons" />
+        </EntityType>
+        <Association Name="FK_ScienceDegreePerson">
+          <End Role="ScienceDegrees" Type="ConferenceModel.ScienceDegree" Multiplicity="1" />
+          <End Role="Persons" Type="ConferenceModel.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScienceDegrees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="ScienceDegreeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScienceStatusPerson">
+          <End Role="ScienceStatuses" Type="ConferenceModel.ScienceStatus" Multiplicity="1" />
+          <End Role="Persons" Type="ConferenceModel.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScienceStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="ScienceStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SexPerson">
+          <End Role="Sexes" Type="ConferenceModel.Sex" Multiplicity="1" />
+          <End Role="Persons" Type="ConferenceModel.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="SexId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpecialityPerson">
+          <End Role="Specialities" Type="ConferenceModel.Speciality" Multiplicity="1" />
+          <End Role="Persons" Type="ConferenceModel.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="SpecialityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ConferenceModelStoreContainer" CdmEntityContainer="ConferenceEntities">
+    <EntitySetMapping Name="Persons">
+      <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.Person)">
+        <MappingFragment StoreEntitySet="Persons">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+          <ScalarProperty Name="ThirdName" ColumnName="ThirdName" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="WorkPlace" ColumnName="WorkPlace" />
+          <ScalarProperty Name="Post" ColumnName="Post" />
+          <ScalarProperty Name="SpecialityId" ColumnName="SpecialityId" />
+          <ScalarProperty Name="ScienceDegreeId" ColumnName="ScienceDegreeId" />
+          <ScalarProperty Name="ScienceStatusId" ColumnName="ScienceStatusId" />
+          <ScalarProperty Name="SexId" ColumnName="SexId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScienceDegrees">
+      <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.ScienceDegree)">
+        <MappingFragment StoreEntitySet="ScienceDegrees">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScienceStatuses">
+      <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.ScienceStatus)">
+        <MappingFragment StoreEntitySet="ScienceStatuses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sexes">
+      <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.Sex)">
+        <MappingFragment StoreEntitySet="Sexes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Specialities">
+      <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.Speciality)">
+        <MappingFragment StoreEntitySet="Specialities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

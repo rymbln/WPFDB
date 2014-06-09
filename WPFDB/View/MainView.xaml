@@ -1,0 +1,28 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:v="clr-namespace:WPFDB.View" 
+    xmlns:vm="clr-namespace:WPFDB.ViewModel"
+    x:Class="WPFDB.View.MainView"
+        Title="MainWindow" Height="350" Width="525">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:SpecialityWorkspaceViewModel}">
+            <v:SpecialityWorkspaceView/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <TabControl Padding="0"  >
+            <!--<TabItem>
+                <TabItem.Header>
+                    Persons
+                </TabItem.Header>
+                <ContentControl Margin="10" Content="{Binding Path=./View/PersonWorkspace}" />
+            </TabItem>-->
+            <TabItem>
+                <TabItem.Header>Specialities</TabItem.Header>
+                <ContentControl Margin="10"  Content="{Binding Path=.SpecialityWorkspace}"  />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
