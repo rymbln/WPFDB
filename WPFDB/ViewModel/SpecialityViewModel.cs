@@ -39,7 +39,21 @@ namespace WPFDB.ViewModel
             set
             {
                 this.Model.Name = value;
-                this.OnPropertyChanged("DepartmentName");
+                this.OnPropertyChanged("Name");
+            }
+        }
+
+        public string Id
+        {
+
+            get
+            {
+                return this.Model.Id.ToString();
+            }
+            set
+            {
+                this.Model.Name = value;
+                this.OnPropertyChanged("Id");
             }
         }
     }

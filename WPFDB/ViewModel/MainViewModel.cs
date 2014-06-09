@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WPFDB.Common;
 using WPFDB.Data;
+using WPFDB.ViewModel.Helpers;
 
 namespace WPFDB.ViewModel
 {
@@ -43,6 +44,7 @@ namespace WPFDB.ViewModel
             }
 
             this.SpecialityWorkspace = new SpecialityWorkspaceViewModel(allSpecialities, unitOfWork);
+            this.SaveCommand = new DelegateCommand((o) => this.Save());
         }
 
         /// <summary>

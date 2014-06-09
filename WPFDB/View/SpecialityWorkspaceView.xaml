@@ -35,7 +35,7 @@
                         </StackPanel>
                     </HeaderedContentControl.Header>
 
-                    <DataGrid SelectedItem="{Binding Path=CurrentDepartment, Mode=TwoWay}" ItemsSource="{Binding Path=AllSpecialities}" AutoGenerateColumns="False" >
+                    <DataGrid SelectedItem="{Binding Path=CurrentSpeciality, Mode=TwoWay}" ItemsSource="{Binding Path=AllSpecialities}" AutoGenerateColumns="False" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Width="Auto" Binding="{Binding Path=Id}" />
                             <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />

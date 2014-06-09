@@ -75,7 +75,7 @@ namespace WPFDB.ViewModel
             set
             {
                 this.currentSpeciality = value;
-                this.OnPropertyChanged("CurrentDepartment");
+                this.OnPropertyChanged("CurrentSpeciality");
             }
         }
 
@@ -95,6 +95,7 @@ namespace WPFDB.ViewModel
         private void AddSpeciality()
         {
             Speciality sp = this.unitOfWork.CreateObject<Speciality>();
+            sp.Id = GuidComb.Generate();
             this.unitOfWork.AddSpeciality(sp);
 
             SpecialityViewModel vm = new SpecialityViewModel(sp);

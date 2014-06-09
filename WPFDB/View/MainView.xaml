@@ -12,6 +12,8 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
+        <StackPanel>
+        <Button Width="60" Height="40" VerticalAlignment="Top" Margin="5" HorizontalAlignment="Left" Command="{Binding Path=SaveCommand}">Save</Button>
         <TabControl Padding="0"  >
             <!--<TabItem>
                 <TabItem.Header>
@@ -24,5 +26,6 @@
                 <ContentControl Margin="10"  Content="{Binding Path=.SpecialityWorkspace}"  />
             </TabItem>
         </TabControl>
+        </StackPanel>
     </Grid>
 </Window>

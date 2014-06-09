@@ -52,7 +52,6 @@ namespace WPFDB.Model
             ObjectStateEntry ose;
             return this.ObjectStateManager.TryGetObjectStateEntry(entity, out ose);
         }
-    	
         /// <summary>
         /// Initializes a new ConferenceEntities object using the connection string found in the 'ConferenceEntities' section of the application configuration file.
         /// </summary>
