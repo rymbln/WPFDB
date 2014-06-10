@@ -26,7 +26,7 @@ namespace WPFDB.Data
 
         IObjectSet<ScienceStatus> ScienceStatuses { get; }
 
-
+        IObjectSet<Conference>  Conferences { get; }
         /// <summary>
         /// Save all pending changes to the data context
         /// </summary>

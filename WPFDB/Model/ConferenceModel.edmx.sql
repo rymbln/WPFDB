@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 06/09/2014 14:34:44
+-- Date Created: 06/10/2014 17:08:29
 -- Generated from EDMX file: C:\Users\Inspiron\documents\visual studio 2012\Projects\WPFDB\WPFDB\Model\ConferenceModel.edmx
 -- --------------------------------------------------
 
@@ -66,35 +66,53 @@ CREATE TABLE [dbo].[Persons] (
     [SpecialityId] uniqueidentifier  NOT NULL,
     [ScienceDegreeId] uniqueidentifier  NOT NULL,
     [ScienceStatusId] uniqueidentifier  NOT NULL,
-    [SexId] uniqueidentifier  NOT NULL
+    [SexId] uniqueidentifier  NOT NULL,
+    [SourceId] int  NOT NULL
 );
 GO
 
 -- Creating table 'ScienceDegrees'
 CREATE TABLE [dbo].[ScienceDegrees] (
     [Id] uniqueidentifier  NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+    [Name] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'ScienceStatuses'
 CREATE TABLE [dbo].[ScienceStatuses] (
     [Id] uniqueidentifier  NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+    [Name] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'Sexes'
 CREATE TABLE [dbo].[Sexes] (
     [Id] uniqueidentifier  NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+    [Name] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'Specialities'
 CREATE TABLE [dbo].[Specialities] (
     [Id] uniqueidentifier  NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+    [Name] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Conferences'
+CREATE TABLE [dbo].[Conferences] (
+    [Id] uniqueidentifier  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL
 );
 GO
 
@@ -129,6 +147,12 @@ GO
 -- Creating primary key on [Id] in table 'Specialities'
 ALTER TABLE [dbo].[Specialities]
 ADD CONSTRAINT [PK_Specialities]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Conferences'
+ALTER TABLE [dbo].[Conferences]
+ADD CONSTRAINT [PK_Conferences]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 

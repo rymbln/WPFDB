@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,24 +7,24 @@ using WPFDB.Model;
 
 namespace WPFDB.ViewModel
 {
-    public class SexViewModel : ViewModelBase
+    public class ConferenceViewModel:ViewModelBase
     {
-        public SexViewModel(Sex sex)
+        public ConferenceViewModel(Conference conference)
         {
-            if (sex == null)
+            if (conference == null)
             {
-                throw new ArgumentNullException("sex");
+                throw new ArgumentNullException("conference");
             }
-            this.Model = sex;
+            this.Model = conference;
         }
 
-        public Sex Model { get; private set; }
+        public Conference Model { get; private set; }
 
         public string Name { get { return this.Model.Name; } set { this.Model.Name = value; this.OnPropertyChanged("Name"); } }
         public string Id
         {
             get { return this.Model.Id.ToString(); }
-            set {}
+            set { }
         }
 
         public string Code
@@ -57,4 +56,3 @@ namespace WPFDB.ViewModel
         }
     }
 }
-

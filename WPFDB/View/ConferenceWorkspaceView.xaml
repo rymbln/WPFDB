@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="WPFDB.View.SexWorkspaceView"
+﻿<UserControl x:Class="WPFDB.View.ConferenceWorkspaceView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,8 +10,8 @@
 >
 
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type vm:SexViewModel}">
-            <v:SexDetailView />
+        <DataTemplate DataType="{x:Type vm:ConferenceViewModel}">
+            <v:ConferenceDetailView />
         </DataTemplate>
     </UserControl.Resources>
 
@@ -22,20 +22,20 @@
         </Grid.ColumnDefinitions>
         <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="0">
             <HeaderedContentControl.Header>
-                Sex
+                Conferences
             </HeaderedContentControl.Header>
             <ScrollViewer>
                 <HeaderedContentControl>
                     <HeaderedContentControl.Header>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Margin="2">
-                            <Hyperlink Command="{Binding Path=AddSexCommand}">Add Sex</Hyperlink>
-                            | <Hyperlink Command="{Binding Path=DeleteSexCommand}">Delete Sex</Hyperlink>
+                            <Hyperlink Command="{Binding Path=AddConferenceCommand}">Add Conference</Hyperlink>
+                            | <Hyperlink Command="{Binding Path=DeleteConferenceCommand}">Delete Conference</Hyperlink>
                             </TextBlock>
                         </StackPanel>
                     </HeaderedContentControl.Header>
 
-                    <DataGrid SelectedItem="{Binding Path=CurrentSex}" ItemsSource="{Binding Path=AllSexes}" AutoGenerateColumns="False" >
+                    <DataGrid SelectedItem="{Binding Path=CurrentConference}" ItemsSource="{Binding Path=AllConferences}" AutoGenerateColumns="False" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Width="Auto" Binding="{Binding Path=Id}" IsReadOnly="True" />
                             <DataGridTextColumn Header="Code" Binding="{Binding Path=Code, Mode=TwoWay}" />
@@ -54,7 +54,7 @@
             <ScrollViewer>
                 <StackPanel>
                     <Border Style="{StaticResource DetailBorder}" Margin="5">
-                        <ContentControl HorizontalAlignment="Right" Content="{Binding Path=CurrentSex}" />
+                        <ContentControl HorizontalAlignment="Right" Content="{Binding Path=CurrentConference}" />
                     </Border>
                 </StackPanel>
             </ScrollViewer>

@@ -37,21 +37,7 @@ namespace WPFDB.Model
     public partial class ConferenceEntities : ObjectContext, IConferenceContext
     {
         #region Constructors
-        public void Save()
-        {
-            this.SaveChanges();
-        }
-
-        /// <summary>
-        /// Checks if the supplied object is tracked in this data context
-        /// </summary>
-        /// <param name="obj">The object to check for</param>
-        /// <returns>True if the object is tracked, false otherwise</returns>
-        public bool IsObjectTracked(object entity)
-        {
-            ObjectStateEntry ose;
-            return this.ObjectStateManager.TryGetObjectStateEntry(entity, out ose);
-        }
+    
         /// <summary>
         /// Initializes a new ConferenceEntities object using the connection string found in the 'ConferenceEntities' section of the application configuration file.
         /// </summary>
@@ -168,6 +154,22 @@ namespace WPFDB.Model
             }
         }
         private ObjectSet<Speciality> _Specialities;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public IObjectSet<Conference> Conferences
+        {
+            get
+            {
+                if ((_Conferences == null))
+                {
+                    _Conferences = base.CreateObjectSet<Conference>("Conferences");
+                }
+                return _Conferences;
+            }
+        }
+        private ObjectSet<Conference> _Conferences;
 
         #endregion
 
@@ -212,6 +214,14 @@ namespace WPFDB.Model
         {
             base.AddObject("Specialities", speciality);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Conferences EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToConferences(Conference conference)
+        {
+            base.AddObject("Conferences", conference);
+        }
 
         #endregion
 
@@ -220,6 +230,140 @@ namespace WPFDB.Model
     #endregion
 
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ConferenceModel", Name="Conference")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Conference : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Conference object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="code">Initial value of the Code property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="sourceId">Initial value of the SourceId property.</param>
+        public static Conference CreateConference(global::System.Guid id, global::System.String code, global::System.String name, global::System.Int32 sourceId)
+        {
+            Conference conference = new Conference();
+            conference.Id = id;
+            conference.Code = code;
+            conference.Name = name;
+            conference.SourceId = sourceId;
+            return conference;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _Id;
+        partial void OnIdChanging(global::System.Guid value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, false, "Code");
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false, "Name");
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SourceId
+        {
+            get
+            {
+                return _SourceId;
+            }
+            set
+            {
+                OnSourceIdChanging(value);
+                ReportPropertyChanging("SourceId");
+                _SourceId = StructuralObject.SetValidValue(value, "SourceId");
+                ReportPropertyChanged("SourceId");
+                OnSourceIdChanged();
+            }
+        }
+        private global::System.Int32 _SourceId;
+        partial void OnSourceIdChanging(global::System.Int32 value);
+        partial void OnSourceIdChanged();
+
+        #endregion
+
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -245,7 +389,8 @@ namespace WPFDB.Model
         /// <param name="scienceDegreeId">Initial value of the ScienceDegreeId property.</param>
         /// <param name="scienceStatusId">Initial value of the ScienceStatusId property.</param>
         /// <param name="sexId">Initial value of the SexId property.</param>
-        public static Person CreatePerson(global::System.Guid id, global::System.String firstName, global::System.String secondName, global::System.String thirdName, global::System.String birthDate, global::System.String workPlace, global::System.String post, global::System.Guid specialityId, global::System.Guid scienceDegreeId, global::System.Guid scienceStatusId, global::System.Guid sexId)
+        /// <param name="sourceId">Initial value of the SourceId property.</param>
+        public static Person CreatePerson(global::System.Guid id, global::System.String firstName, global::System.String secondName, global::System.String thirdName, global::System.String birthDate, global::System.String workPlace, global::System.String post, global::System.Guid specialityId, global::System.Guid scienceDegreeId, global::System.Guid scienceStatusId, global::System.Guid sexId, global::System.Int32 sourceId)
         {
             Person person = new Person();
             person.Id = id;
@@ -259,6 +404,7 @@ namespace WPFDB.Model
             person.ScienceDegreeId = scienceDegreeId;
             person.ScienceStatusId = scienceStatusId;
             person.SexId = sexId;
+            person.SourceId = sourceId;
             return person;
         }
 
@@ -532,6 +678,30 @@ namespace WPFDB.Model
         private global::System.Guid _SexId;
         partial void OnSexIdChanging(global::System.Guid value);
         partial void OnSexIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SourceId
+        {
+            get
+            {
+                return _SourceId;
+            }
+            set
+            {
+                OnSourceIdChanging(value);
+                ReportPropertyChanging("SourceId");
+                _SourceId = StructuralObject.SetValidValue(value, "SourceId");
+                ReportPropertyChanged("SourceId");
+                OnSourceIdChanged();
+            }
+        }
+        private global::System.Int32 _SourceId;
+        partial void OnSourceIdChanging(global::System.Int32 value);
+        partial void OnSourceIdChanged();
 
         #endregion
 
@@ -708,11 +878,15 @@ namespace WPFDB.Model
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        public static ScienceDegree CreateScienceDegree(global::System.Guid id, global::System.String name)
+        /// <param name="sourceId">Initial value of the SourceId property.</param>
+        /// <param name="code">Initial value of the Code property.</param>
+        public static ScienceDegree CreateScienceDegree(global::System.Guid id, global::System.String name, global::System.Int32 sourceId, global::System.String code)
         {
             ScienceDegree scienceDegree = new ScienceDegree();
             scienceDegree.Id = id;
             scienceDegree.Name = name;
+            scienceDegree.SourceId = sourceId;
+            scienceDegree.Code = code;
             return scienceDegree;
         }
 
@@ -770,6 +944,54 @@ namespace WPFDB.Model
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SourceId
+        {
+            get
+            {
+                return _SourceId;
+            }
+            set
+            {
+                OnSourceIdChanging(value);
+                ReportPropertyChanging("SourceId");
+                _SourceId = StructuralObject.SetValidValue(value, "SourceId");
+                ReportPropertyChanged("SourceId");
+                OnSourceIdChanged();
+            }
+        }
+        private global::System.Int32 _SourceId;
+        partial void OnSourceIdChanging(global::System.Int32 value);
+        partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, false, "Code");
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
 
         #endregion
 
@@ -816,11 +1038,15 @@ namespace WPFDB.Model
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        public static ScienceStatus CreateScienceStatus(global::System.Guid id, global::System.String name)
+        /// <param name="sourceId">Initial value of the SourceId property.</param>
+        /// <param name="code">Initial value of the Code property.</param>
+        public static ScienceStatus CreateScienceStatus(global::System.Guid id, global::System.String name, global::System.Int32 sourceId, global::System.String code)
         {
             ScienceStatus scienceStatus = new ScienceStatus();
             scienceStatus.Id = id;
             scienceStatus.Name = name;
+            scienceStatus.SourceId = sourceId;
+            scienceStatus.Code = code;
             return scienceStatus;
         }
 
@@ -878,6 +1104,54 @@ namespace WPFDB.Model
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SourceId
+        {
+            get
+            {
+                return _SourceId;
+            }
+            set
+            {
+                OnSourceIdChanging(value);
+                ReportPropertyChanging("SourceId");
+                _SourceId = StructuralObject.SetValidValue(value, "SourceId");
+                ReportPropertyChanged("SourceId");
+                OnSourceIdChanged();
+            }
+        }
+        private global::System.Int32 _SourceId;
+        partial void OnSourceIdChanging(global::System.Int32 value);
+        partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, false, "Code");
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
 
         #endregion
 
@@ -924,11 +1198,15 @@ namespace WPFDB.Model
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        public static Sex CreateSex(global::System.Guid id, global::System.String name)
+        /// <param name="sourceId">Initial value of the SourceId property.</param>
+        /// <param name="code">Initial value of the Code property.</param>
+        public static Sex CreateSex(global::System.Guid id, global::System.String name, global::System.Int32 sourceId, global::System.String code)
         {
             Sex sex = new Sex();
             sex.Id = id;
             sex.Name = name;
+            sex.SourceId = sourceId;
+            sex.Code = code;
             return sex;
         }
 
@@ -986,6 +1264,54 @@ namespace WPFDB.Model
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SourceId
+        {
+            get
+            {
+                return _SourceId;
+            }
+            set
+            {
+                OnSourceIdChanging(value);
+                ReportPropertyChanging("SourceId");
+                _SourceId = StructuralObject.SetValidValue(value, "SourceId");
+                ReportPropertyChanged("SourceId");
+                OnSourceIdChanged();
+            }
+        }
+        private global::System.Int32 _SourceId;
+        partial void OnSourceIdChanging(global::System.Int32 value);
+        partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, false, "Code");
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
 
         #endregion
 
@@ -1032,11 +1358,15 @@ namespace WPFDB.Model
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        public static Speciality CreateSpeciality(global::System.Guid id, global::System.String name)
+        /// <param name="sourceId">Initial value of the SourceId property.</param>
+        /// <param name="code">Initial value of the Code property.</param>
+        public static Speciality CreateSpeciality(global::System.Guid id, global::System.String name, global::System.Int32 sourceId, global::System.String code)
         {
             Speciality speciality = new Speciality();
             speciality.Id = id;
             speciality.Name = name;
+            speciality.SourceId = sourceId;
+            speciality.Code = code;
             return speciality;
         }
 
@@ -1094,6 +1424,54 @@ namespace WPFDB.Model
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SourceId
+        {
+            get
+            {
+                return _SourceId;
+            }
+            set
+            {
+                OnSourceIdChanging(value);
+                ReportPropertyChanging("SourceId");
+                _SourceId = StructuralObject.SetValidValue(value, "SourceId");
+                ReportPropertyChanged("SourceId");
+                OnSourceIdChanged();
+            }
+        }
+        private global::System.Int32 _SourceId;
+        partial void OnSourceIdChanging(global::System.Int32 value);
+        partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, false, "Code");
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
 
         #endregion
 

@@ -19,6 +19,9 @@
         <DataTemplate DataType="{x:Type vm:ScienceDegreeWorkspaceViewModel}">
             <v:ScienceDegreeWorkspaceView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ConferenceWorkspaceViewModel}">
+            <v:ConferenceWorkspaceView/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <StackPanel>
@@ -43,8 +46,8 @@
                     <ContentControl Margin="10"  Content="{Binding Path=.ScienceDegreeWorkspace}"  />
                 </TabItem>
                 <TabItem>
-                    <TabItem.Header>Science statuses</TabItem.Header>
-                    <ContentControl Margin="10"  Content="{Binding Path=.ScienceStatusWorkspace}"  />
+                    <TabItem.Header>Conferences</TabItem.Header>
+                    <ContentControl Margin="10"  Content="{Binding Path=.ConferenceWorkspace}"  />
                 </TabItem>
             </TabControl>
         </StackPanel>

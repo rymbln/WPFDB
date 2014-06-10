@@ -103,6 +103,16 @@ namespace WPFDB.Common
             this.underlyingContext.ScienceDegrees.AddObject(obj);
         }
 
+        public void AddConference(Conference obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("conference");
+            }
+
+            this.CheckEntityDoesNotBelongToUnitOfWork(obj);
+            this.underlyingContext.Conferences.AddObject(obj);
+        }
         /// <summary>
         /// Registers the addition of a new conference
         /// </summary>
@@ -183,6 +193,22 @@ namespace WPFDB.Common
             }
 
             this.underlyingContext.ScienceStatuses.DeleteObject(obj);
+        }
+
+        public void RemoveConference(Conference obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("conference");
+            }
+
+            this.CheckEntityBelongsToUnitOfWork(obj);
+            //foreach (var person in obj.Conferences.ToList())
+            //{
+            //    person.ScienceStatus = null;
+            //}
+
+            this.underlyingContext.Conferences.DeleteObject(obj);
         }
         /// <summary>
         /// Registers the removal of an existing person

@@ -68,7 +68,9 @@
     <Compile Include="Common\GuidComb.cs" />
     <Compile Include="Common\IUnitOfWork.cs" />
     <Compile Include="Common\UnitOfWork.cs" />
+    <Compile Include="Data\ConferenceRepository.cs" />
     <Compile Include="Data\IConferenceContext.cs" />
+    <Compile Include="Data\IConferenceRepository.cs" />
     <Compile Include="Data\IScienceDegreeRepository.cs" />
     <Compile Include="Data\IScienceStatusRepository.cs" />
     <Compile Include="Data\ISexRepository.cs" />
@@ -77,11 +79,14 @@
     <Compile Include="Data\ScienceStatusRepository.cs" />
     <Compile Include="Data\SexRepository.cs" />
     <Compile Include="Data\SpecialityRepository.cs" />
+    <Compile Include="Model\ConferenceEntities.cs" />
     <Compile Include="Model\ConferenceModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ConferenceModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ConferenceViewModel.cs" />
+    <Compile Include="ViewModel\ConferenceWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\Helpers\DelegateCommand.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ScienceDegreeViewModel.cs" />
@@ -93,6 +98,12 @@
     <Compile Include="ViewModel\SpecialityViewModel.cs" />
     <Compile Include="ViewModel\SpecialityWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\Helpers\ViewModelBase.cs" />
+    <Compile Include="View\ConferenceDetailView.xaml.cs">
+      <DependentUpon>ConferenceDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ConferenceWorkspaceView.xaml.cs">
+      <DependentUpon>ConferenceWorkspaceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ScienceDegreeDetailView.xaml.cs">
       <DependentUpon>ScienceDegreeDetailView.xaml</DependentUpon>
     </Compile>
@@ -117,6 +128,14 @@
     <Compile Include="View\SpecialityWorkspaceView.xaml.cs">
       <DependentUpon>SpecialityWorkspaceView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\ConferenceDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ConferenceWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

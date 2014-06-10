@@ -37,6 +37,7 @@ namespace WPFDB.Common
         void AddSex(Sex sex);
         void AddScienceDegree(ScienceDegree scienceDegree);
         void AddScienceStatus(ScienceStatus scienceStatus);
+        void AddConference(Conference conference);
 
 
         /// <summary>
@@ -64,6 +65,7 @@ namespace WPFDB.Common
         void RemoveSex(Sex sex);
         void RemoveScienceDegree(ScienceDegree scienceDegree);
         void RemoveScienceStatus(ScienceStatus scienceStatus);
+        void RemoveConference(Conference conference);
         /// <summary>
         /// Registers the removal of an existing employee
         /// </summary>

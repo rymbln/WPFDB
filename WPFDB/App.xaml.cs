@@ -36,9 +36,10 @@ namespace WPFDB
             ISexRepository sexRepository = new SexRepository(context);
             IScienceDegreeRepository  scienceDegreeRepository = new ScienceDegreeRepository(context);
             IScienceStatusRepository scienceStatusRepository = new ScienceStatusRepository(context);
+            IConferenceRepository conferenceRepository = new ConferenceRepository(context);
             IUnitOfWork unit = new UnitOfWork(this.context);
 
-            MainViewModel main = new MainViewModel(unit, specialityRepository, sexRepository, scienceDegreeRepository, scienceStatusRepository );
+            MainViewModel main = new MainViewModel(unit, specialityRepository, sexRepository, scienceDegreeRepository, scienceStatusRepository , conferenceRepository);
             MainView window = new View.MainView {DataContext = main};
             window.Show();
 

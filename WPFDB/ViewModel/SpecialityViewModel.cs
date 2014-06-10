@@ -56,5 +56,33 @@ namespace WPFDB.ViewModel
             }
 
         }
+
+        public string Code
+        {
+            get
+            {
+                return this.Model.Code;
+            }
+
+            set
+            {
+                this.Model.Code = value;
+                this.OnPropertyChanged("Code");
+            }
+        }
+
+        public int SourceId
+        {
+            get
+            {
+                return this.Model.SourceId;
+            }
+
+            set
+            {
+                this.Model.SourceId = value;
+                this.OnPropertyChanged("SourceId");
+            }
+        }
     }
 }
