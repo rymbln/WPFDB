@@ -10,6 +10,15 @@
         <DataTemplate DataType="{x:Type vm:SpecialityWorkspaceViewModel}">
             <v:SpecialityWorkspaceView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SexWorkspaceViewModel}">
+            <v:SexWorkspaceView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ScienceStatusWorkspaceViewModel}">
+            <v:ScienceStatusWorkspaceView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ScienceDegreeWorkspaceViewModel}">
+            <v:ScienceDegreeWorkspaceView/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <StackPanel>
@@ -25,7 +34,19 @@
                 <TabItem.Header>Specialities</TabItem.Header>
                 <ContentControl Margin="10"  Content="{Binding Path=.SpecialityWorkspace}"  />
             </TabItem>
-        </TabControl>
+                <TabItem>
+                    <TabItem.Header>Sex</TabItem.Header>
+                    <ContentControl Margin="10"  Content="{Binding Path=.SexWorkspace}"  />
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>Science degrees</TabItem.Header>
+                    <ContentControl Margin="10"  Content="{Binding Path=.ScienceDegreeWorkspace}"  />
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>Science statuses</TabItem.Header>
+                    <ContentControl Margin="10"  Content="{Binding Path=.ScienceStatusWorkspace}"  />
+                </TabItem>
+            </TabControl>
         </StackPanel>
     </Grid>
 </Window>

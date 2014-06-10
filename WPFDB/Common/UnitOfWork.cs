@@ -61,15 +61,46 @@ namespace WPFDB.Common
         /// </summary>
         /// <param name="speciality">The speciality to add</param>
         /// <exception cref="InvalidOperationException">Thrown if speciality is already added to UnitOfWork</exception>
-        public void AddSpeciality(Speciality speciality)
+        public void AddSpeciality(Speciality obj)
         {
-            if (speciality == null)
+            if (obj == null)
             {
                 throw new ArgumentNullException("speciality");
             }
 
-            this.CheckEntityDoesNotBelongToUnitOfWork(speciality);
-            this.underlyingContext.Specialities.AddObject(speciality);
+            this.CheckEntityDoesNotBelongToUnitOfWork(obj);
+            this.underlyingContext.Specialities.AddObject(obj);
+        }
+
+        public void AddSex(Sex obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("sex");
+            }
+
+            this.CheckEntityDoesNotBelongToUnitOfWork(obj);
+            this.underlyingContext.Sexes.AddObject(obj);
+        }
+        public void AddScienceStatus(ScienceStatus obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("scienceStatus");
+            }
+
+            this.CheckEntityDoesNotBelongToUnitOfWork(obj);
+            this.underlyingContext.ScienceStatuses.AddObject(obj);
+        }
+        public void AddScienceDegree(ScienceDegree obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("scienceStatus");
+            }
+
+            this.CheckEntityDoesNotBelongToUnitOfWork(obj);
+            this.underlyingContext.ScienceDegrees.AddObject(obj);
         }
 
         /// <summary>
@@ -77,15 +108,15 @@ namespace WPFDB.Common
         /// </summary>
         /// <param name="employee">The person to add</param>
         /// <exception cref="InvalidOperationException">Thrown if person is already added to UnitOfWork</exception>
-        public void AddPerson(Person person)
+        public void AddPerson(Person obj)
         {
-            if (person == null)
+            if (obj == null)
             {
                 throw new ArgumentNullException("person");
             }
 
-            this.CheckEntityDoesNotBelongToUnitOfWork(person);
-            this.underlyingContext.Persons.AddObject(person);
+            this.CheckEntityDoesNotBelongToUnitOfWork(obj);
+            this.underlyingContext.Persons.AddObject(obj);
         }
 
         /// <summary>
@@ -93,36 +124,80 @@ namespace WPFDB.Common
         /// </summary>
         /// <param name="speciality">The speciality to remove</param>
         /// <exception cref="InvalidOperationException">Thrown if speciality is not tracked by this UnitOfWork</exception>
-        public void RemoveSpeciality(Speciality speciality )
+        public void RemoveSpeciality(Speciality obj)
         {
-            if (speciality == null)
+            if (obj == null)
             {
                 throw new ArgumentNullException("speciality");
             }
 
-            this.CheckEntityBelongsToUnitOfWork(speciality);
-            foreach (var person in speciality.Persons.ToList())
+            this.CheckEntityBelongsToUnitOfWork(obj);
+            foreach (var person in obj.Persons.ToList())
             {
                 person.Speciality = null;
             }
 
-            this.underlyingContext.Specialities.DeleteObject(speciality);
+            this.underlyingContext.Specialities.DeleteObject(obj);
         }
+        public void RemoveSex(Sex obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("sex");
+            }
 
+            this.CheckEntityBelongsToUnitOfWork(obj);
+            foreach (var person in obj.Persons.ToList())
+            {
+                person.Sex = null;
+            }
+
+            this.underlyingContext.Sexes.DeleteObject(obj);
+        }
+        public void RemoveScienceDegree(ScienceDegree obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("scienceDegree");
+            }
+
+            this.CheckEntityBelongsToUnitOfWork(obj);
+            foreach (var person in obj.Persons.ToList())
+            {
+                person.ScienceDegree = null;
+            }
+
+            this.underlyingContext.ScienceDegrees.DeleteObject(obj);
+        }
+        public void RemoveScienceStatus(ScienceStatus obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("scienceStatus");
+            }
+
+            this.CheckEntityBelongsToUnitOfWork(obj);
+            foreach (var person in obj.Persons.ToList())
+            {
+                person.ScienceStatus = null;
+            }
+
+            this.underlyingContext.ScienceStatuses.DeleteObject(obj);
+        }
         /// <summary>
         /// Registers the removal of an existing person
         /// </summary>
         /// <param name="employee">The person to remove</param>
         /// <exception cref="InvalidOperationException">Thrown if person is not tracked by this UnitOfWork</exception>
-        public void RemovePerson(Person person)
+        public void RemovePerson(Person obj)
         {
-            if (person == null)
+            if (obj == null)
             {
                 throw new ArgumentNullException("person");
             }
 
-            this.CheckEntityBelongsToUnitOfWork(person);
-            this.underlyingContext.Persons.DeleteObject(person);
+            this.CheckEntityBelongsToUnitOfWork(obj);
+            this.underlyingContext.Persons.DeleteObject(obj);
         }
 
         /// <summary>

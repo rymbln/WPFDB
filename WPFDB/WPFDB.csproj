@@ -69,7 +69,13 @@
     <Compile Include="Common\IUnitOfWork.cs" />
     <Compile Include="Common\UnitOfWork.cs" />
     <Compile Include="Data\IConferenceContext.cs" />
+    <Compile Include="Data\IScienceDegreeRepository.cs" />
+    <Compile Include="Data\IScienceStatusRepository.cs" />
+    <Compile Include="Data\ISexRepository.cs" />
     <Compile Include="Data\ISpecialityRepository.cs" />
+    <Compile Include="Data\ScienceDegreeRepository.cs" />
+    <Compile Include="Data\ScienceStatusRepository.cs" />
+    <Compile Include="Data\SexRepository.cs" />
     <Compile Include="Data\SpecialityRepository.cs" />
     <Compile Include="Model\ConferenceModel.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -78,17 +84,38 @@
     </Compile>
     <Compile Include="ViewModel\Helpers\DelegateCommand.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ScienceDegreeViewModel.cs" />
+    <Compile Include="ViewModel\ScienceDegreeWorkspaceViewModel.cs" />
+    <Compile Include="ViewModel\ScienceStatusViewModel.cs" />
+    <Compile Include="ViewModel\ScienceStatusWorkspaceViewModel.cs" />
+    <Compile Include="ViewModel\SexViewModel.cs" />
+    <Compile Include="ViewModel\SexWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\SpecialityViewModel.cs" />
     <Compile Include="ViewModel\SpecialityWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\Helpers\ViewModelBase.cs" />
+    <Compile Include="View\ScienceDegreeDetailView.xaml.cs">
+      <DependentUpon>ScienceDegreeDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ScienceDegreeWorkspaceView.xaml.cs">
+      <DependentUpon>ScienceDegreeWorkspaceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ScienceStatusDetailView.xaml.cs">
+      <DependentUpon>ScienceStatusDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ScienceStatusWorkspaceView.xaml.cs">
+      <DependentUpon>ScienceStatusWorkspaceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SexDetailView.xaml.cs">
+      <DependentUpon>SexDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SexWorkspaceView.xaml.cs">
+      <DependentUpon>SexWorkspaceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SpecialityDetailView.xaml.cs">
       <DependentUpon>SpecialityDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SpecialityWorkspaceView.xaml.cs">
       <DependentUpon>SpecialityWorkspaceView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
     <Page Include="View\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -102,15 +129,35 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ScienceDegreeDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ScienceDegreeWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ScienceStatusDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ScienceStatusWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SexDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SexWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SpecialityDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SpecialityWorkspaceView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Window1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

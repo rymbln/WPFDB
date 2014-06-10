@@ -3,28 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPFDB.Model;
 
 namespace WPFDB.ViewModel
 {
-    using System;
-    using WPFDB.Model;
-
-    public class SpecialityViewModel : ViewModelBase
+    public class ScienceDegreeViewModel: ViewModelBase
     {
-        public SpecialityViewModel(Speciality speciality)
+        public ScienceDegreeViewModel(ScienceDegree obj)
         {
-            if (speciality == null)
+            if (obj == null)
             {
-                throw new ArgumentNullException("speciality");
+                throw new ArgumentNullException("scienceDegree");
             }
 
-            this.Model = speciality;
+            this.Model = obj;
         }
 
         /// <summary>
         /// Gets the underlying Department this ViewModel is based on
         /// </summary>
-        public Speciality Model { get; private set; }
+        public ScienceDegree Model { get; private set; }
 
         /// <summary>
         /// Gets or sets the name of this department
@@ -50,11 +48,9 @@ namespace WPFDB.ViewModel
             {
                 return this.Model.Id.ToString();
             }
-            set
-            {
-                
-            }
-
+            set {}
+      
         }
+    
     }
 }

@@ -21,7 +21,7 @@ namespace WPFDB.ViewModel
         ///         /// <param name="unitOfWork">UnitOfWork for co-ordinating changes</param>
         /// <param name="specialityRepository">Repository for querying department data</param>
 
-        public MainViewModel(IUnitOfWork unitOfWork, ISpecialityRepository specialityRepository)
+        public MainViewModel(IUnitOfWork unitOfWork, ISpecialityRepository specialityRepository, ISexRepository sexRepository, IScienceDegreeRepository scienceDegreeRepository, IScienceStatusRepository scienceStatusRepository)
         {
             if (unitOfWork == null)
             {
@@ -32,18 +32,48 @@ namespace WPFDB.ViewModel
             {
                 throw new ArgumentNullException("specialityRepository");
             }
+            if (sexRepository == null)
+            {
+                throw new ArgumentNullException("specialityRepository");
+            }
+            if (scienceStatusRepository == null)
+            {
+                throw new ArgumentNullException("specialityRepository");
+            }
+            if (scienceDegreeRepository == null)
+            {
+                throw new ArgumentNullException("specialityRepository");
+            }
 
             this.unitOfWork = unitOfWork;
 
             // Build data structures to populate areas of the application surface
             ObservableCollection<SpecialityViewModel> allSpecialities = new ObservableCollection<SpecialityViewModel>();
+            ObservableCollection<SexViewModel> allSexes = new ObservableCollection<SexViewModel>();
+            ObservableCollection<ScienceStatusViewModel> allScienceStatuses = new ObservableCollection<ScienceStatusViewModel>();
+            ObservableCollection<ScienceDegreeViewModel> allScienceDegree = new ObservableCollection<ScienceDegreeViewModel>();
 
-            foreach (var sp in specialityRepository.GetAllSpecialities())
+            foreach (var item in specialityRepository.GetAllSpecialities())
             {
-                allSpecialities.Add(new SpecialityViewModel(sp));
+                allSpecialities.Add(new SpecialityViewModel(item));
+            }
+            foreach (var item in sexRepository.GetAllSexes())
+            {
+                allSexes.Add(new SexViewModel(item));
+            }
+            foreach (var item in scienceStatusRepository.GetAllScienceStatuses())
+            {
+                allScienceStatuses.Add(new ScienceStatusViewModel(item));
+            }
+            foreach (var item in scienceDegreeRepository.GetAllScienceDegrees())
+            {
+                allScienceDegree.Add(new ScienceDegreeViewModel(item));
             }
 
             this.SpecialityWorkspace = new SpecialityWorkspaceViewModel(allSpecialities, unitOfWork);
+            this.SexWorkspace = new SexWorkspaceViewModel(allSexes, unitOfWork);
+            this.ScienceDegreeWorkspace = new ScienceDegreeWorkspaceViewModel(allScienceDegree, unitOfWork);
+            this.ScienceStatusWorkspace = new ScienceStatusWorkspaceViewModel(allScienceStatuses, unitOfWork);
             this.SaveCommand = new DelegateCommand((o) => this.Save());
         }
 
@@ -56,6 +86,10 @@ namespace WPFDB.ViewModel
         /// Gets the workspace for managing departments of the company
         /// </summary>
         public SpecialityWorkspaceViewModel SpecialityWorkspace { get; private set; }
+        public SexWorkspaceViewModel SexWorkspace { get; private set; }
+        public ScienceDegreeWorkspaceViewModel ScienceDegreeWorkspace { get; private set; }
+        public ScienceStatusWorkspaceViewModel ScienceStatusWorkspace { get; private set; }
+
 
         /// <summary>
         /// Saves all changes made in the current sessions UnitOfWork

@@ -20,7 +20,14 @@ namespace WPFDB.Data
         /// </summary>
         IObjectSet<Speciality> Specialities { get; }
 
-           /// <summary>
+        IObjectSet<Sex> Sexes { get; }
+
+        IObjectSet<ScienceDegree> ScienceDegrees { get; }
+
+        IObjectSet<ScienceStatus> ScienceStatuses { get; }
+
+
+        /// <summary>
         /// Save all pending changes to the data context
         /// </summary>
         void Save();

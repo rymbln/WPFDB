@@ -34,6 +34,10 @@ namespace WPFDB.Common
         /// <param name="department">The department to add</param>
         /// <exception cref="InvalidOperationException">Thrown if department is already added to UnitOfWork</exception>
         void AddSpeciality(Speciality speciality);
+        void AddSex(Sex sex);
+        void AddScienceDegree(ScienceDegree scienceDegree);
+        void AddScienceStatus(ScienceStatus scienceStatus);
+
 
         /// <summary>
         /// Registers the addition of a new employee
@@ -49,7 +53,7 @@ namespace WPFDB.Common
         /// <param name="detail">The contact detail to add</param>
         /// <exception cref="InvalidOperationException">Thrown if employee is not tracked by this UnitOfWork</exception>
         /// <exception cref="InvalidOperationException">Thrown if contact detail is already added to UnitOfWork</exception>
-       // void AddContactDetail(Employee employee, ContactDetail detail);
+        // void AddContactDetail(Employee employee, ContactDetail detail);
 
         /// <summary>
         /// Registers the removal of an existing department
@@ -57,7 +61,9 @@ namespace WPFDB.Common
         /// <param name="department">The department to remove</param>
         /// <exception cref="InvalidOperationException">Thrown if department is not tracked by this UnitOfWork</exception>
         void RemoveSpeciality(Speciality speciality);
-
+        void RemoveSex(Sex sex);
+        void RemoveScienceDegree(ScienceDegree scienceDegree);
+        void RemoveScienceStatus(ScienceStatus scienceStatus);
         /// <summary>
         /// Registers the removal of an existing employee
         /// </summary>
