@@ -1,0 +1,18 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <BitmapSource x:Key="ConferenceImageSource">.\Image\Conference.ico</BitmapSource>
+
+    <Image x:Key="SaveImage" x:Shared="False" Source=".\Image\Save.png" Height="16" Width="16"/>
+
+    <Image x:Key="UndoImage" x:Shared="False" Source=".\Image\Undo.png" Height="16" Width="16"/>
+    <Image x:Key="RedoImage" x:Shared="False" Source=".\Image\Redo.png" Height="16" Width="16"/>
+    <Image x:Key="CutImage" x:Shared="False" Source=".\Image\Cut.png" Height="16" Width="16"/>
+    <Image x:Key="CopyImage" x:Shared="False" Source=".\Image\Copy.png" Height="16" Width="16"/>
+    <Image x:Key="PasteImage" x:Shared="False" Source=".\Image\Paste.png" Height="16" Width="16"/>
+    <Image x:Key="DeleteImage" x:Shared="False" Source=".\Image\Delete.png" Height="16" Width="16"/>
+
+    <Image x:Key="EmailImage" x:Shared="False" Source=".\Image\Email.png" Height="16" Width="16"/>
+
+</ResourceDictionary>
