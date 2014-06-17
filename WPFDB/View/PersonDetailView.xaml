@@ -28,34 +28,34 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="0" Grid.Row="0" Text="First Name:" />
+        <Label Grid.Column="0" Grid.Row="0" Content="First Name:"  />
         <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=FirstName}" Width="150" />
 
-        <TextBlock Grid.Column="0" Grid.Row="1" Text="Second Name:" />
+        <Label Grid.Column="0" Grid.Row="1" Content="Second Name:" />
         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=SecondName}" Width="150" />
 
-        <TextBlock Grid.Column="0" Grid.Row="2" Text="Third Name:" />
+        <Label Grid.Column="0" Grid.Row="2" Content="Third Name:" />
         <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=ThirdName}" Width="150" />
 
-        <TextBlock Grid.Column="0" Grid.Row="3" Text="Sex:" />
+        <Label Grid.Column="0" Grid.Row="3" Content="Sex:" />
         <ComboBox Grid.Column="1" Grid.Row="3" Width="150" SelectedValuePath="." SelectedItem="{Binding Path=Sex}" ItemsSource="{Binding Path=SexLookup}" DisplayMemberPath="Name" />
 
-        <TextBlock Grid.Column="0" Grid.Row="4" Text="BirthDate:" />
+        <Label Grid.Column="0" Grid.Row="4" Content="BirthDate:" />
         <DatePicker Grid.Column="1" Grid.Row="4" SelectedDate="{Binding Path=BirthDate}" Width="150" />
 
-        <TextBlock Grid.Column="0" Grid.Row="5" Text="Workplace:" />
+        <Label Grid.Column="0" Grid.Row="5" Content="Workplace:" />
         <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=WorkPlace}" Width="150" />
 
-        <TextBlock Grid.Column="0" Grid.Row="6" Text="Post:" />
+        <Label Grid.Column="0" Grid.Row="6" Content="Post:" />
         <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=Post}" Width="150" />
-        
-        <TextBlock Grid.Column="0" Grid.Row="7" Text="Speciality:" />
-        <ComboBox Grid.Column="1" Grid.Row="7" Width="150" SelectedValuePath="." SelectedItem="{Binding Path=Speciality}" ItemsSource="{Binding Path=SpecialityLookup}" DisplayMemberPath="Name" />
 
-        <TextBlock Grid.Column="0" Grid.Row="8" Text="ScienceDegree:" />
+        <Label Grid.Column="0" Grid.Row="7" Content="Speciality:" />
+        <ComboBox Grid.Column="1" Grid.Row="7" Width="150" SelectedValuePath="." SelectedItem="{Binding Path=Speciality}" ItemsSource="{Binding Path=SpecialityLookup}" DisplayMemberPath="Name"  />
+
+        <Label Grid.Column="0" Grid.Row="8" Content="ScienceDegree:" />
         <ComboBox Grid.Column="1" Grid.Row="8" Width="150" SelectedValuePath="." SelectedItem="{Binding Path=ScienceDegree}" ItemsSource="{Binding Path=ScienceDegreeLookup}" DisplayMemberPath="Name" />
 
-        <TextBlock Grid.Column="0" Grid.Row="9" Text="ScienceStatus:" />
+        <Label Grid.Column="0" Grid.Row="9" Content="ScienceStatus:" />
         <ComboBox Grid.Column="1" Grid.Row="9" Width="150" SelectedValuePath="." SelectedItem="{Binding Path=ScienceStatus}" ItemsSource="{Binding Path=ScienceStatusLookup}" DisplayMemberPath="Name" />
 
 

@@ -10,21 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace WPFDB.View
 {
     /// <summary>
-    /// Interaction logic for PersonWorkspaceView.xaml
+    /// Interaction logic for KnowallView.xaml
     /// </summary>
-    public partial class PersonWorkspaceView : UserControl
+    public partial class KnowallView : Window
     {
-        public PersonWorkspaceView()
+        public KnowallView()
         {
             InitializeComponent();
         }
-
-
     }
 }

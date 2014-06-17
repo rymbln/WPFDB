@@ -3,64 +3,79 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:v="clr-namespace:WPFDB.View" 
     xmlns:vm="clr-namespace:WPFDB.ViewModel"
+    xmlns:p="clr-namespace:WPFDB.Properties"
     x:Class="WPFDB.View.MainView"
-        Title="MainWindow" Height="350" Width="525">
-
+        Title="MainWindow" 
+    Icon="{StaticResource ConferenceImageSource}" Height="350" Width="525">
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding SaveCommand}" Key="S" Modifiers="Control"/>
+        <KeyBinding Command="{Binding AboutCommand}" Key="F1"/>
+    </Window.InputBindings>
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:PersonWorkspaceViewModel}">
             <v:PersonWorkspaceView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:SpecialityWorkspaceViewModel}">
-            <v:SpecialityWorkspaceView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:SexWorkspaceViewModel}">
-            <v:SexWorkspaceView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:ScienceStatusWorkspaceViewModel}">
-            <v:ScienceStatusWorkspaceView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:ScienceDegreeWorkspaceViewModel}">
-            <v:ScienceDegreeWorkspaceView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:ConferenceWorkspaceViewModel}">
-            <v:ConferenceWorkspaceView/>
-        </DataTemplate>
+       
     </Window.Resources>
-    <Grid>
-        <StackPanel>
-            <Button Width="60" Height="40" VerticalAlignment="Top" Margin="5" HorizontalAlignment="Left" Command="{Binding Path=SaveCommand}">Save</Button>
-            <TabControl Padding="0"  >
-                <!--<TabItem>
-                <TabItem.Header>
-                    Persons
-                </TabItem.Header>
-                <ContentControl Margin="10" Content="{Binding Path=./View/PersonWorkspace}" />
-            </TabItem>-->
-                <TabItem>
-                    <TabItem.Header>Person</TabItem.Header>
-                    <ContentControl Margin="10"  Content="{Binding Path=.PersonWorkspace}"  />
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>Specialities</TabItem.Header>
-                    <ContentControl Margin="10"  Content="{Binding Path=.SpecialityWorkspace}"  />
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>Sex</TabItem.Header>
-                    <ContentControl Margin="10"  Content="{Binding Path=.SexWorkspace}"  />
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>Science degrees</TabItem.Header>
-                    <ContentControl Margin="10"  Content="{Binding Path=.ScienceDegreeWorkspace}"  />
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>Science statuses</TabItem.Header>
-                    <ContentControl Margin="10"  Content="{Binding Path=.ScienceStatusWorkspace}"  />
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>Conferences</TabItem.Header>
-                    <ContentControl Margin="10"  Content="{Binding Path=.ConferenceWorkspace}"  />
-                </TabItem>
-            </TabControl>
-        </StackPanel>
-    </Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="{x:Static p:Resources.DataMenu}">
+                <MenuItem Command="{Binding SaveCommand}" Header="{x:Static p:Resources.SaveMenu}" Icon="{StaticResource SaveImage}" 
+                          InputGestureText="{x:Static p:Resources.ControlS}"/>
+                <Separator/>
+                <MenuItem Command="{Binding ExitCommand}" Header="{x:Static p:Resources.ExitMenu}"/>
+            </MenuItem>
+            <MenuItem Header="{x:Static p:Resources.EditMenu}">
+                <MenuItem Command="ApplicationCommands.Undo" Header="{x:Static p:Resources.UndoMenu}" Icon="{StaticResource UndoImage}"
+                          InputGestureText="{x:Static p:Resources.ControlZ}"/>
+                <MenuItem Command="ApplicationCommands.Redo" Header="{x:Static p:Resources.RedoMenu}" Icon="{StaticResource RedoImage}"
+                          InputGestureText="{x:Static p:Resources.ControlY}"/>
+                <Separator/>
+                <MenuItem Command="ApplicationCommands.Cut" Header="{x:Static p:Resources.CutMenu}" Icon="{StaticResource CutImage}"
+                          InputGestureText="{x:Static p:Resources.ControlX}"/>
+                <MenuItem Command="ApplicationCommands.Copy" Header="{x:Static p:Resources.CopyMenu}" Icon="{StaticResource CopyImage}"
+                          InputGestureText="{x:Static p:Resources.ControlC}"/>
+                <MenuItem Command="ApplicationCommands.Paste" Header="{x:Static p:Resources.PasteMenu}" Icon="{StaticResource PasteImage}"
+                          InputGestureText="{x:Static p:Resources.ControlV}"/>
+                <MenuItem Command="EditingCommands.Delete" Header="{x:Static p:Resources.DeleteMenu}" Icon="{StaticResource DeleteImage}"
+                          InputGestureText="{x:Static p:Resources.Del}"/>
+                <Separator/>
+                <MenuItem Command="ApplicationCommands.SelectAll" Header="{x:Static p:Resources.SelectAllMenu}"
+                          InputGestureText="{x:Static p:Resources.ControlA}"/>
+            </MenuItem>
+            <MenuItem Header="{x:Static p:Resources.ToolsMenu}">
+                <MenuItem Command="{Binding OpenKnowallsCommand}" Header="{x:Static p:Resources.KnowallMenu}"/>
+                <MenuItem Command="{Binding OpenSettingsCommand}" Header="{x:Static p:Resources.SettingsMenu}"/>
+            </MenuItem>
+            <MenuItem Header="{x:Static p:Resources.HelpMenu}">
+                <MenuItem Command="{Binding AboutCommand}" Header="{x:Static p:Resources.AboutMenu}"
+                          InputGestureText="{x:Static p:Resources.F1}"/>
+            </MenuItem>
+        </Menu>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Command="{Binding SaveCommand}" Content="{StaticResource SaveImage}" ToolTip="{x:Static p:Resources.Save}"/>
+                <Separator/>
+                <Button Command="ApplicationCommands.Undo" Content="{StaticResource UndoImage}" ToolTip="{x:Static p:Resources.Undo}"/>
+                <Button Command="ApplicationCommands.Redo" Content="{StaticResource RedoImage}" ToolTip="{x:Static p:Resources.Redo}"/>
+                <Button Command="ApplicationCommands.Cut" Content="{StaticResource CutImage}" ToolTip="{x:Static p:Resources.Cut}"/>
+                <Button Command="ApplicationCommands.Copy" Content="{StaticResource CopyImage}" ToolTip="{x:Static p:Resources.Copy}"/>
+                <Button Command="ApplicationCommands.Paste" Content="{StaticResource PasteImage}" ToolTip="{x:Static p:Resources.Paste}"/>
+            </ToolBar>
+        </ToolBarTray>
+
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem Content="Status Bar" />
+        </StatusBar>
+
+        <TabControl Padding="0">
+            <TabItem>
+                <TabItem.Header>Person</TabItem.Header>
+                <ContentControl Margin="10"  Content="{Binding Path=.PersonWorkspace}"  />
+            </TabItem>
+            
+        </TabControl>
+
+
+    </DockPanel>
 </Window>
