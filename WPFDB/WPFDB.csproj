@@ -66,16 +66,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\GuidComb.cs" />
-    <Compile Include="Common\IUnitOfWork.cs" />
-    <Compile Include="Common\UnitOfWork.cs" />
+    <Compile Include="Common\DataManager.cs" />
     <Compile Include="Data\ConferenceRepository.cs" />
     <Compile Include="Data\IConferenceContext.cs" />
-    <Compile Include="Data\IConferenceRepository.cs" />
-    <Compile Include="Data\IPersonRepository.cs" />
-    <Compile Include="Data\IScienceDegreeRepository.cs" />
-    <Compile Include="Data\IScienceStatusRepository.cs" />
-    <Compile Include="Data\ISexRepository.cs" />
-    <Compile Include="Data\ISpecialityRepository.cs" />
     <Compile Include="Data\PersonRepository.cs" />
     <Compile Include="Data\ScienceDegreeRepository.cs" />
     <Compile Include="Data\ScienceStatusRepository.cs" />

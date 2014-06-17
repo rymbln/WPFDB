@@ -14,20 +14,15 @@ namespace WPFDB.ViewModel
     public class SexWorkspaceViewModel : ViewModelBase
     {
         private SexViewModel currentSex;
-        private IUnitOfWork unitOfWork;
+   private DataManager dm = DataManager.Instance;
 
-        public SexWorkspaceViewModel(ObservableCollection<SexViewModel> sexes, IUnitOfWork unitOfWork)
+        public SexWorkspaceViewModel( )
         {
-            if (sexes == null)
+            AllSexes = new ObservableCollection<SexViewModel>();
+            foreach (var item in dm.GetAllSexes())
             {
-                throw new ArgumentNullException("sex");
+                AllSexes.Add(new SexViewModel(item));
             }
-            if (unitOfWork == null)
-            {
-                throw new ArgumentNullException("unitOfwork");
-            }
-            this.unitOfWork = unitOfWork;
-            this.AllSexes = sexes;
             this.CurrentSex = this.AllSexes.Count > 0 ? this.AllSexes[0] : null;
             this.AllSexes.CollectionChanged += (sender, e) =>
             {
@@ -54,9 +49,9 @@ namespace WPFDB.ViewModel
 
         private void AddSex()
         {
-            Sex s = this.unitOfWork.CreateObject<Sex>();
+            Sex s = this.dm.CreateObject<Sex>();
             s.Id = GuidComb.Generate();
-            this.unitOfWork.AddSex(s);
+            this.dm.AddSex(s);
 
             SexViewModel vm = new SexViewModel(s);
             this.AllSexes.Add(vm);
@@ -65,7 +60,7 @@ namespace WPFDB.ViewModel
 
         private void DeleteCurrentSex()
         {
-            this.unitOfWork.RemoveSex(this.CurrentSex.Model);
+            this.dm.RemoveSex(this.CurrentSex.Model);
             this.AllSexes.Remove(this.CurrentSex);
             this.CurrentSex = null;
         }

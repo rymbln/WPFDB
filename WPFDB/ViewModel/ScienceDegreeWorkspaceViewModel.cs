@@ -15,22 +15,16 @@ namespace WPFDB.ViewModel
     public class ScienceDegreeWorkspaceViewModel : ViewModelBase
     {
         private ScienceDegreeViewModel currentScienceDegree;
-        private IUnitOfWork unitOfWork;
+   private DataManager dm = DataManager.Instance;
 
-        public ScienceDegreeWorkspaceViewModel(ObservableCollection<ScienceDegreeViewModel> scienceDegrees,
-            IUnitOfWork unitOfWork)
+        public ScienceDegreeWorkspaceViewModel()
         {
-            if (scienceDegrees == null)
+            AllScienceDegrees = new ObservableCollection<ScienceDegreeViewModel>();
+            foreach (var item in dm.GetAllScienceDegrees())
             {
-                throw new ArgumentNullException("scienceDegrees");
+                AllScienceDegrees.Add(new ScienceDegreeViewModel(item));
             }
-            if (unitOfWork == null)
-            {
-                throw new ArgumentNullException("unitOfWork");
-            }
-
-            this.unitOfWork = unitOfWork;
-            this.AllScienceDegrees = scienceDegrees;
+        
             this.CurrentScienceDegree = this.AllScienceDegrees.Count > 0 ? this.AllScienceDegrees[0] : null;
 
             this.AllScienceDegrees.CollectionChanged += (sender, e) =>
@@ -57,9 +51,9 @@ namespace WPFDB.ViewModel
 
         private void AddScienceDegree()
         {
-            ScienceDegree sd = this.unitOfWork.CreateObject<ScienceDegree>();
+            ScienceDegree sd = this.dm.CreateObject<ScienceDegree>();
             sd.Id = GuidComb.Generate();
-            this.unitOfWork.AddScienceDegree(sd);
+            this.dm.AddScienceDegree(sd);
 
             ScienceDegreeViewModel vm = new ScienceDegreeViewModel(sd);
             this.AllScienceDegrees.Add(vm);
@@ -69,7 +63,7 @@ namespace WPFDB.ViewModel
 
         private void DeleteCurrentScienceDegree()
         {
-            this.unitOfWork.RemoveScienceDegree((this.CurrentScienceDegree.Model));
+            this.dm.RemoveScienceDegree((this.CurrentScienceDegree.Model));
             this.AllScienceDegrees.Remove(this.CurrentScienceDegree);
             this.CurrentScienceDegree = null;
         }

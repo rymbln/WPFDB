@@ -15,22 +15,15 @@ namespace WPFDB.ViewModel
     {
         private ScienceStatusViewModel currentScienceStatus;
 
-        private IUnitOfWork unitOfWork;
+   private DataManager dm = DataManager.Instance;
 
-        public ScienceStatusWorkspaceViewModel(ObservableCollection<ScienceStatusViewModel> scienceStatuses,
-            IUnitOfWork unitOfWork)
+        public ScienceStatusWorkspaceViewModel()
         {
-            if (scienceStatuses == null)
+            AllScienceStatuses = new ObservableCollection<ScienceStatusViewModel>();
+            foreach (var item in dm.GetAllScienceStatuses())
             {
-                throw new ArgumentNullException("scienceStatuses");
+                AllScienceStatuses.Add(new ScienceStatusViewModel(item));
             }
-            if (unitOfWork == null)
-            {
-                throw  new ArgumentNullException("unitOfWork");
-            }
-
-            this.unitOfWork = unitOfWork;
-            this.AllScienceStatuses = scienceStatuses;
             this.CurrentScienceStatus = this.AllScienceStatuses.Count > 0 ? this.AllScienceStatuses[0] : null;
 
             this.AllScienceStatuses.CollectionChanged += (sender, e) =>
@@ -62,9 +55,9 @@ namespace WPFDB.ViewModel
 
         private void AddScienceStatus()
         {
-            ScienceStatus ss = this.unitOfWork.CreateObject<ScienceStatus>();
+            ScienceStatus ss = this.dm.CreateObject<ScienceStatus>();
             ss.Id = GuidComb.Generate();
-            this.unitOfWork.AddScienceStatus(ss);
+            this.dm.AddScienceStatus(ss);
 
             ScienceStatusViewModel vm = new ScienceStatusViewModel(ss);
             this.AllScienceStatuses.Add(vm);
@@ -73,7 +66,7 @@ namespace WPFDB.ViewModel
 
         private void DeleteCurrentScienceStatus()
         {
-            this.unitOfWork.RemoveScienceStatus(this.CurrentScienceStatus.Model);
+            this.dm.RemoveScienceStatus(this.CurrentScienceStatus.Model);
             this.AllScienceStatuses.Remove(this.CurrentScienceStatus);
             this.CurrentScienceStatus = null;
         }

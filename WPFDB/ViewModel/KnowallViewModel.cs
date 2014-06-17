@@ -12,67 +12,28 @@ namespace WPFDB.ViewModel
 {
     public class KnowallViewModel: ViewModelBase
     {
-        private IUnitOfWork unitOfWork;
+        private DataManager dm = DataManager.Instance;
 
-        public KnowallViewModel(IUnitOfWork unitOfWork,
-            ISpecialityRepository specialityRepository,
-            ISexRepository sexRepository,
-            IScienceDegreeRepository scienceDegreeRepository,
-            IScienceStatusRepository scienceStatusRepository,
-            IConferenceRepository conferenceRepository)
+        public KnowallViewModel()
         {
-            if (specialityRepository == null)
-            {
-                throw new ArgumentNullException("specialityRepository");
-            }
-            if (sexRepository == null)
-            {
-                throw new ArgumentNullException("specialityRepository");
-            }
-            if (scienceStatusRepository == null)
-            {
-                throw new ArgumentNullException("specialityRepository");
-            }
-            if (scienceDegreeRepository == null)
-            {
-                throw new ArgumentNullException("specialityRepository");
-            }
-            if (conferenceRepository == null)
-            {
-                throw new ArgumentNullException("conferenceRepository");
-            }
 
-            ObservableCollection<SpecialityViewModel> allSpecialities = new ObservableCollection<SpecialityViewModel>();
-            ObservableCollection<SexViewModel> allSexes = new ObservableCollection<SexViewModel>();
-            ObservableCollection<ScienceStatusViewModel> allScienceStatuses = new ObservableCollection<ScienceStatusViewModel>();
-            ObservableCollection<ScienceDegreeViewModel> allScienceDegree = new ObservableCollection<ScienceDegreeViewModel>();
-            ObservableCollection<ConferenceViewModel> allConferences = new ObservableCollection<ConferenceViewModel>();
 
-            foreach (var item in specialityRepository.GetAllSpecialities())
-            {
-                allSpecialities.Add(new SpecialityViewModel(item));
-            }
-            foreach (var item in sexRepository.GetAllSexes())
-            {
-                allSexes.Add(new SexViewModel(item));
-            }
-            foreach (var item in scienceStatusRepository.GetAllScienceStatuses())
-            {
-                allScienceStatuses.Add(new ScienceStatusViewModel(item));
-            }
-            foreach (var item in scienceDegreeRepository.GetAllScienceDegrees())
-            {
-                allScienceDegree.Add(new ScienceDegreeViewModel(item));
-            }
-            foreach (var item in conferenceRepository.GetAllConferences())
-            {
-                allConferences.Add(new ConferenceViewModel(item));
-            }
-            this.SpecialityWorkspace = new SpecialityWorkspaceViewModel(allSpecialities, unitOfWork);
-            this.SexWorkspace = new SexWorkspaceViewModel(allSexes, unitOfWork);
-            this.ScienceDegreeWorkspace = new ScienceDegreeWorkspaceViewModel(allScienceDegree, unitOfWork);
-            this.ScienceStatusWorkspace = new ScienceStatusWorkspaceViewModel(allScienceStatuses, unitOfWork);
-            this.ConferenceWorkspace = new ConferenceWorkspaceViewModel(allConferences, unitOfWork);
+            var allSpecialities = new ObservableCollection<SpecialityViewModel>();
+            var allSexes = new ObservableCollection<SexViewModel>();
+            var allScienceStatuses = new ObservableCollection<ScienceStatusViewModel>();
+            var allScienceDegree = new ObservableCollection<ScienceDegreeViewModel>();
+            var allConferences = new ObservableCollection<ConferenceViewModel>();
+
+
+ 
+ 
+
+          
+            this.SpecialityWorkspace = new SpecialityWorkspaceViewModel();
+            this.SexWorkspace = new SexWorkspaceViewModel();
+            this.ScienceDegreeWorkspace = new ScienceDegreeWorkspaceViewModel();
+            this.ScienceStatusWorkspace = new ScienceStatusWorkspaceViewModel();
+            this.ConferenceWorkspace = new ConferenceWorkspaceViewModel();
 
         }
 
@@ -86,7 +47,7 @@ namespace WPFDB.ViewModel
 
         private void Save()
         {
-            this.unitOfWork.Save();
+            this.dm.Save();
         }
     }
 }

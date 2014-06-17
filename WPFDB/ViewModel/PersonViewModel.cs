@@ -16,14 +16,9 @@ namespace WPFDB.ViewModel
         private SexViewModel sex;
         private SpecialityViewModel speciality;
 
-        private IUnitOfWork unitOfWork;
+        private DataManager dm = DataManager.Instance;
 
-        public PersonViewModel(Person person,
-            ObservableCollection<ScienceDegreeViewModel> scienceDegreeLookup,
-            ObservableCollection<ScienceStatusViewModel> scienceStatusLookup,
-            ObservableCollection<SexViewModel> sexLookup,
-            ObservableCollection<SpecialityViewModel> specialityLookup,
-            IUnitOfWork unitOfWork
+        public PersonViewModel(Person person
             )
             : base(person)
         {
@@ -32,11 +27,32 @@ namespace WPFDB.ViewModel
                 throw new ArgumentNullException("person");
             }
 
-            this.unitOfWork = unitOfWork;
-            this.ScienceDegreeLookup = scienceDegreeLookup;
-            this.ScienceStatusLookup = scienceStatusLookup;
-            this.SexLookup = sexLookup;
-            this.SpecialityLookup = specialityLookup;
+            ScienceDegreeLookup = new ObservableCollection<ScienceDegreeViewModel>();
+            ScienceStatusLookup = new ObservableCollection<ScienceStatusViewModel>();
+            SexLookup = new ObservableCollection<SexViewModel>();
+            SpecialityLookup = new ObservableCollection<SpecialityViewModel>();
+
+
+            foreach (var item in dm.GetAllSpecialities())
+            {
+                SpecialityLookup.Add(new SpecialityViewModel(item));
+            }
+            foreach (var item in dm.GetAllSexes())
+            {
+                SexLookup.Add(new SexViewModel(item));
+            }
+            foreach (var item in dm.GetAllScienceStatuses())
+            {
+                ScienceStatusLookup.Add(new ScienceStatusViewModel(item));
+            }
+            foreach (var item in dm.GetAllScienceDegrees())
+            {
+                ScienceDegreeLookup.Add(new ScienceDegreeViewModel(item));
+            }
+            this.ScienceDegreeLookup = ScienceDegreeLookup;
+            this.ScienceStatusLookup = ScienceStatusLookup;
+            this.SexLookup = SexLookup;
+            this.SpecialityLookup = SpecialityLookup;
 
             this.ScienceDegreeLookup.CollectionChanged += (sender, e) =>
             {
@@ -69,9 +85,9 @@ namespace WPFDB.ViewModel
             };
         }
 
-        public  ObservableCollection<ScienceDegreeViewModel> ScienceDegreeLookup { get; private set; }
-        public    ObservableCollection<ScienceStatusViewModel> ScienceStatusLookup { get; private set; }
-        public    ObservableCollection<SexViewModel> SexLookup { get; private set; }
+        public ObservableCollection<ScienceDegreeViewModel> ScienceDegreeLookup { get; private set; }
+        public ObservableCollection<ScienceStatusViewModel> ScienceStatusLookup { get; private set; }
+        public ObservableCollection<SexViewModel> SexLookup { get; private set; }
         public ObservableCollection<SpecialityViewModel> SpecialityLookup { get; private set; }
 
         public ScienceDegreeViewModel ScienceDegree

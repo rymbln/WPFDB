@@ -8,7 +8,7 @@ using WPFDB.Model;
 
 namespace WPFDB.Data
 {
-    public class SexRepository : ISexRepository
+    public class SexRepository
     {
         /// <summary>
         /// Underlying ObjectSet to retrieve data from
@@ -29,19 +29,31 @@ namespace WPFDB.Data
             this.objectSet = context.Sexes;
         }
 
-        /// <summary>
-        /// All specialities
-        /// </summary>
-        /// <returns>Enumerable of all specialities</returns>
-        public IEnumerable<Sex> GetAllSexes()
+        public IEnumerable<Sex> All()
         {
-            // NOTE: Some points considered during implementation of data access methods:
-            //    -  ToList is used to ensure any data access related exceptions are thrown
-            //       during execution of this method rather than when the data is enumerated.
-            //    -  Returning IEnumerable rather than IQueryable ensures the repository has full control
-            //       over how data is retrieved from the store, returning IQueryable would allow consumers
-            //       to add additional operators and affect the query sent to the store.
-            return this.objectSet.ToList();
+            return objectSet.ToList();
+        }
+
+        public void Add(Sex obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("sex");
+            }
+            objectSet.AddObject(obj);
+
+
+        }
+
+        public void Remove(Sex obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("sex");
+            }
+            objectSet.DeleteObject(obj);
+            //this.CheckEntityBelongsToUnitOfWork(obj);
+            //this.underlyingContext.Persons.DeleteObject(obj);
         }
     }
 }

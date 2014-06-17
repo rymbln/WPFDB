@@ -19,9 +19,9 @@ namespace WPFDB.ViewModel
         private SpecialityViewModel  currentSpeciality;
 
         /// <summary>
-        /// UnitOfWork for managing changes
+        /// DataManager for managing changes
         /// </summary>
-        private IUnitOfWork unitOfWork;
+   private DataManager dm = DataManager.Instance;
 
 
 
@@ -29,21 +29,14 @@ namespace WPFDB.ViewModel
         /// Initializes a new instance of the SpecialityWorkspaceViewModel class.
         /// </summary>
         /// <param name="specialities">The specialities to be managed</param>
-        /// <param name="unitOfWork">UnitOfWork for managing changes</param>
-        public SpecialityWorkspaceViewModel(ObservableCollection<SpecialityViewModel> specialities,
-            IUnitOfWork unitOfWork)
+        /// <param name="unitOfWork">DataManager for managing changes</param>
+        public SpecialityWorkspaceViewModel(  )
         {
-            if (specialities == null)
+            AllSpecialities = new ObservableCollection<SpecialityViewModel>();
+            foreach (var item in dm.GetAllSpecialities())
             {
-                throw new ArgumentNullException("specialities");
+                AllSpecialities.Add(new SpecialityViewModel(item));
             }
-            if (unitOfWork == null)
-            {
-                throw new ArgumentNullException("unitOfWork");
-            }
-
-            this.unitOfWork = unitOfWork;
-            this.AllSpecialities = specialities;
             this.CurrentSpeciality = this.AllSpecialities.Count > 0 ? this.AllSpecialities[0] : null;
 
             this.AllSpecialities.CollectionChanged += (sender, e) =>
@@ -94,9 +87,9 @@ namespace WPFDB.ViewModel
         /// </summary>
         private void AddSpeciality()
         {
-            Speciality sp = this.unitOfWork.CreateObject<Speciality>();
+            Speciality sp = this.dm.CreateObject<Speciality>();
             sp.Id = GuidComb.Generate();
-            this.unitOfWork.AddSpeciality(sp);
+            this.dm.AddSpeciality(sp);
 
             SpecialityViewModel vm = new SpecialityViewModel(sp);
             this.AllSpecialities.Add(vm);
@@ -108,7 +101,7 @@ namespace WPFDB.ViewModel
         /// </summary>
         private void DeleteCurrentSpeciality()
         {
-            this.unitOfWork.RemoveSpeciality(this.CurrentSpeciality.Model);
+            this.dm.RemoveSpeciality(this.CurrentSpeciality.Model);
             this.AllSpecialities.Remove(this.CurrentSpeciality);
             this.CurrentSpeciality = null;
         }

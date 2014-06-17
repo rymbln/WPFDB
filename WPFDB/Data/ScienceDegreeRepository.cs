@@ -8,7 +8,7 @@ using WPFDB.Model;
 
 namespace WPFDB.Data
 {
-    public class ScienceDegreeRepository: IScienceDegreeRepository
+    public class ScienceDegreeRepository
     {
         private IObjectSet<ScienceDegree> objectSet;
 
@@ -21,9 +21,31 @@ namespace WPFDB.Data
             this.objectSet = context.ScienceDegrees;
         }
 
-        public IEnumerable<ScienceDegree> GetAllScienceDegrees()
+        public IEnumerable<ScienceDegree> All()
         {
-            return this.objectSet.ToList();
+            return objectSet.ToList();
+        }
+
+        public void Add(ScienceDegree obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("ScienceDegree");
+            }
+            objectSet.AddObject(obj);
+
+
+        }
+
+        public void Remove(ScienceDegree obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("ScienceDegree");
+            }
+            objectSet.DeleteObject(obj);
+            //this.CheckEntityBelongsToUnitOfWork(obj);
+            //this.underlyingContext.Persons.DeleteObject(obj);
         }
     }
 }

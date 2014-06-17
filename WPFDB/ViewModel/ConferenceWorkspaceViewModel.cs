@@ -11,23 +11,18 @@ using WPFDB.ViewModel.Helpers;
 
 namespace WPFDB.ViewModel
 {
-    public class ConferenceWorkspaceViewModel: ViewModelBase
+    public class ConferenceWorkspaceViewModel : ViewModelBase
     {
         private ConferenceViewModel currentConference;
-        private IUnitOfWork unitOfWork;
+        private DataManager dm = DataManager.Instance;
 
-        public ConferenceWorkspaceViewModel(ObservableCollection<ConferenceViewModel> conferences, IUnitOfWork unitOfWork )
+        public ConferenceWorkspaceViewModel()
         {
-            if (conferences == null)
+            AllConferences = new ObservableCollection<ConferenceViewModel>();
+            foreach (var item in dm.GetAllConferences())
             {
-                throw new ArgumentNullException("conference");
+                AllConferences.Add(new ConferenceViewModel(item));
             }
-            if (unitOfWork == null)
-            {
-                throw new ArgumentNullException("unitOfwork");
-            }
-            this.unitOfWork = unitOfWork;
-            this.AllConferences = conferences;
             this.CurrentConference = this.AllConferences.Count > 0 ? this.AllConferences[0] : null;
             this.AllConferences.CollectionChanged += (sender, e) =>
             {
@@ -54,9 +49,9 @@ namespace WPFDB.ViewModel
 
         public void AddConference()
         {
-            Conference c = this.unitOfWork.CreateObject<Conference>();
+            Conference c = this.dm.CreateObject<Conference>();
             c.Id = GuidComb.Generate();
-            unitOfWork.AddConference(c);
+            dm.AddConference(c);
 
             ConferenceViewModel vm = new ConferenceViewModel(c);
             AllConferences.Add(vm);
@@ -65,7 +60,7 @@ namespace WPFDB.ViewModel
 
         private void DeleteCurrentConference()
         {
-            unitOfWork.RemoveConference(CurrentConference.Model);
+            dm.RemoveConference(CurrentConference.Model);
             AllConferences.Remove(CurrentConference);
             CurrentConference = null;
         }

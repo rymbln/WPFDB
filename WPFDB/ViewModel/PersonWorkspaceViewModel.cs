@@ -11,56 +11,19 @@ using WPFDB.ViewModel.Helpers;
 
 namespace WPFDB.ViewModel
 {
-    public class PersonWorkspaceViewModel: ViewModelBase
+    public class PersonWorkspaceViewModel : ViewModelBase
     {
         private PersonViewModel currentPerson;
-        private IUnitOfWork unitOfWork;
-        private ObservableCollection<ScienceDegreeViewModel> scienceDegreeLookup;
-        private ObservableCollection<ScienceStatusViewModel> scienceStatusLookup;
-        private ObservableCollection<SexViewModel> sexLookup;
-        private ObservableCollection<SpecialityViewModel> specialityLookup;
+        private DataManager dm = DataManager.Instance;
 
-        public PersonWorkspaceViewModel(
-            ObservableCollection<PersonViewModel> persons,
-            ObservableCollection<ScienceDegreeViewModel> scienceDegreeLookup,
-            ObservableCollection<ScienceStatusViewModel> scienceStatusLookup,
-            ObservableCollection<SexViewModel> sexLookup,
-            ObservableCollection<SpecialityViewModel> specialityLookup,
-            IUnitOfWork unitOfWork
-            )
+        public PersonWorkspaceViewModel()
         {
-            if (persons == null)
+            AllPersons = new ObservableCollection<PersonViewModel>();
+            foreach (var item in dm.GetAllPersons())
             {
-                throw new ArgumentNullException("persons");
+                AllPersons.Add(new PersonViewModel(item));
             }
-            if (scienceDegreeLookup == null)
-            {
-                throw new ArgumentNullException("scienceDegreeLookup");
-            }
-            if (scienceStatusLookup == null)
-            {
-                throw new ArgumentNullException("scienceStatusLookup");
-            }
-            if (sexLookup == null)
-            {
-                throw new ArgumentNullException("sexLookup");
-            }
-            if (specialityLookup == null)
-            {
-                throw new ArgumentNullException("specialityLookup");
-            }
-            if (unitOfWork == null)
-            {
-                throw new ArgumentNullException("unitOfWork");
-            }
-
-            this.unitOfWork = unitOfWork;
-            this.AllPersons = persons;
-            this.scienceDegreeLookup = scienceDegreeLookup;
-            this.scienceStatusLookup = scienceStatusLookup;
-            this.sexLookup = sexLookup;
-            this.specialityLookup = specialityLookup;
-            this.CurrentPerson = persons.Count > 0 ? persons[0] : null;
+            this.CurrentPerson = AllPersons.Count > 0 ? AllPersons[0] : null;
 
             this.AllPersons.CollectionChanged += (sender, e) =>
             {
@@ -88,18 +51,18 @@ namespace WPFDB.ViewModel
 
         private void AddPerson()
         {
-            Person p = this.unitOfWork.CreateObject<Person>();
+            Person p = this.dm.CreateObject<Person>();
             p.Id = GuidComb.Generate();
-            this.unitOfWork.AddPerson(p);
+            this.dm.AddPerson(p);
 
-            PersonViewModel vm = new PersonViewModel(p, this.scienceDegreeLookup, this.scienceStatusLookup, this.sexLookup, this.specialityLookup, this.unitOfWork);
+            PersonViewModel vm = new PersonViewModel(p);
             this.AllPersons.Add(vm);
             this.CurrentPerson = vm;
         }
 
         private void DeleteCurrentPerson()
         {
-            this.unitOfWork.RemovePerson(this.CurrentPerson.Model);
+            this.dm.RemovePerson(this.CurrentPerson.Model);
             this.AllPersons.Remove(this.CurrentPerson);
             this.CurrentPerson = null;
 

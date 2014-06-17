@@ -9,7 +9,7 @@ using WPFDB.Model;
 
 namespace WPFDB.Data
 {
-    public class ConferenceRepository: IConferenceRepository
+    public class ConferenceRepository
     {
         private IObjectSet<Conference> objectSet;
 
@@ -22,10 +22,31 @@ namespace WPFDB.Data
 
             this.objectSet = context.Conferences;
         }
-
-        public IEnumerable<Conference> GetAllConferences()
+        public IEnumerable<Conference> All()
         {
             return objectSet.ToList();
+        }
+
+        public void Add(Conference obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("Conference");
+            }
+            objectSet.AddObject(obj);
+
+
+        }
+
+        public void Remove(Conference obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("Conference");
+            }
+            objectSet.DeleteObject(obj);
+            //this.CheckEntityBelongsToUnitOfWork(obj);
+            //this.underlyingContext.Persons.DeleteObject(obj);
         }
 
     }

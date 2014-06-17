@@ -12,33 +12,96 @@ namespace WPFDB.Common
     /// <summary>
     /// Encapsulates changes to underlying data stored in an ConferenceContext
     /// </summary>
-    public class UnitOfWork : IUnitOfWork
+    public class DataManager
     {
+        private static DataManager instance;
+
+
+        public static DataManager Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new DataManager(new ConferenceEntities());
+                }
+                return instance;
+            }
+        }
+
         /// <summary>
         /// The underlying context tracking changes
         /// </summary>
         private IConferenceContext underlyingContext;
 
+        private PersonRepository personRepository;
+        private ConferenceRepository conferenceRepository;
+        private SexRepository sexRepository;
+        private SpecialityRepository specialityRepository;
+        private ScienceDegreeRepository scienceDegreeRepository;
+        private ScienceStatusRepository scienceStatusRepository;
+
         /// <summary>
-        /// Initializes a new instance of the UnitOfWork class.
-        /// Changes registered in the UnitOfWork are recorded in the supplied context
+        /// Initializes a new instance of the DataManager class.
+        /// Changes registered in the DataManager are recorded in the supplied context
         /// </summary>
-        /// <param name="context">The underlying context for this UnitOfWork</param>
-        ///   public UnitOfWork(IEmployeeContext context)
-        public UnitOfWork(IConferenceContext context)
+        /// <param name="context">The underlying context for this DataManager</param>
+        ///   public DataManager(IEmployeeContext context)
+        private DataManager(IConferenceContext context)
         {
             if (context == null)
             {
                 throw new ArgumentNullException("context");
             }
 
-            this.underlyingContext = context;
+            underlyingContext = context;
+            personRepository = new PersonRepository(underlyingContext);
+            conferenceRepository = new ConferenceRepository(underlyingContext);
+            sexRepository = new SexRepository(underlyingContext);
+            specialityRepository = new SpecialityRepository(underlyingContext);
+            scienceDegreeRepository = new ScienceDegreeRepository(underlyingContext);
+            scienceStatusRepository = new ScienceStatusRepository(underlyingContext);
         }
 
-       
+
+        public void AddPerson(Person obj)
+        {
+            personRepository.Add(obj);
+        }
+
+        public void RemovePerson(Person obj)
+        {
+            personRepository.Remove(obj);
+        }
+
+        public IEnumerable<Person> GetAllPersons()
+        {
+            return personRepository.All();
+        }
+        public IEnumerable<Conference> GetAllConferences()
+        {
+            return conferenceRepository.All();
+        }
+        public IEnumerable<Sex> GetAllSexes()
+        {
+            return sexRepository.All();
+        }
+        public IEnumerable<Speciality> GetAllSpecialities()
+        {
+            return specialityRepository.All();
+        }
+        public IEnumerable<ScienceDegree> GetAllScienceDegrees()
+        {
+            return scienceDegreeRepository.All();
+        }
+        public IEnumerable<ScienceStatus> GetAllScienceStatuses()
+        {
+            return scienceStatusRepository.All();
+        }
+
 
         /// <summary>
-        /// Save all pending changes in this UnitOfWork
+        /// Save all pending changes in this DataManager
         /// </summary>
         public void Save()
         {
@@ -62,7 +125,7 @@ namespace WPFDB.Common
         /// Registers the addition of a new speciality
         /// </summary>
         /// <param name="speciality">The speciality to add</param>
-        /// <exception cref="InvalidOperationException">Thrown if speciality is already added to UnitOfWork</exception>
+        /// <exception cref="InvalidOperationException">Thrown if speciality is already added to DataManager</exception>
         public void AddSpeciality(Speciality obj)
         {
             if (obj == null)
@@ -119,23 +182,14 @@ namespace WPFDB.Common
         /// Registers the addition of a new conference
         /// </summary>
         /// <param name="employee">The person to add</param>
-        /// <exception cref="InvalidOperationException">Thrown if person is already added to UnitOfWork</exception>
-        public void AddPerson(Person obj)
-        {
-            if (obj == null)
-            {
-                throw new ArgumentNullException("person");
-            }
-
-            this.CheckEntityDoesNotBelongToUnitOfWork(obj);
-            this.underlyingContext.Persons.AddObject(obj);
-        }
+        /// <exception cref="InvalidOperationException">Thrown if person is already added to DataManager</exception>
+      
 
         /// <summary>
         /// Registers the removal of an existing speciality
         /// </summary>
         /// <param name="speciality">The speciality to remove</param>
-        /// <exception cref="InvalidOperationException">Thrown if speciality is not tracked by this UnitOfWork</exception>
+        /// <exception cref="InvalidOperationException">Thrown if speciality is not tracked by this DataManager</exception>
         public void RemoveSpeciality(Speciality obj)
         {
             if (obj == null)
@@ -216,23 +270,14 @@ namespace WPFDB.Common
         /// Registers the removal of an existing person
         /// </summary>
         /// <param name="employee">The person to remove</param>
-        /// <exception cref="InvalidOperationException">Thrown if person is not tracked by this UnitOfWork</exception>
-        public void RemovePerson(Person obj)
-        {
-            if (obj == null)
-            {
-                throw new ArgumentNullException("person");
-            }
-
-            this.CheckEntityBelongsToUnitOfWork(obj);
-            this.underlyingContext.Persons.DeleteObject(obj);
-        }
+        /// <exception cref="InvalidOperationException">Thrown if person is not tracked by this DataManager</exception>
+       
 
         /// <summary>
-        /// Verifies that the specified entity is tracked in this UnitOfWork
+        /// Verifies that the specified entity is tracked in this DataManager
         /// </summary>
         /// <param name="entity">The object to search for</param>
-        /// <exception cref="InvalidOperationException">Thrown if object is not tracked by this UnitOfWork</exception>
+        /// <exception cref="InvalidOperationException">Thrown if object is not tracked by this DataManager</exception>
         private void CheckEntityBelongsToUnitOfWork(object entity)
         {
             if (!this.underlyingContext.IsObjectTracked(entity))
@@ -242,10 +287,10 @@ namespace WPFDB.Common
         }
 
         /// <summary>
-        /// Verifies that the specified entity is not tracked in this UnitOfWork
+        /// Verifies that the specified entity is not tracked in this DataManager
         /// </summary>
         /// <param name="entity">The object to search for</param>
-        /// <exception cref="InvalidOperationException">Thrown if object is tracked by this UnitOfWork</exception>
+        /// <exception cref="InvalidOperationException">Thrown if object is tracked by this DataManager</exception>
         private void CheckEntityDoesNotBelongToUnitOfWork(object entity)
         {
             if (this.underlyingContext.IsObjectTracked(entity))
