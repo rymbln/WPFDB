@@ -37,7 +37,7 @@
     <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="SecondName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ThirdName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BirthDate" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BirthDate" Type="datetime" Nullable="true" />
     <Property Name="WorkPlace" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Post" Type="nvarchar(max)" Nullable="false" />
     <Property Name="SpecialityId" Type="uniqueidentifier" Nullable="false" />
@@ -175,7 +175,7 @@
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="SecondName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="ThirdName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="BirthDate" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="true" />
           <Property Name="WorkPlace" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Post" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="SpecialityId" Type="Guid" Nullable="false" />

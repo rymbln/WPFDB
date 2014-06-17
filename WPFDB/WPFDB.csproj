@@ -71,10 +71,12 @@
     <Compile Include="Data\ConferenceRepository.cs" />
     <Compile Include="Data\IConferenceContext.cs" />
     <Compile Include="Data\IConferenceRepository.cs" />
+    <Compile Include="Data\IPersonRepository.cs" />
     <Compile Include="Data\IScienceDegreeRepository.cs" />
     <Compile Include="Data\IScienceStatusRepository.cs" />
     <Compile Include="Data\ISexRepository.cs" />
     <Compile Include="Data\ISpecialityRepository.cs" />
+    <Compile Include="Data\PersonRepository.cs" />
     <Compile Include="Data\ScienceDegreeRepository.cs" />
     <Compile Include="Data\ScienceStatusRepository.cs" />
     <Compile Include="Data\SexRepository.cs" />
@@ -85,10 +87,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConferenceModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\BasicPersonViewModel.cs" />
     <Compile Include="ViewModel\ConferenceViewModel.cs" />
     <Compile Include="ViewModel\ConferenceWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\Helpers\DelegateCommand.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\PersonViewModel.cs" />
+    <Compile Include="ViewModel\PersonWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\ScienceDegreeViewModel.cs" />
     <Compile Include="ViewModel\ScienceDegreeWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\ScienceStatusViewModel.cs" />
@@ -103,6 +108,12 @@
     </Compile>
     <Compile Include="View\ConferenceWorkspaceView.xaml.cs">
       <DependentUpon>ConferenceWorkspaceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PersonDetailView.xaml.cs">
+      <DependentUpon>PersonDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PersonWorkspaceView.xaml.cs">
+      <DependentUpon>PersonWorkspaceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ScienceDegreeDetailView.xaml.cs">
       <DependentUpon>ScienceDegreeDetailView.xaml</DependentUpon>
@@ -148,6 +159,14 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\PersonDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PersonWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ScienceDegreeDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

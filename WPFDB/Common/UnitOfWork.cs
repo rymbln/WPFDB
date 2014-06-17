@@ -35,6 +35,8 @@ namespace WPFDB.Common
             this.underlyingContext = context;
         }
 
+       
+
         /// <summary>
         /// Save all pending changes in this UnitOfWork
         /// </summary>

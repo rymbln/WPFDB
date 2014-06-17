@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 06/10/2014 17:08:29
+-- Date Created: 06/16/2014 13:29:37
 -- Generated from EDMX file: C:\Users\Inspiron\documents\visual studio 2012\Projects\WPFDB\WPFDB\Model\ConferenceModel.edmx
 -- --------------------------------------------------
 
@@ -49,6 +49,9 @@ GO
 IF OBJECT_ID(N'[dbo].[Specialities]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Specialities];
 GO
+IF OBJECT_ID(N'[dbo].[Conferences]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Conferences];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -60,7 +63,7 @@ CREATE TABLE [dbo].[Persons] (
     [FirstName] nvarchar(max)  NOT NULL,
     [SecondName] nvarchar(max)  NOT NULL,
     [ThirdName] nvarchar(max)  NOT NULL,
-    [BirthDate] nvarchar(max)  NOT NULL,
+    [BirthDate] datetime  NULL,
     [WorkPlace] nvarchar(max)  NOT NULL,
     [Post] nvarchar(max)  NOT NULL,
     [SpecialityId] uniqueidentifier  NOT NULL,

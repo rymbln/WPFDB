@@ -32,14 +32,15 @@ namespace WPFDB
 
             this.context = new ConferenceEntities();
 
-            ISpecialityRepository specialityRepository = new SpecialityRepository(this.context);
+            ISpecialityRepository specialityRepository = new SpecialityRepository(context);
             ISexRepository sexRepository = new SexRepository(context);
             IScienceDegreeRepository  scienceDegreeRepository = new ScienceDegreeRepository(context);
             IScienceStatusRepository scienceStatusRepository = new ScienceStatusRepository(context);
             IConferenceRepository conferenceRepository = new ConferenceRepository(context);
-            IUnitOfWork unit = new UnitOfWork(this.context);
+            IPersonRepository personRepository = new PersonRepository(context);
+            IUnitOfWork unit = new UnitOfWork(context);
 
-            MainViewModel main = new MainViewModel(unit, specialityRepository, sexRepository, scienceDegreeRepository, scienceStatusRepository , conferenceRepository);
+            MainViewModel main = new MainViewModel(unit, specialityRepository, sexRepository, scienceDegreeRepository, scienceStatusRepository , conferenceRepository, personRepository);
             MainView window = new View.MainView {DataContext = main};
             window.Show();
 

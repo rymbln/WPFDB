@@ -15,7 +15,6 @@ using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using WPFDB.Data;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -34,7 +33,7 @@ namespace WPFDB.Model
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class ConferenceEntities : ObjectContext, IConferenceContext
+    public partial class ConferenceEntities : ObjectContext
     {
         #region Constructors
     
@@ -78,7 +77,7 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public IObjectSet<Person> Persons
+public IObjectSet<Person> Persons
         {
             get
             {
@@ -94,7 +93,7 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public IObjectSet<ScienceDegree> ScienceDegrees
+public IObjectSet<ScienceDegree> ScienceDegrees
         {
             get
             {
@@ -110,7 +109,7 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public IObjectSet<ScienceStatus> ScienceStatuses
+public IObjectSet<ScienceStatus> ScienceStatuses
         {
             get
             {
@@ -126,7 +125,7 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public IObjectSet<Sex> Sexes
+public IObjectSet<Sex> Sexes
         {
             get
             {
@@ -142,7 +141,7 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public IObjectSet<Speciality> Specialities
+public IObjectSet<Speciality> Specialities
         {
             get
             {
@@ -158,7 +157,7 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public IObjectSet<Conference> Conferences
+public IObjectSet<Conference> Conferences
         {
             get
             {
@@ -382,7 +381,6 @@ namespace WPFDB.Model
         /// <param name="firstName">Initial value of the FirstName property.</param>
         /// <param name="secondName">Initial value of the SecondName property.</param>
         /// <param name="thirdName">Initial value of the ThirdName property.</param>
-        /// <param name="birthDate">Initial value of the BirthDate property.</param>
         /// <param name="workPlace">Initial value of the WorkPlace property.</param>
         /// <param name="post">Initial value of the Post property.</param>
         /// <param name="specialityId">Initial value of the SpecialityId property.</param>
@@ -390,14 +388,13 @@ namespace WPFDB.Model
         /// <param name="scienceStatusId">Initial value of the ScienceStatusId property.</param>
         /// <param name="sexId">Initial value of the SexId property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
-        public static Person CreatePerson(global::System.Guid id, global::System.String firstName, global::System.String secondName, global::System.String thirdName, global::System.String birthDate, global::System.String workPlace, global::System.String post, global::System.Guid specialityId, global::System.Guid scienceDegreeId, global::System.Guid scienceStatusId, global::System.Guid sexId, global::System.Int32 sourceId)
+        public static Person CreatePerson(global::System.Guid id, global::System.String firstName, global::System.String secondName, global::System.String thirdName, global::System.String workPlace, global::System.String post, global::System.Guid specialityId, global::System.Guid scienceDegreeId, global::System.Guid scienceStatusId, global::System.Guid sexId, global::System.Int32 sourceId)
         {
             Person person = new Person();
             person.Id = id;
             person.FirstName = firstName;
             person.SecondName = secondName;
             person.ThirdName = thirdName;
-            person.BirthDate = birthDate;
             person.WorkPlace = workPlace;
             person.Post = post;
             person.SpecialityId = specialityId;
@@ -514,9 +511,9 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String BirthDate
+        public Nullable<global::System.DateTime> BirthDate
         {
             get
             {
@@ -526,13 +523,13 @@ namespace WPFDB.Model
             {
                 OnBirthDateChanging(value);
                 ReportPropertyChanging("BirthDate");
-                _BirthDate = StructuralObject.SetValidValue(value, false, "BirthDate");
+                _BirthDate = StructuralObject.SetValidValue(value, "BirthDate");
                 ReportPropertyChanged("BirthDate");
                 OnBirthDateChanged();
             }
         }
-        private global::System.String _BirthDate;
-        partial void OnBirthDateChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _BirthDate;
+        partial void OnBirthDateChanging(Nullable<global::System.DateTime> value);
         partial void OnBirthDateChanged();
     
         /// <summary>

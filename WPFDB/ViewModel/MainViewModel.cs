@@ -21,7 +21,14 @@ namespace WPFDB.ViewModel
         ///         /// <param name="unitOfWork">UnitOfWork for co-ordinating changes</param>
         /// <param name="specialityRepository">Repository for querying department data</param>
 
-        public MainViewModel(IUnitOfWork unitOfWork, ISpecialityRepository specialityRepository, ISexRepository sexRepository, IScienceDegreeRepository scienceDegreeRepository, IScienceStatusRepository scienceStatusRepository, IConferenceRepository conferenceRepository)
+        public MainViewModel(IUnitOfWork unitOfWork, 
+            ISpecialityRepository specialityRepository, 
+            ISexRepository sexRepository, 
+            IScienceDegreeRepository scienceDegreeRepository, 
+            IScienceStatusRepository scienceStatusRepository, 
+            IConferenceRepository conferenceRepository,
+            IPersonRepository personRepository
+            )
         {
             if (unitOfWork == null)
             {
@@ -48,6 +55,11 @@ namespace WPFDB.ViewModel
             {
                 throw new ArgumentNullException("conferenceRepository");
             }
+            if (personRepository == null)
+            {
+                throw new ArgumentNullException("personRepository");
+            }
+
 
             this.unitOfWork = unitOfWork;
 
@@ -57,6 +69,7 @@ namespace WPFDB.ViewModel
             ObservableCollection<ScienceStatusViewModel> allScienceStatuses = new ObservableCollection<ScienceStatusViewModel>();
             ObservableCollection<ScienceDegreeViewModel> allScienceDegree = new ObservableCollection<ScienceDegreeViewModel>();
             ObservableCollection<ConferenceViewModel> allConferences = new ObservableCollection<ConferenceViewModel>();
+            ObservableCollection<PersonViewModel> allPersons = new ObservableCollection<PersonViewModel>();
 
             foreach (var item in specialityRepository.GetAllSpecialities())
             {
@@ -78,11 +91,17 @@ namespace WPFDB.ViewModel
             {
                 allConferences.Add(new ConferenceViewModel(item));
             }
+            foreach (var item in personRepository.GetAllPersons())
+            {
+                allPersons.Add(new PersonViewModel(item,allScienceDegree, allScienceStatuses, allSexes, allSpecialities, unitOfWork));
+            }
+
             this.SpecialityWorkspace = new SpecialityWorkspaceViewModel(allSpecialities, unitOfWork);
             this.SexWorkspace = new SexWorkspaceViewModel(allSexes, unitOfWork);
             this.ScienceDegreeWorkspace = new ScienceDegreeWorkspaceViewModel(allScienceDegree, unitOfWork);
             this.ScienceStatusWorkspace = new ScienceStatusWorkspaceViewModel(allScienceStatuses, unitOfWork);
             this.ConferenceWorkspace = new ConferenceWorkspaceViewModel(allConferences, unitOfWork);
+            this.PersonWorkspace = new PersonWorkspaceViewModel(allPersons, allScienceDegree, allScienceStatuses, allSexes,allSpecialities, unitOfWork);
             this.SaveCommand = new DelegateCommand((o) => this.Save());
 
         }
@@ -100,6 +119,7 @@ namespace WPFDB.ViewModel
         public ScienceDegreeWorkspaceViewModel ScienceDegreeWorkspace { get; private set; }
         public ScienceStatusWorkspaceViewModel ScienceStatusWorkspace { get; private set; }
         public ConferenceWorkspaceViewModel ConferenceWorkspace { get; private set; }
+        public PersonWorkspaceViewModel PersonWorkspace { get; private set; }
 
         /// <summary>
         /// Saves all changes made in the current sessions UnitOfWork

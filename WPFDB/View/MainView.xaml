@@ -7,6 +7,9 @@
         Title="MainWindow" Height="350" Width="525">
 
     <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:PersonWorkspaceViewModel}">
+            <v:PersonWorkspaceView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type vm:SpecialityWorkspaceViewModel}">
             <v:SpecialityWorkspaceView/>
         </DataTemplate>
@@ -25,18 +28,22 @@
     </Window.Resources>
     <Grid>
         <StackPanel>
-        <Button Width="60" Height="40" VerticalAlignment="Top" Margin="5" HorizontalAlignment="Left" Command="{Binding Path=SaveCommand}">Save</Button>
-        <TabControl Padding="0"  >
-            <!--<TabItem>
+            <Button Width="60" Height="40" VerticalAlignment="Top" Margin="5" HorizontalAlignment="Left" Command="{Binding Path=SaveCommand}">Save</Button>
+            <TabControl Padding="0"  >
+                <!--<TabItem>
                 <TabItem.Header>
                     Persons
                 </TabItem.Header>
                 <ContentControl Margin="10" Content="{Binding Path=./View/PersonWorkspace}" />
             </TabItem>-->
-            <TabItem>
-                <TabItem.Header>Specialities</TabItem.Header>
-                <ContentControl Margin="10"  Content="{Binding Path=.SpecialityWorkspace}"  />
-            </TabItem>
+                <TabItem>
+                    <TabItem.Header>Person</TabItem.Header>
+                    <ContentControl Margin="10"  Content="{Binding Path=.PersonWorkspace}"  />
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>Specialities</TabItem.Header>
+                    <ContentControl Margin="10"  Content="{Binding Path=.SpecialityWorkspace}"  />
+                </TabItem>
                 <TabItem>
                     <TabItem.Header>Sex</TabItem.Header>
                     <ContentControl Margin="10"  Content="{Binding Path=.SexWorkspace}"  />
@@ -44,6 +51,10 @@
                 <TabItem>
                     <TabItem.Header>Science degrees</TabItem.Header>
                     <ContentControl Margin="10"  Content="{Binding Path=.ScienceDegreeWorkspace}"  />
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>Science statuses</TabItem.Header>
+                    <ContentControl Margin="10"  Content="{Binding Path=.ScienceStatusWorkspace}"  />
                 </TabItem>
                 <TabItem>
                     <TabItem.Header>Conferences</TabItem.Header>
