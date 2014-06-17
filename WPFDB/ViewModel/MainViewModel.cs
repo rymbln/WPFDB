@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WPFDB.Common;
 using WPFDB.Data;
-using WPFDB.View;
 using WPFDB.ViewModel.Helpers;
 
 namespace WPFDB.ViewModel
@@ -15,11 +14,6 @@ namespace WPFDB.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private IUnitOfWork unitOfWork;
-        private ISpecialityRepository specialityRepository;
-        private ISexRepository sexRepository;
-        private IScienceDegreeRepository scienceDegreeRepository;
-        private IScienceStatusRepository scienceStatusRepository;
-        private IConferenceRepository conferenceRepository;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -27,11 +21,11 @@ namespace WPFDB.ViewModel
         ///         /// <param name="unitOfWork">UnitOfWork for co-ordinating changes</param>
         /// <param name="specialityRepository">Repository for querying department data</param>
 
-        public MainViewModel(IUnitOfWork unitOfWork,
-            ISpecialityRepository specialityRepository,
-            ISexRepository sexRepository,
-            IScienceDegreeRepository scienceDegreeRepository,
-            IScienceStatusRepository scienceStatusRepository,
+        public MainViewModel(IUnitOfWork unitOfWork, 
+            ISpecialityRepository specialityRepository, 
+            ISexRepository sexRepository, 
+            IScienceDegreeRepository scienceDegreeRepository, 
+            IScienceStatusRepository scienceStatusRepository, 
             IConferenceRepository conferenceRepository,
             IPersonRepository personRepository
             )
@@ -68,11 +62,7 @@ namespace WPFDB.ViewModel
 
 
             this.unitOfWork = unitOfWork;
-            this.scienceDegreeRepository = scienceDegreeRepository;
-            this.scienceStatusRepository = scienceStatusRepository;
-            this.sexRepository = sexRepository;
-            this.specialityRepository = specialityRepository;
-            this.conferenceRepository = conferenceRepository;
+
             // Build data structures to populate areas of the application surface
             ObservableCollection<SpecialityViewModel> allSpecialities = new ObservableCollection<SpecialityViewModel>();
             ObservableCollection<SexViewModel> allSexes = new ObservableCollection<SexViewModel>();
@@ -103,7 +93,7 @@ namespace WPFDB.ViewModel
             }
             foreach (var item in personRepository.GetAllPersons())
             {
-                allPersons.Add(new PersonViewModel(item, allScienceDegree, allScienceStatuses, allSexes, allSpecialities, unitOfWork));
+                allPersons.Add(new PersonViewModel(item,allScienceDegree, allScienceStatuses, allSexes, allSpecialities, unitOfWork));
             }
 
             this.SpecialityWorkspace = new SpecialityWorkspaceViewModel(allSpecialities, unitOfWork);
@@ -111,9 +101,8 @@ namespace WPFDB.ViewModel
             this.ScienceDegreeWorkspace = new ScienceDegreeWorkspaceViewModel(allScienceDegree, unitOfWork);
             this.ScienceStatusWorkspace = new ScienceStatusWorkspaceViewModel(allScienceStatuses, unitOfWork);
             this.ConferenceWorkspace = new ConferenceWorkspaceViewModel(allConferences, unitOfWork);
-            this.PersonWorkspace = new PersonWorkspaceViewModel(allPersons, allScienceDegree, allScienceStatuses, allSexes, allSpecialities, unitOfWork);
+            this.PersonWorkspace = new PersonWorkspaceViewModel(allPersons, allScienceDegree, allScienceStatuses, allSexes,allSpecialities, unitOfWork);
             this.SaveCommand = new DelegateCommand((o) => this.Save());
-            this.OpenKnowallsCommand = new DelegateCommand((o) => this.OpenKnowalls());
 
         }
 
@@ -121,7 +110,6 @@ namespace WPFDB.ViewModel
         /// Gets the command to save all changes made in the current sessions UnitOfWork
         /// </summary>
         public ICommand SaveCommand { get; private set; }
-        public ICommand OpenKnowallsCommand { get; private set; }
 
         /// <summary>
         /// Gets the workspace for managing departments of the company
@@ -139,13 +127,6 @@ namespace WPFDB.ViewModel
         private void Save()
         {
             this.unitOfWork.Save();
-        }
-
-        private void OpenKnowalls()
-        {
-            KnowallViewModel vm = new KnowallViewModel(this.unitOfWork, this.specialityRepository, this.sexRepository, this.scienceDegreeRepository, this.scienceStatusRepository, this.conferenceRepository);
-            KnowallView v = new KnowallView { DataContext = vm };
-            v.Show();
         }
     }
 }

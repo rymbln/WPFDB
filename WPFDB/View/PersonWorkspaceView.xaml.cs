@@ -24,7 +24,5 @@ namespace WPFDB.View
         {
             InitializeComponent();
         }
-
-
     }
 }

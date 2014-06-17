@@ -19,16 +19,16 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0" Content="Id:" />
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Id:" />
         <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Id}" Width="200" IsReadOnly="True"/>
 
-        <Label Grid.Column="0" Grid.Row="1" Content="Code:" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Code:" />
         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Code}" Width="200" />
 
-        <Label Grid.Column="0" Grid.Row="2" Content="Name:" />
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Name:" />
         <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Name}" Width="200"/>
 
-        <Label Grid.Column="0" Grid.Row="3" Content="SourceId:" />
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="SourceId:" />
         <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=SourceId}" Width="200" />
     </Grid>
 </UserControl>

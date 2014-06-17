@@ -91,7 +91,6 @@
     <Compile Include="ViewModel\ConferenceViewModel.cs" />
     <Compile Include="ViewModel\ConferenceWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\Helpers\DelegateCommand.cs" />
-    <Compile Include="ViewModel\KnowallViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PersonViewModel.cs" />
     <Compile Include="ViewModel\PersonWorkspaceViewModel.cs" />
@@ -109,9 +108,6 @@
     </Compile>
     <Compile Include="View\ConferenceWorkspaceView.xaml.cs">
       <DependentUpon>ConferenceWorkspaceView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\KnowallView.xaml.cs">
-      <DependentUpon>KnowallView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PersonDetailView.xaml.cs">
       <DependentUpon>PersonDetailView.xaml</DependentUpon>
@@ -143,23 +139,11 @@
     <Compile Include="View\SpecialityWorkspaceView.xaml.cs">
       <DependentUpon>SpecialityWorkspaceView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Resources\ControlResources.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\ImageResources.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\ConferenceDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ConferenceWorkspaceView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\KnowallView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -231,7 +215,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EntityDeploy Include="Model\ConferenceModel.edmx">
@@ -256,15 +240,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model\ConferenceModel.edmx.sql" />
-    <Resource Include="Resources\Image\Conference.ico" />
-    <Resource Include="Resources\Image\Copy.png" />
-    <Resource Include="Resources\Image\Cut.png" />
-    <Resource Include="Resources\Image\Delete.png" />
-    <Resource Include="Resources\Image\Email.png" />
-    <Resource Include="Resources\Image\Paste.png" />
-    <Resource Include="Resources\Image\Redo.png" />
-    <Resource Include="Resources\Image\Save.png" />
-    <Resource Include="Resources\Image\Undo.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

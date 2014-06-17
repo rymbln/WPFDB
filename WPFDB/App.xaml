@@ -3,14 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
            >
     <Application.Resources>
-        <ResourceDictionary>
 
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/ImageResources.xaml"/>
-                <ResourceDictionary Source="Resources/ControlResources.xaml"/>
+        <!--Light pane with header, used to isolate sub sections of the interface-->
+        <Style x:Key="SubDisplayArea" TargetType="{x:Type HeaderedContentControl}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type HeaderedContentControl}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" Background="LightGray" BorderBrush="LightGray"  Padding="8,2,8,6" CornerRadius="6,6,0,0" BorderThickness="2,2,2,0">
+                                <TextBlock Foreground="#FF282828" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <ContentPresenter ContentSource="Header"/>
+                                </TextBlock>
+                            </Border>
+                            <Border Grid.Row="1" Background="White" BorderBrush="LightGray" CornerRadius="0,0,6,6" BorderThickness="2,0,2,2">
+                                <ContentPresenter/>
+                                <Border.RenderTransform>
+                                    <ScaleTransform x:Name="ContentScale" ScaleX="1" ScaleY="1" />
+                                </Border.RenderTransform>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
 
+        <!--Subtle border used to seperate areas of a pane-->
+        <Style x:Key="DetailBorder" TargetType="{x:Type Border}">
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="2" />
+        </Style>
     </Application.Resources>
 </Application>

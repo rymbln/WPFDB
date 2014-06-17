@@ -10,7 +10,6 @@ namespace WPFDB
     using WPFDB.Data;
     using WPFDB.Model;
     using WPFDB.ViewModel;
-    using WPFDB.Properties;
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
