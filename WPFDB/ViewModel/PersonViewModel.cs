@@ -58,7 +58,7 @@ namespace WPFDB.ViewModel
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.ScienceDegree))
                 {
-                    this.ScienceDegree = null;
+                    this.ScienceDegree = new ScienceDegreeViewModel(dm.GetDefaultScienceDegree());
                 }
             };
 
@@ -66,21 +66,21 @@ namespace WPFDB.ViewModel
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.ScienceStatus))
                 {
-                    this.ScienceStatus = null;
+                    this.ScienceStatus = new ScienceStatusViewModel(dm.GetDefaultScienceStatus());
                 }
             };
             this.SexLookup.CollectionChanged += (sender, e) =>
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.Sex))
                 {
-                    this.Sex = null;
+                    this.Sex = new SexViewModel(dm.GetDefaultSex());
                 }
             };
             this.SpecialityLookup.CollectionChanged += (sender, e) =>
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.Speciality))
                 {
-                    this.Speciality = null;
+                    this.Speciality = new SpecialityViewModel(dm.GetDefaultSpeciality());
                 }
             };
         }
@@ -96,13 +96,12 @@ namespace WPFDB.ViewModel
             {
                 if (this.Model.ScienceDegree == null)
                 {
-                    return null;
+                    this.Model.ScienceDegree = dm.GetDefaultScienceDegree();
+     
                 }
-                else if (this.scienceDegree == null || this.scienceDegree.Model != this.Model.ScienceDegree)
-                {
                     this.scienceDegree =
-                        this.ScienceDegreeLookup.Where(s => s.Model == this.Model.ScienceDegree).SingleOrDefault();
-                }
+                        this.ScienceDegreeLookup.SingleOrDefault(s => s.Model == this.Model.ScienceDegree);
+              
                 return this.scienceDegree;
             }
 
@@ -119,13 +118,11 @@ namespace WPFDB.ViewModel
             {
                 if (this.Model.ScienceStatus == null)
                 {
-                    return null;
+                    this.Model.ScienceStatus = dm.GetDefaultScienceStatus();
                 }
-                else if (this.scienceStatus == null || this.scienceStatus.Model != this.Model.ScienceStatus)
-                {
-                    this.scienceStatus =
-                        this.ScienceStatusLookup.Where(s => s.Model == this.Model.ScienceStatus).SingleOrDefault();
-                }
+                this.scienceStatus =
+                        this.ScienceStatusLookup.SingleOrDefault(s => s.Model == this.Model.ScienceStatus);
+
                 return this.scienceStatus;
             }
 
@@ -143,13 +140,12 @@ namespace WPFDB.ViewModel
             {
                 if (this.Model.Sex == null)
                 {
-                    return null;
+                    this.Model.Sex = dm.GetDefaultSex();
+
                 }
-                else if (this.sex == null || this.sex.Model != this.Model.Sex)
-                {
-                    this.sex =
-                        this.SexLookup.Where(s => s.Model == this.Model.Sex).SingleOrDefault();
-                }
+                this.sex =
+                        this.SexLookup.SingleOrDefault(s => s.Model == this.Model.Sex);
+
                 return this.sex;
             }
 
@@ -167,13 +163,11 @@ namespace WPFDB.ViewModel
             {
                 if (this.Model.Speciality == null)
                 {
-                    return null;
+                    this.Model.Speciality = dm.GetDefaultSpeciality();
                 }
-                else if (this.speciality == null || this.speciality.Model != this.Model.Speciality)
-                {
-                    this.speciality =
-                        this.SpecialityLookup.Where(s => s.Model == this.Model.Speciality).SingleOrDefault();
-                }
+                this.speciality =
+                        this.SpecialityLookup.SingleOrDefault(s => s.Model == this.Model.Speciality);
+
                 return this.speciality;
             }
 

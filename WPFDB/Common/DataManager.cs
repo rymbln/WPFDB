@@ -64,15 +64,9 @@ namespace WPFDB.Common
         }
 
 
-        public void AddPerson(Person obj)
-        {
-            personRepository.Add(obj);
-        }
 
-        public void RemovePerson(Person obj)
-        {
-            personRepository.Remove(obj);
-        }
+
+        #region Getting Lists
 
         public IEnumerable<Person> GetAllPersons()
         {
@@ -98,7 +92,7 @@ namespace WPFDB.Common
         {
             return scienceStatusRepository.All();
         }
-
+        #endregion
 
         /// <summary>
         /// Save all pending changes in this DataManager
@@ -121,11 +115,8 @@ namespace WPFDB.Common
         }
 
 
-        /// <summary>
-        /// Registers the addition of a new speciality
-        /// </summary>
-        /// <param name="speciality">The speciality to add</param>
-        /// <exception cref="InvalidOperationException">Thrown if speciality is already added to DataManager</exception>
+        #region Adding 
+
         public void AddSpeciality(Speciality obj)
         {
             if (obj == null)
@@ -136,7 +127,6 @@ namespace WPFDB.Common
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.Specialities.AddObject(obj);
         }
-
         public void AddSex(Sex obj)
         {
             if (obj == null)
@@ -167,7 +157,6 @@ namespace WPFDB.Common
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.ScienceDegrees.AddObject(obj);
         }
-
         public void AddConference(Conference obj)
         {
             if (obj == null)
@@ -178,18 +167,15 @@ namespace WPFDB.Common
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.Conferences.AddObject(obj);
         }
-        /// <summary>
-        /// Registers the addition of a new conference
-        /// </summary>
-        /// <param name="employee">The person to add</param>
-        /// <exception cref="InvalidOperationException">Thrown if person is already added to DataManager</exception>
-      
+        public void AddPerson(Person obj)
+        {
+            personRepository.Add(obj);
+        }
 
-        /// <summary>
-        /// Registers the removal of an existing speciality
-        /// </summary>
-        /// <param name="speciality">The speciality to remove</param>
-        /// <exception cref="InvalidOperationException">Thrown if speciality is not tracked by this DataManager</exception>
+        #endregion
+
+        #region Removing
+
         public void RemoveSpeciality(Speciality obj)
         {
             if (obj == null)
@@ -250,7 +236,6 @@ namespace WPFDB.Common
 
             this.underlyingContext.ScienceStatuses.DeleteObject(obj);
         }
-
         public void RemoveConference(Conference obj)
         {
             if (obj == null)
@@ -266,18 +251,34 @@ namespace WPFDB.Common
 
             this.underlyingContext.Conferences.DeleteObject(obj);
         }
-        /// <summary>
-        /// Registers the removal of an existing person
-        /// </summary>
-        /// <param name="employee">The person to remove</param>
-        /// <exception cref="InvalidOperationException">Thrown if person is not tracked by this DataManager</exception>
-       
+        public void RemovePerson(Person obj)
+        {
+            personRepository.Remove(obj);
+        }
+        #endregion
 
-        /// <summary>
-        /// Verifies that the specified entity is tracked in this DataManager
-        /// </summary>
-        /// <param name="entity">The object to search for</param>
-        /// <exception cref="InvalidOperationException">Thrown if object is not tracked by this DataManager</exception>
+        #region Getting Default Values
+
+        public Sex GetDefaultSex()
+        {
+            return this.underlyingContext.Sexes.FirstOrDefault(o => o.Code == "-");
+        }
+
+        public Speciality GetDefaultSpeciality()
+        {
+            return this.underlyingContext.Specialities.FirstOrDefault(o => o.Code == "-");
+        }
+        public ScienceDegree GetDefaultScienceDegree()
+        {
+            return this.underlyingContext.ScienceDegrees.FirstOrDefault(o => o.Code == "-");
+        }
+        public ScienceStatus GetDefaultScienceStatus()
+        {
+            return this.underlyingContext.ScienceStatuses.FirstOrDefault(o => o.Code == "-");
+        }
+        #endregion
+
+
         private void CheckEntityBelongsToUnitOfWork(object entity)
         {
             if (!this.underlyingContext.IsObjectTracked(entity))
