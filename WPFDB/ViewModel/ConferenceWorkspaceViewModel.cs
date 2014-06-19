@@ -34,7 +34,11 @@ namespace WPFDB.ViewModel
 
             this.AddConferenceCommand = new DelegateCommand((o) => this.AddConference());
             this.DeleteConferenceCommand = new DelegateCommand((o) => this.DeleteCurrentConference(), (o) => this.CurrentConference != null);
+     
+
         }
+
+        public ICommand SaveCommand { get; private set; }
 
         public ObservableCollection<ConferenceViewModel> AllConferences { get; private set; }
 
@@ -64,5 +68,6 @@ namespace WPFDB.ViewModel
             AllConferences.Remove(CurrentConference);
             CurrentConference = null;
         }
+  
     }
 }

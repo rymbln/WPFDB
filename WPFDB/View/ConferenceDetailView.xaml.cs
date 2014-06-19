@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFDB.ViewModel;
 
 namespace WPFDB.View
 {
@@ -24,5 +25,7 @@ namespace WPFDB.View
         {
             InitializeComponent();
         }
+
+      
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WPFDB.Common;
 using WPFDB.Data;
+using WPFDB.ViewModel.Helpers;
 
 namespace WPFDB.ViewModel
 {
@@ -25,9 +26,9 @@ namespace WPFDB.ViewModel
             var allConferences = new ObservableCollection<ConferenceViewModel>();
 
 
- 
- 
 
+
+            this.SaveCommand = new DelegateCommand((o) => this.Save());
           
             this.SpecialityWorkspace = new SpecialityWorkspaceViewModel();
             this.SexWorkspace = new SexWorkspaceViewModel();

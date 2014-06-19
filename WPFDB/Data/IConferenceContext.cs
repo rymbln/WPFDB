@@ -13,20 +13,20 @@ namespace WPFDB.Data
         /// <summary>
         /// Gets Persons in the data context
         /// </summary>
-        IObjectSet<Person> Persons { get; }
+        ObjectSet<Person> Persons { get; }
 
         /// <summary>
         /// Gets Specialities in the data context
         /// </summary>
-        IObjectSet<Speciality> Specialities { get; }
+        ObjectSet<Speciality> Specialities { get; }
 
-        IObjectSet<Sex> Sexes { get; }
+        ObjectSet<Sex> Sexes { get; }
 
-        IObjectSet<ScienceDegree> ScienceDegrees { get; }
+        ObjectSet<ScienceDegree> ScienceDegrees { get; }
 
-        IObjectSet<ScienceStatus> ScienceStatuses { get; }
+        ObjectSet<ScienceStatus> ScienceStatuses { get; }
 
-        IObjectSet<Conference>  Conferences { get; }
+        ObjectSet<Conference>  Conferences { get; }
         /// <summary>
         /// Save all pending changes to the data context
         /// </summary>

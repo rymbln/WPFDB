@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 06/16/2014 13:29:37
+-- Date Created: 06/19/2014 14:30:47
 -- Generated from EDMX file: C:\Users\Inspiron\documents\visual studio 2012\Projects\WPFDB\WPFDB\Model\ConferenceModel.edmx
 -- --------------------------------------------------
 
@@ -64,8 +64,8 @@ CREATE TABLE [dbo].[Persons] (
     [SecondName] nvarchar(max)  NOT NULL,
     [ThirdName] nvarchar(max)  NOT NULL,
     [BirthDate] datetime  NULL,
-    [WorkPlace] nvarchar(max)  NOT NULL,
-    [Post] nvarchar(max)  NOT NULL,
+    [WorkPlace] nvarchar(max)  NULL,
+    [Post] nvarchar(max)  NULL,
     [SpecialityId] uniqueidentifier  NOT NULL,
     [ScienceDegreeId] uniqueidentifier  NOT NULL,
     [ScienceStatusId] uniqueidentifier  NOT NULL,

@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:WPFDB.ViewModel"
         xmlns:view="clr-namespace:WPFDB.View"
+        xmlns:p="clr-namespace:WPFDB.Properties"
         Title="KnowallView" Height="300" Width="300">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:SpecialityWorkspaceViewModel}">
@@ -21,6 +22,19 @@
             <view:ConferenceWorkspaceView/>
         </DataTemplate>
     </Window.Resources>
+    <DockPanel>
+    <ToolBarTray DockPanel.Dock="Top">
+        <ToolBar>
+            <Button Command="{Binding SaveCommand}" Content="{StaticResource SaveImage}" ToolTip="{x:Static p:Resources.Save}"/>
+            <Button ></Button>
+            <Separator/>
+            <Button Command="ApplicationCommands.Undo" Content="{StaticResource UndoImage}" ToolTip="{x:Static p:Resources.Undo}"/>
+            <Button Command="ApplicationCommands.Redo" Content="{StaticResource RedoImage}" ToolTip="{x:Static p:Resources.Redo}"/>
+            <Button Command="ApplicationCommands.Cut" Content="{StaticResource CutImage}" ToolTip="{x:Static p:Resources.Cut}"/>
+            <Button Command="ApplicationCommands.Copy" Content="{StaticResource CopyImage}" ToolTip="{x:Static p:Resources.Copy}"/>
+            <Button Command="ApplicationCommands.Paste" Content="{StaticResource PasteImage}" ToolTip="{x:Static p:Resources.Paste}"/>
+        </ToolBar>
+    </ToolBarTray>
     <Grid>
         <TabControl Padding="0">
             <TabItem>
@@ -45,4 +59,5 @@
             </TabItem>
         </TabControl>
     </Grid>
+    </DockPanel>
 </Window>

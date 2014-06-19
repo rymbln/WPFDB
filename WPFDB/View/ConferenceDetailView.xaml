@@ -6,9 +6,9 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
 >
-
-    <Grid>
-        <Grid.ColumnDefinitions>
+<DockPanel LastChildFill="False">
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
@@ -26,9 +26,18 @@
         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Code}" Width="200" />
 
         <Label Grid.Column="0" Grid.Row="2" Content="Name:" />
-        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Name}" Width="200"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  Width="200"/>
+    
 
         <Label Grid.Column="0" Grid.Row="3" Content="SourceId:" />
         <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=SourceId}" Width="200" />
     </Grid>
+    <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="50*" />
+        </Grid.ColumnDefinitions>
+  
+    </Grid>
+    </DockPanel>
 </UserControl>

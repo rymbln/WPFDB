@@ -38,8 +38,8 @@
     <Property Name="SecondName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ThirdName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="BirthDate" Type="datetime" Nullable="true" />
-    <Property Name="WorkPlace" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Post" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="WorkPlace" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Post" Type="nvarchar(max)" Nullable="true" />
     <Property Name="SpecialityId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ScienceDegreeId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ScienceStatusId" Type="uniqueidentifier" Nullable="false" />
@@ -176,8 +176,8 @@
           <Property Name="SecondName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="ThirdName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="BirthDate" Type="DateTime" Nullable="true" />
-          <Property Name="WorkPlace" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Post" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="WorkPlace" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Post" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="SpecialityId" Type="Guid" Nullable="false" />
           <Property Name="ScienceDegreeId" Type="Guid" Nullable="false" />
           <Property Name="ScienceStatusId" Type="Guid" Nullable="false" />

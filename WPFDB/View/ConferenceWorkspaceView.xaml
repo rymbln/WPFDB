@@ -5,7 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                   xmlns:v="clr-namespace:WPFDB.View"
              xmlns:vm="clr-namespace:WPFDB.ViewModel"
-      mc:Ignorable="d" 
+             xmlns:p="clr-namespace:WPFDB.Properties"
+             mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
 >
 
@@ -15,7 +16,8 @@
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid>
+
+        <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
@@ -59,6 +61,7 @@
                 </StackPanel>
             </ScrollViewer>
         </HeaderedContentControl>
+        
     </Grid>
 
 </UserControl>

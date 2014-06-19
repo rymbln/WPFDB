@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WPFDB.Model;
+using WPFDB.Validation.Helpers;
 
 namespace WPFDB.ViewModel
 {
     public class ConferenceViewModel:ViewModelBase
     {
+        public static int Errors { get; set; }
+
         public ConferenceViewModel(Conference conference)
         {
             if (conference == null)
@@ -20,11 +24,17 @@ namespace WPFDB.ViewModel
 
         public Conference Model { get; private set; }
 
-        public string Name { get { return this.Model.Name; } set { this.Model.Name = value; this.OnPropertyChanged("Name"); } }
+
+
+        public string Name
+        {
+            get { return this.Model.Name; }
+            set { this.Model.Name = value; this.OnPropertyChanged("Name"); }
+        }
         public string Id
         {
             get { return this.Model.Id.ToString(); }
-            set { }
+      set { }
         }
 
         public string Code
@@ -54,5 +64,7 @@ namespace WPFDB.ViewModel
                 this.OnPropertyChanged("SourceId");
             }
         }
+
+
     }
 }

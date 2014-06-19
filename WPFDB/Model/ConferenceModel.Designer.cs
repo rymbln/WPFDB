@@ -77,7 +77,7 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-public IObjectSet<Person> Persons
+        public ObjectSet<Person> Persons
         {
             get
             {
@@ -93,7 +93,7 @@ public IObjectSet<Person> Persons
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-public IObjectSet<ScienceDegree> ScienceDegrees
+        public ObjectSet<ScienceDegree> ScienceDegrees
         {
             get
             {
@@ -109,7 +109,7 @@ public IObjectSet<ScienceDegree> ScienceDegrees
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-public IObjectSet<ScienceStatus> ScienceStatuses
+        public ObjectSet<ScienceStatus> ScienceStatuses
         {
             get
             {
@@ -125,7 +125,7 @@ public IObjectSet<ScienceStatus> ScienceStatuses
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-public IObjectSet<Sex> Sexes
+        public ObjectSet<Sex> Sexes
         {
             get
             {
@@ -141,7 +141,7 @@ public IObjectSet<Sex> Sexes
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-public IObjectSet<Speciality> Specialities
+        public ObjectSet<Speciality> Specialities
         {
             get
             {
@@ -157,7 +157,7 @@ public IObjectSet<Speciality> Specialities
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-public IObjectSet<Conference> Conferences
+        public ObjectSet<Conference> Conferences
         {
             get
             {
@@ -381,22 +381,18 @@ public IObjectSet<Conference> Conferences
         /// <param name="firstName">Initial value of the FirstName property.</param>
         /// <param name="secondName">Initial value of the SecondName property.</param>
         /// <param name="thirdName">Initial value of the ThirdName property.</param>
-        /// <param name="workPlace">Initial value of the WorkPlace property.</param>
-        /// <param name="post">Initial value of the Post property.</param>
         /// <param name="specialityId">Initial value of the SpecialityId property.</param>
         /// <param name="scienceDegreeId">Initial value of the ScienceDegreeId property.</param>
         /// <param name="scienceStatusId">Initial value of the ScienceStatusId property.</param>
         /// <param name="sexId">Initial value of the SexId property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
-        public static Person CreatePerson(global::System.Guid id, global::System.String firstName, global::System.String secondName, global::System.String thirdName, global::System.String workPlace, global::System.String post, global::System.Guid specialityId, global::System.Guid scienceDegreeId, global::System.Guid scienceStatusId, global::System.Guid sexId, global::System.Int32 sourceId)
+        public static Person CreatePerson(global::System.Guid id, global::System.String firstName, global::System.String secondName, global::System.String thirdName, global::System.Guid specialityId, global::System.Guid scienceDegreeId, global::System.Guid scienceStatusId, global::System.Guid sexId, global::System.Int32 sourceId)
         {
             Person person = new Person();
             person.Id = id;
             person.FirstName = firstName;
             person.SecondName = secondName;
             person.ThirdName = thirdName;
-            person.WorkPlace = workPlace;
-            person.Post = post;
             person.SpecialityId = specialityId;
             person.ScienceDegreeId = scienceDegreeId;
             person.ScienceStatusId = scienceStatusId;
@@ -535,7 +531,7 @@ public IObjectSet<Conference> Conferences
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String WorkPlace
         {
@@ -547,7 +543,7 @@ public IObjectSet<Conference> Conferences
             {
                 OnWorkPlaceChanging(value);
                 ReportPropertyChanging("WorkPlace");
-                _WorkPlace = StructuralObject.SetValidValue(value, false, "WorkPlace");
+                _WorkPlace = StructuralObject.SetValidValue(value, true, "WorkPlace");
                 ReportPropertyChanged("WorkPlace");
                 OnWorkPlaceChanged();
             }
@@ -559,7 +555,7 @@ public IObjectSet<Conference> Conferences
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Post
         {
@@ -571,7 +567,7 @@ public IObjectSet<Conference> Conferences
             {
                 OnPostChanging(value);
                 ReportPropertyChanging("Post");
-                _Post = StructuralObject.SetValidValue(value, false, "Post");
+                _Post = StructuralObject.SetValidValue(value, true, "Post");
                 ReportPropertyChanged("Post");
                 OnPostChanged();
             }

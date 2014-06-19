@@ -102,6 +102,8 @@ namespace WPFDB.Common
             this.underlyingContext.Save();
         }
 
+
+
         /// <summary>
         /// Creates a new instance of the specified object type
         /// NOTE: This pattern is used to allow the use of change tracking proxies

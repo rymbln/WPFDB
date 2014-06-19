@@ -80,6 +80,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConferenceModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Validation\Helpers\ExcludeChar.cs" />
+    <Compile Include="Validation\Helpers\Unique.cs" />
     <Compile Include="ViewModel\BasicPersonViewModel.cs" />
     <Compile Include="ViewModel\ConferenceViewModel.cs" />
     <Compile Include="ViewModel\ConferenceWorkspaceViewModel.cs" />
