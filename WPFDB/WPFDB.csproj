@@ -65,6 +65,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\Authentification.cs" />
     <Compile Include="Common\GuidComb.cs" />
     <Compile Include="Common\DataManager.cs" />
     <Compile Include="Data\ConferenceRepository.cs" />
@@ -82,6 +83,7 @@
     </Compile>
     <Compile Include="Validation\Helpers\ExcludeChar.cs" />
     <Compile Include="Validation\Helpers\Unique.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\BasicPersonViewModel.cs" />
     <Compile Include="ViewModel\ConferenceViewModel.cs" />
     <Compile Include="ViewModel\ConferenceWorkspaceViewModel.cs" />
@@ -107,6 +109,9 @@
     </Compile>
     <Compile Include="View\KnowallView.xaml.cs">
       <DependentUpon>KnowallView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PersonDetailView.xaml.cs">
       <DependentUpon>PersonDetailView.xaml</DependentUpon>
@@ -155,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\KnowallView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

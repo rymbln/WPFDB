@@ -16,7 +16,7 @@ namespace WPFDB
     /// </summary>
     public partial class App : Application
     {
-
+        private Authentification auth = Authentification.Instance;
         /// <summary>
         /// Lauches the entry form on startup
         /// </summary>
@@ -24,12 +24,19 @@ namespace WPFDB
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            
-            MainViewModel main = new MainViewModel();
-            MainView window = new View.MainView {DataContext = main};
-            window.Show();
-
-
+            var currentUser = auth.GetCurrentUser();
+            if (auth.Authentificated())
+            {
+                MainViewModel main = new MainViewModel();
+                MainView window = new View.MainView {DataContext = main};
+                window.Show();
+            }
+            else
+            {
+                LoginViewModel authVm = new LoginViewModel();
+                LoginView authV = new LoginView();
+                authV.Show();
+            }
         }
 
         /// <summary>

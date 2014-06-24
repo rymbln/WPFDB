@@ -27,6 +27,8 @@ namespace WPFDB.Data
         ObjectSet<ScienceStatus> ScienceStatuses { get; }
 
         ObjectSet<Conference>  Conferences { get; }
+
+        ObjectSet<User> Users { get;  }
         /// <summary>
         /// Save all pending changes to the data context
         /// </summary>

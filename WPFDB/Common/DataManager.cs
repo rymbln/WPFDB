@@ -280,6 +280,20 @@ namespace WPFDB.Common
         }
         #endregion
 
+        public User GetUser(string name)
+        {
+            return this.underlyingContext.Users.FirstOrDefault(o => o.Name == name);
+        }
+
+        public User GetUser(string name, string pass)
+        {
+            return this.underlyingContext.Users.FirstOrDefault(o => o.Name == name && o.Password == pass);
+        }
+
+        public IEnumerable<User> GetUsers()
+        {
+            return this.underlyingContext.Users.ToList();
+        }
 
         private void CheckEntityBelongsToUnitOfWork(object entity)
         {

@@ -14,7 +14,23 @@
         <AssociationConnector Association="ConferenceModel.FK_ScienceStatusPerson" ManuallyRouted="false" />
         <AssociationConnector Association="ConferenceModel.FK_SexPerson" ManuallyRouted="false" />
         <AssociationConnector Association="ConferenceModel.FK_SpecialityPerson" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ConferenceModel.Conference" Width="1.5" PointX="6" PointY="1" />
+        <EntityTypeShape EntityType="ConferenceModel.Conference" Width="1.5" PointX="8.125" PointY="0.75" />
+        <EntityTypeShape EntityType="ConferenceModel.User" Width="1.5" PointX="8.875" PointY="2.875" />
+        <EntityTypeShape EntityType="ConferenceModel.Propertie" Width="1.5" PointX="8.875" PointY="4.875" />
+        <EntityTypeShape EntityType="ConferenceModel.PersonConference" Width="1.5" PointX="6" PointY="0.875" />
+        <EntityTypeShape EntityType="ConferenceModel.Detail" Width="1.5" PointX="6.625" PointY="5" />
+        <InheritanceConnector EntityType="ConferenceModel.Detail" />
+        <EntityTypeShape EntityType="ConferenceModel.Payment" Width="1.5" PointX="4.875" PointY="5" />
+        <InheritanceConnector EntityType="ConferenceModel.Payment" />
+        <EntityTypeShape EntityType="ConferenceModel.Rank" Width="1.5" PointX="8.75" PointY="8" />
+        <EntityTypeShape EntityType="ConferenceModel.Company" Width="1.5" PointX="5" PointY="8.875" />
+        <EntityTypeShape EntityType="ConferenceModel.PaymentType" Width="1.5" PointX="2.875" PointY="7.25" />
+        <AssociationConnector Association="ConferenceModel.PersonPersonConference" />
+        <AssociationConnector Association="ConferenceModel.ConferencePersonConference" />
+        <AssociationConnector Association="ConferenceModel.RankPersonConferenceDetail" />
+        <AssociationConnector Association="ConferenceModel.CompanyPersonConferenceDetail" />
+        <AssociationConnector Association="ConferenceModel.PaymentTypePersonConferenceMoney" />
+        <AssociationConnector Association="ConferenceModel.CompanyPersonConferenceMoney" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
