@@ -148,7 +148,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="SourceId" Type="int" Nullable="false" />
@@ -167,19 +167,26 @@
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SourceId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Companies">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SourceId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PaymentTypes">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SourceId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PersonConferences_Detail">
     <Key>
@@ -533,7 +540,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Guid" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Guid" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Type="String" Name="Code" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" />
           <Property Type="Int32" Name="SourceId" Nullable="false" />
@@ -606,15 +613,19 @@
           <Property Type="Guid" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Type="String" Name="Name" Nullable="false" />
           <NavigationProperty Name="PersonConferenceDetails" Relationship="ConferenceModel.RankPersonConferenceDetail" FromRole="Rank" ToRole="PersonConferenceDetail" />
+          <Property Type="String" Name="Code" Nullable="false" />
+          <Property Type="Int32" Name="SourceId" Nullable="false" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Guid" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Type="String" Name="Code" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" />
           <NavigationProperty Name="PersonConferenceDetails" Relationship="ConferenceModel.CompanyPersonConferenceDetail" FromRole="Company" ToRole="PersonConferenceDetail" />
           <NavigationProperty Name="PersonConferenceMoneys" Relationship="ConferenceModel.CompanyPersonConferenceMoney" FromRole="Company" ToRole="PersonConferenceMoney" />
+          <Property Type="Int32" Name="SourceId" Nullable="false" />
         </EntityType>
         <EntityType Name="PaymentType">
           <Key>
@@ -622,6 +633,9 @@
           </Key>
           <Property Type="Guid" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <NavigationProperty Name="PersonConferenceMoneys" Relationship="ConferenceModel.PaymentTypePersonConferenceMoney" FromRole="PaymentType" ToRole="PersonConferenceMoney" />
+          <Property Type="String" Name="Code" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="Int32" Name="SourceId" Nullable="false" />
         </EntityType>
         <Association Name="PersonPersonConference">
           <End Type="ConferenceModel.Person" Role="Person" Multiplicity="1" />
@@ -837,6 +851,8 @@
         <MappingFragment StoreEntitySet="Ranks">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -844,7 +860,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.Company)">
         <MappingFragment StoreEntitySet="Companies">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -852,6 +870,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.PaymentType)">
         <MappingFragment StoreEntitySet="PaymentTypes">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

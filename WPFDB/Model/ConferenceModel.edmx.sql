@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 06/24/2014 16:30:40
+-- Date Created: 06/26/2014 18:11:42
 -- Generated from EDMX file: C:\Users\Inspiron\documents\visual studio 2012\Projects\WPFDB\WPFDB\Model\ConferenceModel.edmx
 -- --------------------------------------------------
 
@@ -36,22 +36,22 @@ IF OBJECT_ID(N'[dbo].[FK_ConferencePersonConference]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PersonConferences] DROP CONSTRAINT [FK_ConferencePersonConference];
 GO
 IF OBJECT_ID(N'[dbo].[FK_RankPersonConferenceDetail]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences_PersonConferenceDetail] DROP CONSTRAINT [FK_RankPersonConferenceDetail];
+    ALTER TABLE [dbo].[PersonConferences_Detail] DROP CONSTRAINT [FK_RankPersonConferenceDetail];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CompanyPersonConferenceDetail]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences_PersonConferenceDetail] DROP CONSTRAINT [FK_CompanyPersonConferenceDetail];
+    ALTER TABLE [dbo].[PersonConferences_Detail] DROP CONSTRAINT [FK_CompanyPersonConferenceDetail];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PaymentTypePersonConferenceMoney]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences_PersonConferenceMoney] DROP CONSTRAINT [FK_PaymentTypePersonConferenceMoney];
+    ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_PaymentTypePersonConferenceMoney];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CompanyPersonConferenceMoney]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences_PersonConferenceMoney] DROP CONSTRAINT [FK_CompanyPersonConferenceMoney];
+    ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_CompanyPersonConferenceMoney];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PersonConferenceDetail_inherits_PersonConference]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences_PersonConferenceDetail] DROP CONSTRAINT [FK_PersonConferenceDetail_inherits_PersonConference];
+IF OBJECT_ID(N'[dbo].[FK_Detail_inherits_PersonConference]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonConferences_Detail] DROP CONSTRAINT [FK_Detail_inherits_PersonConference];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PersonConferenceMoney_inherits_PersonConference]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences_PersonConferenceMoney] DROP CONSTRAINT [FK_PersonConferenceMoney_inherits_PersonConference];
+IF OBJECT_ID(N'[dbo].[FK_Payment_inherits_PersonConference]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_Payment_inherits_PersonConference];
 GO
 
 -- --------------------------------------------------
@@ -94,11 +94,11 @@ GO
 IF OBJECT_ID(N'[dbo].[PaymentTypes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PaymentTypes];
 GO
-IF OBJECT_ID(N'[dbo].[PersonConferences_PersonConferenceDetail]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PersonConferences_PersonConferenceDetail];
+IF OBJECT_ID(N'[dbo].[PersonConferences_Detail]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PersonConferences_Detail];
 GO
-IF OBJECT_ID(N'[dbo].[PersonConferences_PersonConferenceMoney]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PersonConferences_PersonConferenceMoney];
+IF OBJECT_ID(N'[dbo].[PersonConferences_Payment]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PersonConferences_Payment];
 GO
 
 -- --------------------------------------------------
@@ -200,20 +200,27 @@ GO
 -- Creating table 'Ranks'
 CREATE TABLE [dbo].[Ranks] (
     [Id] uniqueidentifier  NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+    [Name] nvarchar(max)  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL
 );
 GO
 
 -- Creating table 'Companies'
 CREATE TABLE [dbo].[Companies] (
     [Id] uniqueidentifier  NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+    [Code] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL
 );
 GO
 
 -- Creating table 'PaymentTypes'
 CREATE TABLE [dbo].[PaymentTypes] (
-    [Id] uniqueidentifier  NOT NULL
+    [Id] uniqueidentifier  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL
 );
 GO
 

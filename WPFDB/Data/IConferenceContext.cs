@@ -5,19 +5,12 @@ namespace WPFDB.Data
     using System;
     using System.Data.Objects;
     using WPFDB.Model;
-    /// <summary>
-    /// Data context containing data for the Conference model
-    /// </summary>
+
     public interface IConferenceContext: IDisposable 
     {
-        /// <summary>
-        /// Gets Persons in the data context
-        /// </summary>
+
         ObjectSet<Person> Persons { get; }
 
-        /// <summary>
-        /// Gets Specialities in the data context
-        /// </summary>
         ObjectSet<Speciality> Specialities { get; }
 
         ObjectSet<Sex> Sexes { get; }
@@ -29,6 +22,15 @@ namespace WPFDB.Data
         ObjectSet<Conference>  Conferences { get; }
 
         ObjectSet<User> Users { get;  }
+
+        ObjectSet<PaymentType> PaymentTypes { get; } 
+
+        ObjectSet<Company> Companies { get; }
+
+        ObjectSet<Rank> Ranks { get; } 
+
+        ObjectSet<PersonConference> PersonConferences { get; }
+
         /// <summary>
         /// Save all pending changes to the data context
         /// </summary>

@@ -18,15 +18,15 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Grid.Row="0" Content="Id:" />
-        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Id}" Width="200" IsReadOnly="True"/>
+        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="200" IsReadOnly="True"/>
 
         <Label Grid.Column="0" Grid.Row="1" Content="Code:" />
-        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Code}" Width="200" />
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="200" />
 
         <Label Grid.Column="0" Grid.Row="2" Content="Name:" />
-        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Name}" Width="200"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="200"/>
 
         <Label Grid.Column="0" Grid.Row="3" Content="SourceId:" />
-        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=SourceId}" Width="200" />
+        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=SourceId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="200" />
     </Grid>
 </UserControl>

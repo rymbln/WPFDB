@@ -34,12 +34,17 @@ namespace WPFDB.Common
         /// </summary>
         private IConferenceContext underlyingContext;
 
-        private PersonRepository personRepository;
+        private PersonRepository personRepository ;
         private ConferenceRepository conferenceRepository;
         private SexRepository sexRepository;
         private SpecialityRepository specialityRepository;
         private ScienceDegreeRepository scienceDegreeRepository;
         private ScienceStatusRepository scienceStatusRepository;
+        private RankRepository rankRepository;
+        private CompanyRepository companyRepository;
+        private UserRepository userRepository;
+        private PaymentTypeRepository paymentTypeRepository;
+
 
         /// <summary>
         /// Initializes a new instance of the DataManager class.
@@ -61,6 +66,10 @@ namespace WPFDB.Common
             specialityRepository = new SpecialityRepository(underlyingContext);
             scienceDegreeRepository = new ScienceDegreeRepository(underlyingContext);
             scienceStatusRepository = new ScienceStatusRepository(underlyingContext);
+            rankRepository = new RankRepository(underlyingContext);
+            companyRepository = new CompanyRepository(underlyingContext);
+            paymentTypeRepository = new PaymentTypeRepository(underlyingContext);
+            userRepository = new UserRepository(underlyingContext);
         }
 
 
@@ -92,6 +101,26 @@ namespace WPFDB.Common
         {
             return scienceStatusRepository.All();
         }
+
+        public IEnumerable<Company> GetAllCompanies()
+        {
+            return companyRepository.All();
+        }
+
+        public IEnumerable<Rank> GetAllRanks()
+        {
+            return rankRepository.All();
+        }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            return userRepository.All();
+        }
+
+        public IEnumerable<PaymentType> GetAllPaymentTypes()
+        {
+            return paymentTypeRepository.All();
+        }
         #endregion
 
         /// <summary>
@@ -117,7 +146,7 @@ namespace WPFDB.Common
         }
 
 
-        #region Adding 
+        #region Adding
 
         public void AddSpeciality(Speciality obj)
         {
@@ -169,9 +198,30 @@ namespace WPFDB.Common
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.Conferences.AddObject(obj);
         }
+
+        public void AddUser(User obj)
+        {
+           userRepository.Add(obj);
+        }
+
+        public void AddCompany(Company obj)
+        {
+            companyRepository.Add(obj);
+        }
+
+        public void AddPaymentType(PaymentType obj)
+        {
+            paymentTypeRepository.Add(obj);
+        }
+
+        public void AddRank(Rank obj)
+        {
+            rankRepository.Add(obj);
+        }
         public void AddPerson(Person obj)
         {
             personRepository.Add(obj);
+
         }
 
         #endregion
@@ -257,6 +307,26 @@ namespace WPFDB.Common
         {
             personRepository.Remove(obj);
         }
+
+        public void RemoveRank(Rank obj)
+        {
+            rankRepository.Remove(obj);
+        }
+
+        public void RemoveCompany(Company obj)
+        {
+            companyRepository.Remove(obj);
+        }
+
+        public void RemoveUser(User obj)
+        {
+            userRepository.Remove(obj);
+        }
+
+        public void RemovePaymentType(PaymentType obj)
+        {
+            paymentTypeRepository.Remove(obj);
+        }
         #endregion
 
         #region Getting Default Values
@@ -278,22 +348,32 @@ namespace WPFDB.Common
         {
             return this.underlyingContext.ScienceStatuses.FirstOrDefault(o => o.Code == "-");
         }
+
+        public Rank GetDefaultRank()
+        {
+            return this.underlyingContext.Ranks.FirstOrDefault(o => o.Code == "-");
+        }
+
+        public Company GetDefaultCompany()
+        {
+            return this.underlyingContext.Companies.FirstOrDefault(o => o.Code == "-");
+        }
+
+        public PaymentType GetDefaultPaymentType()
+        {
+            return this.underlyingContext.PaymentTypes.FirstOrDefault(o => o.Code == "-");
+        }
+
+
+
+
         #endregion
 
-        public User GetUser(string name)
-        {
-            return this.underlyingContext.Users.FirstOrDefault(o => o.Name == name);
-        }
+        #region Getting Users
 
-        public User GetUser(string name, string pass)
-        {
-            return this.underlyingContext.Users.FirstOrDefault(o => o.Name == name && o.Password == pass);
-        }
 
-        public IEnumerable<User> GetUsers()
-        {
-            return this.underlyingContext.Users.ToList();
-        }
+
+        #endregion
 
         private void CheckEntityBelongsToUnitOfWork(object entity)
         {
@@ -314,6 +394,54 @@ namespace WPFDB.Common
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "The supplied {0} is already part of this Unit of Work.", entity.GetType().Name));
             }
+        }
+
+        public void FillData()
+        {
+            AddConference(new Conference { Id = GuidComb.Generate(), Code = "-", Name = "-" });
+            AddConference(new Conference { Id = GuidComb.Generate(), Code = "", Name = "Conference 1" });
+            AddConference(new Conference { Id = GuidComb.Generate(), Code = "", Name = "Conference 2" });
+
+            AddScienceDegree(new ScienceDegree { Id = GuidComb.Generate(), Code = "-", Name = "-" });
+            AddScienceDegree(new ScienceDegree { Id = GuidComb.Generate(), Code = "", Name = "Science Degree 1" });
+            AddScienceDegree(new ScienceDegree { Id = GuidComb.Generate(), Code = "", Name = "Science Degree 2" });
+
+            AddScienceStatus(new ScienceStatus { Id = GuidComb.Generate(), Code = "-", Name = "-" });
+            AddScienceStatus(new ScienceStatus { Id = GuidComb.Generate(), Code = "", Name = "Science Status 1" });
+            AddScienceStatus(new ScienceStatus { Id = GuidComb.Generate(), Code = "", Name = "Science Status 2" });
+
+            AddSex(new Sex { Id = GuidComb.Generate(), Code = "-", Name = "-" });
+            AddSex(new Sex { Id = GuidComb.Generate(), Code = "", Name = "Sex 1" });
+            AddSex(new Sex { Id = GuidComb.Generate(), Code = "", Name = "Sex 2" });
+
+            AddSpeciality(new Speciality { Id = GuidComb.Generate(), Code = "-", Name = "-" });
+            AddSpeciality(new Speciality { Id = GuidComb.Generate(), Code = "", Name = "Speciality 1" });
+            AddSpeciality(new Speciality { Id = GuidComb.Generate(), Code = "", Name = "Speciality 2" });
+
+
+            AddRank(new Rank {Id = GuidComb.Generate(), Code = "-", Name = "-"});
+            AddRank(new Rank { Id = GuidComb.Generate(), Code = "", Name = "Rank 1" });
+            AddRank(new Rank { Id = GuidComb.Generate(), Code = "", Name = "Rank 2" });
+
+            AddCompany(new Company { Id = GuidComb.Generate(), Code = "-" , Name = "-"});
+            AddCompany(new Company { Id = GuidComb.Generate(), Code = "", Name = "Company 1" });
+            AddCompany(new Company { Id = GuidComb.Generate(), Code = "", Name = "Company 2" });
+
+            AddPaymentType(new PaymentType {Id = GuidComb.Generate(), Code = "-", Name = "-"});
+            AddPaymentType(new PaymentType { Id = GuidComb.Generate(), Code = "", Name = "Payment type 1" });
+            AddPaymentType(new PaymentType { Id = GuidComb.Generate(), Code = "", Name = "Payment type 2" });
+
+            AddUser(new User {Id = GuidComb.Generate(), Name = "user", Password = "user", Role="user"});
+            AddUser(new User { Id = GuidComb.Generate(), Name = "admin", Password = "admin", Role = "admin" });
+            AddUser(new User { Id = GuidComb.Generate(), Name = "111", Password = "111", Role = "user" });
+
+
+            Save();
+        }
+
+        public User GetUser(string name, string password)
+        {
+            return userRepository.GetUser(name, password);
         }
     }
 }

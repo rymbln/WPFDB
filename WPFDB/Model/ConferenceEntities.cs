@@ -15,6 +15,7 @@ namespace WPFDB.Model
     /// </summary>
     public partial class ConferenceEntities : ObjectContext, IConferenceContext
     {
+
         public void Save()
         {
             this.SaveChanges();

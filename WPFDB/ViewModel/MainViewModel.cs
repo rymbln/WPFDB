@@ -14,7 +14,7 @@ namespace WPFDB.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-   private DataManager dm = DataManager.Instance;
+        private DataManager dm = DataManager.Instance;
 
 
         /// <summary>
@@ -25,11 +25,10 @@ namespace WPFDB.ViewModel
 
         public MainViewModel()
         {
-
-
-    this.PersonWorkspace = new PersonWorkspaceViewModel();
+            this.PersonWorkspace = new PersonWorkspaceViewModel();
             this.SaveCommand = new DelegateCommand((o) => this.Save());
             this.OpenKnowallsCommand = new DelegateCommand((o) => this.OpenKnowalls());
+            this.FillDataCommand = new DelegateCommand((o) => this.FillDatabase());
 
         }
 
@@ -38,6 +37,7 @@ namespace WPFDB.ViewModel
         /// </summary>
         public ICommand SaveCommand { get; private set; }
         public ICommand OpenKnowallsCommand { get; private set; }
+        public ICommand FillDataCommand { get; private set; }
 
         /// <summary>
         /// Gets the workspace for managing departments of the company
@@ -55,6 +55,11 @@ namespace WPFDB.ViewModel
         private void Save()
         {
             this.dm.Save();
+        }
+
+        private void FillDatabase()
+        {
+            dm.FillData();
         }
 
         private void OpenKnowalls()

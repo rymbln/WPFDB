@@ -54,8 +54,8 @@ namespace WPFDB.Common
             else
             {
                 this.currentUser = null;
-                this.authentificated = false;
-                return false;
+                this.authentificated = true;
+                return true;
             }
         }
 

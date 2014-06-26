@@ -68,13 +68,17 @@
     <Compile Include="Common\Authentification.cs" />
     <Compile Include="Common\GuidComb.cs" />
     <Compile Include="Common\DataManager.cs" />
+    <Compile Include="Data\CompanyRepository.cs" />
     <Compile Include="Data\ConferenceRepository.cs" />
     <Compile Include="Data\IConferenceContext.cs" />
+    <Compile Include="Data\PaymentTypeRepository.cs" />
     <Compile Include="Data\PersonRepository.cs" />
+    <Compile Include="Data\RankRepository.cs" />
     <Compile Include="Data\ScienceDegreeRepository.cs" />
     <Compile Include="Data\ScienceStatusRepository.cs" />
     <Compile Include="Data\SexRepository.cs" />
     <Compile Include="Data\SpecialityRepository.cs" />
+    <Compile Include="Data\UserRepository.cs" />
     <Compile Include="Model\ConferenceEntities.cs" />
     <Compile Include="Model\ConferenceModel.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -83,6 +87,8 @@
     </Compile>
     <Compile Include="Validation\Helpers\ExcludeChar.cs" />
     <Compile Include="Validation\Helpers\Unique.cs" />
+    <Compile Include="ViewModel\CompanyViewModel.cs" />
+    <Compile Include="ViewModel\CompanyWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\BasicPersonViewModel.cs" />
     <Compile Include="ViewModel\ConferenceViewModel.cs" />
@@ -90,8 +96,12 @@
     <Compile Include="ViewModel\Helpers\DelegateCommand.cs" />
     <Compile Include="ViewModel\KnowallViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\PaymentTypeViewModel.cs" />
+    <Compile Include="ViewModel\PaymentTypeWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\PersonViewModel.cs" />
     <Compile Include="ViewModel\PersonWorkspaceViewModel.cs" />
+    <Compile Include="ViewModel\RankViewModel.cs" />
+    <Compile Include="ViewModel\RankWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\ScienceDegreeViewModel.cs" />
     <Compile Include="ViewModel\ScienceDegreeWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\ScienceStatusViewModel.cs" />
@@ -101,6 +111,14 @@
     <Compile Include="ViewModel\SpecialityViewModel.cs" />
     <Compile Include="ViewModel\SpecialityWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\Helpers\ViewModelBase.cs" />
+    <Compile Include="ViewModel\UserViewModel.cs" />
+    <Compile Include="ViewModel\UserWorkspaceViewModel.cs" />
+    <Compile Include="View\CompanyDetailView.xaml.cs">
+      <DependentUpon>CompanyDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CompanyWorkspaceView.xaml.cs">
+      <DependentUpon>CompanyWorkspaceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ConferenceDetailView.xaml.cs">
       <DependentUpon>ConferenceDetailView.xaml</DependentUpon>
     </Compile>
@@ -113,11 +131,23 @@
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PaymentTypeDetailView.xaml.cs">
+      <DependentUpon>PaymentTypeDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PaymentTypeWorkspaceView.xaml.cs">
+      <DependentUpon>PaymentTypeWorkspaceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PersonDetailView.xaml.cs">
       <DependentUpon>PersonDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PersonWorkspaceView.xaml.cs">
       <DependentUpon>PersonWorkspaceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RankDetailView.xaml.cs">
+      <DependentUpon>RankDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RankWorkspaceView.xaml.cs">
+      <DependentUpon>RankWorkspaceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ScienceDegreeDetailView.xaml.cs">
       <DependentUpon>ScienceDegreeDetailView.xaml</DependentUpon>
@@ -143,11 +173,25 @@
     <Compile Include="View\SpecialityWorkspaceView.xaml.cs">
       <DependentUpon>SpecialityWorkspaceView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserDetailView.xaml.cs">
+      <DependentUpon>UserDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserWorkspaceView.xaml.cs">
+      <DependentUpon>UserWorkspaceView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Resources\ControlResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\ImageResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CompanyDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CompanyWorkspaceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -179,11 +223,27 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\PaymentTypeDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PaymentTypeWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PersonDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PersonWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RankDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RankWorkspaceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -216,6 +276,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SpecialityWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserWorkspaceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

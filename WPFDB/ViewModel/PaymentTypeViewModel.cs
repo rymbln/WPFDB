@@ -1,29 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WPFDB.Model;
-using WPFDB.Validation.Helpers;
 
 namespace WPFDB.ViewModel
 {
-    public class ConferenceViewModel : ViewModelBase
+    public class PaymentTypeViewModel: ViewModelBase
     {
         public static int Errors { get; set; }
+        public PaymentType Model { get; private set; }
 
-        public ConferenceViewModel(Conference conference)
+        public PaymentTypeViewModel(PaymentType paymentType)
         {
-            if (conference == null)
+            if (paymentType == null)
             {
-                throw new ArgumentNullException("conference");
+                throw new ArgumentNullException("paymentType");
             }
-            this.Model = conference;
+            this.Model = paymentType;
         }
-
-        public Conference Model { get; private set; }
-
 
         public string Id
         {
@@ -65,7 +61,5 @@ namespace WPFDB.ViewModel
                 this.OnPropertyChanged("SourceId");
             }
         }
-
-
     }
 }

@@ -21,6 +21,18 @@
         <DataTemplate DataType="{x:Type vm:ConferenceWorkspaceViewModel}">
             <view:ConferenceWorkspaceView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:CompanyWorkspaceViewModel}">
+            <view:CompanyWorkspaceView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:RankWorkspaceViewModel}">
+            <view:RankWorkspaceView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PaymentTypeWorkspaceViewModel}">
+            <view:PaymentTypeWorkspaceView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:UserWorkspaceViewModel}">
+            <view:UserWorkspaceView/>
+        </DataTemplate>
     </Window.Resources>
     <DockPanel>
     <ToolBarTray DockPanel.Dock="Top">
@@ -57,7 +69,23 @@
                 <TabItem.Header>Conferences</TabItem.Header>
                 <ContentControl Margin="10"  Content="{Binding Path=.ConferenceWorkspace}"  />
             </TabItem>
-        </TabControl>
+                <TabItem>
+                    <TabItem.Header>Companies</TabItem.Header>
+                    <ContentControl Margin="10"  Content="{Binding Path=.CompanyWorkspace}"  />
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>Ranks</TabItem.Header>
+                    <ContentControl Margin="10"  Content="{Binding Path=.RankWorkspace}"  />
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>PaymentTypes</TabItem.Header>
+                    <ContentControl Margin="10"  Content="{Binding Path=.PaymentTypeWorkspace}"  />
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>Users</TabItem.Header>
+                    <ContentControl Margin="10"  Content="{Binding Path=.UserWorkspace}"  />
+                </TabItem>
+            </TabControl>
     </Grid>
     </DockPanel>
 </Window>

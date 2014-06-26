@@ -46,6 +46,7 @@
             <MenuItem Header="{x:Static p:Resources.ToolsMenu}">
                 <MenuItem Command="{Binding OpenKnowallsCommand}" Header="{x:Static p:Resources.KnowallMenu}"/>
                 <MenuItem Command="{Binding OpenSettingsCommand}" Header="{x:Static p:Resources.SettingsMenu}"/>
+                <MenuItem Command="{Binding FillDataCommand}" Header="Fill Data"/>
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.HelpMenu}">
                 <MenuItem Command="{Binding AboutCommand}" Header="{x:Static p:Resources.AboutMenu}"

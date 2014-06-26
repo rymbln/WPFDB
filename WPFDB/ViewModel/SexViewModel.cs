@@ -21,7 +21,15 @@ namespace WPFDB.ViewModel
 
         public Sex Model { get; private set; }
 
-        public string Name { get { return this.Model.Name; } set { this.Model.Name = value; this.OnPropertyChanged("Name"); } }
+        public string Name
+        {
+            get { return this.Model.Name; }
+            set
+            {
+                this.Model.Name = value; 
+                this.OnPropertyChanged("Name");
+            }
+        }
         public string Id
         {
             get { return this.Model.Id.ToString(); }

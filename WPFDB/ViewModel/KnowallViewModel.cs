@@ -17,17 +17,6 @@ namespace WPFDB.ViewModel
 
         public KnowallViewModel()
         {
-
-
-            var allSpecialities = new ObservableCollection<SpecialityViewModel>();
-            var allSexes = new ObservableCollection<SexViewModel>();
-            var allScienceStatuses = new ObservableCollection<ScienceStatusViewModel>();
-            var allScienceDegree = new ObservableCollection<ScienceDegreeViewModel>();
-            var allConferences = new ObservableCollection<ConferenceViewModel>();
-
-
-
-
             this.SaveCommand = new DelegateCommand((o) => this.Save());
           
             this.SpecialityWorkspace = new SpecialityWorkspaceViewModel();
@@ -35,6 +24,10 @@ namespace WPFDB.ViewModel
             this.ScienceDegreeWorkspace = new ScienceDegreeWorkspaceViewModel();
             this.ScienceStatusWorkspace = new ScienceStatusWorkspaceViewModel();
             this.ConferenceWorkspace = new ConferenceWorkspaceViewModel();
+            this.CompanyWorkspace = new CompanyWorkspaceViewModel();
+            this.RankWorkspace = new RankWorkspaceViewModel();
+            this.UserWorkspace = new UserWorkspaceViewModel();
+            this.PaymentTypeWorkspace = new PaymentTypeWorkspaceViewModel();
 
         }
 
@@ -43,6 +36,10 @@ namespace WPFDB.ViewModel
         public ScienceDegreeWorkspaceViewModel ScienceDegreeWorkspace { get; private set; }
         public ScienceStatusWorkspaceViewModel ScienceStatusWorkspace { get; private set; }
         public ConferenceWorkspaceViewModel ConferenceWorkspace { get; private set; }
+        public CompanyWorkspaceViewModel CompanyWorkspace { get; private set; }
+        public RankWorkspaceViewModel RankWorkspace { get; private set; }
+        public PaymentTypeWorkspaceViewModel PaymentTypeWorkspace { get; private set; }
+        public UserWorkspaceViewModel UserWorkspace { get; private set; }
 
         public ICommand SaveCommand { get; private set; }
 

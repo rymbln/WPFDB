@@ -1,29 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WPFDB.Model;
-using WPFDB.Validation.Helpers;
 
 namespace WPFDB.ViewModel
 {
-    public class ConferenceViewModel : ViewModelBase
+    public class RankViewModel:ViewModelBase
     {
         public static int Errors { get; set; }
+        public Rank Model { get; private set; }
 
-        public ConferenceViewModel(Conference conference)
+        public RankViewModel(Rank rank)
         {
-            if (conference == null)
+            if (rank == null)
             {
-                throw new ArgumentNullException("conference");
+                throw new ArgumentNullException("rank");
             }
-            this.Model = conference;
+            this.Model = rank;
         }
-
-        public Conference Model { get; private set; }
-
 
         public string Id
         {
@@ -65,7 +61,6 @@ namespace WPFDB.ViewModel
                 this.OnPropertyChanged("SourceId");
             }
         }
-
 
     }
 }

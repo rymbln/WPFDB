@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="WPFDB.View.ConferenceWorkspaceView"
+﻿<UserControl x:Class="WPFDB.View.RankWorkspaceView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,38 +11,38 @@
 >
 
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type vm:ConferenceViewModel}">
-            <v:ConferenceDetailView />
+        <DataTemplate DataType="{x:Type vm:RankViewModel}">
+            <v:RankDetailView />
         </DataTemplate>
     </UserControl.Resources>
 
 
-        <Grid>
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="0">
             <HeaderedContentControl.Header>
-                Conferences
+                Ranks
             </HeaderedContentControl.Header>
             <ScrollViewer>
                 <HeaderedContentControl>
                     <HeaderedContentControl.Header>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Margin="2">
-                            <Hyperlink Command="{Binding Path=AddConferenceCommand}">Add Conference</Hyperlink>
-                            | <Hyperlink Command="{Binding Path=DeleteConferenceCommand}">Delete Conference</Hyperlink>
+                            <Hyperlink Command="{Binding Path=AddRankCommand}">Add Rank</Hyperlink>
+                            | <Hyperlink Command="{Binding Path=DeleteRankCommand}">Delete Rank</Hyperlink>
                             </TextBlock>
                         </StackPanel>
                     </HeaderedContentControl.Header>
 
-                    <DataGrid SelectedItem="{Binding Path=CurrentConference}" ItemsSource="{Binding Path=AllConferences}" AutoGenerateColumns="False" >
+                    <DataGrid SelectedItem="{Binding Path=CurrentRank}" ItemsSource="{Binding Path=AllRanks}" AutoGenerateColumns="False" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Width="Auto" Binding="{Binding Path=Id}" IsReadOnly="True" />
                             <DataGridTextColumn Header="Code" Binding="{Binding Path=Code, Mode=TwoWay}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, Mode=TwoWay}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="SourceId" Binding="{Binding Path=SourceId, Mode=TwoWay}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, Mode=TwoWay}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="SourceId" Binding="{Binding Path=SourceId, Mode=TwoWay}"  IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </HeaderedContentControl>
@@ -56,12 +56,12 @@
             <ScrollViewer>
                 <StackPanel>
                     <Border Style="{StaticResource DetailBorder}" Margin="5">
-                        <ContentControl HorizontalAlignment="Right" Content="{Binding Path=CurrentConference}" />
+                        <ContentControl HorizontalAlignment="Right" Content="{Binding Path=CurrentRank}" />
                     </Border>
                 </StackPanel>
             </ScrollViewer>
         </HeaderedContentControl>
-        
+
     </Grid>
 
 </UserControl>

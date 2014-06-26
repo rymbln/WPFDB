@@ -31,20 +31,21 @@ namespace WPFDB.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if ((txtName.Text != "") & (txtPassword.Text != ""))
-            {
-                var user = new User();
-                user.Name = txtName.Text;
-                user.Password = txtPassword.Text;
-                if (auth.AuthentificateUser(user))
-                {
+            //if ((txtName.Text != "") & (txtPassword.Text != ""))
+            //{
+            //    var user = new User();
+            //    user.Name = txtName.Text;
+            //    user.Password = txtPassword.Text;
+            //    if (auth.AuthentificateUser(user))
+
+            //    {
                     MainViewModel main = new MainViewModel();
                     MainView window = new View.MainView { DataContext = main };
                     window.Show();
                     this.Close();
-                }
+            //    }
 
-            }
+            //}
         }
     }
 }

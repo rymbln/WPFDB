@@ -38,9 +38,9 @@
                     <DataGrid SelectedItem="{Binding Path=CurrentScienceStatus}" ItemsSource="{Binding Path=AllScienceStatuses}" AutoGenerateColumns="False" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Width="Auto" Binding="{Binding Path=Id}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="Code" Binding="{Binding Path=Code, Mode=TwoWay}" />
-                            <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, Mode=TwoWay}" />
-                            <DataGridTextColumn Header="SourceId" Binding="{Binding Path=SourceId, Mode=TwoWay}" />
+                            <DataGridTextColumn Header="Code" Binding="{Binding Path=Code, Mode=TwoWay}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, Mode=TwoWay}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="SourceId" Binding="{Binding Path=SourceId, Mode=TwoWay}" IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </HeaderedContentControl>
