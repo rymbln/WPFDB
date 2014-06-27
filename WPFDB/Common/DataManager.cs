@@ -34,7 +34,7 @@ namespace WPFDB.Common
         /// </summary>
         private IConferenceContext underlyingContext;
 
-        private PersonRepository personRepository ;
+        private PersonRepository personRepository;
         private ConferenceRepository conferenceRepository;
         private SexRepository sexRepository;
         private SpecialityRepository specialityRepository;
@@ -201,7 +201,7 @@ namespace WPFDB.Common
 
         public void AddUser(User obj)
         {
-           userRepository.Add(obj);
+            userRepository.Add(obj);
         }
 
         public void AddCompany(Company obj)
@@ -401,39 +401,82 @@ namespace WPFDB.Common
             AddConference(new Conference { Id = GuidComb.Generate(), Code = "-", Name = "-" });
             AddConference(new Conference { Id = GuidComb.Generate(), Code = "", Name = "Conference 1" });
             AddConference(new Conference { Id = GuidComb.Generate(), Code = "", Name = "Conference 2" });
-
+            Save();
             AddScienceDegree(new ScienceDegree { Id = GuidComb.Generate(), Code = "-", Name = "-" });
             AddScienceDegree(new ScienceDegree { Id = GuidComb.Generate(), Code = "", Name = "Science Degree 1" });
             AddScienceDegree(new ScienceDegree { Id = GuidComb.Generate(), Code = "", Name = "Science Degree 2" });
-
+            Save();
             AddScienceStatus(new ScienceStatus { Id = GuidComb.Generate(), Code = "-", Name = "-" });
             AddScienceStatus(new ScienceStatus { Id = GuidComb.Generate(), Code = "", Name = "Science Status 1" });
             AddScienceStatus(new ScienceStatus { Id = GuidComb.Generate(), Code = "", Name = "Science Status 2" });
-
+            Save();
             AddSex(new Sex { Id = GuidComb.Generate(), Code = "-", Name = "-" });
             AddSex(new Sex { Id = GuidComb.Generate(), Code = "", Name = "Sex 1" });
             AddSex(new Sex { Id = GuidComb.Generate(), Code = "", Name = "Sex 2" });
-
+            Save();
             AddSpeciality(new Speciality { Id = GuidComb.Generate(), Code = "-", Name = "-" });
             AddSpeciality(new Speciality { Id = GuidComb.Generate(), Code = "", Name = "Speciality 1" });
             AddSpeciality(new Speciality { Id = GuidComb.Generate(), Code = "", Name = "Speciality 2" });
+            Save();
 
-
-            AddRank(new Rank {Id = GuidComb.Generate(), Code = "-", Name = "-"});
+            AddRank(new Rank { Id = GuidComb.Generate(), Code = "-", Name = "-" });
             AddRank(new Rank { Id = GuidComb.Generate(), Code = "", Name = "Rank 1" });
             AddRank(new Rank { Id = GuidComb.Generate(), Code = "", Name = "Rank 2" });
-
-            AddCompany(new Company { Id = GuidComb.Generate(), Code = "-" , Name = "-"});
+            Save();
+            AddCompany(new Company { Id = GuidComb.Generate(), Code = "-", Name = "-" });
             AddCompany(new Company { Id = GuidComb.Generate(), Code = "", Name = "Company 1" });
             AddCompany(new Company { Id = GuidComb.Generate(), Code = "", Name = "Company 2" });
-
-            AddPaymentType(new PaymentType {Id = GuidComb.Generate(), Code = "-", Name = "-"});
+            Save();
+            AddPaymentType(new PaymentType { Id = GuidComb.Generate(), Code = "-", Name = "-" });
             AddPaymentType(new PaymentType { Id = GuidComb.Generate(), Code = "", Name = "Payment type 1" });
             AddPaymentType(new PaymentType { Id = GuidComb.Generate(), Code = "", Name = "Payment type 2" });
-
-            AddUser(new User {Id = GuidComb.Generate(), Name = "user", Password = "user", Role="user"});
+            Save();
+            AddUser(new User { Id = GuidComb.Generate(), Name = "user", Password = "user", Role = "user" });
             AddUser(new User { Id = GuidComb.Generate(), Name = "admin", Password = "admin", Role = "admin" });
             AddUser(new User { Id = GuidComb.Generate(), Name = "111", Password = "111", Role = "user" });
+            Save();
+            var person = new Person
+            {
+                Id = GuidComb.Generate(),
+                BirthDate = Convert.ToDateTime("01.01.1990"),
+                FirstName = "Иванов",
+                SecondName = "Иван",
+                ThirdName = "Иванович",
+                Post = "Man",
+                WorkPlace = "WorkPlace",
+                ScienceDegree = scienceDegreeRepository.GetByName("-"),
+                ScienceStatus = scienceStatusRepository.GetByName("-"),
+                Sex = sexRepository.GetByName("-"),
+                Speciality = specialityRepository.GetByName("-")
+            };
+          
+            AddPerson(person);
+            Save();
+            var details = new PersonConferences_Detail
+            {
+                Company = companyRepository.GetByName("-"),
+                IsAbstract = true,
+                DateArrive = Convert.ToDateTime("12.12.2014"),
+                IsAdditionalMaterial = true,
+                IsAutoreg = true,
+                IsBadge = true,
+                IsNeedBadge = true,
+                IsArrive = true,
+                IsComplect = true,
+                Rank = rankRepository.GetByName("-")
+            };
+            var payment = new PersonConferences_Payment
+            {
+                Company = companyRepository.GetByName("-"),
+                PaymentType = paymentTypeRepository.GetByName("-"),
+                PaymentDocument = "Order",
+                PaymentDate = Convert.ToDateTime("12.11.2014"),
+                Money = 1200,
+                IsComplect = true,
+                OrderNumber = 5,
+                OrderStatus = 1
+            };
+            personRepository.AddConferenceInfoToPerson(person, conferenceRepository.GetByName("-"), details, payment);
 
 
             Save();

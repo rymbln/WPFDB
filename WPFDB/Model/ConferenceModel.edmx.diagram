@@ -5,33 +5,33 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9ffa1558e2ec428fb9ad3c019492ac9b" Name="Diagram1">
-        <EntityTypeShape EntityType="ConferenceModel.Person" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConferenceModel.ScienceDegree" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConferenceModel.ScienceStatus" Width="1.5" PointX="0.5" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConferenceModel.Sex" Width="1.5" PointX="0.5" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConferenceModel.Speciality" Width="1.5" PointX="0.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConferenceModel.Person" Width="1.5" PointX="2.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConferenceModel.ScienceDegree" Width="1.5" PointX="0.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConferenceModel.ScienceStatus" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConferenceModel.Sex" Width="1.5" PointX="0.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConferenceModel.Speciality" Width="1.5" PointX="0.5" PointY="7.25" IsExpanded="true" />
         <AssociationConnector Association="ConferenceModel.FK_ScienceDegreePerson" ManuallyRouted="false" />
         <AssociationConnector Association="ConferenceModel.FK_ScienceStatusPerson" ManuallyRouted="false" />
         <AssociationConnector Association="ConferenceModel.FK_SexPerson" ManuallyRouted="false" />
         <AssociationConnector Association="ConferenceModel.FK_SpecialityPerson" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ConferenceModel.Conference" Width="1.5" PointX="8.125" PointY="0.75" />
-        <EntityTypeShape EntityType="ConferenceModel.User" Width="1.5" PointX="8.875" PointY="2.875" />
-        <EntityTypeShape EntityType="ConferenceModel.Propertie" Width="1.5" PointX="8.875" PointY="4.875" />
-        <EntityTypeShape EntityType="ConferenceModel.PersonConference" Width="1.5" PointX="6" PointY="0.875" />
-        <EntityTypeShape EntityType="ConferenceModel.Detail" Width="1.5" PointX="6.625" PointY="5" />
-        <InheritanceConnector EntityType="ConferenceModel.Detail" />
-        <EntityTypeShape EntityType="ConferenceModel.Payment" Width="1.5" PointX="4.875" PointY="5" />
-        <InheritanceConnector EntityType="ConferenceModel.Payment" />
-        <EntityTypeShape EntityType="ConferenceModel.Rank" Width="1.5" PointX="8.75" PointY="8" />
-        <EntityTypeShape EntityType="ConferenceModel.Company" Width="1.5" PointX="5" PointY="8.875" />
-        <EntityTypeShape EntityType="ConferenceModel.PaymentType" Width="1.5" PointX="2.875" PointY="7.25" />
+        <EntityTypeShape EntityType="ConferenceModel.Conference" Width="1.5" PointX="5.5" PointY="3.25" />
+        <EntityTypeShape EntityType="ConferenceModel.User" Width="1.5" PointX="2.75" PointY="9.625" />
+        <EntityTypeShape EntityType="ConferenceModel.Propertie" Width="1.5" PointX="4.75" PointY="9.625" />
+        <EntityTypeShape EntityType="ConferenceModel.PersonConference" Width="1.5" PointX="5.5" PointY="0.5" />
+        <EntityTypeShape EntityType="ConferenceModel.Rank" Width="1.5" PointX="12.125" PointY="3.25" />
+        <EntityTypeShape EntityType="ConferenceModel.Company" Width="1.5" PointX="8.875" PointY="7.875" />
+        <EntityTypeShape EntityType="ConferenceModel.PaymentType" Width="1.5" PointX="5.5" PointY="5.625" />
         <AssociationConnector Association="ConferenceModel.PersonPersonConference" />
         <AssociationConnector Association="ConferenceModel.ConferencePersonConference" />
-        <AssociationConnector Association="ConferenceModel.RankPersonConferenceDetail" />
-        <AssociationConnector Association="ConferenceModel.CompanyPersonConferenceDetail" />
-        <AssociationConnector Association="ConferenceModel.PaymentTypePersonConferenceMoney" />
-        <AssociationConnector Association="ConferenceModel.CompanyPersonConferenceMoney" />
-      </Diagram>
+        <EntityTypeShape EntityType="ConferenceModel.PersonConferences_Detail" Width="1.5" PointX="10.125" PointY="3.25" />
+        <EntityTypeShape EntityType="ConferenceModel.PersonConferences_Payment" Width="1.5" PointX="7.625" PointY="3.375" />
+        <AssociationConnector Association="ConferenceModel.FK_CompanyPersonConferenceDetail" />
+        <AssociationConnector Association="ConferenceModel.FK_CompanyPersonConferenceMoney" />
+        <AssociationConnector Association="ConferenceModel.FK_PaymentTypePersonConferenceMoney" />
+        <AssociationConnector Association="ConferenceModel.FK_Detail_inherits_PersonConference" />
+        <AssociationConnector Association="ConferenceModel.FK_Payment_inherits_PersonConference" />
+        <AssociationConnector Association="ConferenceModel.FK_RankPersonConferenceDetail" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

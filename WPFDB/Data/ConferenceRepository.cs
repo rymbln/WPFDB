@@ -49,5 +49,14 @@ namespace WPFDB.Data
             //this.underlyingContext.Persons.DeleteObject(obj);
         }
 
+        public Conference GetByName(string name)
+        {
+
+            if (name == null)
+            {
+                throw new ArgumentNullException("PaymentType");
+            }
+            return objectSet.FirstOrDefault(o => o.Name == name);
+        }
     }
 }

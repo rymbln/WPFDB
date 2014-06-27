@@ -19,6 +19,7 @@ namespace WPFDB.ViewModel
         public PersonWorkspaceViewModel()
         {
             AllPersons = new ObservableCollection<PersonViewModel>();
+            
             foreach (var item in dm.GetAllPersons())
             {
                 AllPersons.Add(new PersonViewModel(item));
@@ -35,11 +36,13 @@ namespace WPFDB.ViewModel
 
             this.AddPersonCommand = new DelegateCommand((o) => this.AddPerson());
             this.DeletePersonCommand = new DelegateCommand((o) => this.DeleteCurrentPerson());
+            this.RefreshCommand = new DelegateCommand((o) => this.RefreshPersons());
 
         }
 
         public ICommand AddPersonCommand { get; private set; }
         public ICommand DeletePersonCommand { get; private set; }
+        public ICommand RefreshCommand { get; private set; }
 
         public ObservableCollection<PersonViewModel> AllPersons { get; private set; }
 
@@ -66,6 +69,16 @@ namespace WPFDB.ViewModel
             this.AllPersons.Remove(this.CurrentPerson);
             this.CurrentPerson = null;
 
+        }
+
+        private void RefreshPersons()
+        {
+            AllPersons = new ObservableCollection<PersonViewModel>();
+
+            foreach (var item in dm.GetAllPersons())
+            {
+                AllPersons.Add(new PersonViewModel(item));
+            }
         }
 
     }

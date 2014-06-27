@@ -36,6 +36,9 @@
                                 <Button Command="{Binding DeletePersonCommand}">
                                     <AccessText Text="{x:Static p:Resources.RemoveMenu}"/>
                                 </Button>
+                                <Button Command="{Binding RefreshCommand}">
+                                    <AccessText Text="{x:Static p:Resources.RefreshMenu}"/>
+                                </Button>
                                 <Separator/>
                                 <Label Content="{x:Static p:Resources.SearchMenu}" Target="{Binding ElementName=searchBox}" Padding="5,0,7,0" Margin="0" 
                        VerticalAlignment="Center"/>

@@ -320,4 +320,7 @@
   <data name="ToolsMenu" xml:space="preserve">
     <value>Tools</value>
   </data>
+  <data name="RefreshMenu" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
 </root>

@@ -31,6 +31,10 @@ namespace WPFDB.Data
 
         ObjectSet<PersonConference> PersonConferences { get; }
 
+        //ObjectSet<PersonConferences_Detail> PersonConferenceDetails { get; }
+
+        //ObjectSet<PersonConferences_Payment> PersonConferencePayments { get; }  
+
         /// <summary>
         /// Save all pending changes to the data context
         /// </summary>

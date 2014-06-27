@@ -520,6 +520,15 @@ namespace WPFDB.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string RefreshMenu {
+            get {
+                return ResourceManager.GetString("RefreshMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Remove.
         /// </summary>
         public static string RemoveMenu {

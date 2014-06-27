@@ -16,6 +16,32 @@ namespace WPFDB.Model
     public partial class ConferenceEntities : ObjectContext, IConferenceContext
     {
 
+        //public ObjectSet<Detail> PersonConferenceDetails
+        //{
+        //    get
+        //    {
+        //        if ((_PersonConferenceDetails == null))
+        //        {
+        //            _PersonConferenceDetails = base.CreateObjectSet<Detail>("Details");
+        //        }
+        //        return _PersonConferenceDetails;
+        //    }
+        //}
+        //private ObjectSet<Detail> _PersonConferenceDetails;
+
+        //public ObjectSet<Payment> PersonConferencePayments
+        //{
+        //    get
+        //    {
+        //        if ((_PersonConferencePayments == null))
+        //        {
+        //            _PersonConferencePayments = base.CreateObjectSet<Payment>("Payments");
+        //        }
+        //        return _PersonConferencePayments;
+        //    }
+        //}
+        //private ObjectSet<Payment> _PersonConferencePayments;
+
         public void Save()
         {
             this.SaveChanges();

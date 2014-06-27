@@ -15,7 +15,6 @@ using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using WPFDB.Data;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -26,10 +25,12 @@ using WPFDB.Data;
 [assembly: EdmRelationshipAttribute("ConferenceModel", "FK_SpecialityPerson", "Specialities", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Speciality), "Persons", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.Person), true)]
 [assembly: EdmRelationshipAttribute("ConferenceModel", "PersonPersonConference", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Person), "PersonConference", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.PersonConference), true)]
 [assembly: EdmRelationshipAttribute("ConferenceModel", "ConferencePersonConference", "Conference", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Conference), "PersonConference", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.PersonConference), true)]
-[assembly: EdmRelationshipAttribute("ConferenceModel", "RankPersonConferenceDetail", "Rank", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Rank), "PersonConferenceDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.Detail), true)]
-[assembly: EdmRelationshipAttribute("ConferenceModel", "CompanyPersonConferenceDetail", "Company", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Company), "PersonConferenceDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.Detail), true)]
-[assembly: EdmRelationshipAttribute("ConferenceModel", "PaymentTypePersonConferenceMoney", "PaymentType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.PaymentType), "PersonConferenceMoney", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.Payment), true)]
-[assembly: EdmRelationshipAttribute("ConferenceModel", "CompanyPersonConferenceMoney", "Company", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Company), "PersonConferenceMoney", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.Payment), true)]
+[assembly: EdmRelationshipAttribute("ConferenceModel", "FK_CompanyPersonConferenceDetail", "Company", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Company), "PersonConferences_Detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.PersonConferences_Detail), true)]
+[assembly: EdmRelationshipAttribute("ConferenceModel", "FK_CompanyPersonConferenceMoney", "Company", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Company), "PersonConferences_Payment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.PersonConferences_Payment), true)]
+[assembly: EdmRelationshipAttribute("ConferenceModel", "FK_PaymentTypePersonConferenceMoney", "PaymentType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.PaymentType), "PersonConferences_Payment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.PersonConferences_Payment), true)]
+[assembly: EdmRelationshipAttribute("ConferenceModel", "FK_Detail_inherits_PersonConference", "PersonConference", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.PersonConference), "PersonConferences_Detail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(WPFDB.Model.PersonConferences_Detail), true)]
+[assembly: EdmRelationshipAttribute("ConferenceModel", "FK_Payment_inherits_PersonConference", "PersonConference", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.PersonConference), "PersonConferences_Payment", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(WPFDB.Model.PersonConferences_Payment), true)]
+[assembly: EdmRelationshipAttribute("ConferenceModel", "FK_RankPersonConferenceDetail", "Rank", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Rank), "PersonConferences_Detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.PersonConferences_Detail), true)]
 
 #endregion
 
@@ -40,7 +41,7 @@ namespace WPFDB.Model
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class ConferenceEntities : ObjectContext, IConferenceContext
+    public partial class ConferenceEntities : ObjectContext
     {
         #region Constructors
     
@@ -272,6 +273,38 @@ namespace WPFDB.Model
             }
         }
         private ObjectSet<PaymentType> _PaymentTypes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<PersonConferences_Detail> PersonConferences_Detail
+        {
+            get
+            {
+                if ((_PersonConferences_Detail == null))
+                {
+                    _PersonConferences_Detail = base.CreateObjectSet<PersonConferences_Detail>("PersonConferences_Detail");
+                }
+                return _PersonConferences_Detail;
+            }
+        }
+        private ObjectSet<PersonConferences_Detail> _PersonConferences_Detail;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<PersonConferences_Payment> PersonConferences_Payment
+        {
+            get
+            {
+                if ((_PersonConferences_Payment == null))
+                {
+                    _PersonConferences_Payment = base.CreateObjectSet<PersonConferences_Payment>("PersonConferences_Payment");
+                }
+                return _PersonConferences_Payment;
+            }
+        }
+        private ObjectSet<PersonConferences_Payment> _PersonConferences_Payment;
 
         #endregion
 
@@ -371,6 +404,22 @@ namespace WPFDB.Model
         public void AddToPaymentTypes(PaymentType paymentType)
         {
             base.AddObject("PaymentTypes", paymentType);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the PersonConferences_Detail EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPersonConferences_Detail(PersonConferences_Detail personConferences_Detail)
+        {
+            base.AddObject("PersonConferences_Detail", personConferences_Detail);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the PersonConferences_Payment EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPersonConferences_Payment(PersonConferences_Payment personConferences_Payment)
+        {
+            base.AddObject("PersonConferences_Payment", personConferences_Payment);
         }
 
         #endregion
@@ -521,18 +570,18 @@ namespace WPFDB.Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "CompanyPersonConferenceDetail", "PersonConferenceDetail")]
-        public EntityCollection<Detail> PersonConferenceDetails
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "FK_CompanyPersonConferenceDetail", "PersonConferences_Detail")]
+        public EntityCollection<PersonConferences_Detail> PersonConferences_Detail
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Detail>("ConferenceModel.CompanyPersonConferenceDetail", "PersonConferenceDetail");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PersonConferences_Detail>("ConferenceModel.FK_CompanyPersonConferenceDetail", "PersonConferences_Detail");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Detail>("ConferenceModel.CompanyPersonConferenceDetail", "PersonConferenceDetail", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonConferences_Detail>("ConferenceModel.FK_CompanyPersonConferenceDetail", "PersonConferences_Detail", value);
                 }
             }
         }
@@ -543,18 +592,18 @@ namespace WPFDB.Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "CompanyPersonConferenceMoney", "PersonConferenceMoney")]
-        public EntityCollection<Payment> PersonConferenceMoneys
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "FK_CompanyPersonConferenceMoney", "PersonConferences_Payment")]
+        public EntityCollection<PersonConferences_Payment> PersonConferences_Payment
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Payment>("ConferenceModel.CompanyPersonConferenceMoney", "PersonConferenceMoney");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PersonConferences_Payment>("ConferenceModel.FK_CompanyPersonConferenceMoney", "PersonConferences_Payment");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Payment>("ConferenceModel.CompanyPersonConferenceMoney", "PersonConferenceMoney", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonConferences_Payment>("ConferenceModel.FK_CompanyPersonConferenceMoney", "PersonConferences_Payment", value);
                 }
             }
         }
@@ -726,752 +775,6 @@ namespace WPFDB.Model
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ConferenceModel", Name="Detail")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Detail : PersonConference
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Detail object.
-        /// </summary>
-        /// <param name="personConferenceId">Initial value of the PersonConferenceId property.</param>
-        /// <param name="personId">Initial value of the PersonId property.</param>
-        /// <param name="conferenceId">Initial value of the ConferenceId property.</param>
-        /// <param name="rankId">Initial value of the RankId property.</param>
-        /// <param name="companyId">Initial value of the CompanyId property.</param>
-        /// <param name="isBadge">Initial value of the IsBadge property.</param>
-        /// <param name="isArrive">Initial value of the IsArrive property.</param>
-        /// <param name="dateArrive">Initial value of the DateArrive property.</param>
-        /// <param name="isComplect">Initial value of the IsComplect property.</param>
-        /// <param name="isAdditionalMaterial">Initial value of the IsAdditionalMaterial property.</param>
-        /// <param name="isAbstract">Initial value of the IsAbstract property.</param>
-        /// <param name="isNeedBadge">Initial value of the IsNeedBadge property.</param>
-        /// <param name="isAutoreg">Initial value of the IsAutoreg property.</param>
-        /// <param name="sourceId">Initial value of the SourceId property.</param>
-        public static Detail CreateDetail(global::System.Guid personConferenceId, global::System.Guid personId, global::System.Guid conferenceId, global::System.Guid rankId, global::System.Guid companyId, global::System.Boolean isBadge, global::System.Boolean isArrive, global::System.DateTime dateArrive, global::System.Boolean isComplect, global::System.Boolean isAdditionalMaterial, global::System.Boolean isAbstract, global::System.Boolean isNeedBadge, global::System.Boolean isAutoreg, global::System.Int32 sourceId)
-        {
-            Detail detail = new Detail();
-            detail.PersonConferenceId = personConferenceId;
-            detail.PersonId = personId;
-            detail.ConferenceId = conferenceId;
-            detail.RankId = rankId;
-            detail.CompanyId = companyId;
-            detail.IsBadge = isBadge;
-            detail.IsArrive = isArrive;
-            detail.DateArrive = dateArrive;
-            detail.IsComplect = isComplect;
-            detail.IsAdditionalMaterial = isAdditionalMaterial;
-            detail.IsAbstract = isAbstract;
-            detail.IsNeedBadge = isNeedBadge;
-            detail.IsAutoreg = isAutoreg;
-            detail.SourceId = sourceId;
-            return detail;
-        }
-
-        #endregion
-
-        #region Simple Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid RankId
-        {
-            get
-            {
-                return _RankId;
-            }
-            set
-            {
-                OnRankIdChanging(value);
-                ReportPropertyChanging("RankId");
-                _RankId = StructuralObject.SetValidValue(value, "RankId");
-                ReportPropertyChanged("RankId");
-                OnRankIdChanged();
-            }
-        }
-        private global::System.Guid _RankId;
-        partial void OnRankIdChanging(global::System.Guid value);
-        partial void OnRankIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid CompanyId
-        {
-            get
-            {
-                return _CompanyId;
-            }
-            set
-            {
-                OnCompanyIdChanging(value);
-                ReportPropertyChanging("CompanyId");
-                _CompanyId = StructuralObject.SetValidValue(value, "CompanyId");
-                ReportPropertyChanged("CompanyId");
-                OnCompanyIdChanged();
-            }
-        }
-        private global::System.Guid _CompanyId;
-        partial void OnCompanyIdChanging(global::System.Guid value);
-        partial void OnCompanyIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsBadge
-        {
-            get
-            {
-                return _IsBadge;
-            }
-            set
-            {
-                OnIsBadgeChanging(value);
-                ReportPropertyChanging("IsBadge");
-                _IsBadge = StructuralObject.SetValidValue(value, "IsBadge");
-                ReportPropertyChanged("IsBadge");
-                OnIsBadgeChanged();
-            }
-        }
-        private global::System.Boolean _IsBadge;
-        partial void OnIsBadgeChanging(global::System.Boolean value);
-        partial void OnIsBadgeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsArrive
-        {
-            get
-            {
-                return _IsArrive;
-            }
-            set
-            {
-                OnIsArriveChanging(value);
-                ReportPropertyChanging("IsArrive");
-                _IsArrive = StructuralObject.SetValidValue(value, "IsArrive");
-                ReportPropertyChanged("IsArrive");
-                OnIsArriveChanged();
-            }
-        }
-        private global::System.Boolean _IsArrive;
-        partial void OnIsArriveChanging(global::System.Boolean value);
-        partial void OnIsArriveChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime DateArrive
-        {
-            get
-            {
-                return _DateArrive;
-            }
-            set
-            {
-                OnDateArriveChanging(value);
-                ReportPropertyChanging("DateArrive");
-                _DateArrive = StructuralObject.SetValidValue(value, "DateArrive");
-                ReportPropertyChanged("DateArrive");
-                OnDateArriveChanged();
-            }
-        }
-        private global::System.DateTime _DateArrive;
-        partial void OnDateArriveChanging(global::System.DateTime value);
-        partial void OnDateArriveChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsComplect
-        {
-            get
-            {
-                return _IsComplect;
-            }
-            set
-            {
-                OnIsComplectChanging(value);
-                ReportPropertyChanging("IsComplect");
-                _IsComplect = StructuralObject.SetValidValue(value, "IsComplect");
-                ReportPropertyChanged("IsComplect");
-                OnIsComplectChanged();
-            }
-        }
-        private global::System.Boolean _IsComplect;
-        partial void OnIsComplectChanging(global::System.Boolean value);
-        partial void OnIsComplectChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsAdditionalMaterial
-        {
-            get
-            {
-                return _IsAdditionalMaterial;
-            }
-            set
-            {
-                OnIsAdditionalMaterialChanging(value);
-                ReportPropertyChanging("IsAdditionalMaterial");
-                _IsAdditionalMaterial = StructuralObject.SetValidValue(value, "IsAdditionalMaterial");
-                ReportPropertyChanged("IsAdditionalMaterial");
-                OnIsAdditionalMaterialChanged();
-            }
-        }
-        private global::System.Boolean _IsAdditionalMaterial;
-        partial void OnIsAdditionalMaterialChanging(global::System.Boolean value);
-        partial void OnIsAdditionalMaterialChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsAbstract
-        {
-            get
-            {
-                return _IsAbstract;
-            }
-            set
-            {
-                OnIsAbstractChanging(value);
-                ReportPropertyChanging("IsAbstract");
-                _IsAbstract = StructuralObject.SetValidValue(value, "IsAbstract");
-                ReportPropertyChanged("IsAbstract");
-                OnIsAbstractChanged();
-            }
-        }
-        private global::System.Boolean _IsAbstract;
-        partial void OnIsAbstractChanging(global::System.Boolean value);
-        partial void OnIsAbstractChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsNeedBadge
-        {
-            get
-            {
-                return _IsNeedBadge;
-            }
-            set
-            {
-                OnIsNeedBadgeChanging(value);
-                ReportPropertyChanging("IsNeedBadge");
-                _IsNeedBadge = StructuralObject.SetValidValue(value, "IsNeedBadge");
-                ReportPropertyChanged("IsNeedBadge");
-                OnIsNeedBadgeChanged();
-            }
-        }
-        private global::System.Boolean _IsNeedBadge;
-        partial void OnIsNeedBadgeChanging(global::System.Boolean value);
-        partial void OnIsNeedBadgeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsAutoreg
-        {
-            get
-            {
-                return _IsAutoreg;
-            }
-            set
-            {
-                OnIsAutoregChanging(value);
-                ReportPropertyChanging("IsAutoreg");
-                _IsAutoreg = StructuralObject.SetValidValue(value, "IsAutoreg");
-                ReportPropertyChanged("IsAutoreg");
-                OnIsAutoregChanged();
-            }
-        }
-        private global::System.Boolean _IsAutoreg;
-        partial void OnIsAutoregChanging(global::System.Boolean value);
-        partial void OnIsAutoregChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 SourceId
-        {
-            get
-            {
-                return _SourceId;
-            }
-            set
-            {
-                OnSourceIdChanging(value);
-                ReportPropertyChanging("SourceId");
-                _SourceId = StructuralObject.SetValidValue(value, "SourceId");
-                ReportPropertyChanged("SourceId");
-                OnSourceIdChanged();
-            }
-        }
-        private global::System.Int32 _SourceId;
-        partial void OnSourceIdChanging(global::System.Int32 value);
-        partial void OnSourceIdChanged();
-
-        #endregion
-
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "RankPersonConferenceDetail", "Rank")]
-        public Rank Rank
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Rank>("ConferenceModel.RankPersonConferenceDetail", "Rank").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Rank>("ConferenceModel.RankPersonConferenceDetail", "Rank").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Rank> RankReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Rank>("ConferenceModel.RankPersonConferenceDetail", "Rank");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Rank>("ConferenceModel.RankPersonConferenceDetail", "Rank", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "CompanyPersonConferenceDetail", "Company")]
-        public Company Company
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("ConferenceModel.CompanyPersonConferenceDetail", "Company").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("ConferenceModel.CompanyPersonConferenceDetail", "Company").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Company> CompanyReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("ConferenceModel.CompanyPersonConferenceDetail", "Company");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Company>("ConferenceModel.CompanyPersonConferenceDetail", "Company", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ConferenceModel", Name="Payment")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Payment : PersonConference
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Payment object.
-        /// </summary>
-        /// <param name="personConferenceId">Initial value of the PersonConferenceId property.</param>
-        /// <param name="personId">Initial value of the PersonId property.</param>
-        /// <param name="conferenceId">Initial value of the ConferenceId property.</param>
-        /// <param name="paymentTypeId">Initial value of the PaymentTypeId property.</param>
-        /// <param name="companyId">Initial value of the CompanyId property.</param>
-        /// <param name="paymentDocument">Initial value of the PaymentDocument property.</param>
-        /// <param name="paymentDate">Initial value of the PaymentDate property.</param>
-        /// <param name="money">Initial value of the Money property.</param>
-        /// <param name="isComplect">Initial value of the IsComplect property.</param>
-        /// <param name="orderNumber">Initial value of the OrderNumber property.</param>
-        /// <param name="orderStatus">Initial value of the OrderStatus property.</param>
-        /// <param name="sourceId">Initial value of the SourceId property.</param>
-        public static Payment CreatePayment(global::System.Guid personConferenceId, global::System.Guid personId, global::System.Guid conferenceId, global::System.Guid paymentTypeId, global::System.Guid companyId, global::System.String paymentDocument, global::System.DateTime paymentDate, global::System.Decimal money, global::System.Boolean isComplect, global::System.Int32 orderNumber, global::System.Int32 orderStatus, global::System.Int32 sourceId)
-        {
-            Payment payment = new Payment();
-            payment.PersonConferenceId = personConferenceId;
-            payment.PersonId = personId;
-            payment.ConferenceId = conferenceId;
-            payment.PaymentTypeId = paymentTypeId;
-            payment.CompanyId = companyId;
-            payment.PaymentDocument = paymentDocument;
-            payment.PaymentDate = paymentDate;
-            payment.Money = money;
-            payment.IsComplect = isComplect;
-            payment.OrderNumber = orderNumber;
-            payment.OrderStatus = orderStatus;
-            payment.SourceId = sourceId;
-            return payment;
-        }
-
-        #endregion
-
-        #region Simple Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid PaymentTypeId
-        {
-            get
-            {
-                return _PaymentTypeId;
-            }
-            set
-            {
-                OnPaymentTypeIdChanging(value);
-                ReportPropertyChanging("PaymentTypeId");
-                _PaymentTypeId = StructuralObject.SetValidValue(value, "PaymentTypeId");
-                ReportPropertyChanged("PaymentTypeId");
-                OnPaymentTypeIdChanged();
-            }
-        }
-        private global::System.Guid _PaymentTypeId;
-        partial void OnPaymentTypeIdChanging(global::System.Guid value);
-        partial void OnPaymentTypeIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid CompanyId
-        {
-            get
-            {
-                return _CompanyId;
-            }
-            set
-            {
-                OnCompanyIdChanging(value);
-                ReportPropertyChanging("CompanyId");
-                _CompanyId = StructuralObject.SetValidValue(value, "CompanyId");
-                ReportPropertyChanged("CompanyId");
-                OnCompanyIdChanged();
-            }
-        }
-        private global::System.Guid _CompanyId;
-        partial void OnCompanyIdChanging(global::System.Guid value);
-        partial void OnCompanyIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String PaymentDocument
-        {
-            get
-            {
-                return _PaymentDocument;
-            }
-            set
-            {
-                OnPaymentDocumentChanging(value);
-                ReportPropertyChanging("PaymentDocument");
-                _PaymentDocument = StructuralObject.SetValidValue(value, false, "PaymentDocument");
-                ReportPropertyChanged("PaymentDocument");
-                OnPaymentDocumentChanged();
-            }
-        }
-        private global::System.String _PaymentDocument;
-        partial void OnPaymentDocumentChanging(global::System.String value);
-        partial void OnPaymentDocumentChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime PaymentDate
-        {
-            get
-            {
-                return _PaymentDate;
-            }
-            set
-            {
-                OnPaymentDateChanging(value);
-                ReportPropertyChanging("PaymentDate");
-                _PaymentDate = StructuralObject.SetValidValue(value, "PaymentDate");
-                ReportPropertyChanged("PaymentDate");
-                OnPaymentDateChanged();
-            }
-        }
-        private global::System.DateTime _PaymentDate;
-        partial void OnPaymentDateChanging(global::System.DateTime value);
-        partial void OnPaymentDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Decimal Money
-        {
-            get
-            {
-                return _Money;
-            }
-            set
-            {
-                OnMoneyChanging(value);
-                ReportPropertyChanging("Money");
-                _Money = StructuralObject.SetValidValue(value, "Money");
-                ReportPropertyChanged("Money");
-                OnMoneyChanged();
-            }
-        }
-        private global::System.Decimal _Money;
-        partial void OnMoneyChanging(global::System.Decimal value);
-        partial void OnMoneyChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsComplect
-        {
-            get
-            {
-                return _IsComplect;
-            }
-            set
-            {
-                OnIsComplectChanging(value);
-                ReportPropertyChanging("IsComplect");
-                _IsComplect = StructuralObject.SetValidValue(value, "IsComplect");
-                ReportPropertyChanged("IsComplect");
-                OnIsComplectChanged();
-            }
-        }
-        private global::System.Boolean _IsComplect;
-        partial void OnIsComplectChanging(global::System.Boolean value);
-        partial void OnIsComplectChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 OrderNumber
-        {
-            get
-            {
-                return _OrderNumber;
-            }
-            set
-            {
-                OnOrderNumberChanging(value);
-                ReportPropertyChanging("OrderNumber");
-                _OrderNumber = StructuralObject.SetValidValue(value, "OrderNumber");
-                ReportPropertyChanged("OrderNumber");
-                OnOrderNumberChanged();
-            }
-        }
-        private global::System.Int32 _OrderNumber;
-        partial void OnOrderNumberChanging(global::System.Int32 value);
-        partial void OnOrderNumberChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 OrderStatus
-        {
-            get
-            {
-                return _OrderStatus;
-            }
-            set
-            {
-                OnOrderStatusChanging(value);
-                ReportPropertyChanging("OrderStatus");
-                _OrderStatus = StructuralObject.SetValidValue(value, "OrderStatus");
-                ReportPropertyChanged("OrderStatus");
-                OnOrderStatusChanged();
-            }
-        }
-        private global::System.Int32 _OrderStatus;
-        partial void OnOrderStatusChanging(global::System.Int32 value);
-        partial void OnOrderStatusChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 SourceId
-        {
-            get
-            {
-                return _SourceId;
-            }
-            set
-            {
-                OnSourceIdChanging(value);
-                ReportPropertyChanging("SourceId");
-                _SourceId = StructuralObject.SetValidValue(value, "SourceId");
-                ReportPropertyChanged("SourceId");
-                OnSourceIdChanged();
-            }
-        }
-        private global::System.Int32 _SourceId;
-        partial void OnSourceIdChanging(global::System.Int32 value);
-        partial void OnSourceIdChanged();
-
-        #endregion
-
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "PaymentTypePersonConferenceMoney", "PaymentType")]
-        public PaymentType PaymentType
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PaymentType>("ConferenceModel.PaymentTypePersonConferenceMoney", "PaymentType").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PaymentType>("ConferenceModel.PaymentTypePersonConferenceMoney", "PaymentType").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<PaymentType> PaymentTypeReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PaymentType>("ConferenceModel.PaymentTypePersonConferenceMoney", "PaymentType");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PaymentType>("ConferenceModel.PaymentTypePersonConferenceMoney", "PaymentType", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "CompanyPersonConferenceMoney", "Company")]
-        public Company Company
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("ConferenceModel.CompanyPersonConferenceMoney", "Company").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("ConferenceModel.CompanyPersonConferenceMoney", "Company").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Company> CompanyReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("ConferenceModel.CompanyPersonConferenceMoney", "Company");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Company>("ConferenceModel.CompanyPersonConferenceMoney", "Company", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="ConferenceModel", Name="PaymentType")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -1609,18 +912,18 @@ namespace WPFDB.Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "PaymentTypePersonConferenceMoney", "PersonConferenceMoney")]
-        public EntityCollection<Payment> PersonConferenceMoneys
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "FK_PaymentTypePersonConferenceMoney", "PersonConferences_Payment")]
+        public EntityCollection<PersonConferences_Payment> PersonConferences_Payment
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Payment>("ConferenceModel.PaymentTypePersonConferenceMoney", "PersonConferenceMoney");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PersonConferences_Payment>("ConferenceModel.FK_PaymentTypePersonConferenceMoney", "PersonConferences_Payment");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Payment>("ConferenceModel.PaymentTypePersonConferenceMoney", "PersonConferenceMoney", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonConferences_Payment>("ConferenceModel.FK_PaymentTypePersonConferenceMoney", "PersonConferences_Payment", value);
                 }
             }
         }
@@ -2149,8 +1452,6 @@ namespace WPFDB.Model
     [EdmEntityTypeAttribute(NamespaceName="ConferenceModel", Name="PersonConference")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    [KnownTypeAttribute(typeof(Detail))]
-    [KnownTypeAttribute(typeof(Payment))]
     public partial class PersonConference : EntityObject
     {
         #region Factory Method
@@ -2325,6 +1626,950 @@ namespace WPFDB.Model
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Conference>("ConferenceModel.ConferencePersonConference", "Conference", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "FK_Detail_inherits_PersonConference", "PersonConferences_Detail")]
+        public PersonConferences_Detail PersonConferences_Detail
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PersonConferences_Detail>("ConferenceModel.FK_Detail_inherits_PersonConference", "PersonConferences_Detail").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PersonConferences_Detail>("ConferenceModel.FK_Detail_inherits_PersonConference", "PersonConferences_Detail").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<PersonConferences_Detail> PersonConferences_DetailReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PersonConferences_Detail>("ConferenceModel.FK_Detail_inherits_PersonConference", "PersonConferences_Detail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PersonConferences_Detail>("ConferenceModel.FK_Detail_inherits_PersonConference", "PersonConferences_Detail", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "FK_Payment_inherits_PersonConference", "PersonConferences_Payment")]
+        public PersonConferences_Payment PersonConferences_Payment
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PersonConferences_Payment>("ConferenceModel.FK_Payment_inherits_PersonConference", "PersonConferences_Payment").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PersonConferences_Payment>("ConferenceModel.FK_Payment_inherits_PersonConference", "PersonConferences_Payment").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<PersonConferences_Payment> PersonConferences_PaymentReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PersonConferences_Payment>("ConferenceModel.FK_Payment_inherits_PersonConference", "PersonConferences_Payment");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PersonConferences_Payment>("ConferenceModel.FK_Payment_inherits_PersonConference", "PersonConferences_Payment", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ConferenceModel", Name="PersonConferences_Detail")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class PersonConferences_Detail : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new PersonConferences_Detail object.
+        /// </summary>
+        /// <param name="rankId">Initial value of the RankId property.</param>
+        /// <param name="companyId">Initial value of the CompanyId property.</param>
+        /// <param name="isBadge">Initial value of the IsBadge property.</param>
+        /// <param name="isArrive">Initial value of the IsArrive property.</param>
+        /// <param name="dateArrive">Initial value of the DateArrive property.</param>
+        /// <param name="isComplect">Initial value of the IsComplect property.</param>
+        /// <param name="isAdditionalMaterial">Initial value of the IsAdditionalMaterial property.</param>
+        /// <param name="isAbstract">Initial value of the IsAbstract property.</param>
+        /// <param name="isNeedBadge">Initial value of the IsNeedBadge property.</param>
+        /// <param name="isAutoreg">Initial value of the IsAutoreg property.</param>
+        /// <param name="sourceId">Initial value of the SourceId property.</param>
+        /// <param name="personConferenceId">Initial value of the PersonConferenceId property.</param>
+        public static PersonConferences_Detail CreatePersonConferences_Detail(global::System.Guid rankId, global::System.Guid companyId, global::System.Boolean isBadge, global::System.Boolean isArrive, global::System.DateTime dateArrive, global::System.Boolean isComplect, global::System.Boolean isAdditionalMaterial, global::System.Boolean isAbstract, global::System.Boolean isNeedBadge, global::System.Boolean isAutoreg, global::System.Int32 sourceId, global::System.Guid personConferenceId)
+        {
+            PersonConferences_Detail personConferences_Detail = new PersonConferences_Detail();
+            personConferences_Detail.RankId = rankId;
+            personConferences_Detail.CompanyId = companyId;
+            personConferences_Detail.IsBadge = isBadge;
+            personConferences_Detail.IsArrive = isArrive;
+            personConferences_Detail.DateArrive = dateArrive;
+            personConferences_Detail.IsComplect = isComplect;
+            personConferences_Detail.IsAdditionalMaterial = isAdditionalMaterial;
+            personConferences_Detail.IsAbstract = isAbstract;
+            personConferences_Detail.IsNeedBadge = isNeedBadge;
+            personConferences_Detail.IsAutoreg = isAutoreg;
+            personConferences_Detail.SourceId = sourceId;
+            personConferences_Detail.PersonConferenceId = personConferenceId;
+            return personConferences_Detail;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid RankId
+        {
+            get
+            {
+                return _RankId;
+            }
+            set
+            {
+                OnRankIdChanging(value);
+                ReportPropertyChanging("RankId");
+                _RankId = StructuralObject.SetValidValue(value, "RankId");
+                ReportPropertyChanged("RankId");
+                OnRankIdChanged();
+            }
+        }
+        private global::System.Guid _RankId;
+        partial void OnRankIdChanging(global::System.Guid value);
+        partial void OnRankIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid CompanyId
+        {
+            get
+            {
+                return _CompanyId;
+            }
+            set
+            {
+                OnCompanyIdChanging(value);
+                ReportPropertyChanging("CompanyId");
+                _CompanyId = StructuralObject.SetValidValue(value, "CompanyId");
+                ReportPropertyChanged("CompanyId");
+                OnCompanyIdChanged();
+            }
+        }
+        private global::System.Guid _CompanyId;
+        partial void OnCompanyIdChanging(global::System.Guid value);
+        partial void OnCompanyIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsBadge
+        {
+            get
+            {
+                return _IsBadge;
+            }
+            set
+            {
+                OnIsBadgeChanging(value);
+                ReportPropertyChanging("IsBadge");
+                _IsBadge = StructuralObject.SetValidValue(value, "IsBadge");
+                ReportPropertyChanged("IsBadge");
+                OnIsBadgeChanged();
+            }
+        }
+        private global::System.Boolean _IsBadge;
+        partial void OnIsBadgeChanging(global::System.Boolean value);
+        partial void OnIsBadgeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsArrive
+        {
+            get
+            {
+                return _IsArrive;
+            }
+            set
+            {
+                OnIsArriveChanging(value);
+                ReportPropertyChanging("IsArrive");
+                _IsArrive = StructuralObject.SetValidValue(value, "IsArrive");
+                ReportPropertyChanged("IsArrive");
+                OnIsArriveChanged();
+            }
+        }
+        private global::System.Boolean _IsArrive;
+        partial void OnIsArriveChanging(global::System.Boolean value);
+        partial void OnIsArriveChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime DateArrive
+        {
+            get
+            {
+                return _DateArrive;
+            }
+            set
+            {
+                OnDateArriveChanging(value);
+                ReportPropertyChanging("DateArrive");
+                _DateArrive = StructuralObject.SetValidValue(value, "DateArrive");
+                ReportPropertyChanged("DateArrive");
+                OnDateArriveChanged();
+            }
+        }
+        private global::System.DateTime _DateArrive;
+        partial void OnDateArriveChanging(global::System.DateTime value);
+        partial void OnDateArriveChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsComplect
+        {
+            get
+            {
+                return _IsComplect;
+            }
+            set
+            {
+                OnIsComplectChanging(value);
+                ReportPropertyChanging("IsComplect");
+                _IsComplect = StructuralObject.SetValidValue(value, "IsComplect");
+                ReportPropertyChanged("IsComplect");
+                OnIsComplectChanged();
+            }
+        }
+        private global::System.Boolean _IsComplect;
+        partial void OnIsComplectChanging(global::System.Boolean value);
+        partial void OnIsComplectChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsAdditionalMaterial
+        {
+            get
+            {
+                return _IsAdditionalMaterial;
+            }
+            set
+            {
+                OnIsAdditionalMaterialChanging(value);
+                ReportPropertyChanging("IsAdditionalMaterial");
+                _IsAdditionalMaterial = StructuralObject.SetValidValue(value, "IsAdditionalMaterial");
+                ReportPropertyChanged("IsAdditionalMaterial");
+                OnIsAdditionalMaterialChanged();
+            }
+        }
+        private global::System.Boolean _IsAdditionalMaterial;
+        partial void OnIsAdditionalMaterialChanging(global::System.Boolean value);
+        partial void OnIsAdditionalMaterialChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsAbstract
+        {
+            get
+            {
+                return _IsAbstract;
+            }
+            set
+            {
+                OnIsAbstractChanging(value);
+                ReportPropertyChanging("IsAbstract");
+                _IsAbstract = StructuralObject.SetValidValue(value, "IsAbstract");
+                ReportPropertyChanged("IsAbstract");
+                OnIsAbstractChanged();
+            }
+        }
+        private global::System.Boolean _IsAbstract;
+        partial void OnIsAbstractChanging(global::System.Boolean value);
+        partial void OnIsAbstractChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsNeedBadge
+        {
+            get
+            {
+                return _IsNeedBadge;
+            }
+            set
+            {
+                OnIsNeedBadgeChanging(value);
+                ReportPropertyChanging("IsNeedBadge");
+                _IsNeedBadge = StructuralObject.SetValidValue(value, "IsNeedBadge");
+                ReportPropertyChanged("IsNeedBadge");
+                OnIsNeedBadgeChanged();
+            }
+        }
+        private global::System.Boolean _IsNeedBadge;
+        partial void OnIsNeedBadgeChanging(global::System.Boolean value);
+        partial void OnIsNeedBadgeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsAutoreg
+        {
+            get
+            {
+                return _IsAutoreg;
+            }
+            set
+            {
+                OnIsAutoregChanging(value);
+                ReportPropertyChanging("IsAutoreg");
+                _IsAutoreg = StructuralObject.SetValidValue(value, "IsAutoreg");
+                ReportPropertyChanged("IsAutoreg");
+                OnIsAutoregChanged();
+            }
+        }
+        private global::System.Boolean _IsAutoreg;
+        partial void OnIsAutoregChanging(global::System.Boolean value);
+        partial void OnIsAutoregChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SourceId
+        {
+            get
+            {
+                return _SourceId;
+            }
+            set
+            {
+                OnSourceIdChanging(value);
+                ReportPropertyChanging("SourceId");
+                _SourceId = StructuralObject.SetValidValue(value, "SourceId");
+                ReportPropertyChanged("SourceId");
+                OnSourceIdChanged();
+            }
+        }
+        private global::System.Int32 _SourceId;
+        partial void OnSourceIdChanging(global::System.Int32 value);
+        partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid PersonConferenceId
+        {
+            get
+            {
+                return _PersonConferenceId;
+            }
+            set
+            {
+                if (_PersonConferenceId != value)
+                {
+                    OnPersonConferenceIdChanging(value);
+                    ReportPropertyChanging("PersonConferenceId");
+                    _PersonConferenceId = StructuralObject.SetValidValue(value, "PersonConferenceId");
+                    ReportPropertyChanged("PersonConferenceId");
+                    OnPersonConferenceIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _PersonConferenceId;
+        partial void OnPersonConferenceIdChanging(global::System.Guid value);
+        partial void OnPersonConferenceIdChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "FK_CompanyPersonConferenceDetail", "Company")]
+        public Company Company
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("ConferenceModel.FK_CompanyPersonConferenceDetail", "Company").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("ConferenceModel.FK_CompanyPersonConferenceDetail", "Company").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Company> CompanyReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("ConferenceModel.FK_CompanyPersonConferenceDetail", "Company");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Company>("ConferenceModel.FK_CompanyPersonConferenceDetail", "Company", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "FK_Detail_inherits_PersonConference", "PersonConference")]
+        public PersonConference PersonConference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PersonConference>("ConferenceModel.FK_Detail_inherits_PersonConference", "PersonConference").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PersonConference>("ConferenceModel.FK_Detail_inherits_PersonConference", "PersonConference").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<PersonConference> PersonConferenceReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PersonConference>("ConferenceModel.FK_Detail_inherits_PersonConference", "PersonConference");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PersonConference>("ConferenceModel.FK_Detail_inherits_PersonConference", "PersonConference", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "FK_RankPersonConferenceDetail", "Rank")]
+        public Rank Rank
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Rank>("ConferenceModel.FK_RankPersonConferenceDetail", "Rank").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Rank>("ConferenceModel.FK_RankPersonConferenceDetail", "Rank").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Rank> RankReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Rank>("ConferenceModel.FK_RankPersonConferenceDetail", "Rank");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Rank>("ConferenceModel.FK_RankPersonConferenceDetail", "Rank", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ConferenceModel", Name="PersonConferences_Payment")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class PersonConferences_Payment : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new PersonConferences_Payment object.
+        /// </summary>
+        /// <param name="paymentTypeId">Initial value of the PaymentTypeId property.</param>
+        /// <param name="companyId">Initial value of the CompanyId property.</param>
+        /// <param name="paymentDocument">Initial value of the PaymentDocument property.</param>
+        /// <param name="paymentDate">Initial value of the PaymentDate property.</param>
+        /// <param name="money">Initial value of the Money property.</param>
+        /// <param name="isComplect">Initial value of the IsComplect property.</param>
+        /// <param name="orderNumber">Initial value of the OrderNumber property.</param>
+        /// <param name="orderStatus">Initial value of the OrderStatus property.</param>
+        /// <param name="sourceId">Initial value of the SourceId property.</param>
+        /// <param name="personConferenceId">Initial value of the PersonConferenceId property.</param>
+        public static PersonConferences_Payment CreatePersonConferences_Payment(global::System.Guid paymentTypeId, global::System.Guid companyId, global::System.String paymentDocument, global::System.DateTime paymentDate, global::System.Decimal money, global::System.Boolean isComplect, global::System.Int32 orderNumber, global::System.Int32 orderStatus, global::System.Int32 sourceId, global::System.Guid personConferenceId)
+        {
+            PersonConferences_Payment personConferences_Payment = new PersonConferences_Payment();
+            personConferences_Payment.PaymentTypeId = paymentTypeId;
+            personConferences_Payment.CompanyId = companyId;
+            personConferences_Payment.PaymentDocument = paymentDocument;
+            personConferences_Payment.PaymentDate = paymentDate;
+            personConferences_Payment.Money = money;
+            personConferences_Payment.IsComplect = isComplect;
+            personConferences_Payment.OrderNumber = orderNumber;
+            personConferences_Payment.OrderStatus = orderStatus;
+            personConferences_Payment.SourceId = sourceId;
+            personConferences_Payment.PersonConferenceId = personConferenceId;
+            return personConferences_Payment;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid PaymentTypeId
+        {
+            get
+            {
+                return _PaymentTypeId;
+            }
+            set
+            {
+                OnPaymentTypeIdChanging(value);
+                ReportPropertyChanging("PaymentTypeId");
+                _PaymentTypeId = StructuralObject.SetValidValue(value, "PaymentTypeId");
+                ReportPropertyChanged("PaymentTypeId");
+                OnPaymentTypeIdChanged();
+            }
+        }
+        private global::System.Guid _PaymentTypeId;
+        partial void OnPaymentTypeIdChanging(global::System.Guid value);
+        partial void OnPaymentTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid CompanyId
+        {
+            get
+            {
+                return _CompanyId;
+            }
+            set
+            {
+                OnCompanyIdChanging(value);
+                ReportPropertyChanging("CompanyId");
+                _CompanyId = StructuralObject.SetValidValue(value, "CompanyId");
+                ReportPropertyChanged("CompanyId");
+                OnCompanyIdChanged();
+            }
+        }
+        private global::System.Guid _CompanyId;
+        partial void OnCompanyIdChanging(global::System.Guid value);
+        partial void OnCompanyIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String PaymentDocument
+        {
+            get
+            {
+                return _PaymentDocument;
+            }
+            set
+            {
+                OnPaymentDocumentChanging(value);
+                ReportPropertyChanging("PaymentDocument");
+                _PaymentDocument = StructuralObject.SetValidValue(value, false, "PaymentDocument");
+                ReportPropertyChanged("PaymentDocument");
+                OnPaymentDocumentChanged();
+            }
+        }
+        private global::System.String _PaymentDocument;
+        partial void OnPaymentDocumentChanging(global::System.String value);
+        partial void OnPaymentDocumentChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime PaymentDate
+        {
+            get
+            {
+                return _PaymentDate;
+            }
+            set
+            {
+                OnPaymentDateChanging(value);
+                ReportPropertyChanging("PaymentDate");
+                _PaymentDate = StructuralObject.SetValidValue(value, "PaymentDate");
+                ReportPropertyChanged("PaymentDate");
+                OnPaymentDateChanged();
+            }
+        }
+        private global::System.DateTime _PaymentDate;
+        partial void OnPaymentDateChanging(global::System.DateTime value);
+        partial void OnPaymentDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Money
+        {
+            get
+            {
+                return _Money;
+            }
+            set
+            {
+                OnMoneyChanging(value);
+                ReportPropertyChanging("Money");
+                _Money = StructuralObject.SetValidValue(value, "Money");
+                ReportPropertyChanged("Money");
+                OnMoneyChanged();
+            }
+        }
+        private global::System.Decimal _Money;
+        partial void OnMoneyChanging(global::System.Decimal value);
+        partial void OnMoneyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsComplect
+        {
+            get
+            {
+                return _IsComplect;
+            }
+            set
+            {
+                OnIsComplectChanging(value);
+                ReportPropertyChanging("IsComplect");
+                _IsComplect = StructuralObject.SetValidValue(value, "IsComplect");
+                ReportPropertyChanged("IsComplect");
+                OnIsComplectChanged();
+            }
+        }
+        private global::System.Boolean _IsComplect;
+        partial void OnIsComplectChanging(global::System.Boolean value);
+        partial void OnIsComplectChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OrderNumber
+        {
+            get
+            {
+                return _OrderNumber;
+            }
+            set
+            {
+                OnOrderNumberChanging(value);
+                ReportPropertyChanging("OrderNumber");
+                _OrderNumber = StructuralObject.SetValidValue(value, "OrderNumber");
+                ReportPropertyChanged("OrderNumber");
+                OnOrderNumberChanged();
+            }
+        }
+        private global::System.Int32 _OrderNumber;
+        partial void OnOrderNumberChanging(global::System.Int32 value);
+        partial void OnOrderNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OrderStatus
+        {
+            get
+            {
+                return _OrderStatus;
+            }
+            set
+            {
+                OnOrderStatusChanging(value);
+                ReportPropertyChanging("OrderStatus");
+                _OrderStatus = StructuralObject.SetValidValue(value, "OrderStatus");
+                ReportPropertyChanged("OrderStatus");
+                OnOrderStatusChanged();
+            }
+        }
+        private global::System.Int32 _OrderStatus;
+        partial void OnOrderStatusChanging(global::System.Int32 value);
+        partial void OnOrderStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SourceId
+        {
+            get
+            {
+                return _SourceId;
+            }
+            set
+            {
+                OnSourceIdChanging(value);
+                ReportPropertyChanging("SourceId");
+                _SourceId = StructuralObject.SetValidValue(value, "SourceId");
+                ReportPropertyChanged("SourceId");
+                OnSourceIdChanged();
+            }
+        }
+        private global::System.Int32 _SourceId;
+        partial void OnSourceIdChanging(global::System.Int32 value);
+        partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid PersonConferenceId
+        {
+            get
+            {
+                return _PersonConferenceId;
+            }
+            set
+            {
+                if (_PersonConferenceId != value)
+                {
+                    OnPersonConferenceIdChanging(value);
+                    ReportPropertyChanging("PersonConferenceId");
+                    _PersonConferenceId = StructuralObject.SetValidValue(value, "PersonConferenceId");
+                    ReportPropertyChanged("PersonConferenceId");
+                    OnPersonConferenceIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _PersonConferenceId;
+        partial void OnPersonConferenceIdChanging(global::System.Guid value);
+        partial void OnPersonConferenceIdChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "FK_CompanyPersonConferenceMoney", "Company")]
+        public Company Company
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("ConferenceModel.FK_CompanyPersonConferenceMoney", "Company").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("ConferenceModel.FK_CompanyPersonConferenceMoney", "Company").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Company> CompanyReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("ConferenceModel.FK_CompanyPersonConferenceMoney", "Company");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Company>("ConferenceModel.FK_CompanyPersonConferenceMoney", "Company", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "FK_PaymentTypePersonConferenceMoney", "PaymentType")]
+        public PaymentType PaymentType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PaymentType>("ConferenceModel.FK_PaymentTypePersonConferenceMoney", "PaymentType").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PaymentType>("ConferenceModel.FK_PaymentTypePersonConferenceMoney", "PaymentType").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<PaymentType> PaymentTypeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PaymentType>("ConferenceModel.FK_PaymentTypePersonConferenceMoney", "PaymentType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PaymentType>("ConferenceModel.FK_PaymentTypePersonConferenceMoney", "PaymentType", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "FK_Payment_inherits_PersonConference", "PersonConference")]
+        public PersonConference PersonConference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PersonConference>("ConferenceModel.FK_Payment_inherits_PersonConference", "PersonConference").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PersonConference>("ConferenceModel.FK_Payment_inherits_PersonConference", "PersonConference").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<PersonConference> PersonConferenceReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PersonConference>("ConferenceModel.FK_Payment_inherits_PersonConference", "PersonConference");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PersonConference>("ConferenceModel.FK_Payment_inherits_PersonConference", "PersonConference", value);
                 }
             }
         }
@@ -2711,18 +2956,18 @@ namespace WPFDB.Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "RankPersonConferenceDetail", "PersonConferenceDetail")]
-        public EntityCollection<Detail> PersonConferenceDetails
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "FK_RankPersonConferenceDetail", "PersonConferences_Detail")]
+        public EntityCollection<PersonConferences_Detail> PersonConferences_Detail
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Detail>("ConferenceModel.RankPersonConferenceDetail", "PersonConferenceDetail");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PersonConferences_Detail>("ConferenceModel.FK_RankPersonConferenceDetail", "PersonConferences_Detail");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Detail>("ConferenceModel.RankPersonConferenceDetail", "PersonConferenceDetail", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonConferences_Detail>("ConferenceModel.FK_RankPersonConferenceDetail", "PersonConferences_Detail", value);
                 }
             }
         }

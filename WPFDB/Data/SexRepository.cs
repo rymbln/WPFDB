@@ -55,5 +55,15 @@ namespace WPFDB.Data
             //this.CheckEntityBelongsToUnitOfWork(obj);
             //this.underlyingContext.Persons.DeleteObject(obj);
         }
+
+        public Sex GetByName(string name)
+        {
+
+            if (name == null)
+            {
+                throw new ArgumentNullException("PaymentType");
+            }
+            return objectSet.FirstOrDefault(o => o.Name == name);
+        }
     }
 }
