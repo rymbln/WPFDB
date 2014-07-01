@@ -76,6 +76,10 @@
         <Setter Property="Margin" Value="10,0,10,0"/>
         <Setter Property="IsEditable" Value="True"></Setter>
     </Style>
+    <Style TargetType="CheckBox">
+        <Setter Property="Margin" Value="10,7,10,0"/>
+       
+    </Style>
     <Style TargetType="TextBox">
         <Setter Property="MinHeight" Value="25"/>
         <Setter Property="MinWidth" Value="100"/>

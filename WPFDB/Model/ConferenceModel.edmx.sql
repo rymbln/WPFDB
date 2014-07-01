@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 06/27/2014 10:53:45
+-- Date Created: 07/01/2014 15:59:51
 -- Generated from EDMX file: C:\Users\Inspiron\documents\visual studio 2012\Projects\WPFDB\WPFDB\Model\ConferenceModel.edmx
 -- --------------------------------------------------
 
@@ -35,23 +35,26 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ConferencePersonConference]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PersonConferences] DROP CONSTRAINT [FK_ConferencePersonConference];
 GO
-IF OBJECT_ID(N'[dbo].[FK_RankPersonConferenceDetail]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences_Detail] DROP CONSTRAINT [FK_RankPersonConferenceDetail];
-GO
 IF OBJECT_ID(N'[dbo].[FK_CompanyPersonConferenceDetail]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PersonConferences_Detail] DROP CONSTRAINT [FK_CompanyPersonConferenceDetail];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PaymentTypePersonConferenceMoney]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_PaymentTypePersonConferenceMoney];
-GO
 IF OBJECT_ID(N'[dbo].[FK_CompanyPersonConferenceMoney]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_CompanyPersonConferenceMoney];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentTypePersonConferenceMoney]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_PaymentTypePersonConferenceMoney];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Detail_inherits_PersonConference]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PersonConferences_Detail] DROP CONSTRAINT [FK_Detail_inherits_PersonConference];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Payment_inherits_PersonConference]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_Payment_inherits_PersonConference];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RankPersonConferenceDetail]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonConferences_Detail] DROP CONSTRAINT [FK_RankPersonConferenceDetail];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PersonIacmac]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Iacmacs] DROP CONSTRAINT [FK_PersonIacmac];
 GO
 
 -- --------------------------------------------------
@@ -99,6 +102,9 @@ IF OBJECT_ID(N'[dbo].[PersonConferences_Detail]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[PersonConferences_Payment]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PersonConferences_Payment];
+GO
+IF OBJECT_ID(N'[dbo].[Iacmacs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Iacmacs];
 GO
 
 -- --------------------------------------------------
@@ -256,6 +262,19 @@ CREATE TABLE [dbo].[PersonConferences_Payment] (
 );
 GO
 
+-- Creating table 'Iacmacs'
+CREATE TABLE [dbo].[Iacmacs] (
+    [IsMember] bit  NOT NULL,
+    [DateRegistration] datetime  NOT NULL,
+    [Number] int  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL,
+    [IsCardCreate] bit  NOT NULL,
+    [IsCardSent] bit  NOT NULL,
+    [IsForm] bit  NOT NULL,
+    [PersonId] uniqueidentifier  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -342,6 +361,12 @@ GO
 ALTER TABLE [dbo].[PersonConferences_Payment]
 ADD CONSTRAINT [PK_PersonConferences_Payment]
     PRIMARY KEY CLUSTERED ([PersonConferenceId] ASC);
+GO
+
+-- Creating primary key on [PersonId] in table 'Iacmacs'
+ALTER TABLE [dbo].[Iacmacs]
+ADD CONSTRAINT [PK_Iacmacs]
+    PRIMARY KEY CLUSTERED ([PersonId] ASC);
 GO
 
 -- --------------------------------------------------
@@ -432,20 +457,6 @@ ON [dbo].[PersonConferences]
     ([ConferenceId]);
 GO
 
--- Creating foreign key on [RankId] in table 'PersonConferences_Detail'
-ALTER TABLE [dbo].[PersonConferences_Detail]
-ADD CONSTRAINT [FK_RankPersonConferenceDetail]
-    FOREIGN KEY ([RankId])
-    REFERENCES [dbo].[Ranks]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_RankPersonConferenceDetail'
-CREATE INDEX [IX_FK_RankPersonConferenceDetail]
-ON [dbo].[PersonConferences_Detail]
-    ([RankId]);
-GO
-
 -- Creating foreign key on [CompanyId] in table 'PersonConferences_Detail'
 ALTER TABLE [dbo].[PersonConferences_Detail]
 ADD CONSTRAINT [FK_CompanyPersonConferenceDetail]
@@ -457,6 +468,20 @@ ADD CONSTRAINT [FK_CompanyPersonConferenceDetail]
 -- Creating non-clustered index for FOREIGN KEY 'FK_CompanyPersonConferenceDetail'
 CREATE INDEX [IX_FK_CompanyPersonConferenceDetail]
 ON [dbo].[PersonConferences_Detail]
+    ([CompanyId]);
+GO
+
+-- Creating foreign key on [CompanyId] in table 'PersonConferences_Payment'
+ALTER TABLE [dbo].[PersonConferences_Payment]
+ADD CONSTRAINT [FK_CompanyPersonConferenceMoney]
+    FOREIGN KEY ([CompanyId])
+    REFERENCES [dbo].[Companies]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CompanyPersonConferenceMoney'
+CREATE INDEX [IX_FK_CompanyPersonConferenceMoney]
+ON [dbo].[PersonConferences_Payment]
     ([CompanyId]);
 GO
 
@@ -474,20 +499,6 @@ ON [dbo].[PersonConferences_Payment]
     ([PaymentTypeId]);
 GO
 
--- Creating foreign key on [CompanyId] in table 'PersonConferences_Payment'
-ALTER TABLE [dbo].[PersonConferences_Payment]
-ADD CONSTRAINT [FK_CompanyPersonConferenceMoney]
-    FOREIGN KEY ([CompanyId])
-    REFERENCES [dbo].[Companies]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CompanyPersonConferenceMoney'
-CREATE INDEX [IX_FK_CompanyPersonConferenceMoney]
-ON [dbo].[PersonConferences_Payment]
-    ([CompanyId]);
-GO
-
 -- Creating foreign key on [PersonConferenceId] in table 'PersonConferences_Detail'
 ALTER TABLE [dbo].[PersonConferences_Detail]
 ADD CONSTRAINT [FK_Detail_inherits_PersonConference]
@@ -503,6 +514,29 @@ ADD CONSTRAINT [FK_Payment_inherits_PersonConference]
     FOREIGN KEY ([PersonConferenceId])
     REFERENCES [dbo].[PersonConferences]
         ([PersonConferenceId])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [RankId] in table 'PersonConferences_Detail'
+ALTER TABLE [dbo].[PersonConferences_Detail]
+ADD CONSTRAINT [FK_RankPersonConferenceDetail]
+    FOREIGN KEY ([RankId])
+    REFERENCES [dbo].[Ranks]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RankPersonConferenceDetail'
+CREATE INDEX [IX_FK_RankPersonConferenceDetail]
+ON [dbo].[PersonConferences_Detail]
+    ([RankId]);
+GO
+
+-- Creating foreign key on [PersonId] in table 'Iacmacs'
+ALTER TABLE [dbo].[Iacmacs]
+ADD CONSTRAINT [FK_PersonIacmac]
+    FOREIGN KEY ([PersonId])
+    REFERENCES [dbo].[Persons]
+        ([Id])
     ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 

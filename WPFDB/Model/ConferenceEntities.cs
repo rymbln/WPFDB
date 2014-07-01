@@ -57,5 +57,22 @@ namespace WPFDB.Model
             ObjectStateEntry ose;
             return this.ObjectStateManager.TryGetObjectStateEntry(entity, out ose);
         }
+
+        public ObjectStateManager GetObjectStateManager()
+        {
+             return this.ObjectStateManager;
+        }
+
+        public void Refresh(RefreshMode refreshMode, IEnumerable<object> collection)
+        {
+            this.Refresh(refreshMode,collection);
+        }
+
+        public void Detach(object obj)
+        {
+            this.Detach(obj);
+        }
+
+
     }
 }

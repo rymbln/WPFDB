@@ -1,5 +1,7 @@
 ﻿
 
+using System.Collections.Generic;
+
 namespace WPFDB.Data
 {
     using System;
@@ -55,6 +57,12 @@ namespace WPFDB.Data
         /// <param name="obj">The object to check for</param>
         /// <returns>True if the object is tracked, false otherwise</returns>
         bool IsObjectTracked(object obj);
+
+        ObjectStateManager GetObjectStateManager();
+
+        void Refresh(RefreshMode refreshMode, IEnumerable<object> collection);
+        void Detach(object obj);
+
     }
     
 }

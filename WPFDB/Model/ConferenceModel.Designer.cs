@@ -31,6 +31,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("ConferenceModel", "FK_Detail_inherits_PersonConference", "PersonConference", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.PersonConference), "PersonConferences_Detail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(WPFDB.Model.PersonConferences_Detail), true)]
 [assembly: EdmRelationshipAttribute("ConferenceModel", "FK_Payment_inherits_PersonConference", "PersonConference", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.PersonConference), "PersonConferences_Payment", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(WPFDB.Model.PersonConferences_Payment), true)]
 [assembly: EdmRelationshipAttribute("ConferenceModel", "FK_RankPersonConferenceDetail", "Rank", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Rank), "PersonConferences_Detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.PersonConferences_Detail), true)]
+[assembly: EdmRelationshipAttribute("ConferenceModel", "PersonIacmac", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Person), "Iacmac", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(WPFDB.Model.Iacmac), true)]
 
 #endregion
 
@@ -305,6 +306,22 @@ namespace WPFDB.Model
             }
         }
         private ObjectSet<PersonConferences_Payment> _PersonConferences_Payment;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Iacmac> Iacmacs
+        {
+            get
+            {
+                if ((_Iacmacs == null))
+                {
+                    _Iacmacs = base.CreateObjectSet<Iacmac>("Iacmacs");
+                }
+                return _Iacmacs;
+            }
+        }
+        private ObjectSet<Iacmac> _Iacmacs;
 
         #endregion
 
@@ -420,6 +437,14 @@ namespace WPFDB.Model
         public void AddToPersonConferences_Payment(PersonConferences_Payment personConferences_Payment)
         {
             base.AddObject("PersonConferences_Payment", personConferences_Payment);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Iacmacs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToIacmacs(Iacmac iacmac)
+        {
+            base.AddObject("Iacmacs", iacmac);
         }
 
         #endregion
@@ -764,6 +789,286 @@ namespace WPFDB.Model
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonConference>("ConferenceModel.ConferencePersonConference", "PersonConference", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ConferenceModel", Name="Iacmac")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Iacmac : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Iacmac object.
+        /// </summary>
+        /// <param name="isMember">Initial value of the IsMember property.</param>
+        /// <param name="dateRegistration">Initial value of the DateRegistration property.</param>
+        /// <param name="number">Initial value of the Number property.</param>
+        /// <param name="code">Initial value of the Code property.</param>
+        /// <param name="isCardCreate">Initial value of the IsCardCreate property.</param>
+        /// <param name="isCardSent">Initial value of the IsCardSent property.</param>
+        /// <param name="isForm">Initial value of the IsForm property.</param>
+        /// <param name="personId">Initial value of the PersonId property.</param>
+        public static Iacmac CreateIacmac(global::System.Boolean isMember, global::System.DateTime dateRegistration, global::System.Int32 number, global::System.String code, global::System.Boolean isCardCreate, global::System.Boolean isCardSent, global::System.Boolean isForm, global::System.Guid personId)
+        {
+            Iacmac iacmac = new Iacmac();
+            iacmac.IsMember = isMember;
+            iacmac.DateRegistration = dateRegistration;
+            iacmac.Number = number;
+            iacmac.Code = code;
+            iacmac.IsCardCreate = isCardCreate;
+            iacmac.IsCardSent = isCardSent;
+            iacmac.IsForm = isForm;
+            iacmac.PersonId = personId;
+            return iacmac;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsMember
+        {
+            get
+            {
+                return _IsMember;
+            }
+            set
+            {
+                OnIsMemberChanging(value);
+                ReportPropertyChanging("IsMember");
+                _IsMember = StructuralObject.SetValidValue(value, "IsMember");
+                ReportPropertyChanged("IsMember");
+                OnIsMemberChanged();
+            }
+        }
+        private global::System.Boolean _IsMember;
+        partial void OnIsMemberChanging(global::System.Boolean value);
+        partial void OnIsMemberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime DateRegistration
+        {
+            get
+            {
+                return _DateRegistration;
+            }
+            set
+            {
+                OnDateRegistrationChanging(value);
+                ReportPropertyChanging("DateRegistration");
+                _DateRegistration = StructuralObject.SetValidValue(value, "DateRegistration");
+                ReportPropertyChanged("DateRegistration");
+                OnDateRegistrationChanged();
+            }
+        }
+        private global::System.DateTime _DateRegistration;
+        partial void OnDateRegistrationChanging(global::System.DateTime value);
+        partial void OnDateRegistrationChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Number
+        {
+            get
+            {
+                return _Number;
+            }
+            set
+            {
+                OnNumberChanging(value);
+                ReportPropertyChanging("Number");
+                _Number = StructuralObject.SetValidValue(value, "Number");
+                ReportPropertyChanged("Number");
+                OnNumberChanged();
+            }
+        }
+        private global::System.Int32 _Number;
+        partial void OnNumberChanging(global::System.Int32 value);
+        partial void OnNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, false, "Code");
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsCardCreate
+        {
+            get
+            {
+                return _IsCardCreate;
+            }
+            set
+            {
+                OnIsCardCreateChanging(value);
+                ReportPropertyChanging("IsCardCreate");
+                _IsCardCreate = StructuralObject.SetValidValue(value, "IsCardCreate");
+                ReportPropertyChanged("IsCardCreate");
+                OnIsCardCreateChanged();
+            }
+        }
+        private global::System.Boolean _IsCardCreate;
+        partial void OnIsCardCreateChanging(global::System.Boolean value);
+        partial void OnIsCardCreateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsCardSent
+        {
+            get
+            {
+                return _IsCardSent;
+            }
+            set
+            {
+                OnIsCardSentChanging(value);
+                ReportPropertyChanging("IsCardSent");
+                _IsCardSent = StructuralObject.SetValidValue(value, "IsCardSent");
+                ReportPropertyChanged("IsCardSent");
+                OnIsCardSentChanged();
+            }
+        }
+        private global::System.Boolean _IsCardSent;
+        partial void OnIsCardSentChanging(global::System.Boolean value);
+        partial void OnIsCardSentChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsForm
+        {
+            get
+            {
+                return _IsForm;
+            }
+            set
+            {
+                OnIsFormChanging(value);
+                ReportPropertyChanging("IsForm");
+                _IsForm = StructuralObject.SetValidValue(value, "IsForm");
+                ReportPropertyChanged("IsForm");
+                OnIsFormChanged();
+            }
+        }
+        private global::System.Boolean _IsForm;
+        partial void OnIsFormChanging(global::System.Boolean value);
+        partial void OnIsFormChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid PersonId
+        {
+            get
+            {
+                return _PersonId;
+            }
+            set
+            {
+                if (_PersonId != value)
+                {
+                    OnPersonIdChanging(value);
+                    ReportPropertyChanging("PersonId");
+                    _PersonId = StructuralObject.SetValidValue(value, "PersonId");
+                    ReportPropertyChanged("PersonId");
+                    OnPersonIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _PersonId;
+        partial void OnPersonIdChanging(global::System.Guid value);
+        partial void OnPersonIdChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "PersonIacmac", "Person")]
+        public Person Person
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("ConferenceModel.PersonIacmac", "Person").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("ConferenceModel.PersonIacmac", "Person").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Person> PersonReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("ConferenceModel.PersonIacmac", "Person");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Person>("ConferenceModel.PersonIacmac", "Person", value);
                 }
             }
         }
@@ -1438,6 +1743,44 @@ namespace WPFDB.Model
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonConference>("ConferenceModel.PersonPersonConference", "PersonConference", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "PersonIacmac", "Iacmac")]
+        public Iacmac Iacmac
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Iacmac>("ConferenceModel.PersonIacmac", "Iacmac").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Iacmac>("ConferenceModel.PersonIacmac", "Iacmac").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Iacmac> IacmacReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Iacmac>("ConferenceModel.PersonIacmac", "Iacmac");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Iacmac>("ConferenceModel.PersonIacmac", "Iacmac", value);
                 }
             }
         }

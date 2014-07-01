@@ -25,6 +25,10 @@ namespace WPFDB.ViewModel
             {
                 throw new ArgumentNullException("person");
             }
+            if (person.Iacmac == null)
+            {
+                person.Iacmac = new Iacmac{PersonId = person.Id, IsMember = false};
+            }
             this.Model = person;
             ScienceDegreeLookup = new ObservableCollection<ScienceDegreeViewModel>();
             ScienceStatusLookup = new ObservableCollection<ScienceStatusViewModel>();
@@ -271,6 +275,97 @@ namespace WPFDB.ViewModel
             {
                 this.Model.SourceId = value;
                 this.OnPropertyChanged("SourceId");
+            }
+        }
+        public bool IsMember
+        {
+            get
+            {
+                return this.Model.Iacmac.IsMember;
+            }
+
+            set
+            {
+                this.Model.Iacmac.IsMember = value;
+                this.OnPropertyChanged("IsMember");
+            }
+        }
+        public bool IsCardCreate
+        {
+            get
+            {
+                return this.Model.Iacmac.IsCardCreate;
+            }
+
+            set
+            {
+                this.Model.Iacmac.IsCardCreate = value;
+                this.OnPropertyChanged("IsCardCreate");
+            }
+        }
+        public bool IsCardSent
+        {
+            get
+            {
+                return this.Model.Iacmac.IsCardSent;
+            }
+
+            set
+            {
+                this.Model.Iacmac.IsCardSent = value;
+                this.OnPropertyChanged("IsCardSent");
+            }
+        }
+        public bool IsForm
+        {
+            get
+            {
+                return this.Model.Iacmac.IsForm;
+            }
+
+            set
+            {
+                this.Model.Iacmac.IsForm = value;
+                this.OnPropertyChanged("IsForm");
+            }
+        }
+        public DateTime DateRegistration
+        {
+            get
+            {
+                return this.Model.Iacmac.DateRegistration;
+            }
+
+            set
+            {
+                this.Model.Iacmac.DateRegistration = value;
+                this.OnPropertyChanged("DateRegistration");
+            }
+        }
+        public int Number
+        {
+            get
+            {
+                return this.Model.Iacmac.Number;
+            }
+
+            set
+            {
+                this.Model.Iacmac.Number = value;
+                this.OnPropertyChanged("Number");
+            }
+        }
+        public string Code
+        {
+            get
+            {
+                return this.Model.Iacmac.Code;
+            }
+
+            set
+            {
+                this.Model.Iacmac.Code = value;
+                this.OnPropertyChanged("Code");
             }
         }
     }

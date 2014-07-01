@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Objects;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -130,6 +131,24 @@ namespace WPFDB.Common
         public void Save()
         {
             this.underlyingContext.Save();
+        }
+
+        public void Rollback()
+        {
+            IEnumerable<object> collection = from e in underlyingContext.GetObjectStateManager().GetObjectStateEntries
+                                     (System.Data.EntityState.Modified | System.Data.EntityState.Deleted)
+                                             select e.Entity;
+            underlyingContext.Refresh(RefreshMode.StoreWins, collection);
+
+
+            IEnumerable<object> AddedCollection = from e in underlyingContext.GetObjectStateManager().GetObjectStateEntries
+                                                      (System.Data.EntityState.Added)
+                                                  select e.Entity;
+            foreach (object addedEntity in AddedCollection)
+            {
+                underlyingContext.Detach(addedEntity);
+            } 
+ 
         }
 
 
@@ -399,7 +418,7 @@ namespace WPFDB.Common
 
         public void EraseData()
         {
-           foreach (var obj in underlyingContext.PersonConferences)
+            foreach (var obj in underlyingContext.PersonConferences)
             {
                 underlyingContext.PersonConferences.DeleteObject(obj);
             }
@@ -504,10 +523,23 @@ namespace WPFDB.Common
                 ScienceDegree = scienceDegreeRepository.GetByName("-"),
                 ScienceStatus = scienceStatusRepository.GetByName("-"),
                 Sex = sexRepository.GetByName("-"),
-                Speciality = specialityRepository.GetByName("-")
+                Speciality = specialityRepository.GetByName("-"),
+                Iacmac = new Iacmac
+                {
+                    Code = "42000001",
+                    DateRegistration = Convert.ToDateTime("01.01.1990"),
+                    Number = 1,
+                    IsCardCreate = true,
+                    IsCardSent = true,
+                    IsForm = true,
+                    IsMember = true
+                }
+
+
             };
-          
+
             AddPerson(person);
+
             Save();
             var details = new PersonConferences_Detail
             {

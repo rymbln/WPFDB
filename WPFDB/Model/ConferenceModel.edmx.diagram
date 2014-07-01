@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9ffa1558e2ec428fb9ad3c019492ac9b" Name="Diagram1">
+      <Diagram DiagramId="9ffa1558e2ec428fb9ad3c019492ac9b" Name="Diagram1" ZoomLevel="99">
         <EntityTypeShape EntityType="ConferenceModel.Person" Width="1.5" PointX="2.75" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ConferenceModel.ScienceDegree" Width="1.5" PointX="0.5" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ConferenceModel.ScienceStatus" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
@@ -31,6 +31,8 @@
         <AssociationConnector Association="ConferenceModel.FK_Detail_inherits_PersonConference" />
         <AssociationConnector Association="ConferenceModel.FK_Payment_inherits_PersonConference" />
         <AssociationConnector Association="ConferenceModel.FK_RankPersonConferenceDetail" />
+        <EntityTypeShape EntityType="ConferenceModel.Iacmac" Width="1.5" PointX="3.375" PointY="6.625" />
+        <AssociationConnector Association="ConferenceModel.PersonIacmac" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

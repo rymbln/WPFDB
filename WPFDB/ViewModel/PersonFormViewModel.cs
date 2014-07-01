@@ -36,12 +36,12 @@ namespace WPFDB.ViewModel
 
         private void Save()
         {
-            
+            dm.Save();
         }
 
         private void Cancel()
         {
-            
+            dm.Rollback();
         }
     }
 }

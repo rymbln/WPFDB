@@ -17,7 +17,8 @@
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar>
-                <Button Command="{Binding SaveCommand}" Content="{StaticResource SaveImage}" ToolTip="{x:Static p:Resources.Save}"/>
+                <Button Command="{Binding SaveCommand}" Content="Save" ToolTip="{x:Static p:Resources.Save}"/>
+                <Button Command="{Binding CancelCommand}" Content="Cancel" ToolTip="{x:Static p:Resources.Save}"/>
                 <Separator/>
                 <Button Command="ApplicationCommands.Undo" Content="{StaticResource UndoImage}" ToolTip="{x:Static p:Resources.Undo}"/>
                 <Button Command="ApplicationCommands.Redo" Content="{StaticResource RedoImage}" ToolTip="{x:Static p:Resources.Redo}"/>
