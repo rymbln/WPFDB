@@ -4,9 +4,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using WPFDB.Common;
 using WPFDB.Data;
+using WPFDB.Model;
 using WPFDB.View;
 using WPFDB.ViewModel.Helpers;
 
@@ -15,6 +17,26 @@ namespace WPFDB.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private DataManager dm = DataManager.Instance;
+        private ConferenceViewModel defaultConference;
+        public ConferenceViewModel DefaultConference
+        {
+            get
+            {
+                if (this.defaultConference == null)
+                {
+                    this.defaultConference = new ConferenceViewModel(DefaultManager.Instance.DefaultConference);
+                }
+                return defaultConference;
+            }
+
+            set
+            {
+                this.defaultConference = value;
+                DefaultManager.Instance.DefaultConference = value.Model;
+                this.OnPropertyChanged("DefaultConference");
+            }
+        }
+        public ObservableCollection<ConferenceViewModel> ConferenceLookup { get; private set; }
 
 
         /// <summary>
@@ -29,6 +51,14 @@ namespace WPFDB.ViewModel
             this.SaveCommand = new DelegateCommand((o) => this.Save());
             this.OpenKnowallsCommand = new DelegateCommand((o) => this.OpenKnowalls());
             this.FillDataCommand = new DelegateCommand((o) => this.FillDatabase());
+            this.EraseDataCommand = new DelegateCommand((o) => this.EraseData());
+            this.ConferenceLookup = new ObservableCollection<ConferenceViewModel>();
+          //  defaultConference = new ConferenceViewModel(DefaultManager.Instance.DefaultConference);
+            var conferences = dm.GetAllConferences();
+            foreach (var c in conferences)
+            {
+                ConferenceLookup.Add(new ConferenceViewModel(c));
+            }
 
         }
 
@@ -38,6 +68,7 @@ namespace WPFDB.ViewModel
         public ICommand SaveCommand { get; private set; }
         public ICommand OpenKnowallsCommand { get; private set; }
         public ICommand FillDataCommand { get; private set; }
+        public ICommand EraseDataCommand { get; private set; }
 
         /// <summary>
         /// Gets the workspace for managing departments of the company
@@ -60,6 +91,13 @@ namespace WPFDB.ViewModel
         private void FillDatabase()
         {
             dm.FillData();
+            MessageBox.Show("Data Filled!");
+        }
+
+        private void EraseData()
+        {
+            dm.EraseData();
+            MessageBox.Show("Data Erased!");
         }
 
         private void OpenKnowalls()
@@ -67,6 +105,11 @@ namespace WPFDB.ViewModel
             KnowallViewModel vm = new KnowallViewModel();
             KnowallView v = new KnowallView { DataContext = vm };
             v.Show();
+        }
+
+        private void OpenPerson(PersonViewModel person)
+        {
+            
         }
     }
 }

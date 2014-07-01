@@ -6,7 +6,7 @@
     xmlns:p="clr-namespace:WPFDB.Properties"
     x:Class="WPFDB.View.MainView"
         Title="MainWindow" 
-    Icon="{StaticResource ConferenceImageSource}" Height="350" Width="525">
+    Icon="{StaticResource ConferenceImageSource}" Height="600" Width="1024">
     <Window.InputBindings>
         <KeyBinding Command="{Binding SaveCommand}" Key="S" Modifiers="Control"/>
         <KeyBinding Command="{Binding AboutCommand}" Key="F1"/>
@@ -47,6 +47,7 @@
                 <MenuItem Command="{Binding OpenKnowallsCommand}" Header="{x:Static p:Resources.KnowallMenu}"/>
                 <MenuItem Command="{Binding OpenSettingsCommand}" Header="{x:Static p:Resources.SettingsMenu}"/>
                 <MenuItem Command="{Binding FillDataCommand}" Header="Fill Data"/>
+                <MenuItem Command="{Binding EraseDataCommand}" Header="Erase Data"/>
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.HelpMenu}">
                 <MenuItem Command="{Binding AboutCommand}" Header="{x:Static p:Resources.AboutMenu}"
@@ -62,6 +63,9 @@
                 <Button Command="ApplicationCommands.Cut" Content="{StaticResource CutImage}" ToolTip="{x:Static p:Resources.Cut}"/>
                 <Button Command="ApplicationCommands.Copy" Content="{StaticResource CopyImage}" ToolTip="{x:Static p:Resources.Copy}"/>
                 <Button Command="ApplicationCommands.Paste" Content="{StaticResource PasteImage}" ToolTip="{x:Static p:Resources.Paste}"/>
+                <Label Content="Default Conference:" />
+                <ComboBox Width="150" SelectedValuePath="." SelectedItem="{Binding Path=DefaultConference, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=ConferenceLookup}" DisplayMemberPath="Name"  />
+
             </ToolBar>
         </ToolBarTray>
 

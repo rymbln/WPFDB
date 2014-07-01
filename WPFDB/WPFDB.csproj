@@ -66,6 +66,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\Authentification.cs" />
+    <Compile Include="Common\DefaultManager.cs" />
     <Compile Include="Common\GuidComb.cs" />
     <Compile Include="Common\DataManager.cs" />
     <Compile Include="Data\CompanyRepository.cs" />
@@ -90,7 +91,6 @@
     <Compile Include="ViewModel\CompanyViewModel.cs" />
     <Compile Include="ViewModel\CompanyWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
-    <Compile Include="ViewModel\BasicPersonViewModel.cs" />
     <Compile Include="ViewModel\ConferenceViewModel.cs" />
     <Compile Include="ViewModel\ConferenceWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\Helpers\DelegateCommand.cs" />
@@ -98,6 +98,10 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PaymentTypeViewModel.cs" />
     <Compile Include="ViewModel\PaymentTypeWorkspaceViewModel.cs" />
+    <Compile Include="ViewModel\PersonConferenceDetailViewModel.cs" />
+    <Compile Include="ViewModel\PersonConferencePaymentViewModel.cs" />
+    <Compile Include="ViewModel\PersonConferenceWorkspaceViewModel.cs" />
+    <Compile Include="ViewModel\PersonFormViewModel.cs" />
     <Compile Include="ViewModel\PersonViewModel.cs" />
     <Compile Include="ViewModel\PersonWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\RankViewModel.cs" />
@@ -137,8 +141,17 @@
     <Compile Include="View\PaymentTypeWorkspaceView.xaml.cs">
       <DependentUpon>PaymentTypeWorkspaceView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PersonConferenceDetailView.xaml.cs">
+      <DependentUpon>PersonConferenceDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PersonConferenceWorkspaceView.xaml.cs">
+      <DependentUpon>PersonConferenceWorkspaceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PersonDetailView.xaml.cs">
       <DependentUpon>PersonDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PersonFormView.xaml.cs">
+      <DependentUpon>PersonFormView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PersonWorkspaceView.xaml.cs">
       <DependentUpon>PersonWorkspaceView.xaml</DependentUpon>
@@ -231,7 +244,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\PersonConferenceDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PersonConferenceWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PersonDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PersonFormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

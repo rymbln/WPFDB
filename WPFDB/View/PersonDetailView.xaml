@@ -15,49 +15,75 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Margin="10,0,0,0" Grid.Column="0" Grid.Row="0">
+            <HeaderedContentControl.Header>
+                Person
+            </HeaderedContentControl.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Content="First Name:"  />
+                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
 
-        <Label Grid.Column="0" Grid.Row="0" Content="First Name:"  />
-        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
+                <Label Grid.Column="0" Grid.Row="1" Content="Second Name:" />
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=SecondName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
 
-        <Label Grid.Column="0" Grid.Row="1" Content="Second Name:" />
-        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=SecondName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
+                <Label Grid.Column="0" Grid.Row="2" Content="Third Name:" />
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=ThirdName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
 
-        <Label Grid.Column="0" Grid.Row="2" Content="Third Name:" />
-        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=ThirdName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
+                <Label Grid.Column="0" Grid.Row="3" Content="Sex:" />
+                <ComboBox Grid.Column="1" Grid.Row="3" Width="150" SelectedValuePath="." SelectedItem="{Binding Path=Sex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=SexLookup}" DisplayMemberPath="Name" />
 
-        <Label Grid.Column="0" Grid.Row="3" Content="Sex:" />
-        <ComboBox Grid.Column="1" Grid.Row="3" Width="150" SelectedValuePath="." SelectedItem="{Binding Path=Sex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=SexLookup}" DisplayMemberPath="Name" />
+                <Label Grid.Column="0" Grid.Row="4" Content="BirthDate:" />
+                <DatePicker Grid.Column="1" Grid.Row="4" SelectedDate="{Binding Path=BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
 
-        <Label Grid.Column="0" Grid.Row="4" Content="BirthDate:" />
-        <DatePicker Grid.Column="1" Grid.Row="4" SelectedDate="{Binding Path=BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
+            </Grid>
+        </HeaderedContentControl>
+        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Margin="10,0,0,0" Grid.Column="1" Grid.Row="0">
+            <HeaderedContentControl.Header>
+                Work
+            </HeaderedContentControl.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Content="Workplace:" />
+                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=WorkPlace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
 
-        <Label Grid.Column="0" Grid.Row="5" Content="Workplace:" />
-        <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=WorkPlace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
+                <Label Grid.Column="0" Grid.Row="1" Content="Post:" />
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Post, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
 
-        <Label Grid.Column="0" Grid.Row="6" Content="Post:" />
-        <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=Post, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
+                <Label Grid.Column="0" Grid.Row="2" Content="Speciality:" />
+                <ComboBox Grid.Column="1" Grid.Row="2" Width="150" SelectedValuePath="." SelectedItem="{Binding Path=Speciality, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=SpecialityLookup}" DisplayMemberPath="Name"  />
 
-        <Label Grid.Column="0" Grid.Row="7" Content="Speciality:" />
-        <ComboBox Grid.Column="1" Grid.Row="7" Width="150" SelectedValuePath="." SelectedItem="{Binding Path=Speciality, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=SpecialityLookup}" DisplayMemberPath="Name"  />
+                <Label Grid.Column="0" Grid.Row="3" Content="ScienceDegree:" />
+                <ComboBox Grid.Column="1" Grid.Row="3" Width="150" SelectedValuePath="." SelectedItem="{Binding Path=ScienceDegree, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=ScienceDegreeLookup}" DisplayMemberPath="Name" />
 
-        <Label Grid.Column="0" Grid.Row="8" Content="ScienceDegree:" />
-        <ComboBox Grid.Column="1" Grid.Row="8" Width="150" SelectedValuePath="." SelectedItem="{Binding Path=ScienceDegree, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=ScienceDegreeLookup}" DisplayMemberPath="Name" />
+                <Label Grid.Column="0" Grid.Row="4" Content="ScienceStatus:" />
+                <ComboBox Grid.Column="1" Grid.Row="4" Width="150" SelectedValuePath="." SelectedItem="{Binding Path=ScienceStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=ScienceStatusLookup}" DisplayMemberPath="Name" />
 
-        <Label Grid.Column="0" Grid.Row="9" Content="ScienceStatus:" />
-        <ComboBox Grid.Column="1" Grid.Row="9" Width="150" SelectedValuePath="." SelectedItem="{Binding Path=ScienceStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=ScienceStatusLookup}" DisplayMemberPath="Name" />
+            </Grid>
+        </HeaderedContentControl>
 
+
+     
 
     </Grid>
 </UserControl>

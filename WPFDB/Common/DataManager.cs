@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Annotations;
 using WPFDB.Data;
 using WPFDB.Model;
 
@@ -396,6 +397,62 @@ namespace WPFDB.Common
             }
         }
 
+        public void EraseData()
+        {
+           foreach (var obj in underlyingContext.PersonConferences)
+            {
+                underlyingContext.PersonConferences.DeleteObject(obj);
+            }
+            Save();
+
+            foreach (var obj in underlyingContext.Persons)
+            {
+                underlyingContext.Persons.DeleteObject(obj);
+            }
+            Save();
+
+            foreach (var obj in underlyingContext.Conferences)
+            {
+                underlyingContext.Conferences.DeleteObject(obj);
+            }
+            Save();
+            foreach (var obj in underlyingContext.ScienceDegrees)
+            {
+                underlyingContext.ScienceDegrees.DeleteObject(obj);
+            }
+            Save();
+            foreach (var obj in underlyingContext.ScienceStatuses)
+            {
+                underlyingContext.ScienceStatuses.DeleteObject(obj);
+            }
+            Save();
+            foreach (var obj in underlyingContext.Sexes)
+            {
+                underlyingContext.Sexes.DeleteObject(obj);
+            }
+            Save();
+            foreach (var obj in underlyingContext.Specialities)
+            {
+                underlyingContext.Specialities.DeleteObject(obj);
+            }
+            Save();
+            foreach (var obj in underlyingContext.Ranks)
+            {
+                underlyingContext.Ranks.DeleteObject(obj);
+            }
+            Save();
+            foreach (var obj in underlyingContext.Companies)
+            {
+                underlyingContext.Companies.DeleteObject(obj);
+            }
+            Save();
+            foreach (var obj in underlyingContext.PaymentTypes)
+            {
+                underlyingContext.PaymentTypes.DeleteObject(obj);
+            }
+            Save();
+        }
+
         public void FillData()
         {
             AddConference(new Conference { Id = GuidComb.Generate(), Code = "-", Name = "-" });
@@ -486,5 +543,14 @@ namespace WPFDB.Common
         {
             return userRepository.GetUser(name, password);
         }
+
+        public PersonConference GetPersonConference(Person person, Conference conference)
+        {
+            return
+                this.underlyingContext.PersonConferences.SingleOrDefault(
+                    o => o.PersonId == person.Id & o.ConferenceId == conference.Id);
+        }
+
+
     }
 }

@@ -19,12 +19,12 @@
         <EntityTypeShape EntityType="ConferenceModel.Propertie" Width="1.5" PointX="4.75" PointY="9.625" />
         <EntityTypeShape EntityType="ConferenceModel.PersonConference" Width="1.5" PointX="5.5" PointY="0.5" />
         <EntityTypeShape EntityType="ConferenceModel.Rank" Width="1.5" PointX="12.125" PointY="3.25" />
-        <EntityTypeShape EntityType="ConferenceModel.Company" Width="1.5" PointX="8.875" PointY="7.875" />
+        <EntityTypeShape EntityType="ConferenceModel.Company" Width="1.5" PointX="9.25" PointY="3.625" />
         <EntityTypeShape EntityType="ConferenceModel.PaymentType" Width="1.5" PointX="5.5" PointY="5.625" />
         <AssociationConnector Association="ConferenceModel.PersonPersonConference" />
         <AssociationConnector Association="ConferenceModel.ConferencePersonConference" />
-        <EntityTypeShape EntityType="ConferenceModel.PersonConferences_Detail" Width="1.5" PointX="10.125" PointY="3.25" />
-        <EntityTypeShape EntityType="ConferenceModel.PersonConferences_Payment" Width="1.5" PointX="7.625" PointY="3.375" />
+        <EntityTypeShape EntityType="ConferenceModel.PersonConferences_Detail" Width="1.5" PointX="7.5" PointY="0.75" />
+        <EntityTypeShape EntityType="ConferenceModel.PersonConferences_Payment" Width="1.5" PointX="7.375" PointY="5.5" />
         <AssociationConnector Association="ConferenceModel.FK_CompanyPersonConferenceDetail" />
         <AssociationConnector Association="ConferenceModel.FK_CompanyPersonConferenceMoney" />
         <AssociationConnector Association="ConferenceModel.FK_PaymentTypePersonConferenceMoney" />
