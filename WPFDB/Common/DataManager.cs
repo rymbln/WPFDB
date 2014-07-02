@@ -109,6 +109,11 @@ namespace WPFDB.Common
             return companyRepository.All();
         }
 
+        public IEnumerable<OrderStatus> GetAllOrderStatuses()
+        {
+            return this.underlyingContext.OrderStatuses.ToList();
+        }
+
         public IEnumerable<Rank> GetAllRanks()
         {
             return rankRepository.All();
@@ -165,6 +170,10 @@ namespace WPFDB.Common
             return this.underlyingContext.CreateObject<T>();
         }
 
+        public void RemoveObject<T>(T obj) where T : class
+        {
+            this.underlyingContext.RemoveObject(obj);
+        }
 
         #region Adding
 
@@ -208,6 +217,18 @@ namespace WPFDB.Common
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.ScienceDegrees.AddObject(obj);
         }
+
+        public void AddOrderStatus(OrderStatus obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("conference");
+            }
+
+            this.CheckEntityDoesNotBelongToUnitOfWork(obj);
+            this.underlyingContext.OrderStatuses.AddObject(obj);
+        }
+
         public void AddConference(Conference obj)
         {
             if (obj == null)
@@ -293,6 +314,18 @@ namespace WPFDB.Common
 
             this.underlyingContext.ScienceDegrees.DeleteObject(obj);
         }
+
+        public void RemoveOrderStatus(OrderStatus obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("scienceDegree");
+            }
+
+            this.CheckEntityBelongsToUnitOfWork(obj);
+            this.underlyingContext.OrderStatuses.DeleteObject(obj);
+        }
+
         public void RemoveScienceStatus(ScienceStatus obj)
         {
             if (obj == null)
@@ -354,6 +387,11 @@ namespace WPFDB.Common
         public Sex GetDefaultSex()
         {
             return this.underlyingContext.Sexes.FirstOrDefault(o => o.Code == "-");
+        }
+
+        public OrderStatus GetDefaultOrderStatus()
+        {
+            return this.underlyingContext.OrderStatuses.FirstOrDefault(o => o.Code == "-");
         }
 
         public Speciality GetDefaultSpeciality()
@@ -474,6 +512,11 @@ namespace WPFDB.Common
 
         public void FillData()
         {
+            AddOrderStatus(new OrderStatus {Id = GuidComb.Generate(), Code = "-", Name = "-"});
+            AddOrderStatus(new OrderStatus { Id = GuidComb.Generate(), Code = "P", Name = "Оплачено" });
+            AddOrderStatus(new OrderStatus { Id = GuidComb.Generate(), Code = "R", Name = "Возврат" });
+            Save();
+
             AddConference(new Conference { Id = GuidComb.Generate(), Code = "-", Name = "-" });
             AddConference(new Conference { Id = GuidComb.Generate(), Code = "", Name = "Conference 1" });
             AddConference(new Conference { Id = GuidComb.Generate(), Code = "", Name = "Conference 2" });
@@ -563,11 +606,63 @@ namespace WPFDB.Common
                 Money = 1200,
                 IsComplect = true,
                 OrderNumber = 5,
-                OrderStatus = 1
+                OrderStatus = GetDefaultOrderStatus()
             };
             personRepository.AddConferenceInfoToPerson(person, conferenceRepository.GetByName("-"), details, payment);
-
-
+            Save();
+            details = new PersonConferences_Detail
+            {
+                Company = companyRepository.GetByName("Company 1"),
+                IsAbstract = true,
+                DateArrive = Convert.ToDateTime("12.12.2014"),
+                IsAdditionalMaterial = true,
+                IsAutoreg = true,
+                IsBadge = true,
+                IsNeedBadge = true,
+                IsArrive = true,
+                IsComplect = true,
+                Rank = rankRepository.GetByName("-")
+            };
+            payment = new PersonConferences_Payment
+            {
+                Company = companyRepository.GetByName("Company 1"),
+                PaymentType = paymentTypeRepository.GetByName("-"),
+                PaymentDocument = "Order",
+                PaymentDate = Convert.ToDateTime("12.11.2014"),
+                Money = 1200,
+                IsComplect = true,
+                OrderNumber = 5,
+                OrderStatus = GetDefaultOrderStatus()
+            };
+            personRepository.AddConferenceInfoToPerson(person, conferenceRepository.GetByName("Conference 1"), details, payment);
+            Save();
+            details = new PersonConferences_Detail
+            {
+                Company = companyRepository.GetByName("Company 2"),
+                IsAbstract = true,
+                DateArrive = Convert.ToDateTime("12.12.2014"),
+                IsAdditionalMaterial = true,
+                IsAutoreg = true,
+                IsBadge = true,
+                IsNeedBadge = true,
+                IsArrive = true,
+                IsComplect = true,
+                Rank = rankRepository.GetByName("-")
+            };
+            payment = new PersonConferences_Payment
+            {
+                Company = companyRepository.GetByName("Company 2"),
+                PaymentType = paymentTypeRepository.GetByName("-"),
+                PaymentDocument = "Order",
+                PaymentDate = Convert.ToDateTime("12.11.2014"),
+                Money = 1200,
+                IsComplect = true,
+                OrderNumber = 5,
+                OrderStatus = GetDefaultOrderStatus()
+            };
+            personRepository.AddConferenceInfoToPerson(person, conferenceRepository.GetByName("Conference 2"), details, payment);
+            Save();
+       
             Save();
         }
 
@@ -583,6 +678,9 @@ namespace WPFDB.Common
                     o => o.PersonId == person.Id & o.ConferenceId == conference.Id);
         }
 
-
+        public IEnumerable<PersonConference> GetPersonConferencesForPerson(Person person)
+        {
+            return this.underlyingContext.PersonConferences.Where(o => o.PersonId == person.Id).ToList();
+        }
     }
 }

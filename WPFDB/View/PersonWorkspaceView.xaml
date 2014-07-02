@@ -14,9 +14,6 @@
         <DataTemplate DataType="{x:Type vm:PersonViewModel}">
             <v:PersonDetailView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:PersonConferenceWorkspaceViewModel}">
-            <v:PersonConferenceWorkspaceView />
-        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

@@ -28,6 +28,7 @@ namespace WPFDB.ViewModel
             this.RankWorkspace = new RankWorkspaceViewModel();
             this.UserWorkspace = new UserWorkspaceViewModel();
             this.PaymentTypeWorkspace = new PaymentTypeWorkspaceViewModel();
+            this.OrderStatusWorkspace = new OrderStatusWorkspaceViewModel();
 
         }
 
@@ -40,6 +41,7 @@ namespace WPFDB.ViewModel
         public RankWorkspaceViewModel RankWorkspace { get; private set; }
         public PaymentTypeWorkspaceViewModel PaymentTypeWorkspace { get; private set; }
         public UserWorkspaceViewModel UserWorkspace { get; private set; }
+        public OrderStatusWorkspaceViewModel OrderStatusWorkspace { get; private set; }
 
         public ICommand SaveCommand { get; private set; }
 

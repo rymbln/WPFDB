@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace WPFDB.View
 {
     /// <summary>
-    /// Interaction logic for PersonFormConferenceDetailView.xaml
+    /// Interaction logic for PersonFormConferenceWorkspaceView.xaml
     /// </summary>
-    public partial class PersonConferenceDetailView : UserControl
+    public partial class PersonFormConferenceWorkspaceView : UserControl
     {
-        public PersonConferenceDetailView()
+        public PersonFormConferenceWorkspaceView()
         {
             InitializeComponent();
         }

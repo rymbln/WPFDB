@@ -21,6 +21,7 @@
     <EntitySet Name="PersonConferences_Detail" EntityType="ConferenceModel.Store.PersonConferences_Detail" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PersonConferences_Payment" EntityType="ConferenceModel.Store.PersonConferences_Payment" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Iacmacs" EntityType="ConferenceModel.Store.Iacmacs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderStatuses" EntityType="ConferenceModel.Store.OrderStatuses" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ScienceDegreePerson" Association="ConferenceModel.Store.FK_ScienceDegreePerson">
       <End Role="ScienceDegrees" EntitySet="ScienceDegrees" />
       <End Role="Persons" EntitySet="Persons" />
@@ -72,6 +73,10 @@
     <AssociationSet Name="PersonIacmac" Association="ConferenceModel.Store.PersonIacmac">
       <End Role="Person" EntitySet="Persons" />
       <End Role="Iacmac" EntitySet="Iacmacs" />
+    </AssociationSet>
+    <AssociationSet Name="PersonConferences_PaymentOrderStatus" Association="ConferenceModel.Store.PersonConferences_PaymentOrderStatus">
+      <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
+      <End Role="OrderStatus" EntitySet="OrderStatuses" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Persons">
@@ -221,9 +226,9 @@
     <Property Name="Money" Type="decimal" Nullable="false" Precision="18" Scale="0" />
     <Property Name="IsComplect" Type="bit" Nullable="false" />
     <Property Name="OrderNumber" Type="int" Nullable="false" />
-    <Property Name="OrderStatus" Type="int" Nullable="false" />
     <Property Name="SourceId" Type="int" Nullable="false" />
     <Property Name="PersonConferenceId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OrderStatus_Id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="Iacmacs">
     <Key>
@@ -237,6 +242,15 @@
     <Property Name="IsCardSent" Type="bit" Nullable="false" />
     <Property Name="IsForm" Type="bit" Nullable="false" />
     <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderStatuses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SourceId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_ScienceDegreePerson">
     <End Role="ScienceDegrees" Type="ConferenceModel.Store.ScienceDegrees" Multiplicity="1" />
@@ -400,6 +414,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="PersonConferences_PaymentOrderStatus">
+    <End Role="PersonConferences_Payment" Type="ConferenceModel.Store.PersonConferences_Payment" Multiplicity="*" />
+    <End Role="OrderStatus" Type="ConferenceModel.Store.OrderStatuses" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonConferences_Payment">
+        <PropertyRef Name="OrderStatus_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -471,6 +497,11 @@
           <AssociationSet Name="PersonIacmac" Association="ConferenceModel.PersonIacmac">
             <End Role="Person" EntitySet="Persons" />
             <End Role="Iacmac" EntitySet="Iacmacs" />
+          </AssociationSet>
+          <EntitySet Name="OrderStatuses" EntityType="ConferenceModel.OrderStatus" />
+          <AssociationSet Name="PersonConferences_PaymentOrderStatus" Association="ConferenceModel.PersonConferences_PaymentOrderStatus">
+            <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
+            <End Role="OrderStatus" EntitySet="OrderStatuses" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Person">
@@ -714,12 +745,12 @@
           <Property Type="Decimal" Name="Money" Nullable="false" Precision="18" Scale="0" />
           <Property Type="Boolean" Name="IsComplect" Nullable="false" />
           <Property Type="Int32" Name="OrderNumber" Nullable="false" />
-          <Property Type="Int32" Name="OrderStatus" Nullable="false" />
           <Property Type="Int32" Name="SourceId" Nullable="false" />
           <Property Type="Guid" Name="PersonConferenceId" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="ConferenceModel.FK_CompanyPersonConferenceMoney" FromRole="PersonConferences_Payment" ToRole="Company" />
           <NavigationProperty Name="PaymentType" Relationship="ConferenceModel.FK_PaymentTypePersonConferenceMoney" FromRole="PersonConferences_Payment" ToRole="PaymentType" />
           <NavigationProperty Name="PersonConference" Relationship="ConferenceModel.FK_Payment_inherits_PersonConference" FromRole="PersonConferences_Payment" ToRole="PersonConference" />
+          <NavigationProperty Name="OrderStatus" Relationship="ConferenceModel.PersonConferences_PaymentOrderStatus" FromRole="PersonConferences_Payment" ToRole="OrderStatus" />
         </EntityType>
         <Association Name="FK_CompanyPersonConferenceDetail">
           <End Type="ConferenceModel.Company" Role="Company" Multiplicity="1" />
@@ -824,6 +855,20 @@
               <PropertyRef Name="PersonId" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Type="String" Name="Code" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="Int32" Name="SourceId" Nullable="false" />
+          <NavigationProperty Name="PersonConferences_Payment" Relationship="ConferenceModel.PersonConferences_PaymentOrderStatus" FromRole="OrderStatus" ToRole="PersonConferences_Payment" />
+        </EntityType>
+        <Association Name="PersonConferences_PaymentOrderStatus">
+          <End Type="ConferenceModel.PersonConferences_Payment" Role="PersonConferences_Payment" Multiplicity="*" />
+          <End Type="ConferenceModel.OrderStatus" Role="OrderStatus" Multiplicity="1" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -991,7 +1036,6 @@
           <ScalarProperty Name="Money" ColumnName="Money" />
           <ScalarProperty Name="IsComplect" ColumnName="IsComplect" />
           <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
-          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
           <ScalarProperty Name="SourceId" ColumnName="SourceId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -1010,6 +1054,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="OrderStatuses">
+      <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.OrderStatus)">
+        <MappingFragment StoreEntitySet="OrderStatuses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PersonConferences_PaymentOrderStatus" TypeName="ConferenceModel.PersonConferences_PaymentOrderStatus" StoreEntitySet="PersonConferences_Payment">
+      <EndProperty Name="OrderStatus">
+        <ScalarProperty Name="Id" ColumnName="OrderStatus_Id" />
+      </EndProperty>
+      <EndProperty Name="PersonConferences_Payment">
+        <ScalarProperty Name="PersonConferenceId" ColumnName="PersonConferenceId" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

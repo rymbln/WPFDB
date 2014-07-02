@@ -6,83 +6,90 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
+        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="0" Grid.Row="0">
+            <HeaderedContentControl.Header>
+                Registration
+            </HeaderedContentControl.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0" Content="Rank:"  />
-        <ComboBox Grid.Column="1" Grid.Row="0" Width="150" 
+                <Label Grid.Column="0" Grid.Row="0" Content="Rank:"  />
+                <ComboBox Grid.Column="1" Grid.Row="0" Width="150" 
                   SelectedValuePath="." 
                   SelectedItem="{Binding Path=Rank, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
                   ItemsSource="{Binding Path=RankLookup}" 
                   DisplayMemberPath="Name" />
 
-        <Label Grid.Column="0" Grid.Row="1" Content="Company:" />
-        <ComboBox Grid.Column="1" Grid.Row="1" Width="150" 
+                <Label Grid.Column="0" Grid.Row="1" Content="Company:" />
+                <ComboBox Grid.Column="1" Grid.Row="1" Width="150" 
                   SelectedValuePath="." 
                   SelectedItem="{Binding Path=Company, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
                   ItemsSource="{Binding Path=CompanyLookup}" 
                   DisplayMemberPath="Name" />
 
-        <Label Grid.Column="0" Grid.Row="2" Content="Is Arrive:" />
-        <TextBox Grid.Column="1" Grid.Row="2" 
-                 Text="{Binding Path=ThirdName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
-                 Width="150" />
+                <Label Grid.Column="0" Grid.Row="2" Content="Is Arrive:" />
+                <CheckBox Grid.Column="1" Grid.Row="2" 
+                  IsChecked="{Binding Path=IsArrive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  Width="150" />
 
-        <Label Grid.Column="0" Grid.Row="3" Content="Date Arrive:" />
-        <DatePicker Grid.Column="1" Grid.Row="3" 
+                <Label Grid.Column="0" Grid.Row="3" Content="Date Arrive:" />
+                <DatePicker Grid.Column="1" Grid.Row="3" 
                     SelectedDate="{Binding Path=DateArrive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
                     Width="150" />
 
-        <Label Grid.Column="0" Grid.Row="4" Content="Is Need Badge:" />
-        <CheckBox Grid.Column="1" Grid.Row="4" 
+                <Label Grid.Column="0" Grid.Row="4" Content="Is Need Badge:" />
+                <CheckBox Grid.Column="1" Grid.Row="4" 
                   IsChecked="{Binding Path=IsNeedBadge, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                   Width="150" />
 
-        <Label Grid.Column="0" Grid.Row="5" Content="Is Badge:" />
-        <CheckBox Grid.Column="1" Grid.Row="5" 
+                <Label Grid.Column="0" Grid.Row="5" Content="Is Badge:" />
+                <CheckBox Grid.Column="1" Grid.Row="5" 
                   IsChecked="{Binding Path=IsBadge, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                   Width="150" />
 
-        <Label Grid.Column="0" Grid.Row="6" Content="Is Complect:" />
-        <CheckBox Grid.Column="1" Grid.Row="6" 
+                <Label Grid.Column="0" Grid.Row="6" Content="Is Complect:" />
+                <CheckBox Grid.Column="1" Grid.Row="6" 
                  IsChecked="{Binding Path=IsComplect, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                  Width="150" />
 
-        <Label Grid.Column="0" Grid.Row="7" Content="Is Additional Material:" />
-        <CheckBox Grid.Column="1" Grid.Row="7" Width="150" 
+                <Label Grid.Column="0" Grid.Row="7" Content="Is Additional Material:" />
+                <CheckBox Grid.Column="1" Grid.Row="7" Width="150" 
                   IsChecked="{Binding Path=IsAdditionalMaterial, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                    />
 
-        <Label Grid.Column="0" Grid.Row="8" Content="Is Abstract:" />
-        <CheckBox Grid.Column="1" Grid.Row="8" Width="150" 
+                <Label Grid.Column="0" Grid.Row="8" Content="Is Abstract:" />
+                <CheckBox Grid.Column="1" Grid.Row="8" Width="150" 
                   IsChecked="{Binding Path=IsAbstract, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                    />
 
 
-        <Label Grid.Column="0" Grid.Row="9" Content="Is Autoreg:" />
-        <CheckBox Grid.Column="1" Grid.Row="9" Width="150" 
+                <Label Grid.Column="0" Grid.Row="9" Content="Is Autoreg:" />
+                <CheckBox Grid.Column="1" Grid.Row="9" Width="150" 
                   IsChecked="{Binding Path=IsAutoreg, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                    />
 
 
-        <Button Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Content="Print Badge" />
-        
+                <Button Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Content="Print Badge" />
 
+
+            </Grid>
+        </HeaderedContentControl>
     </Grid>
 </UserControl>

@@ -33,6 +33,8 @@ namespace WPFDB.Data
 
         ObjectSet<PersonConference> PersonConferences { get; }
 
+        ObjectSet<OrderStatus> OrderStatuses { get; } 
+
         //ObjectSet<PersonConferences_Detail> PersonConferenceDetails { get; }
 
         //ObjectSet<PersonConferences_Payment> PersonConferencePayments { get; }  
@@ -50,6 +52,7 @@ namespace WPFDB.Data
         /// <typeparam name="T">The type to create</typeparam>
         /// <returns>The newly created object</returns>
         T CreateObject<T>() where T : class;
+        void RemoveObject<T>(T obj) where T:class;
 
         /// <summary>
         /// Checks if the supplied object is tracked in this data context

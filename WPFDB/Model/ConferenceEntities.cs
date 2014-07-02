@@ -73,6 +73,11 @@ namespace WPFDB.Model
             this.Detach(obj);
         }
 
+        public void RemoveObject<T>(T obj) where T : class
+        {
+            RemoveObject<T>(obj);
+        }
+
 
     }
 }

@@ -9,6 +9,9 @@
         <DataTemplate DataType="{x:Type vm:PersonViewModel}">
             <view:PersonDetailView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PersonFormConferencesWorkspaceViewModel}">
+            <view:PersonFormConferenceWorkspaceView />
+        </DataTemplate>
     </Window.Resources>
     <Window.InputBindings>
         <KeyBinding Command="{Binding SaveCommand}" Key="S" Modifiers="Control"/>
@@ -28,17 +31,28 @@
              </ToolBar>
         </ToolBarTray>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+
             <Grid.RowDefinitions>
-                <RowDefinition Height="50*"/>
-                <RowDefinition Height="50*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-  <StackPanel>
-                    <ContentControl HorizontalAlignment="Right" Content="{Binding Path=CurrentPerson}" Grid.Column="0" Grid.Row="0"/>
-            </StackPanel>
+
+            <ContentControl Grid.Row="0"  HorizontalAlignment="Right" Content="{Binding Path=CurrentPerson}" />
+            <TabControl Grid.Row="1"  Padding="0">
+                <TabItem>
+                    <TabItem.Header>Участия в конференциях</TabItem.Header>
+                    <ContentControl Margin="10"  Content="{Binding Path=.PersonFormConferenceWorkspace}"  />
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>Sex</TabItem.Header>
+                    <!--<ContentControl Margin="10"  Content="{Binding Path=.SexWorkspace}"  />-->
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>Science degrees</TabItem.Header>
+                    <!--<ContentControl Margin="10"  Content="{Binding Path=.ScienceDegreeWorkspace}"  />-->
+                </TabItem>
+               
+            </TabControl>
         </Grid>
 
     </DockPanel>

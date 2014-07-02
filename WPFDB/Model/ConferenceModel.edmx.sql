@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 07/01/2014 15:59:51
+-- Date Created: 07/02/2014 14:22:36
 -- Generated from EDMX file: C:\Users\Inspiron\documents\visual studio 2012\Projects\WPFDB\WPFDB\Model\ConferenceModel.edmx
 -- --------------------------------------------------
 
@@ -56,6 +56,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PersonIacmac]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Iacmacs] DROP CONSTRAINT [FK_PersonIacmac];
 GO
+IF OBJECT_ID(N'[dbo].[FK_PersonConferences_PaymentOrderStatus]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_PersonConferences_PaymentOrderStatus];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -105,6 +108,9 @@ IF OBJECT_ID(N'[dbo].[PersonConferences_Payment]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Iacmacs]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Iacmacs];
+GO
+IF OBJECT_ID(N'[dbo].[OrderStatuses]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OrderStatuses];
 GO
 
 -- --------------------------------------------------
@@ -256,9 +262,9 @@ CREATE TABLE [dbo].[PersonConferences_Payment] (
     [Money] decimal(18,0)  NOT NULL,
     [IsComplect] bit  NOT NULL,
     [OrderNumber] int  NOT NULL,
-    [OrderStatus] int  NOT NULL,
     [SourceId] int  NOT NULL,
-    [PersonConferenceId] uniqueidentifier  NOT NULL
+    [PersonConferenceId] uniqueidentifier  NOT NULL,
+    [OrderStatus_Id] uniqueidentifier  NOT NULL
 );
 GO
 
@@ -272,6 +278,15 @@ CREATE TABLE [dbo].[Iacmacs] (
     [IsCardSent] bit  NOT NULL,
     [IsForm] bit  NOT NULL,
     [PersonId] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'OrderStatuses'
+CREATE TABLE [dbo].[OrderStatuses] (
+    [Id] uniqueidentifier  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL
 );
 GO
 
@@ -367,6 +382,12 @@ GO
 ALTER TABLE [dbo].[Iacmacs]
 ADD CONSTRAINT [PK_Iacmacs]
     PRIMARY KEY CLUSTERED ([PersonId] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'OrderStatuses'
+ALTER TABLE [dbo].[OrderStatuses]
+ADD CONSTRAINT [PK_OrderStatuses]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -538,6 +559,20 @@ ADD CONSTRAINT [FK_PersonIacmac]
     REFERENCES [dbo].[Persons]
         ([Id])
     ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [OrderStatus_Id] in table 'PersonConferences_Payment'
+ALTER TABLE [dbo].[PersonConferences_Payment]
+ADD CONSTRAINT [FK_PersonConferences_PaymentOrderStatus]
+    FOREIGN KEY ([OrderStatus_Id])
+    REFERENCES [dbo].[OrderStatuses]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PersonConferences_PaymentOrderStatus'
+CREATE INDEX [IX_FK_PersonConferences_PaymentOrderStatus]
+ON [dbo].[PersonConferences_Payment]
+    ([OrderStatus_Id]);
 GO
 
 -- --------------------------------------------------

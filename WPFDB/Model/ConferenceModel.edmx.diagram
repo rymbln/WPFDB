@@ -33,6 +33,8 @@
         <AssociationConnector Association="ConferenceModel.FK_RankPersonConferenceDetail" />
         <EntityTypeShape EntityType="ConferenceModel.Iacmac" Width="1.5" PointX="3.375" PointY="6.625" />
         <AssociationConnector Association="ConferenceModel.PersonIacmac" />
+        <EntityTypeShape EntityType="ConferenceModel.OrderStatus" Width="1.5" PointX="10.5" PointY="6.625" />
+        <AssociationConnector Association="ConferenceModel.PersonConferences_PaymentOrderStatus" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
