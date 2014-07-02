@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WPFDB.Common;
 using WPFDB.Model;
+using WPFDB.ViewModel.Helpers;
 
 namespace WPFDB.ViewModel
 {
@@ -14,17 +15,27 @@ namespace WPFDB.ViewModel
     {
         private PersonConferenceDetailViewModel currentPersonConferenceDetail;
         private PersonConferencePaymentViewModel currentPersonConferencePayment;
+        private PersonConferenceViewModel currentPersonConference;
+        private ConferenceViewModel currentConference;
+        private DataManager dm = DataManager.Instance;
+        
+        public PersonConference Model { get; private set; }
 
         public ObservableCollection<PersonConferenceViewModel> AllPersonConferences { get; private set; }
-        private PersonConferenceViewModel currentPersonConference;
+        public ObservableCollection<ConferenceViewModel> AllConferences { get; private set; }
         public string CurrentPersonConferenceName { get; private set; }
-        private DataManager dm = DataManager.Instance;
-
+        
         public ICommand AddPersonConferenceCommand { get; private set; }
         public ICommand RemovePersonConferenceCommand { get; private set; }
 
         public PersonFormConferencesWorkspaceViewModel(PersonViewModel person)
         {
+            AllConferences = new ObservableCollection<ConferenceViewModel>();
+            foreach (var c in dm.GetAllConferences())
+            {
+                AllConferences.Add(new ConferenceViewModel(c));
+            }
+
             AllPersonConferences = new ObservableCollection<PersonConferenceViewModel>();
             foreach (var pc in dm.GetPersonConferencesForPerson(person.Model))
             {
@@ -40,6 +51,26 @@ namespace WPFDB.ViewModel
                     this.CurrentPersonConference = null;
                 }
             };
+
+            this.AddPersonConferenceCommand = new DelegateCommand((o) => this.AddPersonConference());
+            this.RemovePersonConferenceCommand = new DelegateCommand((o) => this.RemoveCurrentPersonConference());
+        }
+
+        public ConferenceViewModel CurrentConference
+        {
+            get
+            {
+                this.currentConference =
+                    this.AllConferences.FirstOrDefault(o => o.Id == this.CurrentPersonConference.Model.ConferenceId.ToString());
+                return this.currentConference;
+            }
+            set
+            {
+                this.currentConference = value;
+                this.CurrentPersonConference.Model.Conference = (this.currentConference.Model);
+                this.OnPropertyChanged("CurrentConference");
+              
+           }
         }
 
         public PersonConferenceDetailViewModel CurrentPersonConferenceDetail
@@ -74,7 +105,7 @@ namespace WPFDB.ViewModel
                 this.currentPersonConference = value;
                 this.CurrentPersonConferenceDetail = new PersonConferenceDetailViewModel(CurrentPersonConference.Model.PersonConferences_Detail);
                 this.CurrentPersonConferencePayment = new PersonConferencePaymentViewModel(CurrentPersonConference.Model.PersonConferences_Payment);
-                this.CurrentPersonConferenceName = this.currentPersonConference.CurrentConferenceName;
+                this.OnPropertyChanged("CurrentConference");
                 this.OnPropertyChanged("CurrentPersonConference");
             }
         }
@@ -86,6 +117,33 @@ namespace WPFDB.ViewModel
             PersonConference pc = dm.CreateObject<PersonConference>();
             pc.Person = p;
             pc.Conference = c;
+            var details = new PersonConferences_Detail
+            {
+                Company = DataManager.Instance.GetDefaultCompany(),
+                IsAbstract = true,
+                DateArrive = DateTime.Now,
+                IsAdditionalMaterial = true,
+                IsAutoreg = true,
+                IsBadge = true,
+                IsNeedBadge = true,
+                IsArrive = true,
+                IsComplect = true,
+                Rank = DataManager.Instance.GetDefaultRank()
+            };
+            var payment = new PersonConferences_Payment
+            {
+                Company = DataManager.Instance.GetDefaultCompany(),
+                PaymentType = DataManager.Instance.GetDefaultPaymentType(),
+                PaymentDocument = "Order",
+                PaymentDate = DateTime.Now,
+                Money = 1200,
+                IsComplect = true,
+                OrderNumber = 5,
+                OrderStatus = DataManager.Instance.GetDefaultOrderStatus()
+            };
+            pc.PersonConferences_Payment = payment;
+            pc.PersonConferences_Detail = details;
+            DataManager.Instance.AddPersonConference(pc);
             PersonConferenceViewModel pcvm = new PersonConferenceViewModel(pc);
             AllPersonConferences.Add(pcvm);
             CurrentPersonConference = pcvm;
@@ -93,9 +151,10 @@ namespace WPFDB.ViewModel
 
         public void RemoveCurrentPersonConference()
         {
-          dm.RemoveObject(this.CurrentPersonConference.Model);
-          AllPersonConferences.Remove(this.CurrentPersonConference);
-          this.CurrentPersonConference = AllPersonConferences.Count > 0 ? AllPersonConferences[0] : null;
+            AllPersonConferences.Remove(this.CurrentPersonConference);
+            dm.RemoveObject(dm.GetPersonConference(this.CurrentPersonConference.Model.Person, this.CurrentPersonConference.Model.Conference));
+     
+            this.CurrentPersonConference = AllPersonConferences.Count > 0 ? AllPersonConferences[0] : null;
         }
 
 

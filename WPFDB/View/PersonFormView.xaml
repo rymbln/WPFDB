@@ -33,11 +33,11 @@
         <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <ContentControl Grid.Row="0"  HorizontalAlignment="Right" Content="{Binding Path=CurrentPerson}" />
+            <ContentControl Grid.Row="0"  HorizontalAlignment="Left" Content="{Binding Path=CurrentPerson}" />
             <TabControl Grid.Row="1"  Padding="0">
                 <TabItem>
                     <TabItem.Header>Участия в конференциях</TabItem.Header>

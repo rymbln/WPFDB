@@ -265,6 +265,15 @@ namespace WPFDB.Common
 
         }
 
+        public void AddPersonConference(PersonConference obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("personConference");
+            }
+            underlyingContext.PersonConferences.AddObject(obj);
+        }
+
         #endregion
 
         #region Removing
