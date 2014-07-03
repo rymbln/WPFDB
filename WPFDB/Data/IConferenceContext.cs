@@ -35,6 +35,14 @@ namespace WPFDB.Data
 
         ObjectSet<OrderStatus> OrderStatuses { get; } 
 
+        ObjectSet<ContactType> ContactTypes { get; } 
+
+        ObjectSet<Email>  Emails { get; }
+
+        ObjectSet<Address>  Addresses { get; }
+
+        ObjectSet<Phone>  Phones { get; }
+
         //ObjectSet<PersonConferences_Detail> PersonConferenceDetails { get; }
 
         //ObjectSet<PersonConferences_Payment> PersonConferencePayments { get; }  

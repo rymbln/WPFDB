@@ -33,6 +33,12 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("ConferenceModel", "FK_RankPersonConferenceDetail", "Rank", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Rank), "PersonConferences_Detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.PersonConferences_Detail), true)]
 [assembly: EdmRelationshipAttribute("ConferenceModel", "PersonIacmac", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Person), "Iacmac", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(WPFDB.Model.Iacmac), true)]
 [assembly: EdmRelationshipAttribute("ConferenceModel", "PersonConferences_PaymentOrderStatus", "PersonConferences_Payment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.PersonConferences_Payment), "OrderStatus", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.OrderStatus))]
+[assembly: EdmRelationshipAttribute("ConferenceModel", "ContactTypeEmail", "ContactType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.ContactType), "Email", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.Email), true)]
+[assembly: EdmRelationshipAttribute("ConferenceModel", "ContactTypePhone", "ContactType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.ContactType), "Phone", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.Phone), true)]
+[assembly: EdmRelationshipAttribute("ConferenceModel", "ContactTypeAddress", "ContactType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.ContactType), "Address", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.Address), true)]
+[assembly: EdmRelationshipAttribute("ConferenceModel", "PersonAddress", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Person), "Address", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.Address), true)]
+[assembly: EdmRelationshipAttribute("ConferenceModel", "PersonEmail", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Person), "Email", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.Email), true)]
+[assembly: EdmRelationshipAttribute("ConferenceModel", "PersonPhone", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Person), "Phone", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.Phone), true)]
 
 #endregion
 
@@ -339,6 +345,70 @@ namespace WPFDB.Model
             }
         }
         private ObjectSet<OrderStatus> _OrderStatuses;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ContactType> ContactTypes
+        {
+            get
+            {
+                if ((_ContactTypes == null))
+                {
+                    _ContactTypes = base.CreateObjectSet<ContactType>("ContactTypes");
+                }
+                return _ContactTypes;
+            }
+        }
+        private ObjectSet<ContactType> _ContactTypes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Email> Emails
+        {
+            get
+            {
+                if ((_Emails == null))
+                {
+                    _Emails = base.CreateObjectSet<Email>("Emails");
+                }
+                return _Emails;
+            }
+        }
+        private ObjectSet<Email> _Emails;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Phone> Phones
+        {
+            get
+            {
+                if ((_Phones == null))
+                {
+                    _Phones = base.CreateObjectSet<Phone>("Phones");
+                }
+                return _Phones;
+            }
+        }
+        private ObjectSet<Phone> _Phones;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Address> Addresses
+        {
+            get
+            {
+                if ((_Addresses == null))
+                {
+                    _Addresses = base.CreateObjectSet<Address>("Addresses");
+                }
+                return _Addresses;
+            }
+        }
+        private ObjectSet<Address> _Addresses;
 
         #endregion
 
@@ -471,6 +541,38 @@ namespace WPFDB.Model
         {
             base.AddObject("OrderStatuses", orderStatus);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ContactTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToContactTypes(ContactType contactType)
+        {
+            base.AddObject("ContactTypes", contactType);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Emails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToEmails(Email email)
+        {
+            base.AddObject("Emails", email);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Phones EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPhones(Phone phone)
+        {
+            base.AddObject("Phones", phone);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Addresses EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAddresses(Address address)
+        {
+            base.AddObject("Addresses", address);
+        }
 
         #endregion
 
@@ -479,6 +581,350 @@ namespace WPFDB.Model
     #endregion
 
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ConferenceModel", Name="Address")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Address : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Address object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="zipCode">Initial value of the ZipCode property.</param>
+        /// <param name="countryName">Initial value of the CountryName property.</param>
+        /// <param name="regionName">Initial value of the RegionName property.</param>
+        /// <param name="cityName">Initial value of the CityName property.</param>
+        /// <param name="streetHouseName">Initial value of the StreetHouseName property.</param>
+        /// <param name="sourceId">Initial value of the SourceId property.</param>
+        /// <param name="contactTypeId">Initial value of the ContactTypeId property.</param>
+        /// <param name="personId">Initial value of the PersonId property.</param>
+        public static Address CreateAddress(global::System.Guid id, global::System.String zipCode, global::System.String countryName, global::System.String regionName, global::System.String cityName, global::System.String streetHouseName, global::System.Int32 sourceId, global::System.Guid contactTypeId, global::System.Guid personId)
+        {
+            Address address = new Address();
+            address.Id = id;
+            address.ZipCode = zipCode;
+            address.CountryName = countryName;
+            address.RegionName = regionName;
+            address.CityName = cityName;
+            address.StreetHouseName = streetHouseName;
+            address.SourceId = sourceId;
+            address.ContactTypeId = contactTypeId;
+            address.PersonId = personId;
+            return address;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _Id;
+        partial void OnIdChanging(global::System.Guid value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ZipCode
+        {
+            get
+            {
+                return _ZipCode;
+            }
+            set
+            {
+                OnZipCodeChanging(value);
+                ReportPropertyChanging("ZipCode");
+                _ZipCode = StructuralObject.SetValidValue(value, false, "ZipCode");
+                ReportPropertyChanged("ZipCode");
+                OnZipCodeChanged();
+            }
+        }
+        private global::System.String _ZipCode;
+        partial void OnZipCodeChanging(global::System.String value);
+        partial void OnZipCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String CountryName
+        {
+            get
+            {
+                return _CountryName;
+            }
+            set
+            {
+                OnCountryNameChanging(value);
+                ReportPropertyChanging("CountryName");
+                _CountryName = StructuralObject.SetValidValue(value, false, "CountryName");
+                ReportPropertyChanged("CountryName");
+                OnCountryNameChanged();
+            }
+        }
+        private global::System.String _CountryName;
+        partial void OnCountryNameChanging(global::System.String value);
+        partial void OnCountryNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String RegionName
+        {
+            get
+            {
+                return _RegionName;
+            }
+            set
+            {
+                OnRegionNameChanging(value);
+                ReportPropertyChanging("RegionName");
+                _RegionName = StructuralObject.SetValidValue(value, false, "RegionName");
+                ReportPropertyChanged("RegionName");
+                OnRegionNameChanged();
+            }
+        }
+        private global::System.String _RegionName;
+        partial void OnRegionNameChanging(global::System.String value);
+        partial void OnRegionNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String CityName
+        {
+            get
+            {
+                return _CityName;
+            }
+            set
+            {
+                OnCityNameChanging(value);
+                ReportPropertyChanging("CityName");
+                _CityName = StructuralObject.SetValidValue(value, false, "CityName");
+                ReportPropertyChanged("CityName");
+                OnCityNameChanged();
+            }
+        }
+        private global::System.String _CityName;
+        partial void OnCityNameChanging(global::System.String value);
+        partial void OnCityNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String StreetHouseName
+        {
+            get
+            {
+                return _StreetHouseName;
+            }
+            set
+            {
+                OnStreetHouseNameChanging(value);
+                ReportPropertyChanging("StreetHouseName");
+                _StreetHouseName = StructuralObject.SetValidValue(value, false, "StreetHouseName");
+                ReportPropertyChanged("StreetHouseName");
+                OnStreetHouseNameChanged();
+            }
+        }
+        private global::System.String _StreetHouseName;
+        partial void OnStreetHouseNameChanging(global::System.String value);
+        partial void OnStreetHouseNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SourceId
+        {
+            get
+            {
+                return _SourceId;
+            }
+            set
+            {
+                OnSourceIdChanging(value);
+                ReportPropertyChanging("SourceId");
+                _SourceId = StructuralObject.SetValidValue(value, "SourceId");
+                ReportPropertyChanged("SourceId");
+                OnSourceIdChanged();
+            }
+        }
+        private global::System.Int32 _SourceId;
+        partial void OnSourceIdChanging(global::System.Int32 value);
+        partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid ContactTypeId
+        {
+            get
+            {
+                return _ContactTypeId;
+            }
+            set
+            {
+                OnContactTypeIdChanging(value);
+                ReportPropertyChanging("ContactTypeId");
+                _ContactTypeId = StructuralObject.SetValidValue(value, "ContactTypeId");
+                ReportPropertyChanged("ContactTypeId");
+                OnContactTypeIdChanged();
+            }
+        }
+        private global::System.Guid _ContactTypeId;
+        partial void OnContactTypeIdChanging(global::System.Guid value);
+        partial void OnContactTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid PersonId
+        {
+            get
+            {
+                return _PersonId;
+            }
+            set
+            {
+                OnPersonIdChanging(value);
+                ReportPropertyChanging("PersonId");
+                _PersonId = StructuralObject.SetValidValue(value, "PersonId");
+                ReportPropertyChanged("PersonId");
+                OnPersonIdChanged();
+            }
+        }
+        private global::System.Guid _PersonId;
+        partial void OnPersonIdChanging(global::System.Guid value);
+        partial void OnPersonIdChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "ContactTypeAddress", "ContactType")]
+        public ContactType ContactType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ContactType>("ConferenceModel.ContactTypeAddress", "ContactType").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ContactType>("ConferenceModel.ContactTypeAddress", "ContactType").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ContactType> ContactTypeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ContactType>("ConferenceModel.ContactTypeAddress", "ContactType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ContactType>("ConferenceModel.ContactTypeAddress", "ContactType", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "PersonAddress", "Person")]
+        public Person Person
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("ConferenceModel.PersonAddress", "Person").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("ConferenceModel.PersonAddress", "Person").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Person> PersonReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("ConferenceModel.PersonAddress", "Person");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Person>("ConferenceModel.PersonAddress", "Person", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -814,6 +1260,450 @@ namespace WPFDB.Model
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonConference>("ConferenceModel.ConferencePersonConference", "PersonConference", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ConferenceModel", Name="ContactType")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ContactType : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ContactType object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="code">Initial value of the Code property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="sourceId">Initial value of the SourceId property.</param>
+        public static ContactType CreateContactType(global::System.Guid id, global::System.String code, global::System.String name, global::System.Int32 sourceId)
+        {
+            ContactType contactType = new ContactType();
+            contactType.Id = id;
+            contactType.Code = code;
+            contactType.Name = name;
+            contactType.SourceId = sourceId;
+            return contactType;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _Id;
+        partial void OnIdChanging(global::System.Guid value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, false, "Code");
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false, "Name");
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SourceId
+        {
+            get
+            {
+                return _SourceId;
+            }
+            set
+            {
+                OnSourceIdChanging(value);
+                ReportPropertyChanging("SourceId");
+                _SourceId = StructuralObject.SetValidValue(value, "SourceId");
+                ReportPropertyChanged("SourceId");
+                OnSourceIdChanged();
+            }
+        }
+        private global::System.Int32 _SourceId;
+        partial void OnSourceIdChanging(global::System.Int32 value);
+        partial void OnSourceIdChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "ContactTypeEmail", "Email")]
+        public EntityCollection<Email> Emails
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Email>("ConferenceModel.ContactTypeEmail", "Email");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Email>("ConferenceModel.ContactTypeEmail", "Email", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "ContactTypePhone", "Phone")]
+        public EntityCollection<Phone> Phones
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Phone>("ConferenceModel.ContactTypePhone", "Phone");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Phone>("ConferenceModel.ContactTypePhone", "Phone", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "ContactTypeAddress", "Address")]
+        public EntityCollection<Address> Addresses
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Address>("ConferenceModel.ContactTypeAddress", "Address");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Address>("ConferenceModel.ContactTypeAddress", "Address", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ConferenceModel", Name="Email")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Email : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Email object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="sourceId">Initial value of the SourceId property.</param>
+        /// <param name="contactTypeId">Initial value of the ContactTypeId property.</param>
+        /// <param name="personId">Initial value of the PersonId property.</param>
+        public static Email CreateEmail(global::System.Guid id, global::System.String name, global::System.Int32 sourceId, global::System.Guid contactTypeId, global::System.Guid personId)
+        {
+            Email email = new Email();
+            email.Id = id;
+            email.Name = name;
+            email.SourceId = sourceId;
+            email.ContactTypeId = contactTypeId;
+            email.PersonId = personId;
+            return email;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _Id;
+        partial void OnIdChanging(global::System.Guid value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false, "Name");
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SourceId
+        {
+            get
+            {
+                return _SourceId;
+            }
+            set
+            {
+                OnSourceIdChanging(value);
+                ReportPropertyChanging("SourceId");
+                _SourceId = StructuralObject.SetValidValue(value, "SourceId");
+                ReportPropertyChanged("SourceId");
+                OnSourceIdChanged();
+            }
+        }
+        private global::System.Int32 _SourceId;
+        partial void OnSourceIdChanging(global::System.Int32 value);
+        partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid ContactTypeId
+        {
+            get
+            {
+                return _ContactTypeId;
+            }
+            set
+            {
+                OnContactTypeIdChanging(value);
+                ReportPropertyChanging("ContactTypeId");
+                _ContactTypeId = StructuralObject.SetValidValue(value, "ContactTypeId");
+                ReportPropertyChanged("ContactTypeId");
+                OnContactTypeIdChanged();
+            }
+        }
+        private global::System.Guid _ContactTypeId;
+        partial void OnContactTypeIdChanging(global::System.Guid value);
+        partial void OnContactTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid PersonId
+        {
+            get
+            {
+                return _PersonId;
+            }
+            set
+            {
+                OnPersonIdChanging(value);
+                ReportPropertyChanging("PersonId");
+                _PersonId = StructuralObject.SetValidValue(value, "PersonId");
+                ReportPropertyChanged("PersonId");
+                OnPersonIdChanged();
+            }
+        }
+        private global::System.Guid _PersonId;
+        partial void OnPersonIdChanging(global::System.Guid value);
+        partial void OnPersonIdChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "ContactTypeEmail", "ContactType")]
+        public ContactType ContactType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ContactType>("ConferenceModel.ContactTypeEmail", "ContactType").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ContactType>("ConferenceModel.ContactTypeEmail", "ContactType").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ContactType> ContactTypeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ContactType>("ConferenceModel.ContactTypeEmail", "ContactType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ContactType>("ConferenceModel.ContactTypeEmail", "ContactType", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "PersonEmail", "Person")]
+        public Person Person
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("ConferenceModel.PersonEmail", "Person").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("ConferenceModel.PersonEmail", "Person").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Person> PersonReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("ConferenceModel.PersonEmail", "Person");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Person>("ConferenceModel.PersonEmail", "Person", value);
                 }
             }
         }
@@ -1969,6 +2859,72 @@ namespace WPFDB.Model
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "PersonAddress", "Address")]
+        public EntityCollection<Address> Addresses
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Address>("ConferenceModel.PersonAddress", "Address");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Address>("ConferenceModel.PersonAddress", "Address", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "PersonEmail", "Email")]
+        public EntityCollection<Email> Emails
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Email>("ConferenceModel.PersonEmail", "Email");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Email>("ConferenceModel.PersonEmail", "Email", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "PersonPhone", "Phone")]
+        public EntityCollection<Phone> Phones
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Phone>("ConferenceModel.PersonPhone", "Phone");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Phone>("ConferenceModel.PersonPhone", "Phone", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -3110,6 +4066,246 @@ namespace WPFDB.Model
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<OrderStatus>("ConferenceModel.PersonConferences_PaymentOrderStatus", "OrderStatus", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ConferenceModel", Name="Phone")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Phone : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Phone object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="number">Initial value of the Number property.</param>
+        /// <param name="sourceId">Initial value of the SourceId property.</param>
+        /// <param name="contactTypeId">Initial value of the ContactTypeId property.</param>
+        /// <param name="personId">Initial value of the PersonId property.</param>
+        public static Phone CreatePhone(global::System.Guid id, global::System.String number, global::System.Int32 sourceId, global::System.Guid contactTypeId, global::System.Guid personId)
+        {
+            Phone phone = new Phone();
+            phone.Id = id;
+            phone.Number = number;
+            phone.SourceId = sourceId;
+            phone.ContactTypeId = contactTypeId;
+            phone.PersonId = personId;
+            return phone;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _Id;
+        partial void OnIdChanging(global::System.Guid value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Number
+        {
+            get
+            {
+                return _Number;
+            }
+            set
+            {
+                OnNumberChanging(value);
+                ReportPropertyChanging("Number");
+                _Number = StructuralObject.SetValidValue(value, false, "Number");
+                ReportPropertyChanged("Number");
+                OnNumberChanged();
+            }
+        }
+        private global::System.String _Number;
+        partial void OnNumberChanging(global::System.String value);
+        partial void OnNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SourceId
+        {
+            get
+            {
+                return _SourceId;
+            }
+            set
+            {
+                OnSourceIdChanging(value);
+                ReportPropertyChanging("SourceId");
+                _SourceId = StructuralObject.SetValidValue(value, "SourceId");
+                ReportPropertyChanged("SourceId");
+                OnSourceIdChanged();
+            }
+        }
+        private global::System.Int32 _SourceId;
+        partial void OnSourceIdChanging(global::System.Int32 value);
+        partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid ContactTypeId
+        {
+            get
+            {
+                return _ContactTypeId;
+            }
+            set
+            {
+                OnContactTypeIdChanging(value);
+                ReportPropertyChanging("ContactTypeId");
+                _ContactTypeId = StructuralObject.SetValidValue(value, "ContactTypeId");
+                ReportPropertyChanged("ContactTypeId");
+                OnContactTypeIdChanged();
+            }
+        }
+        private global::System.Guid _ContactTypeId;
+        partial void OnContactTypeIdChanging(global::System.Guid value);
+        partial void OnContactTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid PersonId
+        {
+            get
+            {
+                return _PersonId;
+            }
+            set
+            {
+                OnPersonIdChanging(value);
+                ReportPropertyChanging("PersonId");
+                _PersonId = StructuralObject.SetValidValue(value, "PersonId");
+                ReportPropertyChanged("PersonId");
+                OnPersonIdChanged();
+            }
+        }
+        private global::System.Guid _PersonId;
+        partial void OnPersonIdChanging(global::System.Guid value);
+        partial void OnPersonIdChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "ContactTypePhone", "ContactType")]
+        public ContactType ContactType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ContactType>("ConferenceModel.ContactTypePhone", "ContactType").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ContactType>("ConferenceModel.ContactTypePhone", "ContactType").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ContactType> ContactTypeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ContactType>("ConferenceModel.ContactTypePhone", "ContactType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ContactType>("ConferenceModel.ContactTypePhone", "ContactType", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "PersonPhone", "Person")]
+        public Person Person
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("ConferenceModel.PersonPhone", "Person").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("ConferenceModel.PersonPhone", "Person").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Person> PersonReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("ConferenceModel.PersonPhone", "Person");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Person>("ConferenceModel.PersonPhone", "Person", value);
                 }
             }
         }

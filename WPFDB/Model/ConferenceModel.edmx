@@ -22,6 +22,10 @@
     <EntitySet Name="PersonConferences_Payment" EntityType="ConferenceModel.Store.PersonConferences_Payment" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Iacmacs" EntityType="ConferenceModel.Store.Iacmacs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="OrderStatuses" EntityType="ConferenceModel.Store.OrderStatuses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContactTypes" EntityType="ConferenceModel.Store.ContactTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Emails" EntityType="ConferenceModel.Store.Emails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Phones" EntityType="ConferenceModel.Store.Phones" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Addresses" EntityType="ConferenceModel.Store.Addresses" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ScienceDegreePerson" Association="ConferenceModel.Store.FK_ScienceDegreePerson">
       <End Role="ScienceDegrees" EntitySet="ScienceDegrees" />
       <End Role="Persons" EntitySet="Persons" />
@@ -77,6 +81,30 @@
     <AssociationSet Name="PersonConferences_PaymentOrderStatus" Association="ConferenceModel.Store.PersonConferences_PaymentOrderStatus">
       <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
       <End Role="OrderStatus" EntitySet="OrderStatuses" />
+    </AssociationSet>
+    <AssociationSet Name="ContactTypeEmail" Association="ConferenceModel.Store.ContactTypeEmail">
+      <End Role="ContactType" EntitySet="ContactTypes" />
+      <End Role="Email" EntitySet="Emails" />
+    </AssociationSet>
+    <AssociationSet Name="ContactTypePhone" Association="ConferenceModel.Store.ContactTypePhone">
+      <End Role="ContactType" EntitySet="ContactTypes" />
+      <End Role="Phone" EntitySet="Phones" />
+    </AssociationSet>
+    <AssociationSet Name="ContactTypeAddress" Association="ConferenceModel.Store.ContactTypeAddress">
+      <End Role="ContactType" EntitySet="ContactTypes" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="PersonAddress" Association="ConferenceModel.Store.PersonAddress">
+      <End Role="Person" EntitySet="Persons" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="PersonEmail" Association="ConferenceModel.Store.PersonEmail">
+      <End Role="Person" EntitySet="Persons" />
+      <End Role="Email" EntitySet="Emails" />
+    </AssociationSet>
+    <AssociationSet Name="PersonPhone" Association="ConferenceModel.Store.PersonPhone">
+      <End Role="Person" EntitySet="Persons" />
+      <End Role="Phone" EntitySet="Phones" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Persons">
@@ -252,6 +280,49 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="SourceId" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="ContactTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SourceId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Emails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SourceId" Type="int" Nullable="false" />
+    <Property Name="ContactTypeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Phones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Number" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SourceId" Type="int" Nullable="false" />
+    <Property Name="ContactTypeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Addresses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ZipCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CountryName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RegionName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StreetHouseName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SourceId" Type="int" Nullable="false" />
+    <Property Name="ContactTypeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
   <Association Name="FK_ScienceDegreePerson">
     <End Role="ScienceDegrees" Type="ConferenceModel.Store.ScienceDegrees" Multiplicity="1" />
     <End Role="Persons" Type="ConferenceModel.Store.Persons" Multiplicity="*" />
@@ -426,6 +497,78 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ContactTypeEmail">
+    <End Role="ContactType" Type="ConferenceModel.Store.ContactTypes" Multiplicity="1" />
+    <End Role="Email" Type="ConferenceModel.Store.Emails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Email">
+        <PropertyRef Name="ContactTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ContactTypePhone">
+    <End Role="ContactType" Type="ConferenceModel.Store.ContactTypes" Multiplicity="1" />
+    <End Role="Phone" Type="ConferenceModel.Store.Phones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Phone">
+        <PropertyRef Name="ContactTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ContactTypeAddress">
+    <End Role="ContactType" Type="ConferenceModel.Store.ContactTypes" Multiplicity="1" />
+    <End Role="Address" Type="ConferenceModel.Store.Addresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="ContactTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonAddress">
+    <End Role="Person" Type="ConferenceModel.Store.Persons" Multiplicity="1" />
+    <End Role="Address" Type="ConferenceModel.Store.Addresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonEmail">
+    <End Role="Person" Type="ConferenceModel.Store.Persons" Multiplicity="1" />
+    <End Role="Email" Type="ConferenceModel.Store.Emails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Email">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonPhone">
+    <End Role="Person" Type="ConferenceModel.Store.Persons" Multiplicity="1" />
+    <End Role="Phone" Type="ConferenceModel.Store.Phones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Phone">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -503,6 +646,34 @@
             <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
             <End Role="OrderStatus" EntitySet="OrderStatuses" />
           </AssociationSet>
+          <EntitySet Name="ContactTypes" EntityType="ConferenceModel.ContactType" />
+          <EntitySet Name="Emails" EntityType="ConferenceModel.Email" />
+          <EntitySet Name="Phones" EntityType="ConferenceModel.Phone" />
+          <EntitySet Name="Addresses" EntityType="ConferenceModel.Address" />
+          <AssociationSet Name="ContactTypeEmail" Association="ConferenceModel.ContactTypeEmail">
+            <End Role="ContactType" EntitySet="ContactTypes" />
+            <End Role="Email" EntitySet="Emails" />
+          </AssociationSet>
+          <AssociationSet Name="ContactTypePhone" Association="ConferenceModel.ContactTypePhone">
+            <End Role="ContactType" EntitySet="ContactTypes" />
+            <End Role="Phone" EntitySet="Phones" />
+          </AssociationSet>
+          <AssociationSet Name="ContactTypeAddress" Association="ConferenceModel.ContactTypeAddress">
+            <End Role="ContactType" EntitySet="ContactTypes" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="PersonAddress" Association="ConferenceModel.PersonAddress">
+            <End Role="Person" EntitySet="Persons" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="PersonEmail" Association="ConferenceModel.PersonEmail">
+            <End Role="Person" EntitySet="Persons" />
+            <End Role="Email" EntitySet="Emails" />
+          </AssociationSet>
+          <AssociationSet Name="PersonPhone" Association="ConferenceModel.PersonPhone">
+            <End Role="Person" EntitySet="Persons" />
+            <End Role="Phone" EntitySet="Phones" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Person">
           <Key>
@@ -526,6 +697,9 @@
           <Property Type="Int32" Name="SourceId" Nullable="false" />
           <NavigationProperty Name="PersonConferences" Relationship="ConferenceModel.PersonPersonConference" FromRole="Person" ToRole="PersonConference" />
           <NavigationProperty Name="Iacmac" Relationship="ConferenceModel.PersonIacmac" FromRole="Person" ToRole="Iacmac" />
+          <NavigationProperty Name="Addresses" Relationship="ConferenceModel.PersonAddress" FromRole="Person" ToRole="Address" />
+          <NavigationProperty Name="Emails" Relationship="ConferenceModel.PersonEmail" FromRole="Person" ToRole="Email" />
+          <NavigationProperty Name="Phones" Relationship="ConferenceModel.PersonPhone" FromRole="Person" ToRole="Phone" />
         </EntityType>
         <EntityType Name="ScienceDegree">
           <Key>
@@ -870,6 +1044,130 @@
           <End Type="ConferenceModel.PersonConferences_Payment" Role="PersonConferences_Payment" Multiplicity="*" />
           <End Type="ConferenceModel.OrderStatus" Role="OrderStatus" Multiplicity="1" />
         </Association>
+        <EntityType Name="ContactType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Type="String" Name="Code" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="Int32" Name="SourceId" Nullable="false" />
+          <NavigationProperty Name="Emails" Relationship="ConferenceModel.ContactTypeEmail" FromRole="ContactType" ToRole="Email" />
+          <NavigationProperty Name="Phones" Relationship="ConferenceModel.ContactTypePhone" FromRole="ContactType" ToRole="Phone" />
+          <NavigationProperty Name="Addresses" Relationship="ConferenceModel.ContactTypeAddress" FromRole="ContactType" ToRole="Address" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="Int32" Name="SourceId" Nullable="false" />
+          <NavigationProperty Name="ContactType" Relationship="ConferenceModel.ContactTypeEmail" FromRole="Email" ToRole="ContactType" />
+          <Property Type="Guid" Name="ContactTypeId" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="ConferenceModel.PersonEmail" FromRole="Email" ToRole="Person" />
+          <Property Type="Guid" Name="PersonId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Phone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Type="String" Name="Number" Nullable="false" />
+          <Property Type="Int32" Name="SourceId" Nullable="false" />
+          <NavigationProperty Name="ContactType" Relationship="ConferenceModel.ContactTypePhone" FromRole="Phone" ToRole="ContactType" />
+          <Property Type="Guid" Name="ContactTypeId" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="ConferenceModel.PersonPhone" FromRole="Phone" ToRole="Person" />
+          <Property Type="Guid" Name="PersonId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Type="String" Name="ZipCode" Nullable="false" />
+          <Property Type="String" Name="CountryName" Nullable="false" />
+          <Property Type="String" Name="RegionName" Nullable="false" />
+          <Property Type="String" Name="CityName" Nullable="false" />
+          <Property Type="String" Name="StreetHouseName" Nullable="false" />
+          <Property Type="Int32" Name="SourceId" Nullable="false" />
+          <NavigationProperty Name="ContactType" Relationship="ConferenceModel.ContactTypeAddress" FromRole="Address" ToRole="ContactType" />
+          <Property Type="Guid" Name="ContactTypeId" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="ConferenceModel.PersonAddress" FromRole="Address" ToRole="Person" />
+          <Property Type="Guid" Name="PersonId" Nullable="false" />
+        </EntityType>
+        <Association Name="ContactTypeEmail">
+          <End Type="ConferenceModel.ContactType" Role="ContactType" Multiplicity="1" />
+          <End Type="ConferenceModel.Email" Role="Email" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Email">
+              <PropertyRef Name="ContactTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ContactTypePhone">
+          <End Type="ConferenceModel.ContactType" Role="ContactType" Multiplicity="1" />
+          <End Type="ConferenceModel.Phone" Role="Phone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Phone">
+              <PropertyRef Name="ContactTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ContactTypeAddress">
+          <End Type="ConferenceModel.ContactType" Role="ContactType" Multiplicity="1" />
+          <End Type="ConferenceModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="ContactTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PersonAddress">
+          <End Type="ConferenceModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="ConferenceModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PersonEmail">
+          <End Type="ConferenceModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="ConferenceModel.Email" Role="Email" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Email">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PersonPhone">
+          <End Type="ConferenceModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="ConferenceModel.Phone" Role="Phone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Phone">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1061,6 +1359,53 @@
           <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.ContactType)">
+        <MappingFragment StoreEntitySet="ContactTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Emails">
+      <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.Email)">
+        <MappingFragment StoreEntitySet="Emails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+          <ScalarProperty Name="ContactTypeId" ColumnName="ContactTypeId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Phones">
+      <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.Phone)">
+        <MappingFragment StoreEntitySet="Phones">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+          <ScalarProperty Name="ContactTypeId" ColumnName="ContactTypeId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Addresses">
+      <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.Address)">
+        <MappingFragment StoreEntitySet="Addresses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="StreetHouseName" ColumnName="StreetHouseName" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+          <ScalarProperty Name="ContactTypeId" ColumnName="ContactTypeId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 07/02/2014 14:22:36
+-- Date Created: 07/03/2014 12:20:08
 -- Generated from EDMX file: C:\Users\Inspiron\documents\visual studio 2012\Projects\WPFDB\WPFDB\Model\ConferenceModel.edmx
 -- --------------------------------------------------
 
@@ -59,6 +59,24 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PersonConferences_PaymentOrderStatus]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_PersonConferences_PaymentOrderStatus];
 GO
+IF OBJECT_ID(N'[dbo].[FK_ContactTypeEmail]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Emails] DROP CONSTRAINT [FK_ContactTypeEmail];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContactTypePhone]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Phones] DROP CONSTRAINT [FK_ContactTypePhone];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContactTypeAddress]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Addresses] DROP CONSTRAINT [FK_ContactTypeAddress];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PersonAddress]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Addresses] DROP CONSTRAINT [FK_PersonAddress];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PersonEmail]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Emails] DROP CONSTRAINT [FK_PersonEmail];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PersonPhone]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Phones] DROP CONSTRAINT [FK_PersonPhone];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -111,6 +129,18 @@ IF OBJECT_ID(N'[dbo].[Iacmacs]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[OrderStatuses]', 'U') IS NOT NULL
     DROP TABLE [dbo].[OrderStatuses];
+GO
+IF OBJECT_ID(N'[dbo].[ContactTypes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ContactTypes];
+GO
+IF OBJECT_ID(N'[dbo].[Emails]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Emails];
+GO
+IF OBJECT_ID(N'[dbo].[Phones]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Phones];
+GO
+IF OBJECT_ID(N'[dbo].[Addresses]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Addresses];
 GO
 
 -- --------------------------------------------------
@@ -290,6 +320,49 @@ CREATE TABLE [dbo].[OrderStatuses] (
 );
 GO
 
+-- Creating table 'ContactTypes'
+CREATE TABLE [dbo].[ContactTypes] (
+    [Id] uniqueidentifier  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL
+);
+GO
+
+-- Creating table 'Emails'
+CREATE TABLE [dbo].[Emails] (
+    [Id] uniqueidentifier  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL,
+    [ContactTypeId] uniqueidentifier  NOT NULL,
+    [PersonId] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'Phones'
+CREATE TABLE [dbo].[Phones] (
+    [Id] uniqueidentifier  NOT NULL,
+    [Number] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL,
+    [ContactTypeId] uniqueidentifier  NOT NULL,
+    [PersonId] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'Addresses'
+CREATE TABLE [dbo].[Addresses] (
+    [Id] uniqueidentifier  NOT NULL,
+    [ZipCode] nvarchar(max)  NOT NULL,
+    [CountryName] nvarchar(max)  NOT NULL,
+    [RegionName] nvarchar(max)  NOT NULL,
+    [CityName] nvarchar(max)  NOT NULL,
+    [StreetHouseName] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL,
+    [ContactTypeId] uniqueidentifier  NOT NULL,
+    [PersonId] uniqueidentifier  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -387,6 +460,30 @@ GO
 -- Creating primary key on [Id] in table 'OrderStatuses'
 ALTER TABLE [dbo].[OrderStatuses]
 ADD CONSTRAINT [PK_OrderStatuses]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'ContactTypes'
+ALTER TABLE [dbo].[ContactTypes]
+ADD CONSTRAINT [PK_ContactTypes]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Emails'
+ALTER TABLE [dbo].[Emails]
+ADD CONSTRAINT [PK_Emails]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Phones'
+ALTER TABLE [dbo].[Phones]
+ADD CONSTRAINT [PK_Phones]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Addresses'
+ALTER TABLE [dbo].[Addresses]
+ADD CONSTRAINT [PK_Addresses]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -573,6 +670,90 @@ ADD CONSTRAINT [FK_PersonConferences_PaymentOrderStatus]
 CREATE INDEX [IX_FK_PersonConferences_PaymentOrderStatus]
 ON [dbo].[PersonConferences_Payment]
     ([OrderStatus_Id]);
+GO
+
+-- Creating foreign key on [ContactTypeId] in table 'Emails'
+ALTER TABLE [dbo].[Emails]
+ADD CONSTRAINT [FK_ContactTypeEmail]
+    FOREIGN KEY ([ContactTypeId])
+    REFERENCES [dbo].[ContactTypes]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ContactTypeEmail'
+CREATE INDEX [IX_FK_ContactTypeEmail]
+ON [dbo].[Emails]
+    ([ContactTypeId]);
+GO
+
+-- Creating foreign key on [ContactTypeId] in table 'Phones'
+ALTER TABLE [dbo].[Phones]
+ADD CONSTRAINT [FK_ContactTypePhone]
+    FOREIGN KEY ([ContactTypeId])
+    REFERENCES [dbo].[ContactTypes]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ContactTypePhone'
+CREATE INDEX [IX_FK_ContactTypePhone]
+ON [dbo].[Phones]
+    ([ContactTypeId]);
+GO
+
+-- Creating foreign key on [ContactTypeId] in table 'Addresses'
+ALTER TABLE [dbo].[Addresses]
+ADD CONSTRAINT [FK_ContactTypeAddress]
+    FOREIGN KEY ([ContactTypeId])
+    REFERENCES [dbo].[ContactTypes]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ContactTypeAddress'
+CREATE INDEX [IX_FK_ContactTypeAddress]
+ON [dbo].[Addresses]
+    ([ContactTypeId]);
+GO
+
+-- Creating foreign key on [PersonId] in table 'Addresses'
+ALTER TABLE [dbo].[Addresses]
+ADD CONSTRAINT [FK_PersonAddress]
+    FOREIGN KEY ([PersonId])
+    REFERENCES [dbo].[Persons]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PersonAddress'
+CREATE INDEX [IX_FK_PersonAddress]
+ON [dbo].[Addresses]
+    ([PersonId]);
+GO
+
+-- Creating foreign key on [PersonId] in table 'Emails'
+ALTER TABLE [dbo].[Emails]
+ADD CONSTRAINT [FK_PersonEmail]
+    FOREIGN KEY ([PersonId])
+    REFERENCES [dbo].[Persons]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PersonEmail'
+CREATE INDEX [IX_FK_PersonEmail]
+ON [dbo].[Emails]
+    ([PersonId]);
+GO
+
+-- Creating foreign key on [PersonId] in table 'Phones'
+ALTER TABLE [dbo].[Phones]
+ADD CONSTRAINT [FK_PersonPhone]
+    FOREIGN KEY ([PersonId])
+    REFERENCES [dbo].[Persons]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PersonPhone'
+CREATE INDEX [IX_FK_PersonPhone]
+ON [dbo].[Phones]
+    ([PersonId]);
 GO
 
 -- --------------------------------------------------

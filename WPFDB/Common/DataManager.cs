@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data.Objects;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Annotations;
+using System.Windows.Documents;
 using WPFDB.Data;
 using WPFDB.Model;
 
@@ -240,6 +244,17 @@ namespace WPFDB.Common
             this.underlyingContext.Conferences.AddObject(obj);
         }
 
+        public void AddContactType(ContactType obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("contactType");
+            }
+
+            this.CheckEntityDoesNotBelongToUnitOfWork(obj);
+            this.underlyingContext.ContactTypes.AddObject(obj);
+        }
+
         public void AddUser(User obj)
         {
             userRepository.Add(obj);
@@ -403,6 +418,11 @@ namespace WPFDB.Common
             return this.underlyingContext.OrderStatuses.FirstOrDefault(o => o.Code == "-");
         }
 
+        public ContactType GetDefaultContactType()
+        {
+            return this.underlyingContext.ContactTypes.FirstOrDefault(o => o.Code == "-");
+        }
+
         public Speciality GetDefaultSpeciality()
         {
             return this.underlyingContext.Specialities.FirstOrDefault(o => o.Code == "-");
@@ -431,6 +451,10 @@ namespace WPFDB.Common
             return this.underlyingContext.PaymentTypes.FirstOrDefault(o => o.Code == "-");
         }
 
+        public ContactType GetContactTypeByName(string name)
+        {
+            return this.underlyingContext.ContactTypes.FirstOrDefault(o => o.Name == name);
+        }
 
 
 
@@ -470,9 +494,23 @@ namespace WPFDB.Common
                 underlyingContext.PersonConferences.DeleteObject(obj);
             }
             Save();
-
+ 
             foreach (var obj in underlyingContext.Persons)
             {
+                foreach (var email in obj.Emails.ToList())
+                {
+                    underlyingContext.Emails.DeleteObject(email);
+                }
+                var phones = new List<Phone>();
+                foreach (var phone in obj.Phones.ToList())
+                {
+                    underlyingContext.Phones.DeleteObject(phone);
+                }
+
+                foreach (var adr in obj.Addresses.ToList())
+                {
+                    underlyingContext.Addresses.DeleteObject(adr);
+                }
                 underlyingContext.Persons.DeleteObject(obj);
             }
             Save();
@@ -521,6 +559,12 @@ namespace WPFDB.Common
 
         public void FillData()
         {
+            AddContactType(new ContactType{Id=GuidComb.Generate(), Code = "-", Name="-"});
+            AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "H", Name = "Home" });
+            AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "W", Name = "Work" });
+            AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "O", Name = "Other" });
+            Save();
+
             AddOrderStatus(new OrderStatus {Id = GuidComb.Generate(), Code = "-", Name = "-"});
             AddOrderStatus(new OrderStatus { Id = GuidComb.Generate(), Code = "P", Name = "Оплачено" });
             AddOrderStatus(new OrderStatus { Id = GuidComb.Generate(), Code = "R", Name = "Возврат" });
@@ -592,6 +636,20 @@ namespace WPFDB.Common
 
             AddPerson(person);
 
+            Save();
+
+            person.Emails.Add(new Email{ Id=GuidComb.Generate(), Name = "test@mail.ru", ContactType = GetDefaultContactType()});
+            person.Emails.Add(new Email { Id = GuidComb.Generate(), Name = "work@mail.ru", ContactType = GetContactTypeByName("Work") });
+            person.Emails.Add(new Email { Id = GuidComb.Generate(), Name = "Home@mail.ru", ContactType = GetContactTypeByName("Home") });
+            person.Emails.Add(new Email { Id = GuidComb.Generate(), Name = "other@mail.ru", ContactType = GetContactTypeByName("Other") });
+            Save();
+            person.Phones.Add(new Phone{Id = GuidComb.Generate(), ContactType = GetDefaultContactType(), Number = "+71234567890"});
+            person.Phones.Add(new Phone { Id = GuidComb.Generate(), ContactType = GetContactTypeByName("Home"), Number = "+71234567890" });
+            person.Phones.Add(new Phone { Id = GuidComb.Generate(), ContactType = GetContactTypeByName("Other"), Number = "+71234567890" });
+            person.Phones.Add(new Phone { Id = GuidComb.Generate(), ContactType = GetContactTypeByName("Work"), Number = "+71234567890" });
+            Save();
+            person.Addresses.Add(new Address{Id=GuidComb.Generate(),ZipCode = "214000",ContactType = GetContactTypeByName("Home"), CountryName = "Russia", RegionName = "Smolensk region", CityName = "Smolensk", StreetHouseName = "Petr Alekseev st. 19"});
+            person.Addresses.Add(new Address { Id = GuidComb.Generate(), ZipCode = "214000",ContactType = GetContactTypeByName("Work"), CountryName = "Russia", RegionName = "Smolensk region", CityName = "Smolensk", StreetHouseName = "Kirov st. 46" });
             Save();
             var details = new PersonConferences_Detail
             {
