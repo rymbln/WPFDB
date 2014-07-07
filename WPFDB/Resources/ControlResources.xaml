@@ -82,7 +82,7 @@
     </Style>
     <Style TargetType="TextBox">
         <Setter Property="MinHeight" Value="25"/>
-        <Setter Property="MinWidth" Value="100"/>
+        <Setter Property="MinWidth" Value="50"/>
         <Setter Property="Margin" Value="10,0,10,0"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
     </Style>

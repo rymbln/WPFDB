@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -749,5 +750,139 @@ namespace WPFDB.Common
         {
             return this.underlyingContext.PersonConferences.Where(o => o.PersonId == person.Id).ToList();
         }
+
+        public IEnumerable<ContactType> GetAllContactTypes()
+        {
+            return this.underlyingContext.ContactTypes.ToList();
+        }
+
+        public void RemoveContactType(ContactType obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("contactType");
+            }
+
+            this.CheckEntityBelongsToUnitOfWork(obj);
+            this.underlyingContext.ContactTypes.DeleteObject(obj);
+        }
+
+        public void AddEmailToPerson(Person person, Email email)
+        {
+            if (person == null)
+            {
+                throw new ArgumentNullException("person");
+            }
+
+            if (email == null)
+            {
+                throw new ArgumentNullException("email");
+            }
+
+            this.CheckEntityDoesNotBelongToUnitOfWork(email);
+            this.CheckEntityBelongsToUnitOfWork(person);
+
+            this.underlyingContext.Emails.AddObject(email);
+            person.Emails.Add(email);
+        }
+
+        public void RemoveEmail(Person person, Email email)
+        {
+            if (person == null)
+            {
+                throw new ArgumentNullException("person");
+            }
+            if (email == null)
+            {
+                throw new ArgumentNullException("email");
+            }
+            this.CheckEntityBelongsToUnitOfWork(email);
+            this.CheckEntityBelongsToUnitOfWork(person);
+            if (!person.Emails.Contains(email))
+            {
+                throw new InvalidOperationException("This email doesnot belong to person");
+            }
+            person.Emails.Remove(email);
+            this.underlyingContext.Emails.DeleteObject(email);
+        }
+
+        public void AddAddressToPerson(Person person, Address address)
+        {
+            if (person == null)
+            {
+                throw new ArgumentNullException("person");
+            }
+
+            if (address == null)
+            {
+                throw new ArgumentNullException("address");
+            }
+
+            this.CheckEntityDoesNotBelongToUnitOfWork(address);
+            this.CheckEntityBelongsToUnitOfWork(person);
+
+            this.underlyingContext.Addresses.AddObject(address);
+            person.Addresses.Add(address);
+        }
+
+        public void RemoveAddress(Person person, Address address)
+        {
+            if (person == null)
+            {
+                throw new ArgumentNullException("person");
+            }
+            if (address == null)
+            {
+                throw new ArgumentNullException("address");
+            }
+            this.CheckEntityBelongsToUnitOfWork(address);
+            this.CheckEntityBelongsToUnitOfWork(person);
+            if (!person.Addresses.Contains(address))
+            {
+                throw new InvalidOperationException("This email doesnot belong to person");
+            }
+            person.Addresses.Remove(address);
+            this.underlyingContext.Addresses.DeleteObject(address);
+        }
+
+        public void AddPhoneToPerson(Person person, Phone phone)
+        {
+            if (person == null)
+            {
+                throw new ArgumentNullException("person");
+            }
+
+            if (phone == null)
+            {
+                throw new ArgumentNullException("phone");
+            }
+
+            this.CheckEntityDoesNotBelongToUnitOfWork(phone);
+            this.CheckEntityBelongsToUnitOfWork(person);
+
+            this.underlyingContext.Phones.AddObject(phone);
+            person.Phones.Add(phone);
+        }
+
+        public void RemovePhone(Person person, Phone phone)
+        {
+            if (person == null)
+            {
+                throw new ArgumentNullException("person");
+            }
+            if (phone == null)
+            {
+                throw new ArgumentNullException("phone");
+            }
+            this.CheckEntityBelongsToUnitOfWork(phone);
+            this.CheckEntityBelongsToUnitOfWork(person);
+            if (!person.Phones.Contains(phone))
+            {
+                throw new InvalidOperationException("This email doesnot belong to person");
+            }
+            person.Phones.Remove(phone);
+            this.underlyingContext.Phones.DeleteObject(phone);
+        }
+
     }
 }

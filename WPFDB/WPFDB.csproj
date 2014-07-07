@@ -88,6 +88,10 @@
     </Compile>
     <Compile Include="Validation\Helpers\ExcludeChar.cs" />
     <Compile Include="Validation\Helpers\Unique.cs" />
+    <Compile Include="ViewModel\AddressViewModel.cs" />
+    <Compile Include="ViewModel\ContactTypeViewModel.cs" />
+    <Compile Include="ViewModel\ContactTypeWorkspaceViewModel.cs" />
+    <Compile Include="ViewModel\EmailViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\CompanyViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\CompanyWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\OrderStatusViewModel.cs" />
@@ -105,6 +109,7 @@
     <Compile Include="ViewModel\PersonConferenceViewModel.cs" />
     <Compile Include="ViewModel\PersonConferenceWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\PersonFormConferencesWorkspaceViewModel.cs" />
+    <Compile Include="ViewModel\PersonFormContactsWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\PersonFormViewModel.cs" />
     <Compile Include="ViewModel\PersonViewModel.cs" />
     <Compile Include="ViewModel\PersonWorkspaceViewModel.cs" />
@@ -121,6 +126,19 @@
     <Compile Include="ViewModel\Helpers\ViewModelBase.cs" />
     <Compile Include="ViewModel\Knowalls\UserViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\UserWorkspaceViewModel.cs" />
+    <Compile Include="ViewModel\PhoneViewModel.cs" />
+    <Compile Include="View\AddressView.xaml.cs">
+      <DependentUpon>AddressView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EmailView.xaml.cs">
+      <DependentUpon>EmailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactTypeDetailView.xaml.cs">
+      <DependentUpon>ContactTypeDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactTypeWorkspaceView.xaml.cs">
+      <DependentUpon>ContactTypeWorkspaceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Knowalls\OrderStatusDetailView.xaml.cs">
       <DependentUpon>OrderStatusDetailView.xaml</DependentUpon>
     </Compile>
@@ -162,6 +180,9 @@
     </Compile>
     <Compile Include="View\PersonFormConferenceWorkspaceView.xaml.cs">
       <DependentUpon>PersonFormConferenceWorkspaceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PersonFormContactsWorkspaceView.xaml.cs">
+      <DependentUpon>PersonFormContactsWorkspaceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PersonFormView.xaml.cs">
       <DependentUpon>PersonFormView.xaml</DependentUpon>
@@ -205,6 +226,9 @@
     <Compile Include="View\Knowalls\UserWorkspaceView.xaml.cs">
       <DependentUpon>UserWorkspaceView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PhoneView.xaml.cs">
+      <DependentUpon>PhoneView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Resources\ControlResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,6 +236,22 @@
     <Page Include="Resources\ImageResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddressView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactTypeDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ContactTypeWorkspaceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Knowalls\OrderStatusDetailView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -281,6 +321,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\PersonFormContactsWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PersonFormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -334,6 +378,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Knowalls\UserWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PhoneView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

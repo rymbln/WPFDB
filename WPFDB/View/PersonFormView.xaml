@@ -12,6 +12,9 @@
         <DataTemplate DataType="{x:Type vm:PersonFormConferencesWorkspaceViewModel}">
             <view:PersonFormConferenceWorkspaceView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PersonFormContactsWorkspaceViewModel}">
+            <view:PersonFormContactsWorkspaceView />
+        </DataTemplate>
     </Window.Resources>
     <Window.InputBindings>
         <KeyBinding Command="{Binding SaveCommand}" Key="S" Modifiers="Control"/>
@@ -39,17 +42,18 @@
 
             <ContentControl Grid.Row="0"  HorizontalAlignment="Left" Content="{Binding Path=CurrentPerson}" />
             <TabControl Grid.Row="1"  Padding="0">
+               
+                <TabItem>
+                    <TabItem.Header>Контактные данные</TabItem.Header>
+                    <ContentControl Margin="10"  Content="{Binding Path=.PersonFormContactsWorkspace}"  />
+                </TabItem>
                 <TabItem>
                     <TabItem.Header>Участия в конференциях</TabItem.Header>
                     <ContentControl Margin="10"  Content="{Binding Path=.PersonFormConferenceWorkspace}"  />
                 </TabItem>
                 <TabItem>
-                    <TabItem.Header>Sex</TabItem.Header>
-                    <!--<ContentControl Margin="10"  Content="{Binding Path=.SexWorkspace}"  />-->
-                </TabItem>
-                <TabItem>
                     <TabItem.Header>Science degrees</TabItem.Header>
-                    <!--<ContentControl Margin="10"  Content="{Binding Path=.ScienceDegreeWorkspace}"  />-->
+                    <!--<ContentControl Margin="10"  Content="{Binding Path=.PersonFormConferenceWorkspace}"  />-->
                 </TabItem>
                
             </TabControl>

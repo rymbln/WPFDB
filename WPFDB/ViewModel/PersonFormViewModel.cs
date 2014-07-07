@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WPFDB.Common;
+using WPFDB.View;
 using WPFDB.ViewModel.Helpers;
 
 namespace WPFDB.ViewModel
@@ -20,7 +21,8 @@ namespace WPFDB.ViewModel
 
             this.SaveCommand = new DelegateCommand((o) => this.Save());
             this.CancelCommand = new DelegateCommand((o) => this.Cancel());
-            this.PersonFormConferenceWorkspace = new PersonFormConferencesWorkspaceViewModel(person);
+            this.PersonFormConferenceWorkspace = new PersonFormConferencesWorkspaceViewModel(CurrentPerson);
+            this.PersonFormContactsWorkspace = new PersonFormContactsWorkspaceViewModel(CurrentPerson);
         }
 
         public PersonViewModel CurrentPerson
@@ -32,6 +34,7 @@ namespace WPFDB.ViewModel
             }
         }
         public PersonFormConferencesWorkspaceViewModel PersonFormConferenceWorkspace { get; private set; }
+        public PersonFormContactsWorkspaceViewModel PersonFormContactsWorkspace { get; private set; }
 
 
         public ICommand SaveCommand { get; private set; }

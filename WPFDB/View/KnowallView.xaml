@@ -36,6 +36,9 @@
         <DataTemplate DataType="{x:Type vm:OrderStatusWorkspaceViewModel}">
             <view:OrderStatusWorkspaceView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ContactTypeWorkspaceViewModel}">
+            <view:ContactTypeWorkspaceView/>
+        </DataTemplate>
     </Window.Resources>
     <DockPanel>
     <ToolBarTray DockPanel.Dock="Top">
@@ -91,6 +94,10 @@
                 <TabItem>
                     <TabItem.Header>Order Statuses</TabItem.Header>
                     <ContentControl Margin="10"  Content="{Binding Path=.OrderStatusWorkspace}"  />
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>Contact Types</TabItem.Header>
+                    <ContentControl Margin="10"  Content="{Binding Path=.ContactTypeWorkspace}"  />
                 </TabItem>
             </TabControl>
     </Grid>

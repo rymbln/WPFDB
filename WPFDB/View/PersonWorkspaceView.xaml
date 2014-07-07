@@ -37,12 +37,15 @@
                                 <Button Command="{Binding AddPersonCommand}">
                                     <AccessText Text="{x:Static p:Resources.AddMenu}"/>
                                 </Button>
+                                <Separator/>
                                 <Button Command="{Binding OpenPersonCommand}">
                                     <AccessText Text="Open"/>
                                 </Button>
+                                <Separator/>
                                 <Button Command="{Binding DeletePersonCommand}">
                                     <AccessText Text="{x:Static p:Resources.RemoveMenu}"/>
                                 </Button>
+                                <Separator/>
                                 <Button Command="{Binding RefreshCommand}">
                                     <AccessText Text="{x:Static p:Resources.RefreshMenu}"/>
                                 </Button>

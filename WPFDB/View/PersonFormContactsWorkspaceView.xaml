@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="WPFDB.View.PersonFormContactsWorkspaceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:WPFDB.ViewModel"
+             xmlns:v="clr-namespace:WPFDB.View"
+             mc:Ignorable="d" 
+            >
+
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:EmailViewModel}">
+            <v:EmailView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AddressViewModel}">
+            <v:AddressView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PhoneViewModel}">
+            <v:PhoneView/>
+        </DataTemplate>
+    </UserControl.Resources>
+
+        <StackPanel Orientation="Horizontal">
+        <HeaderedContentControl  Style="{StaticResource SubDisplayArea}" Margin="5,0,0,0">
+            <HeaderedContentControl.Header>
+                Addresses
+            </HeaderedContentControl.Header>
+            <StackPanel Orientation="Vertical">
+                <ToolBar>
+                    <Button Command="{Binding AddAddressCommand}" Content="Add Address"></Button>
+                    <Separator/>
+                    <Button Command="{Binding DeleteAddressCommand}" Content="Delete Address"></Button>
+                </ToolBar>
+                <ScrollViewer>
+                <ListBox BorderThickness="0" 
+                     SelectedItem="{Binding Path=CurrentAddress, Mode=TwoWay}" 
+                     ItemsSource="{Binding Path=PersonAddresses}" />
+                </ScrollViewer>
+            </StackPanel>
+        </HeaderedContentControl>
+        <HeaderedContentControl  Style="{StaticResource SubDisplayArea}" Margin="5,0,0,0">
+            <HeaderedContentControl.Header>
+                Emails
+            </HeaderedContentControl.Header>
+            <StackPanel Orientation="Vertical">
+                <ToolBar>
+                    <Button Command="{Binding AddEmailCommand}" Content="Add Email"></Button>
+                    <Separator/>
+                    <Button Command="{Binding DeleteEmailCommand}" Content="Delete Email"></Button>
+                </ToolBar>
+                <ScrollViewer>
+                <ListBox BorderThickness="0" 
+                     SelectedItem="{Binding Path=CurrentEmail, Mode=TwoWay}" 
+                     ItemsSource="{Binding Path=PersonEmails}" />
+                </ScrollViewer>
+            </StackPanel>
+        </HeaderedContentControl>
+        <HeaderedContentControl  Style="{StaticResource SubDisplayArea}" Margin="5,0,5,0">
+            <HeaderedContentControl.Header>
+                Phones
+            </HeaderedContentControl.Header>
+            <StackPanel Orientation="Vertical">
+                <ToolBar>
+                    <Button Command="{Binding AddPhoneCommand}" Content="Add Phone"></Button>
+                    <Separator/>
+                    <Button Command="{Binding DeletePhoneCommand}" Content="Delete Phone"></Button>
+                </ToolBar>
+                <ScrollViewer>
+                    <ListBox BorderThickness="0" 
+                     SelectedItem="{Binding Path=CurrentPhone, Mode=TwoWay}" 
+                     ItemsSource="{Binding Path=PersonPhones}" />
+                </ScrollViewer>
+            </StackPanel>
+        </HeaderedContentControl>
+    </StackPanel>
+
+</UserControl>
