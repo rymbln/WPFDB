@@ -76,7 +76,7 @@
         <TabControl Padding="0">
             <TabItem>
                 <TabItem.Header>Person</TabItem.Header>
-                <ContentControl Margin="10"  Content="{Binding Path=.PersonWorkspace}"  />
+                <ContentControl Content="{Binding Path=.PersonWorkspace}"  />
             </TabItem>
             
         </TabControl>

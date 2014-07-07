@@ -25,52 +25,57 @@
             <HeaderedContentControl.Header>
                 Addresses
             </HeaderedContentControl.Header>
-            <StackPanel Orientation="Vertical">
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical">
                 <ToolBar>
                     <Button Command="{Binding AddAddressCommand}" Content="Add Address"></Button>
                     <Separator/>
                     <Button Command="{Binding DeleteAddressCommand}" Content="Delete Address"></Button>
                 </ToolBar>
-                <ScrollViewer>
-                <ListBox BorderThickness="0" 
+                        <ListBox BorderThickness="0" 
                      SelectedItem="{Binding Path=CurrentAddress, Mode=TwoWay}" 
                      ItemsSource="{Binding Path=PersonAddresses}" />
-                </ScrollViewer>
+         
             </StackPanel>
+            </ScrollViewer>
         </HeaderedContentControl>
         <HeaderedContentControl  Style="{StaticResource SubDisplayArea}" Margin="5,0,0,0">
             <HeaderedContentControl.Header>
                 Emails
             </HeaderedContentControl.Header>
-            <StackPanel Orientation="Vertical">
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical">
                 <ToolBar>
                     <Button Command="{Binding AddEmailCommand}" Content="Add Email"></Button>
                     <Separator/>
                     <Button Command="{Binding DeleteEmailCommand}" Content="Delete Email"></Button>
                 </ToolBar>
-                <ScrollViewer>
+           
                 <ListBox BorderThickness="0" 
                      SelectedItem="{Binding Path=CurrentEmail, Mode=TwoWay}" 
                      ItemsSource="{Binding Path=PersonEmails}" />
-                </ScrollViewer>
+             
             </StackPanel>
+                </ScrollViewer>
         </HeaderedContentControl>
         <HeaderedContentControl  Style="{StaticResource SubDisplayArea}" Margin="5,0,5,0">
             <HeaderedContentControl.Header>
                 Phones
             </HeaderedContentControl.Header>
-            <StackPanel Orientation="Vertical">
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical">
                 <ToolBar>
                     <Button Command="{Binding AddPhoneCommand}" Content="Add Phone"></Button>
                     <Separator/>
                     <Button Command="{Binding DeletePhoneCommand}" Content="Delete Phone"></Button>
                 </ToolBar>
-                <ScrollViewer>
+           
                     <ListBox BorderThickness="0" 
                      SelectedItem="{Binding Path=CurrentPhone, Mode=TwoWay}" 
                      ItemsSource="{Binding Path=PersonPhones}" />
-                </ScrollViewer>
+           
             </StackPanel>
+                </ScrollViewer>
         </HeaderedContentControl>
     </StackPanel>
 

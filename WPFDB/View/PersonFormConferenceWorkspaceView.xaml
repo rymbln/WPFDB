@@ -20,9 +20,17 @@
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar>
                 <Button Command="{Binding SaveCommand}" Content="Save" ToolTip="{x:Static p:Resources.Save}"/>
+                <Separator/>
                 <Button Command="{Binding CancelCommand}" Content="Cancel" ToolTip="{x:Static p:Resources.Save}"/>
-                <Button Command="{Binding AddPersonConferenceCommand}" Content="Add" ToolTip="{x:Static p:Resources.Save}"/>
-                <Button Command="{Binding RemovePersonConferenceCommand}" Content="Remove" ToolTip="{x:Static p:Resources.Save}"/>
+                <Separator/>
+                <Button Command="{Binding AddPersonConferenceCommand}" Content="Add Conference" ToolTip="{x:Static p:Resources.Save}"/>
+                <Separator/>
+                <Button Command="{Binding RemovePersonConferenceCommand}" Content="Remove Conference" ToolTip="{x:Static p:Resources.Save}"/>
+                <Separator/>
+                <Button Command="{Binding PrintBadgeCommand}" Content="Print Badge" ToolTip="{x:Static p:Resources.Save}"/>
+                <Separator/>
+                <Button Command="{Binding PrintOrderCommand}" Content="Print Order" ToolTip="{x:Static p:Resources.Save}"/>
+                <Separator/>
             </ToolBar>
         </ToolBarTray>
         <Grid>
@@ -42,7 +50,7 @@
             </HeaderedContentControl.Header>
             <ScrollViewer>
                 <HeaderedContentControl>
-                    <DataGrid SelectedItem="{Binding Path=CurrentPersonConference}" ItemsSource="{Binding Path=AllPersonConferences}" AutoGenerateColumns="False" >
+                    <DataGrid SelectedItem="{Binding Path=CurrentPersonConference}" ItemsSource="{Binding Path=AllPersonConferences}" AutoGenerateColumns="False" GridLinesVisibility="None" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Binding="{Binding Path=CurrentConferenceName, Mode=OneWay}" IsReadOnly="True"/>
                         </DataGrid.Columns>

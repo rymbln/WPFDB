@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 07/03/2014 15:02:07
+-- Date Created: 07/07/2014 15:48:25
 -- Generated from EDMX file: C:\Users\rymbln\Documents\GitHub\WPFDB\WPFDB\Model\ConferenceModel.edmx
 -- --------------------------------------------------
 
@@ -273,9 +273,7 @@ CREATE TABLE [dbo].[PersonConferences_Detail] (
     [IsBadge] bit  NOT NULL,
     [IsArrive] bit  NOT NULL,
     [DateArrive] datetime  NOT NULL,
-    [IsComplect] bit  NOT NULL,
     [IsAdditionalMaterial] bit  NOT NULL,
-    [IsAbstract] bit  NOT NULL,
     [IsNeedBadge] bit  NOT NULL,
     [IsAutoreg] bit  NOT NULL,
     [SourceId] int  NOT NULL,

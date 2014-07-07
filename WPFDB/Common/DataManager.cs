@@ -655,14 +655,12 @@ namespace WPFDB.Common
             var details = new PersonConferences_Detail
             {
                 Company = companyRepository.GetByName("-"),
-                IsAbstract = true,
                 DateArrive = Convert.ToDateTime("12.12.2014"),
                 IsAdditionalMaterial = true,
                 IsAutoreg = true,
                 IsBadge = true,
                 IsNeedBadge = true,
                 IsArrive = true,
-                IsComplect = true,
                 Rank = rankRepository.GetByName("-")
             };
             var payment = new PersonConferences_Payment
@@ -681,14 +679,12 @@ namespace WPFDB.Common
             details = new PersonConferences_Detail
             {
                 Company = companyRepository.GetByName("Company 1"),
-                IsAbstract = true,
                 DateArrive = Convert.ToDateTime("12.12.2014"),
                 IsAdditionalMaterial = true,
                 IsAutoreg = true,
                 IsBadge = true,
                 IsNeedBadge = true,
                 IsArrive = true,
-                IsComplect = true,
                 Rank = rankRepository.GetByName("-")
             };
             payment = new PersonConferences_Payment
@@ -707,14 +703,12 @@ namespace WPFDB.Common
             details = new PersonConferences_Detail
             {
                 Company = companyRepository.GetByName("Company 2"),
-                IsAbstract = true,
                 DateArrive = Convert.ToDateTime("12.12.2014"),
                 IsAdditionalMaterial = true,
                 IsAutoreg = true,
                 IsBadge = true,
                 IsNeedBadge = true,
                 IsArrive = true,
-                IsComplect = true,
                 Rank = rankRepository.GetByName("-")
             };
             payment = new PersonConferences_Payment

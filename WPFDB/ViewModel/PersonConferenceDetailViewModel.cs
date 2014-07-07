@@ -68,12 +68,7 @@ namespace WPFDB.ViewModel
             get { return this.Model.IsBadge; }
             set { this.Model.IsBadge = value; this.OnPropertyChanged("IsBadge"); }
         }
-        public bool IsComplect
-        {
-            get { return this.Model.IsComplect; }
-            set { this.Model.IsComplect = value; this.OnPropertyChanged("IsComplect"); }
-        }
-        public bool IsArrive
+          public bool IsArrive
         {
             get { return this.Model.IsArrive; }
             set { this.Model.IsArrive = value; this.OnPropertyChanged("IsArrive"); }
@@ -83,12 +78,7 @@ namespace WPFDB.ViewModel
             get { return this.Model.IsAdditionalMaterial; }
             set { this.Model.IsAdditionalMaterial = value; this.OnPropertyChanged("IsAdditionalMaterial"); }
         }
-        public bool IsAbstract
-        {
-            get { return this.Model.IsAbstract; }
-            set { this.Model.IsAbstract = value; this.OnPropertyChanged("IsAbstract"); }
-        }
-        public bool IsNeedBadge
+    public bool IsNeedBadge
         {
             get { return this.Model.IsNeedBadge; }
             set { this.Model.IsNeedBadge = value; this.OnPropertyChanged("IsNeedBadge"); }

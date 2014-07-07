@@ -3212,14 +3212,12 @@ namespace WPFDB.Model
         /// <param name="isBadge">Initial value of the IsBadge property.</param>
         /// <param name="isArrive">Initial value of the IsArrive property.</param>
         /// <param name="dateArrive">Initial value of the DateArrive property.</param>
-        /// <param name="isComplect">Initial value of the IsComplect property.</param>
         /// <param name="isAdditionalMaterial">Initial value of the IsAdditionalMaterial property.</param>
-        /// <param name="isAbstract">Initial value of the IsAbstract property.</param>
         /// <param name="isNeedBadge">Initial value of the IsNeedBadge property.</param>
         /// <param name="isAutoreg">Initial value of the IsAutoreg property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
         /// <param name="personConferenceId">Initial value of the PersonConferenceId property.</param>
-        public static PersonConferences_Detail CreatePersonConferences_Detail(global::System.Guid rankId, global::System.Guid companyId, global::System.Boolean isBadge, global::System.Boolean isArrive, global::System.DateTime dateArrive, global::System.Boolean isComplect, global::System.Boolean isAdditionalMaterial, global::System.Boolean isAbstract, global::System.Boolean isNeedBadge, global::System.Boolean isAutoreg, global::System.Int32 sourceId, global::System.Guid personConferenceId)
+        public static PersonConferences_Detail CreatePersonConferences_Detail(global::System.Guid rankId, global::System.Guid companyId, global::System.Boolean isBadge, global::System.Boolean isArrive, global::System.DateTime dateArrive, global::System.Boolean isAdditionalMaterial, global::System.Boolean isNeedBadge, global::System.Boolean isAutoreg, global::System.Int32 sourceId, global::System.Guid personConferenceId)
         {
             PersonConferences_Detail personConferences_Detail = new PersonConferences_Detail();
             personConferences_Detail.RankId = rankId;
@@ -3227,9 +3225,7 @@ namespace WPFDB.Model
             personConferences_Detail.IsBadge = isBadge;
             personConferences_Detail.IsArrive = isArrive;
             personConferences_Detail.DateArrive = dateArrive;
-            personConferences_Detail.IsComplect = isComplect;
             personConferences_Detail.IsAdditionalMaterial = isAdditionalMaterial;
-            personConferences_Detail.IsAbstract = isAbstract;
             personConferences_Detail.IsNeedBadge = isNeedBadge;
             personConferences_Detail.IsAutoreg = isAutoreg;
             personConferences_Detail.SourceId = sourceId;
@@ -3366,30 +3362,6 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean IsComplect
-        {
-            get
-            {
-                return _IsComplect;
-            }
-            set
-            {
-                OnIsComplectChanging(value);
-                ReportPropertyChanging("IsComplect");
-                _IsComplect = StructuralObject.SetValidValue(value, "IsComplect");
-                ReportPropertyChanged("IsComplect");
-                OnIsComplectChanged();
-            }
-        }
-        private global::System.Boolean _IsComplect;
-        partial void OnIsComplectChanging(global::System.Boolean value);
-        partial void OnIsComplectChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.Boolean IsAdditionalMaterial
         {
             get
@@ -3408,30 +3380,6 @@ namespace WPFDB.Model
         private global::System.Boolean _IsAdditionalMaterial;
         partial void OnIsAdditionalMaterialChanging(global::System.Boolean value);
         partial void OnIsAdditionalMaterialChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsAbstract
-        {
-            get
-            {
-                return _IsAbstract;
-            }
-            set
-            {
-                OnIsAbstractChanging(value);
-                ReportPropertyChanging("IsAbstract");
-                _IsAbstract = StructuralObject.SetValidValue(value, "IsAbstract");
-                ReportPropertyChanged("IsAbstract");
-                OnIsAbstractChanged();
-            }
-        }
-        private global::System.Boolean _IsAbstract;
-        partial void OnIsAbstractChanging(global::System.Boolean value);
-        partial void OnIsAbstractChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

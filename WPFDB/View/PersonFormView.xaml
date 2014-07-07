@@ -4,7 +4,7 @@
         xmlns:vm="clr-namespace:WPFDB.ViewModel"
         xmlns:view="clr-namespace:WPFDB.View"
         xmlns:p="clr-namespace:WPFDB.Properties"
-        Title="PersonFormView" Height="600" Width="1024">
+        Title="PersonFormView" MinHeight="600" MinWidth="1024">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:PersonViewModel}">
             <view:PersonDetailView />
@@ -37,23 +37,24 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <ContentControl Grid.Row="0"  HorizontalAlignment="Left" Content="{Binding Path=CurrentPerson}" />
+            <ContentControl Grid.Row="0"   HorizontalAlignment="Left" Content="{Binding Path=CurrentPerson}" />
+    
             <TabControl Grid.Row="1"  Padding="0">
                
                 <TabItem>
                     <TabItem.Header>Контактные данные</TabItem.Header>
-                    <ContentControl Margin="10"  Content="{Binding Path=.PersonFormContactsWorkspace}"  />
+                    <ContentControl Content="{Binding Path=.PersonFormContactsWorkspace}"  />
                 </TabItem>
                 <TabItem>
                     <TabItem.Header>Участия в конференциях</TabItem.Header>
-                    <ContentControl Margin="10"  Content="{Binding Path=.PersonFormConferenceWorkspace}"  />
+                    <ContentControl Content="{Binding Path=.PersonFormConferenceWorkspace}"  />
                 </TabItem>
                 <TabItem>
                     <TabItem.Header>Science degrees</TabItem.Header>
-                    <!--<ContentControl Margin="10"  Content="{Binding Path=.PersonFormConferenceWorkspace}"  />-->
+                    <!--<ContentControl Content="{Binding Path=.PersonFormConferenceWorkspace}"  />-->
                 </TabItem>
                
             </TabControl>

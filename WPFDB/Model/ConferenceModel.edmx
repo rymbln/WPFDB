@@ -235,9 +235,7 @@
     <Property Name="IsBadge" Type="bit" Nullable="false" />
     <Property Name="IsArrive" Type="bit" Nullable="false" />
     <Property Name="DateArrive" Type="datetime" Nullable="false" />
-    <Property Name="IsComplect" Type="bit" Nullable="false" />
     <Property Name="IsAdditionalMaterial" Type="bit" Nullable="false" />
-    <Property Name="IsAbstract" Type="bit" Nullable="false" />
     <Property Name="IsNeedBadge" Type="bit" Nullable="false" />
     <Property Name="IsAutoreg" Type="bit" Nullable="false" />
     <Property Name="SourceId" Type="int" Nullable="false" />
@@ -897,9 +895,7 @@
           <Property Type="Boolean" Name="IsBadge" Nullable="false" />
           <Property Type="Boolean" Name="IsArrive" Nullable="false" />
           <Property Type="DateTime" Name="DateArrive" Nullable="false" Precision="3" />
-          <Property Type="Boolean" Name="IsComplect" Nullable="false" />
           <Property Type="Boolean" Name="IsAdditionalMaterial" Nullable="false" />
-          <Property Type="Boolean" Name="IsAbstract" Nullable="false" />
           <Property Type="Boolean" Name="IsNeedBadge" Nullable="false" />
           <Property Type="Boolean" Name="IsAutoreg" Nullable="false" />
           <Property Type="Int32" Name="SourceId" Nullable="false" />
@@ -1314,9 +1310,7 @@
           <ScalarProperty Name="IsBadge" ColumnName="IsBadge" />
           <ScalarProperty Name="IsArrive" ColumnName="IsArrive" />
           <ScalarProperty Name="DateArrive" ColumnName="DateArrive" />
-          <ScalarProperty Name="IsComplect" ColumnName="IsComplect" />
           <ScalarProperty Name="IsAdditionalMaterial" ColumnName="IsAdditionalMaterial" />
-          <ScalarProperty Name="IsAbstract" ColumnName="IsAbstract" />
           <ScalarProperty Name="IsNeedBadge" ColumnName="IsNeedBadge" />
           <ScalarProperty Name="IsAutoreg" ColumnName="IsAutoreg" />
           <ScalarProperty Name="SourceId" ColumnName="SourceId" />
