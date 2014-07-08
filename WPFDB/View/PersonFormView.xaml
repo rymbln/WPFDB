@@ -4,7 +4,7 @@
         xmlns:vm="clr-namespace:WPFDB.ViewModel"
         xmlns:view="clr-namespace:WPFDB.View"
         xmlns:p="clr-namespace:WPFDB.Properties"
-        Title="PersonFormView" MinHeight="600" MinWidth="1024">
+        Title="PersonFormView" MinHeight="600" MinWidth="1024" Width="1024" Height="600">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:PersonViewModel}">
             <view:PersonDetailView />

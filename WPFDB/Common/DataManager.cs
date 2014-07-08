@@ -157,8 +157,8 @@ namespace WPFDB.Common
             foreach (object addedEntity in AddedCollection)
             {
                 underlyingContext.Detach(addedEntity);
-            } 
- 
+            }
+
         }
 
 
@@ -279,6 +279,34 @@ namespace WPFDB.Common
         {
             personRepository.Add(obj);
 
+        }
+
+        public void AddAbstractStatus(AbstractStatus obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("abstractStatus");
+            }
+            underlyingContext.AbstractStatuses.AddObject(obj);
+        }
+
+        public void AddAbstractWork(AbstractWork obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("abstractWork");
+            }
+            underlyingContext.AbstractWorks.AddObject(obj);
+        }
+
+     
+        public void AddAbstract(Abstract obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("abstract");
+            }
+            underlyingContext.Abstracts.AddObject(obj);
         }
 
         public void AddPersonConference(PersonConference obj)
@@ -495,7 +523,7 @@ namespace WPFDB.Common
                 underlyingContext.PersonConferences.DeleteObject(obj);
             }
             Save();
- 
+
             foreach (var obj in underlyingContext.Persons)
             {
                 foreach (var email in obj.Emails.ToList())
@@ -559,7 +587,20 @@ namespace WPFDB.Common
         }
 
         public void FillData()
-        {
+        {      
+            AddUser(new User { Id = GuidComb.Generate(), Name = "user", Password = "user", Email = "user@example.com",Role = "user" });
+            AddUser(new User { Id = GuidComb.Generate(), Name = "admin", Password = "admin", Email = "admin@example.com",  Role = "admin" });
+            AddUser(new User { Id = GuidComb.Generate(), Name = "111", Password = "111", Email = "111@example.com",  Role = "user" });
+            Save();
+    
+            AddAbstractStatus(new AbstractStatus {Id=GuidComb.Generate(), Code = "-", Name = "-"});
+            AddAbstractStatus(new AbstractStatus { Id = GuidComb.Generate(), Code = "I", Name = "In work" });
+            AddAbstractStatus(new AbstractStatus { Id = GuidComb.Generate(), Code = "RV", Name = "Revision" });
+            AddAbstractStatus(new AbstractStatus { Id = GuidComb.Generate(), Code = "A", Name = "Accepted" });
+            AddAbstractStatus(new AbstractStatus { Id = GuidComb.Generate(), Code = "RJ", Name = "Rejected" });
+            AddAbstractStatus(new AbstractStatus { Id = GuidComb.Generate(), Code = "R2", Name = "Rejected Twice" });
+            Save();
+
             AddContactType(new ContactType{Id=GuidComb.Generate(), Code = "-", Name="-"});
             AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "H", Name = "Home" });
             AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "W", Name = "Work" });
@@ -604,11 +645,7 @@ namespace WPFDB.Common
             AddPaymentType(new PaymentType { Id = GuidComb.Generate(), Code = "", Name = "Payment type 1" });
             AddPaymentType(new PaymentType { Id = GuidComb.Generate(), Code = "", Name = "Payment type 2" });
             Save();
-            AddUser(new User { Id = GuidComb.Generate(), Name = "user", Password = "user", Role = "user" });
-            AddUser(new User { Id = GuidComb.Generate(), Name = "admin", Password = "admin", Role = "admin" });
-            AddUser(new User { Id = GuidComb.Generate(), Name = "111", Password = "111", Role = "user" });
-            Save();
-            var person = new Person
+              var person = new Person
             {
                 Id = GuidComb.Generate(),
                 BirthDate = Convert.ToDateTime("01.01.1990"),
@@ -878,5 +915,11 @@ namespace WPFDB.Common
             this.underlyingContext.Phones.DeleteObject(phone);
         }
 
+        public IEnumerable<AbstractStatus> GetAllAbstractStatuses()
+        {
+            return this.underlyingContext.AbstractStatuses.ToList();
+        }
+
+   
     }
 }

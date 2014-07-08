@@ -15,6 +15,10 @@
         <DataTemplate DataType="{x:Type vm:PersonConferencePaymentViewModel}">
             <v:PersonConferencePaymentView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PersonConferenceViewModel}">
+            <v:PersonConferenceView/>
+        </DataTemplate>
+
     </UserControl.Resources>
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top">
@@ -50,12 +54,10 @@
             </HeaderedContentControl.Header>
             <ScrollViewer>
                 <HeaderedContentControl>
-                    <DataGrid SelectedItem="{Binding Path=CurrentPersonConference}" ItemsSource="{Binding Path=AllPersonConferences}" AutoGenerateColumns="False" GridLinesVisibility="None" >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Binding="{Binding Path=CurrentConferenceName, Mode=OneWay}" IsReadOnly="True"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </HeaderedContentControl>
+                        <ListBox BorderThickness="0" 
+                     SelectedItem="{Binding Path=CurrentPersonConference, Mode=TwoWay}" 
+                     ItemsSource="{Binding Path=AllPersonConferences, UpdateSourceTrigger=PropertyChanged}" />
+                    </HeaderedContentControl>
             </ScrollViewer>
         </HeaderedContentControl>
         <HeaderedContentControl Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource SubDisplayArea}" >

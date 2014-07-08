@@ -17,6 +17,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Label Grid.Column="0" Grid.Row="0" Content="Id:" />
@@ -31,6 +32,10 @@
 
             <Label Grid.Column="0" Grid.Row="3" Content="SourceId:" />
             <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Role, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="200" />
+            <Label Grid.Column="0" Grid.Row="4" Content="Email:" />
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="200" />
+
+
         </Grid>
         <Grid DockPanel.Dock="Bottom">
             <Grid.ColumnDefinitions>

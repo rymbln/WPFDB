@@ -58,11 +58,11 @@ namespace WPFDB.ViewModel
 
         public void AddRank()
         {
-            Rank c = this.dm.CreateObject<Rank>();
+            var c = this.dm.CreateObject<Rank>();
             c.Id = GuidComb.Generate();
             dm.AddRank(c);
 
-            RankViewModel vm = new RankViewModel(c);
+            var vm = new RankViewModel(c);
             AllRanks.Add(vm);
             CurrentRank = vm;
         }

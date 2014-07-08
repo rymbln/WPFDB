@@ -41,6 +41,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Width="Auto" Binding="{Binding Path=Id}" IsReadOnly="True" />
                             <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, Mode=TwoWay}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Path=Email, Mode=TwoWay}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Password" Binding="{Binding Path=Password, Mode=TwoWay}" IsReadOnly="True" />
                             <DataGridTextColumn Header="Role" Binding="{Binding Path=Role, Mode=TwoWay}" IsReadOnly="True"/>
                         </DataGrid.Columns>

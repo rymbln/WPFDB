@@ -43,6 +43,13 @@ namespace WPFDB.Data
 
         ObjectSet<Phone>  Phones { get; }
 
+        ObjectSet<Abstract>  Abstracts { get; }
+
+        ObjectSet<AbstractStatus> AbstractStatuses { get;  } 
+
+        ObjectSet<AbstractWork>  AbstractWorks { get;  }
+
+
         //ObjectSet<PersonConferences_Detail> PersonConferenceDetails { get; }
 
         //ObjectSet<PersonConferences_Payment> PersonConferencePayments { get; }  

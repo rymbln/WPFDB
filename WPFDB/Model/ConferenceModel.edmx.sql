@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 07/07/2014 15:48:25
+-- Date Created: 07/08/2014 15:10:37
 -- Generated from EDMX file: C:\Users\rymbln\Documents\GitHub\WPFDB\WPFDB\Model\ConferenceModel.edmx
 -- --------------------------------------------------
 
@@ -77,6 +77,18 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PersonPhone]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Phones] DROP CONSTRAINT [FK_PersonPhone];
 GO
+IF OBJECT_ID(N'[dbo].[FK_PersonConferenceAbstract]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Abstracts] DROP CONSTRAINT [FK_PersonConferenceAbstract];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AbstractAbstractWork]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AbstractWorks] DROP CONSTRAINT [FK_AbstractAbstractWork];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AbstractStatusAbstractWork]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AbstractWorks] DROP CONSTRAINT [FK_AbstractStatusAbstractWork];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserAbstractWork]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AbstractWorks] DROP CONSTRAINT [FK_UserAbstractWork];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -142,6 +154,15 @@ GO
 IF OBJECT_ID(N'[dbo].[Addresses]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Addresses];
 GO
+IF OBJECT_ID(N'[dbo].[Abstracts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Abstracts];
+GO
+IF OBJECT_ID(N'[dbo].[AbstractWorks]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AbstractWorks];
+GO
+IF OBJECT_ID(N'[dbo].[AbstractStatuses]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AbstractStatuses];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -205,7 +226,8 @@ CREATE TABLE [dbo].[Users] (
     [Id] uniqueidentifier  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Password] nvarchar(max)  NOT NULL,
-    [Role] nvarchar(max)  NOT NULL
+    [Role] nvarchar(max)  NOT NULL,
+    [Email] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -361,6 +383,40 @@ CREATE TABLE [dbo].[Addresses] (
 );
 GO
 
+-- Creating table 'Abstracts'
+CREATE TABLE [dbo].[Abstracts] (
+    [Id] uniqueidentifier  NOT NULL,
+    [MainAuthor] nvarchar(max)  NOT NULL,
+    [OtherAuthors] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [Text] nvarchar(max)  NOT NULL,
+    [Link] nvarchar(max)  NOT NULL,
+    [SourceId] nvarchar(max)  NOT NULL,
+    [PersonConferencePersonConferenceId] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'AbstractWorks'
+CREATE TABLE [dbo].[AbstractWorks] (
+    [Id] uniqueidentifier  NOT NULL,
+    [AbstractId] uniqueidentifier  NOT NULL,
+    [AbstractStatusId] uniqueidentifier  NOT NULL,
+    [AbstractResponsiblePersonId] uniqueidentifier  NOT NULL,
+    [IsSentByEmail] bit  NOT NULL,
+    [SourceId] int  NOT NULL,
+    [UserId] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'AbstractStatuses'
+CREATE TABLE [dbo].[AbstractStatuses] (
+    [Id] uniqueidentifier  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -482,6 +538,24 @@ GO
 -- Creating primary key on [Id] in table 'Addresses'
 ALTER TABLE [dbo].[Addresses]
 ADD CONSTRAINT [PK_Addresses]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Abstracts'
+ALTER TABLE [dbo].[Abstracts]
+ADD CONSTRAINT [PK_Abstracts]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'AbstractWorks'
+ALTER TABLE [dbo].[AbstractWorks]
+ADD CONSTRAINT [PK_AbstractWorks]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'AbstractStatuses'
+ALTER TABLE [dbo].[AbstractStatuses]
+ADD CONSTRAINT [PK_AbstractStatuses]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -752,6 +826,62 @@ ADD CONSTRAINT [FK_PersonPhone]
 CREATE INDEX [IX_FK_PersonPhone]
 ON [dbo].[Phones]
     ([PersonId]);
+GO
+
+-- Creating foreign key on [PersonConferencePersonConferenceId] in table 'Abstracts'
+ALTER TABLE [dbo].[Abstracts]
+ADD CONSTRAINT [FK_PersonConferenceAbstract]
+    FOREIGN KEY ([PersonConferencePersonConferenceId])
+    REFERENCES [dbo].[PersonConferences]
+        ([PersonConferenceId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PersonConferenceAbstract'
+CREATE INDEX [IX_FK_PersonConferenceAbstract]
+ON [dbo].[Abstracts]
+    ([PersonConferencePersonConferenceId]);
+GO
+
+-- Creating foreign key on [AbstractId] in table 'AbstractWorks'
+ALTER TABLE [dbo].[AbstractWorks]
+ADD CONSTRAINT [FK_AbstractAbstractWork]
+    FOREIGN KEY ([AbstractId])
+    REFERENCES [dbo].[Abstracts]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AbstractAbstractWork'
+CREATE INDEX [IX_FK_AbstractAbstractWork]
+ON [dbo].[AbstractWorks]
+    ([AbstractId]);
+GO
+
+-- Creating foreign key on [AbstractStatusId] in table 'AbstractWorks'
+ALTER TABLE [dbo].[AbstractWorks]
+ADD CONSTRAINT [FK_AbstractStatusAbstractWork]
+    FOREIGN KEY ([AbstractStatusId])
+    REFERENCES [dbo].[AbstractStatuses]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AbstractStatusAbstractWork'
+CREATE INDEX [IX_FK_AbstractStatusAbstractWork]
+ON [dbo].[AbstractWorks]
+    ([AbstractStatusId]);
+GO
+
+-- Creating foreign key on [UserId] in table 'AbstractWorks'
+ALTER TABLE [dbo].[AbstractWorks]
+ADD CONSTRAINT [FK_UserAbstractWork]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[Users]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserAbstractWork'
+CREATE INDEX [IX_FK_UserAbstractWork]
+ON [dbo].[AbstractWorks]
+    ([UserId]);
 GO
 
 -- --------------------------------------------------

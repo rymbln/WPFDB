@@ -34,6 +34,13 @@ namespace WPFDB.ViewModel
            set { this.Model.Name = value; this.OnPropertyChanged("Name"); }
        }
 
+       public string Email
+       {
+           get { return this.Model.Email; }
+           set { this.Model.Email = value; this.OnPropertyChanged("Email"); }
+       }
+
+
        public string Password
        {
            get { return this.Model.Password; }

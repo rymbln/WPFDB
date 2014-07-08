@@ -26,6 +26,9 @@
     <EntitySet Name="Emails" EntityType="ConferenceModel.Store.Emails" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Phones" EntityType="ConferenceModel.Store.Phones" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Addresses" EntityType="ConferenceModel.Store.Addresses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Abstracts" EntityType="ConferenceModel.Store.Abstracts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AbstractWorks" EntityType="ConferenceModel.Store.AbstractWorks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AbstractStatuses" EntityType="ConferenceModel.Store.AbstractStatuses" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ScienceDegreePerson" Association="ConferenceModel.Store.FK_ScienceDegreePerson">
       <End Role="ScienceDegrees" EntitySet="ScienceDegrees" />
       <End Role="Persons" EntitySet="Persons" />
@@ -106,6 +109,22 @@
       <End Role="Person" EntitySet="Persons" />
       <End Role="Phone" EntitySet="Phones" />
     </AssociationSet>
+    <AssociationSet Name="PersonConferenceAbstract" Association="ConferenceModel.Store.PersonConferenceAbstract">
+      <End Role="PersonConference" EntitySet="PersonConferences" />
+      <End Role="Abstract" EntitySet="Abstracts" />
+    </AssociationSet>
+    <AssociationSet Name="AbstractAbstractWork" Association="ConferenceModel.Store.AbstractAbstractWork">
+      <End Role="Abstract" EntitySet="Abstracts" />
+      <End Role="AbstractWork" EntitySet="AbstractWorks" />
+    </AssociationSet>
+    <AssociationSet Name="AbstractStatusAbstractWork" Association="ConferenceModel.Store.AbstractStatusAbstractWork">
+      <End Role="AbstractStatus" EntitySet="AbstractStatuses" />
+      <End Role="AbstractWork" EntitySet="AbstractWorks" />
+    </AssociationSet>
+    <AssociationSet Name="UserAbstractWork" Association="ConferenceModel.Store.UserAbstractWork">
+      <End Role="User" EntitySet="Users" />
+      <End Role="AbstractWork" EntitySet="AbstractWorks" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Persons">
     <Key>
@@ -168,6 +187,7 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Role" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Properties">
     <Key>
@@ -320,6 +340,40 @@
     <Property Name="SourceId" Type="int" Nullable="false" />
     <Property Name="ContactTypeId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Abstracts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MainAuthor" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OtherAuthors" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Link" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SourceId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PersonConferencePersonConferenceId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AbstractWorks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AbstractId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AbstractStatusId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AbstractResponsiblePersonId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsSentByEmail" Type="bit" Nullable="false" />
+    <Property Name="SourceId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AbstractStatuses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SourceId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_ScienceDegreePerson">
     <End Role="ScienceDegrees" Type="ConferenceModel.Store.ScienceDegrees" Multiplicity="1" />
@@ -567,6 +621,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="PersonConferenceAbstract">
+    <End Role="PersonConference" Type="ConferenceModel.Store.PersonConferences" Multiplicity="1" />
+    <End Role="Abstract" Type="ConferenceModel.Store.Abstracts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonConference">
+        <PropertyRef Name="PersonConferenceId" />
+      </Principal>
+      <Dependent Role="Abstract">
+        <PropertyRef Name="PersonConferencePersonConferenceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AbstractAbstractWork">
+    <End Role="Abstract" Type="ConferenceModel.Store.Abstracts" Multiplicity="1" />
+    <End Role="AbstractWork" Type="ConferenceModel.Store.AbstractWorks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Abstract">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AbstractWork">
+        <PropertyRef Name="AbstractId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AbstractStatusAbstractWork">
+    <End Role="AbstractStatus" Type="ConferenceModel.Store.AbstractStatuses" Multiplicity="1" />
+    <End Role="AbstractWork" Type="ConferenceModel.Store.AbstractWorks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AbstractStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AbstractWork">
+        <PropertyRef Name="AbstractStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserAbstractWork">
+    <End Role="User" Type="ConferenceModel.Store.Users" Multiplicity="1" />
+    <End Role="AbstractWork" Type="ConferenceModel.Store.AbstractWorks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AbstractWork">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -671,6 +773,25 @@
           <AssociationSet Name="PersonPhone" Association="ConferenceModel.PersonPhone">
             <End Role="Person" EntitySet="Persons" />
             <End Role="Phone" EntitySet="Phones" />
+          </AssociationSet>
+          <EntitySet Name="Abstracts" EntityType="ConferenceModel.Abstract" />
+          <AssociationSet Name="PersonConferenceAbstract" Association="ConferenceModel.PersonConferenceAbstract">
+            <End Role="PersonConference" EntitySet="PersonConferences" />
+            <End Role="Abstract" EntitySet="Abstracts" />
+          </AssociationSet>
+          <EntitySet Name="AbstractWorks" EntityType="ConferenceModel.AbstractWork" />
+          <EntitySet Name="AbstractStatuses" EntityType="ConferenceModel.AbstractStatus" />
+          <AssociationSet Name="AbstractAbstractWork" Association="ConferenceModel.AbstractAbstractWork">
+            <End Role="Abstract" EntitySet="Abstracts" />
+            <End Role="AbstractWork" EntitySet="AbstractWorks" />
+          </AssociationSet>
+          <AssociationSet Name="AbstractStatusAbstractWork" Association="ConferenceModel.AbstractStatusAbstractWork">
+            <End Role="AbstractStatus" EntitySet="AbstractStatuses" />
+            <End Role="AbstractWork" EntitySet="AbstractWorks" />
+          </AssociationSet>
+          <AssociationSet Name="UserAbstractWork" Association="ConferenceModel.UserAbstractWork">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AbstractWork" EntitySet="AbstractWorks" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Person">
@@ -805,6 +926,8 @@
           <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="String" Name="Password" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="String" Name="Role" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="AbstractWorks" Relationship="ConferenceModel.UserAbstractWork" FromRole="User" ToRole="AbstractWork" />
+          <Property Type="String" Name="Email" Nullable="false" />
         </EntityType>
         <EntityType Name="Propertie">
           <Key>
@@ -830,6 +953,7 @@
           <Property Type="Guid" Name="ConferenceId" Nullable="false" />
           <NavigationProperty Name="PersonConferences_Detail" Relationship="ConferenceModel.FK_Detail_inherits_PersonConference" FromRole="PersonConference" ToRole="PersonConferences_Detail" />
           <NavigationProperty Name="PersonConferences_Payment" Relationship="ConferenceModel.FK_Payment_inherits_PersonConference" FromRole="PersonConference" ToRole="PersonConferences_Payment" />
+          <NavigationProperty Name="Abstracts" Relationship="ConferenceModel.PersonConferenceAbstract" FromRole="PersonConference" ToRole="Abstract" />
         </EntityType>
         <EntityType Name="Rank">
           <Key>
@@ -1164,6 +1288,94 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Abstract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Type="String" Name="MainAuthor" Nullable="false" />
+          <Property Type="String" Name="OtherAuthors" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="String" Name="Text" Nullable="false" />
+          <Property Type="String" Name="Link" Nullable="false" />
+          <Property Type="String" Name="SourceId" Nullable="false" />
+          <NavigationProperty Name="PersonConference" Relationship="ConferenceModel.PersonConferenceAbstract" FromRole="Abstract" ToRole="PersonConference" />
+          <Property Type="Guid" Name="PersonConferencePersonConferenceId" Nullable="false" />
+          <NavigationProperty Name="AbstractWorks" Relationship="ConferenceModel.AbstractAbstractWork" FromRole="Abstract" ToRole="AbstractWork" />
+        </EntityType>
+        <Association Name="PersonConferenceAbstract">
+          <End Type="ConferenceModel.PersonConference" Role="PersonConference" Multiplicity="1" />
+          <End Type="ConferenceModel.Abstract" Role="Abstract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonConference">
+              <PropertyRef Name="PersonConferenceId" />
+            </Principal>
+            <Dependent Role="Abstract">
+              <PropertyRef Name="PersonConferencePersonConferenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AbstractWork">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="Abstract" Relationship="ConferenceModel.AbstractAbstractWork" FromRole="AbstractWork" ToRole="Abstract" />
+          <Property Type="Guid" Name="AbstractId" Nullable="false" />
+          <NavigationProperty Name="AbstractStatus" Relationship="ConferenceModel.AbstractStatusAbstractWork" FromRole="AbstractWork" ToRole="AbstractStatus" />
+          <Property Type="Guid" Name="AbstractStatusId" Nullable="false" />
+          <Property Type="Guid" Name="AbstractResponsiblePersonId" Nullable="false" />
+          <Property Type="Boolean" Name="IsSentByEmail" Nullable="false" />
+          <Property Type="Int32" Name="SourceId" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="ConferenceModel.UserAbstractWork" FromRole="AbstractWork" ToRole="User" />
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AbstractStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Type="String" Name="Code" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="Int32" Name="SourceId" Nullable="false" />
+          <NavigationProperty Name="AbstractWorks" Relationship="ConferenceModel.AbstractStatusAbstractWork" FromRole="AbstractStatus" ToRole="AbstractWork" />
+        </EntityType>
+        <Association Name="AbstractAbstractWork">
+          <End Type="ConferenceModel.Abstract" Role="Abstract" Multiplicity="1" />
+          <End Type="ConferenceModel.AbstractWork" Role="AbstractWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Abstract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AbstractWork">
+              <PropertyRef Name="AbstractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AbstractStatusAbstractWork">
+          <End Type="ConferenceModel.AbstractStatus" Role="AbstractStatus" Multiplicity="1" />
+          <End Type="ConferenceModel.AbstractWork" Role="AbstractWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AbstractStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AbstractWork">
+              <PropertyRef Name="AbstractStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserAbstractWork">
+          <End Type="ConferenceModel.User" Role="User" Multiplicity="1" />
+          <End Type="ConferenceModel.AbstractWork" Role="AbstractWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AbstractWork">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1235,6 +1447,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1400,6 +1613,43 @@
           <ScalarProperty Name="SourceId" ColumnName="SourceId" />
           <ScalarProperty Name="ContactTypeId" ColumnName="ContactTypeId" />
           <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Abstracts">
+      <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.Abstract)">
+        <MappingFragment StoreEntitySet="Abstracts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MainAuthor" ColumnName="MainAuthor" />
+          <ScalarProperty Name="OtherAuthors" ColumnName="OtherAuthors" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+          <ScalarProperty Name="PersonConferencePersonConferenceId" ColumnName="PersonConferencePersonConferenceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AbstractWorks">
+      <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.AbstractWork)">
+        <MappingFragment StoreEntitySet="AbstractWorks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AbstractId" ColumnName="AbstractId" />
+          <ScalarProperty Name="AbstractStatusId" ColumnName="AbstractStatusId" />
+          <ScalarProperty Name="AbstractResponsiblePersonId" ColumnName="AbstractResponsiblePersonId" />
+          <ScalarProperty Name="IsSentByEmail" ColumnName="IsSentByEmail" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AbstractStatuses">
+      <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.AbstractStatus)">
+        <MappingFragment StoreEntitySet="AbstractStatuses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

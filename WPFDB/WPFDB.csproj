@@ -92,6 +92,8 @@
     <Compile Include="ViewModel\ContactTypeViewModel.cs" />
     <Compile Include="ViewModel\ContactTypeWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\EmailViewModel.cs" />
+    <Compile Include="ViewModel\Knowalls\AbstractStatusViewModel.cs" />
+    <Compile Include="ViewModel\Knowalls\AbstractStatusWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\CompanyViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\CompanyWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\OrderStatusViewModel.cs" />
@@ -139,6 +141,12 @@
     <Compile Include="View\ContactTypeWorkspaceView.xaml.cs">
       <DependentUpon>ContactTypeWorkspaceView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Knowalls\AbstractStatusDetailView.xaml.cs">
+      <DependentUpon>AbstractStatusDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Knowalls\AbstractStatusWorkspaceView.xaml.cs">
+      <DependentUpon>AbstractStatusWorkspaceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Knowalls\OrderStatusDetailView.xaml.cs">
       <DependentUpon>OrderStatusDetailView.xaml</DependentUpon>
     </Compile>
@@ -171,6 +179,9 @@
     </Compile>
     <Compile Include="View\Knowalls\PaymentTypeWorkspaceView.xaml.cs">
       <DependentUpon>PaymentTypeWorkspaceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PersonConferenceView.xaml.cs">
+      <DependentUpon>PersonConferenceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PersonDetailView.xaml.cs">
       <DependentUpon>PersonDetailView.xaml</DependentUpon>
@@ -253,6 +264,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Knowalls\AbstractStatusDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Knowalls\AbstractStatusWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Knowalls\OrderStatusDetailView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -306,6 +325,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Knowalls\PaymentTypeWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PersonConferenceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

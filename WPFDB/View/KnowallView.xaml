@@ -4,7 +4,7 @@
         xmlns:vm="clr-namespace:WPFDB.ViewModel"
         xmlns:view="clr-namespace:WPFDB.View"
         xmlns:p="clr-namespace:WPFDB.Properties"
-        Title="KnowallView" Height="300" Width="300">
+        Title="KnowallView" Height="600" Width="1024" MinWidth="1024" MinHeight="600">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:SpecialityWorkspaceViewModel}">
             <view:SpecialityWorkspaceView/>
@@ -39,6 +39,10 @@
         <DataTemplate DataType="{x:Type vm:ContactTypeWorkspaceViewModel}">
             <view:ContactTypeWorkspaceView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AbstractStatusWorkspaceViewModel}">
+            <view:AbstractStatusWorkspaceView/>
+        </DataTemplate>
+    
     </Window.Resources>
     <DockPanel>
     <ToolBarTray DockPanel.Dock="Top">
@@ -99,6 +103,11 @@
                     <TabItem.Header>Contact Types</TabItem.Header>
                     <ContentControl Margin="10"  Content="{Binding Path=.ContactTypeWorkspace}"  />
                 </TabItem>
+                <TabItem>
+                    <TabItem.Header>Abstract Statuses</TabItem.Header>
+                    <ContentControl Margin="10"  Content="{Binding Path=.AbstractStatusWorkspace}"  />
+                </TabItem>
+            
             </TabControl>
     </Grid>
     </DockPanel>
