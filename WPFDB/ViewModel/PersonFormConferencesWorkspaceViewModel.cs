@@ -29,6 +29,7 @@ namespace WPFDB.ViewModel
         public ICommand RemovePersonConferenceCommand { get; private set; }
         public ICommand PrintBadgeCommand { get; private set; }
         public ICommand PrintOrderCommand { get; private set; }
+        public ICommand SaveCommand { get; private set; }
 
         public PersonFormConferencesWorkspaceViewModel(PersonViewModel person)
         {
@@ -57,7 +58,8 @@ namespace WPFDB.ViewModel
             this.PrintBadgeCommand = new DelegateCommand((o)=> PrintBadge());
             this.PrintOrderCommand = new DelegateCommand((o) => PrintOrder());
             this.AddPersonConferenceCommand = new DelegateCommand((o) => this.AddPersonConference());
-            this.RemovePersonConferenceCommand = new DelegateCommand((o) => this.RemoveCurrentPersonConference());
+            this.RemovePersonConferenceCommand = new DelegateCommand((o) => this.RemoveCurrentPersonConference(), (o) => this.CurrentPersonConference != null);
+            this.SaveCommand = new DelegateCommand((o) => this.Save());
         }
 
         public ConferenceViewModel CurrentConference
@@ -125,7 +127,7 @@ namespace WPFDB.ViewModel
             {
                 Company = DataManager.Instance.GetDefaultCompany(),
                 DateArrive = DateTime.Now,
-                IsAdditionalMaterial = true,
+                IsAbstract = false,
                 IsAutoreg = true,
                 IsBadge = true,
                 IsNeedBadge = true,
@@ -167,6 +169,11 @@ namespace WPFDB.ViewModel
         public void PrintOrder()
         {
             
+        }
+
+        private void Save()
+        {
+            this.dm.Save();
         }
 
 

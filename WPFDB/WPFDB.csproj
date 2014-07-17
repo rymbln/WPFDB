@@ -88,6 +88,7 @@
     </Compile>
     <Compile Include="Validation\Helpers\ExcludeChar.cs" />
     <Compile Include="Validation\Helpers\Unique.cs" />
+    <Compile Include="ViewModel\AbstractViewModel.cs" />
     <Compile Include="ViewModel\AddressViewModel.cs" />
     <Compile Include="ViewModel\ContactTypeViewModel.cs" />
     <Compile Include="ViewModel\ContactTypeWorkspaceViewModel.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="ViewModel\PersonConferencePaymentViewModel.cs" />
     <Compile Include="ViewModel\PersonConferenceViewModel.cs" />
     <Compile Include="ViewModel\PersonConferenceWorkspaceViewModel.cs" />
+    <Compile Include="ViewModel\PersonFormAbstractWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\PersonFormConferencesWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\PersonFormContactsWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\PersonFormViewModel.cs" />
@@ -129,8 +131,17 @@
     <Compile Include="ViewModel\Knowalls\UserViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\UserWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\PhoneViewModel.cs" />
+    <Compile Include="View\AbstractDetailView.xaml.cs">
+      <DependentUpon>AbstractDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AbstractItemView.xaml.cs">
+      <DependentUpon>AbstractItemView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddressView.xaml.cs">
       <DependentUpon>AddressView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PersonFormAbstractWorkspaceView.xaml.cs">
+      <DependentUpon>PersonFormAbstractWorkspaceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EmailView.xaml.cs">
       <DependentUpon>EmailView.xaml</DependentUpon>
@@ -248,9 +259,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AbstractDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AbstractItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddressView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PersonFormAbstractWorkspaceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\EmailView.xaml">
       <SubType>Designer</SubType>

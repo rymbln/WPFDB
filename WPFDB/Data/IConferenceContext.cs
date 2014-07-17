@@ -49,7 +49,6 @@ namespace WPFDB.Data
 
         ObjectSet<AbstractWork>  AbstractWorks { get;  }
 
-
         //ObjectSet<PersonConferences_Detail> PersonConferenceDetails { get; }
 
         //ObjectSet<PersonConferences_Payment> PersonConferencePayments { get; }  

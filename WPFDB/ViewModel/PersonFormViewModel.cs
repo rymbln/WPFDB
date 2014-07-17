@@ -23,6 +23,8 @@ namespace WPFDB.ViewModel
             this.CancelCommand = new DelegateCommand((o) => this.Cancel());
             this.PersonFormConferenceWorkspace = new PersonFormConferencesWorkspaceViewModel(CurrentPerson);
             this.PersonFormContactsWorkspace = new PersonFormContactsWorkspaceViewModel(CurrentPerson);
+            this.PersonFormAbstractWorkspace = new PersonFormAbstractWorkspaceViewModel(CurrentPerson);
+            
         }
 
         public PersonViewModel CurrentPerson
@@ -35,7 +37,7 @@ namespace WPFDB.ViewModel
         }
         public PersonFormConferencesWorkspaceViewModel PersonFormConferenceWorkspace { get; private set; }
         public PersonFormContactsWorkspaceViewModel PersonFormContactsWorkspace { get; private set; }
-
+        public PersonFormAbstractWorkspaceViewModel PersonFormAbstractWorkspace { get; private set; }
 
         public ICommand SaveCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }

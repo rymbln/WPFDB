@@ -255,7 +255,7 @@
     <Property Name="IsBadge" Type="bit" Nullable="false" />
     <Property Name="IsArrive" Type="bit" Nullable="false" />
     <Property Name="DateArrive" Type="datetime" Nullable="false" />
-    <Property Name="IsAdditionalMaterial" Type="bit" Nullable="false" />
+    <Property Name="IsAbstract" Type="bit" Nullable="false" />
     <Property Name="IsNeedBadge" Type="bit" Nullable="false" />
     <Property Name="IsAutoreg" Type="bit" Nullable="false" />
     <Property Name="SourceId" Type="int" Nullable="false" />
@@ -346,13 +346,12 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="MainAuthor" Type="nvarchar(max)" Nullable="false" />
     <Property Name="OtherAuthors" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Link" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PersonConferencePersonConferenceId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SourceId" Type="int" Nullable="false" />
+    <Property Name="PersonConferenceId" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="AbstractWorks">
     <Key>
@@ -629,7 +628,7 @@
         <PropertyRef Name="PersonConferenceId" />
       </Principal>
       <Dependent Role="Abstract">
-        <PropertyRef Name="PersonConferencePersonConferenceId" />
+        <PropertyRef Name="PersonConferenceId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1019,7 +1018,7 @@
           <Property Type="Boolean" Name="IsBadge" Nullable="false" />
           <Property Type="Boolean" Name="IsArrive" Nullable="false" />
           <Property Type="DateTime" Name="DateArrive" Nullable="false" Precision="3" />
-          <Property Type="Boolean" Name="IsAdditionalMaterial" Nullable="false" />
+          <Property Type="Boolean" Name="IsAbstract" Nullable="false" />
           <Property Type="Boolean" Name="IsNeedBadge" Nullable="false" />
           <Property Type="Boolean" Name="IsAutoreg" Nullable="false" />
           <Property Type="Int32" Name="SourceId" Nullable="false" />
@@ -1293,14 +1292,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Guid" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Type="String" Name="MainAuthor" Nullable="false" />
           <Property Type="String" Name="OtherAuthors" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" />
           <Property Type="String" Name="Text" Nullable="false" />
           <Property Type="String" Name="Link" Nullable="false" />
-          <Property Type="String" Name="SourceId" Nullable="false" />
+          <Property Type="Int32" Name="SourceId" Nullable="false" />
           <NavigationProperty Name="PersonConference" Relationship="ConferenceModel.PersonConferenceAbstract" FromRole="Abstract" ToRole="PersonConference" />
-          <Property Type="Guid" Name="PersonConferencePersonConferenceId" Nullable="false" />
+          <Property Type="Guid" Name="PersonConferenceId" Nullable="false" />
           <NavigationProperty Name="AbstractWorks" Relationship="ConferenceModel.AbstractAbstractWork" FromRole="Abstract" ToRole="AbstractWork" />
         </EntityType>
         <Association Name="PersonConferenceAbstract">
@@ -1311,7 +1309,7 @@
               <PropertyRef Name="PersonConferenceId" />
             </Principal>
             <Dependent Role="Abstract">
-              <PropertyRef Name="PersonConferencePersonConferenceId" />
+              <PropertyRef Name="PersonConferenceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1523,7 +1521,7 @@
           <ScalarProperty Name="IsBadge" ColumnName="IsBadge" />
           <ScalarProperty Name="IsArrive" ColumnName="IsArrive" />
           <ScalarProperty Name="DateArrive" ColumnName="DateArrive" />
-          <ScalarProperty Name="IsAdditionalMaterial" ColumnName="IsAdditionalMaterial" />
+          <ScalarProperty Name="IsAbstract" ColumnName="IsAbstract" />
           <ScalarProperty Name="IsNeedBadge" ColumnName="IsNeedBadge" />
           <ScalarProperty Name="IsAutoreg" ColumnName="IsAutoreg" />
           <ScalarProperty Name="SourceId" ColumnName="SourceId" />
@@ -1620,13 +1618,12 @@
       <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.Abstract)">
         <MappingFragment StoreEntitySet="Abstracts">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="MainAuthor" ColumnName="MainAuthor" />
           <ScalarProperty Name="OtherAuthors" ColumnName="OtherAuthors" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Text" ColumnName="Text" />
           <ScalarProperty Name="Link" ColumnName="Link" />
           <ScalarProperty Name="SourceId" ColumnName="SourceId" />
-          <ScalarProperty Name="PersonConferencePersonConferenceId" ColumnName="PersonConferencePersonConferenceId" />
+          <ScalarProperty Name="PersonConferenceId" ColumnName="PersonConferenceId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

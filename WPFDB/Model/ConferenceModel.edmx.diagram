@@ -5,40 +5,40 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9ffa1558e2ec428fb9ad3c019492ac9b" Name="Diagram1" ZoomLevel="88" DisplayType="true">
-        <EntityTypeShape EntityType="ConferenceModel.Person" Width="2.25" PointX="3" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConferenceModel.ScienceDegree" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConferenceModel.ScienceStatus" Width="1.5" PointX="0.75" PointY="13.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConferenceModel.Sex" Width="1.5" PointX="0.75" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConferenceModel.Speciality" Width="1.5" PointX="0.75" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConferenceModel.Person" Width="2.25" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConferenceModel.ScienceDegree" Width="1.5" PointX="5.625" PointY="10.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="ConferenceModel.ScienceStatus" Width="1.5" PointX="5.625" PointY="9.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="ConferenceModel.Sex" Width="1.5" PointX="5.625" PointY="8.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="ConferenceModel.Speciality" Width="1.5" PointX="5.5" PointY="8.125" IsExpanded="false" />
         <AssociationConnector Association="ConferenceModel.FK_ScienceDegreePerson" ManuallyRouted="false" />
         <AssociationConnector Association="ConferenceModel.FK_ScienceStatusPerson" ManuallyRouted="false" />
         <AssociationConnector Association="ConferenceModel.FK_SexPerson" ManuallyRouted="false" />
         <AssociationConnector Association="ConferenceModel.FK_SpecialityPerson" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ConferenceModel.Conference" Width="1.75" PointX="3.5" PointY="18.625" />
-        <EntityTypeShape EntityType="ConferenceModel.User" Width="2.75" PointX="17.5" PointY="22.75" />
+        <EntityTypeShape EntityType="ConferenceModel.Conference" Width="1.75" PointX="8.25" PointY="15.375" />
+        <EntityTypeShape EntityType="ConferenceModel.User" Width="2.75" PointX="19.125" PointY="18" />
         <EntityTypeShape EntityType="ConferenceModel.Propertie" Width="2.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ConferenceModel.PersonConference" Width="2.375" PointX="6" PointY="13.375" />
-        <EntityTypeShape EntityType="ConferenceModel.Rank" Width="1.5" PointX="10.875" PointY="17.625" />
-        <EntityTypeShape EntityType="ConferenceModel.Company" Width="2.5" PointX="5.875" PointY="5.125" />
-        <EntityTypeShape EntityType="ConferenceModel.PaymentType" Width="2.25" PointX="6.125" PointY="2.125" />
+        <EntityTypeShape EntityType="ConferenceModel.PersonConference" Width="2.375" PointX="8.125" PointY="12.375" />
+        <EntityTypeShape EntityType="ConferenceModel.Rank" Width="1.5" PointX="14.625" PointY="15.5" />
+        <EntityTypeShape EntityType="ConferenceModel.Company" Width="2.5" PointX="15" PointY="10.5" />
+        <EntityTypeShape EntityType="ConferenceModel.PaymentType" Width="2.25" PointX="14.625" PointY="4.625" />
         <AssociationConnector Association="ConferenceModel.PersonPersonConference" />
         <AssociationConnector Association="ConferenceModel.ConferencePersonConference" />
-        <EntityTypeShape EntityType="ConferenceModel.PersonConferences_Detail" Width="2.375" PointX="13.125" PointY="12.875" />
-        <EntityTypeShape EntityType="ConferenceModel.PersonConferences_Payment" Width="2.25" PointX="9.125" PointY="7.875" />
+        <EntityTypeShape EntityType="ConferenceModel.PersonConferences_Detail" Width="2.375" PointX="11.625" PointY="13" />
+        <EntityTypeShape EntityType="ConferenceModel.PersonConferences_Payment" Width="2.25" PointX="11.625" PointY="6.625" />
         <AssociationConnector Association="ConferenceModel.FK_CompanyPersonConferenceDetail" />
         <AssociationConnector Association="ConferenceModel.FK_CompanyPersonConferenceMoney" />
         <AssociationConnector Association="ConferenceModel.FK_PaymentTypePersonConferenceMoney" />
         <AssociationConnector Association="ConferenceModel.FK_Detail_inherits_PersonConference" />
         <AssociationConnector Association="ConferenceModel.FK_Payment_inherits_PersonConference" />
         <AssociationConnector Association="ConferenceModel.FK_RankPersonConferenceDetail" />
-        <EntityTypeShape EntityType="ConferenceModel.Iacmac" Width="2.25" PointX="6" PointY="27" />
+        <EntityTypeShape EntityType="ConferenceModel.Iacmac" Width="2.25" PointX="5.25" PointY="17.625" />
         <AssociationConnector Association="ConferenceModel.PersonIacmac" />
-        <EntityTypeShape EntityType="ConferenceModel.OrderStatus" Width="2.25" PointX="12.125" PointY="8.625" />
+        <EntityTypeShape EntityType="ConferenceModel.OrderStatus" Width="2.25" PointX="14.625" PointY="7.375" />
         <AssociationConnector Association="ConferenceModel.PersonConferences_PaymentOrderStatus" />
-        <EntityTypeShape EntityType="ConferenceModel.ContactType" Width="1.5" PointX="3.75" PointY="8.5" />
-        <EntityTypeShape EntityType="ConferenceModel.Email" Width="1.75" PointX="6" PointY="9.5" />
-        <EntityTypeShape EntityType="ConferenceModel.Phone" Width="2" PointX="6" PointY="17.5" />
-        <EntityTypeShape EntityType="ConferenceModel.Address" Width="2.375" PointX="10" PointY="13" />
+        <EntityTypeShape EntityType="ConferenceModel.ContactType" Width="1.5" PointX="0.5" PointY="13.125" />
+        <EntityTypeShape EntityType="ConferenceModel.Email" Width="1.75" PointX="2.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConferenceModel.Phone" Width="2" PointX="2.75" PointY="15.25" />
+        <EntityTypeShape EntityType="ConferenceModel.Address" Width="2.375" PointX="2.25" PointY="9.125" />
         <AssociationConnector Association="ConferenceModel.ContactTypeEmail" />
         <AssociationConnector Association="ConferenceModel.ContactTypePhone" />
         <AssociationConnector Association="ConferenceModel.ContactTypeAddress" ManuallyRouted="false" >
@@ -46,10 +46,10 @@
         <AssociationConnector Association="ConferenceModel.PersonAddress" />
         <AssociationConnector Association="ConferenceModel.PersonEmail" />
         <AssociationConnector Association="ConferenceModel.PersonPhone" />
-        <EntityTypeShape EntityType="ConferenceModel.Abstract" Width="3.375" PointX="9.125" PointY="21.75" />
+        <EntityTypeShape EntityType="ConferenceModel.Abstract" Width="3.375" PointX="11.375" PointY="18.125" />
         <AssociationConnector Association="ConferenceModel.PersonConferenceAbstract" />
-        <EntityTypeShape EntityType="ConferenceModel.AbstractWork" Width="2.625" PointX="13.25" PointY="21.75" />
-        <EntityTypeShape EntityType="ConferenceModel.AbstractStatus" Width="1.5" PointX="11" PointY="25.75" />
+        <EntityTypeShape EntityType="ConferenceModel.AbstractWork" Width="2.625" PointX="15.5" PointY="18" />
+        <EntityTypeShape EntityType="ConferenceModel.AbstractStatus" Width="1.5" PointX="15.125" PointY="21.75" />
         <AssociationConnector Association="ConferenceModel.AbstractAbstractWork" />
         <AssociationConnector Association="ConferenceModel.AbstractStatusAbstractWork" />
         <AssociationConnector Association="ConferenceModel.UserAbstractWork" />

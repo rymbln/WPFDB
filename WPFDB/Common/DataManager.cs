@@ -693,7 +693,7 @@ namespace WPFDB.Common
             {
                 Company = companyRepository.GetByName("-"),
                 DateArrive = Convert.ToDateTime("12.12.2014"),
-                IsAdditionalMaterial = true,
+                IsAbstract = false,
                 IsAutoreg = true,
                 IsBadge = true,
                 IsNeedBadge = true,
@@ -717,7 +717,7 @@ namespace WPFDB.Common
             {
                 Company = companyRepository.GetByName("Company 1"),
                 DateArrive = Convert.ToDateTime("12.12.2014"),
-                IsAdditionalMaterial = true,
+                IsAbstract = false,
                 IsAutoreg = true,
                 IsBadge = true,
                 IsNeedBadge = true,
@@ -741,7 +741,7 @@ namespace WPFDB.Common
             {
                 Company = companyRepository.GetByName("Company 2"),
                 DateArrive = Convert.ToDateTime("12.12.2014"),
-                IsAdditionalMaterial = true,
+                IsAbstract = false,
                 IsAutoreg = true,
                 IsBadge = true,
                 IsNeedBadge = true,
@@ -761,9 +761,8 @@ namespace WPFDB.Common
             };
             personRepository.AddConferenceInfoToPerson(person, conferenceRepository.GetByName("Conference 2"), details, payment);
             Save();
-       
-            Save();
         }
+
 
         public User GetUser(string name, string password)
         {
@@ -775,6 +774,11 @@ namespace WPFDB.Common
             return
                 this.underlyingContext.PersonConferences.SingleOrDefault(
                     o => o.PersonId == person.Id & o.ConferenceId == conference.Id);
+        }
+
+        public PersonConference GetPersonConferenceByID(string id)
+        {
+            return this.underlyingContext.PersonConferences.SingleOrDefault(o => o.PersonConferenceId == new Guid(id));
         }
 
         public IEnumerable<PersonConference> GetPersonConferencesForPerson(Person person)
@@ -920,6 +924,47 @@ namespace WPFDB.Common
             return this.underlyingContext.AbstractStatuses.ToList();
         }
 
-   
+        public IEnumerable<Abstract> GetAllAbstracts()
+        {
+            return this.underlyingContext.Abstracts.ToList();
+        }
+
+
+
+        public Conference GetDefaultConference()
+        {
+            return this.underlyingContext.Conferences.SingleOrDefault(o => o.Code == "-");
+        }
+
+        public void AddAbstractToPerson(Person person, Conference conference, Abstract abs)
+        {
+            var personConference =
+                this.underlyingContext.PersonConferences.SingleOrDefault(
+                    o => o.PersonId == person.Id && o.ConferenceId == conference.Id);
+            if (personConference == null)
+            {
+                personConference = new PersonConference
+                {
+                    PersonConferenceId = GuidComb.Generate(),
+                    PersonId = person.Id,
+                    ConferenceId = conference.Id
+                };
+                this.underlyingContext.PersonConferences.AddObject(personConference);
+                Save();
+            }
+
+            abs.PersonConferenceId = personConference.PersonConferenceId;
+            Save();
+        }
+
+        public void SetPersonConferenceAbstractOn(PersonConference personConference)
+        {
+            // TODO - Сделать чтобы в PersonConferenceDetail проставлялся флажок IsAbstract
+        }
+
+        public IEnumerable<Abstract> GetAbstractsForPerson(Person person)
+        {
+            return this.underlyingContext.Abstracts.Where(a => a.PersonConference.PersonId == person.Id).ToList();
+        }
     }
 }

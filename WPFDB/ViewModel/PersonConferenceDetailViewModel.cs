@@ -73,10 +73,10 @@ namespace WPFDB.ViewModel
             get { return this.Model.IsArrive; }
             set { this.Model.IsArrive = value; this.OnPropertyChanged("IsArrive"); }
         }
-        public bool IsAdditionalMaterial
+        public bool IsAbstract
         {
-            get { return this.Model.IsAdditionalMaterial; }
-            set { this.Model.IsAdditionalMaterial = value; this.OnPropertyChanged("IsAdditionalMaterial"); }
+            get { return this.Model.IsAbstract; }
+            set { this.Model.IsAbstract = value; this.OnPropertyChanged("IsAbstract"); }
         }
     public bool IsNeedBadge
         {

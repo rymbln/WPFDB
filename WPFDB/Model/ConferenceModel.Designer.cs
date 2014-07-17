@@ -672,24 +672,22 @@ namespace WPFDB.Model
         /// Create a new Abstract object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="mainAuthor">Initial value of the MainAuthor property.</param>
         /// <param name="otherAuthors">Initial value of the OtherAuthors property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="text">Initial value of the Text property.</param>
         /// <param name="link">Initial value of the Link property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
-        /// <param name="personConferencePersonConferenceId">Initial value of the PersonConferencePersonConferenceId property.</param>
-        public static Abstract CreateAbstract(global::System.Guid id, global::System.String mainAuthor, global::System.String otherAuthors, global::System.String name, global::System.String text, global::System.String link, global::System.String sourceId, global::System.Guid personConferencePersonConferenceId)
+        /// <param name="personConferenceId">Initial value of the PersonConferenceId property.</param>
+        public static Abstract CreateAbstract(global::System.Guid id, global::System.String otherAuthors, global::System.String name, global::System.String text, global::System.String link, global::System.Int32 sourceId, global::System.Guid personConferenceId)
         {
             Abstract @abstract = new Abstract();
             @abstract.Id = id;
-            @abstract.MainAuthor = mainAuthor;
             @abstract.OtherAuthors = otherAuthors;
             @abstract.Name = name;
             @abstract.Text = text;
             @abstract.Link = link;
             @abstract.SourceId = sourceId;
-            @abstract.PersonConferencePersonConferenceId = personConferencePersonConferenceId;
+            @abstract.PersonConferenceId = personConferenceId;
             return @abstract;
         }
 
@@ -723,30 +721,6 @@ namespace WPFDB.Model
         private global::System.Guid _Id;
         partial void OnIdChanging(global::System.Guid value);
         partial void OnIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String MainAuthor
-        {
-            get
-            {
-                return _MainAuthor;
-            }
-            set
-            {
-                OnMainAuthorChanging(value);
-                ReportPropertyChanging("MainAuthor");
-                _MainAuthor = StructuralObject.SetValidValue(value, false, "MainAuthor");
-                ReportPropertyChanged("MainAuthor");
-                OnMainAuthorChanged();
-            }
-        }
-        private global::System.String _MainAuthor;
-        partial void OnMainAuthorChanging(global::System.String value);
-        partial void OnMainAuthorChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -849,7 +823,7 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String SourceId
+        public global::System.Int32 SourceId
         {
             get
             {
@@ -859,13 +833,13 @@ namespace WPFDB.Model
             {
                 OnSourceIdChanging(value);
                 ReportPropertyChanging("SourceId");
-                _SourceId = StructuralObject.SetValidValue(value, false, "SourceId");
+                _SourceId = StructuralObject.SetValidValue(value, "SourceId");
                 ReportPropertyChanged("SourceId");
                 OnSourceIdChanged();
             }
         }
-        private global::System.String _SourceId;
-        partial void OnSourceIdChanging(global::System.String value);
+        private global::System.Int32 _SourceId;
+        partial void OnSourceIdChanging(global::System.Int32 value);
         partial void OnSourceIdChanged();
     
         /// <summary>
@@ -873,24 +847,24 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid PersonConferencePersonConferenceId
+        public global::System.Guid PersonConferenceId
         {
             get
             {
-                return _PersonConferencePersonConferenceId;
+                return _PersonConferenceId;
             }
             set
             {
-                OnPersonConferencePersonConferenceIdChanging(value);
-                ReportPropertyChanging("PersonConferencePersonConferenceId");
-                _PersonConferencePersonConferenceId = StructuralObject.SetValidValue(value, "PersonConferencePersonConferenceId");
-                ReportPropertyChanged("PersonConferencePersonConferenceId");
-                OnPersonConferencePersonConferenceIdChanged();
+                OnPersonConferenceIdChanging(value);
+                ReportPropertyChanging("PersonConferenceId");
+                _PersonConferenceId = StructuralObject.SetValidValue(value, "PersonConferenceId");
+                ReportPropertyChanged("PersonConferenceId");
+                OnPersonConferenceIdChanged();
             }
         }
-        private global::System.Guid _PersonConferencePersonConferenceId;
-        partial void OnPersonConferencePersonConferenceIdChanging(global::System.Guid value);
-        partial void OnPersonConferencePersonConferenceIdChanged();
+        private global::System.Guid _PersonConferenceId;
+        partial void OnPersonConferenceIdChanging(global::System.Guid value);
+        partial void OnPersonConferenceIdChanged();
 
         #endregion
 
@@ -4102,12 +4076,12 @@ namespace WPFDB.Model
         /// <param name="isBadge">Initial value of the IsBadge property.</param>
         /// <param name="isArrive">Initial value of the IsArrive property.</param>
         /// <param name="dateArrive">Initial value of the DateArrive property.</param>
-        /// <param name="isAdditionalMaterial">Initial value of the IsAdditionalMaterial property.</param>
+        /// <param name="isAbstract">Initial value of the IsAbstract property.</param>
         /// <param name="isNeedBadge">Initial value of the IsNeedBadge property.</param>
         /// <param name="isAutoreg">Initial value of the IsAutoreg property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
         /// <param name="personConferenceId">Initial value of the PersonConferenceId property.</param>
-        public static PersonConferences_Detail CreatePersonConferences_Detail(global::System.Guid rankId, global::System.Guid companyId, global::System.Boolean isBadge, global::System.Boolean isArrive, global::System.DateTime dateArrive, global::System.Boolean isAdditionalMaterial, global::System.Boolean isNeedBadge, global::System.Boolean isAutoreg, global::System.Int32 sourceId, global::System.Guid personConferenceId)
+        public static PersonConferences_Detail CreatePersonConferences_Detail(global::System.Guid rankId, global::System.Guid companyId, global::System.Boolean isBadge, global::System.Boolean isArrive, global::System.DateTime dateArrive, global::System.Boolean isAbstract, global::System.Boolean isNeedBadge, global::System.Boolean isAutoreg, global::System.Int32 sourceId, global::System.Guid personConferenceId)
         {
             PersonConferences_Detail personConferences_Detail = new PersonConferences_Detail();
             personConferences_Detail.RankId = rankId;
@@ -4115,7 +4089,7 @@ namespace WPFDB.Model
             personConferences_Detail.IsBadge = isBadge;
             personConferences_Detail.IsArrive = isArrive;
             personConferences_Detail.DateArrive = dateArrive;
-            personConferences_Detail.IsAdditionalMaterial = isAdditionalMaterial;
+            personConferences_Detail.IsAbstract = isAbstract;
             personConferences_Detail.IsNeedBadge = isNeedBadge;
             personConferences_Detail.IsAutoreg = isAutoreg;
             personConferences_Detail.SourceId = sourceId;
@@ -4252,24 +4226,24 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean IsAdditionalMaterial
+        public global::System.Boolean IsAbstract
         {
             get
             {
-                return _IsAdditionalMaterial;
+                return _IsAbstract;
             }
             set
             {
-                OnIsAdditionalMaterialChanging(value);
-                ReportPropertyChanging("IsAdditionalMaterial");
-                _IsAdditionalMaterial = StructuralObject.SetValidValue(value, "IsAdditionalMaterial");
-                ReportPropertyChanged("IsAdditionalMaterial");
-                OnIsAdditionalMaterialChanged();
+                OnIsAbstractChanging(value);
+                ReportPropertyChanging("IsAbstract");
+                _IsAbstract = StructuralObject.SetValidValue(value, "IsAbstract");
+                ReportPropertyChanged("IsAbstract");
+                OnIsAbstractChanged();
             }
         }
-        private global::System.Boolean _IsAdditionalMaterial;
-        partial void OnIsAdditionalMaterialChanging(global::System.Boolean value);
-        partial void OnIsAdditionalMaterialChanged();
+        private global::System.Boolean _IsAbstract;
+        partial void OnIsAbstractChanging(global::System.Boolean value);
+        partial void OnIsAbstractChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

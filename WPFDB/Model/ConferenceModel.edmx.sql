@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 07/08/2014 15:10:37
+-- Date Created: 07/17/2014 11:42:03
 -- Generated from EDMX file: C:\Users\rymbln\Documents\GitHub\WPFDB\WPFDB\Model\ConferenceModel.edmx
 -- --------------------------------------------------
 
@@ -295,7 +295,7 @@ CREATE TABLE [dbo].[PersonConferences_Detail] (
     [IsBadge] bit  NOT NULL,
     [IsArrive] bit  NOT NULL,
     [DateArrive] datetime  NOT NULL,
-    [IsAdditionalMaterial] bit  NOT NULL,
+    [IsAbstract] bit  NOT NULL,
     [IsNeedBadge] bit  NOT NULL,
     [IsAutoreg] bit  NOT NULL,
     [SourceId] int  NOT NULL,
@@ -386,13 +386,12 @@ GO
 -- Creating table 'Abstracts'
 CREATE TABLE [dbo].[Abstracts] (
     [Id] uniqueidentifier  NOT NULL,
-    [MainAuthor] nvarchar(max)  NOT NULL,
     [OtherAuthors] nvarchar(max)  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Text] nvarchar(max)  NOT NULL,
     [Link] nvarchar(max)  NOT NULL,
-    [SourceId] nvarchar(max)  NOT NULL,
-    [PersonConferencePersonConferenceId] uniqueidentifier  NOT NULL
+    [SourceId] int  NOT NULL,
+    [PersonConferenceId] uniqueidentifier  NOT NULL
 );
 GO
 
@@ -828,10 +827,10 @@ ON [dbo].[Phones]
     ([PersonId]);
 GO
 
--- Creating foreign key on [PersonConferencePersonConferenceId] in table 'Abstracts'
+-- Creating foreign key on [PersonConferenceId] in table 'Abstracts'
 ALTER TABLE [dbo].[Abstracts]
 ADD CONSTRAINT [FK_PersonConferenceAbstract]
-    FOREIGN KEY ([PersonConferencePersonConferenceId])
+    FOREIGN KEY ([PersonConferenceId])
     REFERENCES [dbo].[PersonConferences]
         ([PersonConferenceId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -839,7 +838,7 @@ ADD CONSTRAINT [FK_PersonConferenceAbstract]
 -- Creating non-clustered index for FOREIGN KEY 'FK_PersonConferenceAbstract'
 CREATE INDEX [IX_FK_PersonConferenceAbstract]
 ON [dbo].[Abstracts]
-    ([PersonConferencePersonConferenceId]);
+    ([PersonConferenceId]);
 GO
 
 -- Creating foreign key on [AbstractId] in table 'AbstractWorks'

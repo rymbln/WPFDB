@@ -15,6 +15,9 @@
         <DataTemplate DataType="{x:Type vm:PersonFormContactsWorkspaceViewModel}">
             <view:PersonFormContactsWorkspaceView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PersonFormAbstractWorkspaceViewModel}">
+            <view:PersonFormAbstractWorkspaceView />
+        </DataTemplate>
     </Window.Resources>
     <Window.InputBindings>
         <KeyBinding Command="{Binding SaveCommand}" Key="S" Modifiers="Control"/>
@@ -53,8 +56,8 @@
                     <ContentControl Content="{Binding Path=.PersonFormConferenceWorkspace}"  />
                 </TabItem>
                 <TabItem>
-                    <TabItem.Header>Science degrees</TabItem.Header>
-                    <!--<ContentControl Content="{Binding Path=.PersonFormConferenceWorkspace}"  />-->
+                    <TabItem.Header>Abstracts</TabItem.Header>
+                    <ContentControl Content="{Binding Path=.PersonFormAbstractWorkspace}"  />
                 </TabItem>
                
             </TabControl>
