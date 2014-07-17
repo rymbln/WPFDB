@@ -41,16 +41,7 @@ namespace WPFDB.Common
         /// </summary>
         private IConferenceContext underlyingContext;
 
-        private PersonRepository personRepository;
-        private ConferenceRepository conferenceRepository;
-        private SexRepository sexRepository;
-        private SpecialityRepository specialityRepository;
-        private ScienceDegreeRepository scienceDegreeRepository;
-        private ScienceStatusRepository scienceStatusRepository;
-        private RankRepository rankRepository;
-        private CompanyRepository companyRepository;
-        private UserRepository userRepository;
-        private PaymentTypeRepository paymentTypeRepository;
+    
 
 
         /// <summary>
@@ -67,17 +58,7 @@ namespace WPFDB.Common
             }
 
             underlyingContext = context;
-            personRepository = new PersonRepository(underlyingContext);
-            conferenceRepository = new ConferenceRepository(underlyingContext);
-            sexRepository = new SexRepository(underlyingContext);
-            specialityRepository = new SpecialityRepository(underlyingContext);
-            scienceDegreeRepository = new ScienceDegreeRepository(underlyingContext);
-            scienceStatusRepository = new ScienceStatusRepository(underlyingContext);
-            rankRepository = new RankRepository(underlyingContext);
-            companyRepository = new CompanyRepository(underlyingContext);
-            paymentTypeRepository = new PaymentTypeRepository(underlyingContext);
-            userRepository = new UserRepository(underlyingContext);
-        }
+       }
 
 
 
@@ -86,32 +67,32 @@ namespace WPFDB.Common
 
         public IEnumerable<Person> GetAllPersons()
         {
-            return personRepository.All();
+            return this.underlyingContext.Persons.ToList();
         }
         public IEnumerable<Conference> GetAllConferences()
         {
-            return conferenceRepository.All();
+            return this.underlyingContext.Conferences.ToList();
         }
         public IEnumerable<Sex> GetAllSexes()
         {
-            return sexRepository.All();
+            return this.underlyingContext.Sexes.ToList();
         }
         public IEnumerable<Speciality> GetAllSpecialities()
         {
-            return specialityRepository.All();
+            return this.underlyingContext.Specialities.ToList();
         }
         public IEnumerable<ScienceDegree> GetAllScienceDegrees()
         {
-            return scienceDegreeRepository.All();
+            return this.underlyingContext.ScienceDegrees.ToList();
         }
         public IEnumerable<ScienceStatus> GetAllScienceStatuses()
         {
-            return scienceStatusRepository.All();
+            return this.underlyingContext.ScienceStatuses.ToList();
         }
 
         public IEnumerable<Company> GetAllCompanies()
         {
-            return companyRepository.All();
+            return this.underlyingContext.Companies.ToList();
         }
 
         public IEnumerable<OrderStatus> GetAllOrderStatuses()
@@ -121,17 +102,17 @@ namespace WPFDB.Common
 
         public IEnumerable<Rank> GetAllRanks()
         {
-            return rankRepository.All();
+            return this.underlyingContext.Ranks.ToList();
         }
 
         public IEnumerable<User> GetAllUsers()
         {
-            return userRepository.All();
+            return this.underlyingContext.Users.ToList();
         }
 
         public IEnumerable<PaymentType> GetAllPaymentTypes()
         {
-            return paymentTypeRepository.All();
+            return this.underlyingContext.PaymentTypes.ToList();
         }
         #endregion
 
@@ -258,27 +239,49 @@ namespace WPFDB.Common
 
         public void AddUser(User obj)
         {
-            userRepository.Add(obj);
+            if (obj == null)
+            {
+                throw new ArgumentNullException("User");
+            }
+            this.underlyingContext.Users.AddObject(obj);
         }
 
         public void AddCompany(Company obj)
         {
-            companyRepository.Add(obj);
+
+            if (obj == null)
+            {
+                throw new ArgumentNullException("Company");
+            }
+            this.underlyingContext.Companies.AddObject(obj);
         }
 
         public void AddPaymentType(PaymentType obj)
         {
-            paymentTypeRepository.Add(obj);
+            if (obj == null)
+            {
+                throw new ArgumentNullException("PaymentType");
+            }
+            this.underlyingContext.PaymentTypes.AddObject(obj);
         }
 
         public void AddRank(Rank obj)
         {
-            rankRepository.Add(obj);
+            if (obj == null)
+            {
+                throw new ArgumentNullException("Rank");
+            }
+            this.underlyingContext.Ranks.AddObject(obj);
         }
         public void AddPerson(Person obj)
         {
-            personRepository.Add(obj);
 
+            if (obj == null)
+            {
+                throw new ArgumentNullException("person");
+            }
+            this.underlyingContext.Persons.AddObject(obj);
+           Save();
         }
 
         public void AddAbstractStatus(AbstractStatus obj)
@@ -411,27 +414,60 @@ namespace WPFDB.Common
         }
         public void RemovePerson(Person obj)
         {
-            personRepository.Remove(obj);
+            if (obj == null)
+            {
+                throw new ArgumentNullException("person");
+            }
+            this.underlyingContext.Persons.DeleteObject(obj);
+            Save();
         }
 
         public void RemoveRank(Rank obj)
         {
-            rankRepository.Remove(obj);
+            if (obj == null)
+            {
+                throw new ArgumentNullException("Rank");
+            }
+            this.underlyingContext.Ranks.DeleteObject(obj);
         }
 
         public void RemoveCompany(Company obj)
         {
-            companyRepository.Remove(obj);
+            if (obj == null)
+            {
+                throw new ArgumentNullException("Company");
+            }
+            this.underlyingContext.Companies.DeleteObject(obj);
         }
 
         public void RemoveUser(User obj)
         {
-            userRepository.Remove(obj);
+            if (obj == null)
+            {
+                throw new ArgumentNullException("User");
+            }
+            this.underlyingContext.Users.DeleteObject(obj);
+            this.CheckEntityBelongsToUnitOfWork(obj);
+        }
+
+        public User GetUser(string name)
+        {
+            return this.underlyingContext.Users.FirstOrDefault(o => o.Name == name);
+        }
+
+       
+        public IEnumerable<User> GetUsers()
+        {
+            return this.underlyingContext.Users.ToList();
         }
 
         public void RemovePaymentType(PaymentType obj)
         {
-            paymentTypeRepository.Remove(obj);
+            if (obj == null)
+            {
+                throw new ArgumentNullException("PaymentType");
+            }
+            this.underlyingContext.PaymentTypes.DeleteObject(obj);
         }
         #endregion
 
@@ -518,6 +554,10 @@ namespace WPFDB.Common
 
         public void EraseData()
         {
+            foreach (var obj in underlyingContext.Abstracts)
+            {
+                underlyingContext.Abstracts.DeleteObject(obj);
+            }
             foreach (var obj in underlyingContext.PersonConferences)
             {
                 underlyingContext.PersonConferences.DeleteObject(obj);
@@ -583,6 +623,26 @@ namespace WPFDB.Common
             {
                 underlyingContext.PaymentTypes.DeleteObject(obj);
             }
+            foreach (var obj in underlyingContext.OrderStatuses)
+            {
+                underlyingContext.OrderStatuses.DeleteObject(obj);
+            }
+            foreach (var obj in underlyingContext.OrderStatuses)
+            {
+                underlyingContext.OrderStatuses.DeleteObject(obj);
+            }
+            foreach (var obj in underlyingContext.ContactTypes)
+            {
+                underlyingContext.ContactTypes.DeleteObject(obj);
+            }
+            foreach (var obj in underlyingContext.AbstractStatuses)
+            {
+                underlyingContext.AbstractStatuses.DeleteObject(obj);
+            }
+            foreach (var obj in underlyingContext.Users)
+            {
+                underlyingContext.Users.DeleteObject(obj);
+            }
             Save();
         }
 
@@ -645,128 +705,128 @@ namespace WPFDB.Common
             AddPaymentType(new PaymentType { Id = GuidComb.Generate(), Code = "", Name = "Payment type 1" });
             AddPaymentType(new PaymentType { Id = GuidComb.Generate(), Code = "", Name = "Payment type 2" });
             Save();
-              var person = new Person
-            {
-                Id = GuidComb.Generate(),
-                BirthDate = Convert.ToDateTime("01.01.1990"),
-                FirstName = "Иванов",
-                SecondName = "Иван",
-                ThirdName = "Иванович",
-                Post = "Man",
-                WorkPlace = "WorkPlace",
-                ScienceDegree = scienceDegreeRepository.GetByName("-"),
-                ScienceStatus = scienceStatusRepository.GetByName("-"),
-                Sex = sexRepository.GetByName("-"),
-                Speciality = specialityRepository.GetByName("-"),
-                Iacmac = new Iacmac
-                {
-                    Code = "42000001",
-                    DateRegistration = Convert.ToDateTime("01.01.1990"),
-                    Number = 1,
-                    IsCardCreate = true,
-                    IsCardSent = true,
-                    IsForm = true,
-                    IsMember = true
-                }
+            //  var person = new Person
+            //{
+            //    Id = GuidComb.Generate(),
+            //    BirthDate = Convert.ToDateTime("01.01.1990"),
+            //    FirstName = "Иванов",
+            //    SecondName = "Иван",
+            //    ThirdName = "Иванович",
+            //    Post = "Man",
+            //    WorkPlace = "WorkPlace",
+            //    ScienceDegree = scienceDegreeRepository.GetByName("-"),
+            //    ScienceStatus = scienceStatusRepository.GetByName("-"),
+            //    Sex = sexRepository.GetByName("-"),
+            //    Speciality = specialityRepository.GetByName("-"),
+            //    Iacmac = new Iacmac
+            //    {
+            //        Code = "42000001",
+            //        DateRegistration = Convert.ToDateTime("01.01.1990"),
+            //        Number = 1,
+            //        IsCardCreate = true,
+            //        IsCardSent = true,
+            //        IsForm = true,
+            //        IsMember = true
+            //    }
 
 
-            };
+            //};
 
-            AddPerson(person);
+            //AddPerson(person);
 
-            Save();
+            //Save();
 
-            person.Emails.Add(new Email{ Id=GuidComb.Generate(), Name = "test@mail.ru", ContactType = GetDefaultContactType()});
-            person.Emails.Add(new Email { Id = GuidComb.Generate(), Name = "work@mail.ru", ContactType = GetContactTypeByName("Work") });
-            person.Emails.Add(new Email { Id = GuidComb.Generate(), Name = "Home@mail.ru", ContactType = GetContactTypeByName("Home") });
-            person.Emails.Add(new Email { Id = GuidComb.Generate(), Name = "other@mail.ru", ContactType = GetContactTypeByName("Other") });
-            Save();
-            person.Phones.Add(new Phone{Id = GuidComb.Generate(), ContactType = GetDefaultContactType(), Number = "+71234567890"});
-            person.Phones.Add(new Phone { Id = GuidComb.Generate(), ContactType = GetContactTypeByName("Home"), Number = "+71234567890" });
-            person.Phones.Add(new Phone { Id = GuidComb.Generate(), ContactType = GetContactTypeByName("Other"), Number = "+71234567890" });
-            person.Phones.Add(new Phone { Id = GuidComb.Generate(), ContactType = GetContactTypeByName("Work"), Number = "+71234567890" });
-            Save();
-            person.Addresses.Add(new Address{Id=GuidComb.Generate(),ZipCode = "214000",ContactType = GetContactTypeByName("Home"), CountryName = "Russia", RegionName = "Smolensk region", CityName = "Smolensk", StreetHouseName = "Petr Alekseev st. 19"});
-            person.Addresses.Add(new Address { Id = GuidComb.Generate(), ZipCode = "214000",ContactType = GetContactTypeByName("Work"), CountryName = "Russia", RegionName = "Smolensk region", CityName = "Smolensk", StreetHouseName = "Kirov st. 46" });
-            Save();
-            var details = new PersonConferences_Detail
-            {
-                Company = companyRepository.GetByName("-"),
-                DateArrive = Convert.ToDateTime("12.12.2014"),
-                IsAbstract = false,
-                IsAutoreg = true,
-                IsBadge = true,
-                IsNeedBadge = true,
-                IsArrive = true,
-                Rank = rankRepository.GetByName("-")
-            };
-            var payment = new PersonConferences_Payment
-            {
-                Company = companyRepository.GetByName("-"),
-                PaymentType = paymentTypeRepository.GetByName("-"),
-                PaymentDocument = "Order",
-                PaymentDate = Convert.ToDateTime("12.11.2014"),
-                Money = 1200,
-                IsComplect = true,
-                OrderNumber = 5,
-                OrderStatus = GetDefaultOrderStatus()
-            };
-            personRepository.AddConferenceInfoToPerson(person, conferenceRepository.GetByName("-"), details, payment);
-            Save();
-            details = new PersonConferences_Detail
-            {
-                Company = companyRepository.GetByName("Company 1"),
-                DateArrive = Convert.ToDateTime("12.12.2014"),
-                IsAbstract = false,
-                IsAutoreg = true,
-                IsBadge = true,
-                IsNeedBadge = true,
-                IsArrive = true,
-                Rank = rankRepository.GetByName("-")
-            };
-            payment = new PersonConferences_Payment
-            {
-                Company = companyRepository.GetByName("Company 1"),
-                PaymentType = paymentTypeRepository.GetByName("-"),
-                PaymentDocument = "Order",
-                PaymentDate = Convert.ToDateTime("12.11.2014"),
-                Money = 1200,
-                IsComplect = true,
-                OrderNumber = 5,
-                OrderStatus = GetDefaultOrderStatus()
-            };
-            personRepository.AddConferenceInfoToPerson(person, conferenceRepository.GetByName("Conference 1"), details, payment);
-            Save();
-            details = new PersonConferences_Detail
-            {
-                Company = companyRepository.GetByName("Company 2"),
-                DateArrive = Convert.ToDateTime("12.12.2014"),
-                IsAbstract = false,
-                IsAutoreg = true,
-                IsBadge = true,
-                IsNeedBadge = true,
-                IsArrive = true,
-                Rank = rankRepository.GetByName("-")
-            };
-            payment = new PersonConferences_Payment
-            {
-                Company = companyRepository.GetByName("Company 2"),
-                PaymentType = paymentTypeRepository.GetByName("-"),
-                PaymentDocument = "Order",
-                PaymentDate = Convert.ToDateTime("12.11.2014"),
-                Money = 1200,
-                IsComplect = true,
-                OrderNumber = 5,
-                OrderStatus = GetDefaultOrderStatus()
-            };
-            personRepository.AddConferenceInfoToPerson(person, conferenceRepository.GetByName("Conference 2"), details, payment);
+            //person.Emails.Add(new Email{ Id=GuidComb.Generate(), Name = "test@mail.ru", ContactType = GetDefaultContactType()});
+            //person.Emails.Add(new Email { Id = GuidComb.Generate(), Name = "work@mail.ru", ContactType = GetContactTypeByName("Work") });
+            //person.Emails.Add(new Email { Id = GuidComb.Generate(), Name = "Home@mail.ru", ContactType = GetContactTypeByName("Home") });
+            //person.Emails.Add(new Email { Id = GuidComb.Generate(), Name = "other@mail.ru", ContactType = GetContactTypeByName("Other") });
+            //Save();
+            //person.Phones.Add(new Phone{Id = GuidComb.Generate(), ContactType = GetDefaultContactType(), Number = "+71234567890"});
+            //person.Phones.Add(new Phone { Id = GuidComb.Generate(), ContactType = GetContactTypeByName("Home"), Number = "+71234567890" });
+            //person.Phones.Add(new Phone { Id = GuidComb.Generate(), ContactType = GetContactTypeByName("Other"), Number = "+71234567890" });
+            //person.Phones.Add(new Phone { Id = GuidComb.Generate(), ContactType = GetContactTypeByName("Work"), Number = "+71234567890" });
+            //Save();
+            //person.Addresses.Add(new Address{Id=GuidComb.Generate(),ZipCode = "214000",ContactType = GetContactTypeByName("Home"), CountryName = "Russia", RegionName = "Smolensk region", CityName = "Smolensk", StreetHouseName = "Petr Alekseev st. 19"});
+            //person.Addresses.Add(new Address { Id = GuidComb.Generate(), ZipCode = "214000",ContactType = GetContactTypeByName("Work"), CountryName = "Russia", RegionName = "Smolensk region", CityName = "Smolensk", StreetHouseName = "Kirov st. 46" });
+            //Save();
+            //var details = new PersonConferences_Detail
+            //{
+            //    Company = companyRepository.GetByName("-"),
+            //    DateArrive = Convert.ToDateTime("12.12.2014"),
+            //    IsAbstract = false,
+            //    IsAutoreg = true,
+            //    IsBadge = true,
+            //    IsNeedBadge = true,
+            //    IsArrive = true,
+            //    Rank = rankRepository.GetByName("-")
+            //};
+            //var payment = new PersonConferences_Payment
+            //{
+            //    Company = companyRepository.GetByName("-"),
+            //    PaymentType = paymentTypeRepository.GetByName("-"),
+            //    PaymentDocument = "Order",
+            //    PaymentDate = Convert.ToDateTime("12.11.2014"),
+            //    Money = 1200,
+            //    IsComplect = true,
+            //    OrderNumber = 5,
+            //    OrderStatus = GetDefaultOrderStatus()
+            //};
+            //personRepository.AddConferenceInfoToPerson(person, conferenceRepository.GetByName("-"), details, payment);
+            //Save();
+            //details = new PersonConferences_Detail
+            //{
+            //    Company = companyRepository.GetByName("Company 1"),
+            //    DateArrive = Convert.ToDateTime("12.12.2014"),
+            //    IsAbstract = false,
+            //    IsAutoreg = true,
+            //    IsBadge = true,
+            //    IsNeedBadge = true,
+            //    IsArrive = true,
+            //    Rank = rankRepository.GetByName("-")
+            //};
+            //payment = new PersonConferences_Payment
+            //{
+            //    Company = companyRepository.GetByName("Company 1"),
+            //    PaymentType = paymentTypeRepository.GetByName("-"),
+            //    PaymentDocument = "Order",
+            //    PaymentDate = Convert.ToDateTime("12.11.2014"),
+            //    Money = 1200,
+            //    IsComplect = true,
+            //    OrderNumber = 5,
+            //    OrderStatus = GetDefaultOrderStatus()
+            //};
+            //personRepository.AddConferenceInfoToPerson(person, conferenceRepository.GetByName("Conference 1"), details, payment);
+            //Save();
+            //details = new PersonConferences_Detail
+            //{
+            //    Company = companyRepository.GetByName("Company 2"),
+            //    DateArrive = Convert.ToDateTime("12.12.2014"),
+            //    IsAbstract = false,
+            //    IsAutoreg = true,
+            //    IsBadge = true,
+            //    IsNeedBadge = true,
+            //    IsArrive = true,
+            //    Rank = rankRepository.GetByName("-")
+            //};
+            //payment = new PersonConferences_Payment
+            //{
+            //    Company = companyRepository.GetByName("Company 2"),
+            //    PaymentType = paymentTypeRepository.GetByName("-"),
+            //    PaymentDocument = "Order",
+            //    PaymentDate = Convert.ToDateTime("12.11.2014"),
+            //    Money = 1200,
+            //    IsComplect = true,
+            //    OrderNumber = 5,
+            //    OrderStatus = GetDefaultOrderStatus()
+            //};
+            //personRepository.AddConferenceInfoToPerson(person, conferenceRepository.GetByName("Conference 2"), details, payment);
             Save();
         }
 
 
-        public User GetUser(string name, string password)
+        public User GetUser(string name, string pass)
         {
-            return userRepository.GetUser(name, password);
+            return this.underlyingContext.Users.FirstOrDefault(o => o.Name == name && o.Password == pass);
         }
 
         public PersonConference GetPersonConference(Person person, Conference conference)
@@ -939,7 +999,7 @@ namespace WPFDB.Common
         public void AddAbstractToPerson(Person person, Conference conference, Abstract abs)
         {
             var personConference =
-                this.underlyingContext.PersonConferences.SingleOrDefault(
+                this.underlyingContext.PersonConferences.FirstOrDefault(
                     o => o.PersonId == person.Id && o.ConferenceId == conference.Id);
             if (personConference == null)
             {

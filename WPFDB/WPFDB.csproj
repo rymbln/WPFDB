@@ -69,17 +69,7 @@
     <Compile Include="Common\DefaultManager.cs" />
     <Compile Include="Common\GuidComb.cs" />
     <Compile Include="Common\DataManager.cs" />
-    <Compile Include="Data\CompanyRepository.cs" />
-    <Compile Include="Data\ConferenceRepository.cs" />
-    <Compile Include="Data\IConferenceContext.cs" />
-    <Compile Include="Data\PaymentTypeRepository.cs" />
-    <Compile Include="Data\PersonRepository.cs" />
-    <Compile Include="Data\RankRepository.cs" />
-    <Compile Include="Data\ScienceDegreeRepository.cs" />
-    <Compile Include="Data\ScienceStatusRepository.cs" />
-    <Compile Include="Data\SexRepository.cs" />
-    <Compile Include="Data\SpecialityRepository.cs" />
-    <Compile Include="Data\UserRepository.cs" />
+    <Compile Include="Model\IConferenceContext.cs" />
     <Compile Include="Model\ConferenceEntities.cs" />
     <Compile Include="Model\ConferenceModel.Designer.cs">
       <AutoGen>True</AutoGen>

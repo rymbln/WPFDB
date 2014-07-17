@@ -63,10 +63,7 @@
                 <Button Command="ApplicationCommands.Cut" Content="{StaticResource CutImage}" ToolTip="{x:Static p:Resources.Cut}"/>
                 <Button Command="ApplicationCommands.Copy" Content="{StaticResource CopyImage}" ToolTip="{x:Static p:Resources.Copy}"/>
                 <Button Command="ApplicationCommands.Paste" Content="{StaticResource PasteImage}" ToolTip="{x:Static p:Resources.Paste}"/>
-                <Label Content="Default Conference:" />
-                <ComboBox Width="150" SelectedValuePath="." SelectedItem="{Binding Path=DefaultConference, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=ConferenceLookup}" DisplayMemberPath="Name"  />
-
-            </ToolBar>
+                 </ToolBar>
         </ToolBarTray>
 
         <StatusBar DockPanel.Dock="Bottom">

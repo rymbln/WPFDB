@@ -15,7 +15,7 @@ namespace WPFDB.ViewModel
         private ConferenceViewModel conference;
         private Person currentPerson;
 
-        public ObservableCollection<ConferenceViewModel> ConferenceLookup;
+        public ObservableCollection<ConferenceViewModel> ConferenceLookup { get; private set; }
 
         public Abstract Model { get; private set; }
 

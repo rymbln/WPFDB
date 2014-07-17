@@ -80,6 +80,8 @@ namespace WPFDB.ViewModel
             PersonViewModel vm = new PersonViewModel(p);
             this.AllPersons.Add(vm);
             this.CurrentPerson = vm;
+
+             OpenPerson();
         }
 
         private void DeleteCurrentPerson()

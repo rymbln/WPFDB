@@ -17,26 +17,7 @@ namespace WPFDB.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private DataManager dm = DataManager.Instance;
-        private ConferenceViewModel defaultConference;
-        public ConferenceViewModel DefaultConference
-        {
-            get
-            {
-                if (this.defaultConference == null)
-                {
-                    this.defaultConference = new ConferenceViewModel(DefaultManager.Instance.DefaultConference);
-                }
-                return defaultConference;
-            }
-
-            set
-            {
-                this.defaultConference = value;
-                DefaultManager.Instance.DefaultConference = value.Model;
-                this.OnPropertyChanged("DefaultConference");
-            }
-        }
-        public ObservableCollection<ConferenceViewModel> ConferenceLookup { get; private set; }
+       
 
 
         /// <summary>
@@ -52,15 +33,7 @@ namespace WPFDB.ViewModel
             this.OpenKnowallsCommand = new DelegateCommand((o) => this.OpenKnowalls());
             this.FillDataCommand = new DelegateCommand((o) => this.FillDatabase());
             this.EraseDataCommand = new DelegateCommand((o) => this.EraseData());
-            this.ConferenceLookup = new ObservableCollection<ConferenceViewModel>();
-          //  defaultConference = new ConferenceViewModel(DefaultManager.Instance.DefaultConference);
-            var conferences = dm.GetAllConferences();
-            foreach (var c in conferences)
-            {
-                ConferenceLookup.Add(new ConferenceViewModel(c));
-            }
-
-        }
+         }
 
         /// <summary>
         /// Gets the command to save all changes made in the current sessions DataManager
