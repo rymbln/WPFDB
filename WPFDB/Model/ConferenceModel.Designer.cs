@@ -32,7 +32,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("ConferenceModel", "FK_Payment_inherits_PersonConference", "PersonConference", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.PersonConference), "PersonConferences_Payment", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(WPFDB.Model.PersonConferences_Payment), true)]
 [assembly: EdmRelationshipAttribute("ConferenceModel", "FK_RankPersonConferenceDetail", "Rank", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Rank), "PersonConferences_Detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.PersonConferences_Detail), true)]
 [assembly: EdmRelationshipAttribute("ConferenceModel", "PersonIacmac", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Person), "Iacmac", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(WPFDB.Model.Iacmac), true)]
-[assembly: EdmRelationshipAttribute("ConferenceModel", "PersonConferences_PaymentOrderStatus", "PersonConferences_Payment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.PersonConferences_Payment), "OrderStatus", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.OrderStatus))]
 [assembly: EdmRelationshipAttribute("ConferenceModel", "ContactTypeEmail", "ContactType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.ContactType), "Email", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.Email), true)]
 [assembly: EdmRelationshipAttribute("ConferenceModel", "ContactTypePhone", "ContactType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.ContactType), "Phone", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.Phone), true)]
 [assembly: EdmRelationshipAttribute("ConferenceModel", "ContactTypeAddress", "ContactType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.ContactType), "Address", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.Address), true)]
@@ -43,6 +42,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("ConferenceModel", "AbstractAbstractWork", "Abstract", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Abstract), "AbstractWork", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.AbstractWork), true)]
 [assembly: EdmRelationshipAttribute("ConferenceModel", "AbstractStatusAbstractWork", "AbstractStatus", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.AbstractStatus), "AbstractWork", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.AbstractWork), true)]
 [assembly: EdmRelationshipAttribute("ConferenceModel", "UserAbstractWork", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.User), "AbstractWork", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.AbstractWork), true)]
+[assembly: EdmRelationshipAttribute("ConferenceModel", "OrderStatusPersonConferences_Payment", "OrderStatus", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.OrderStatus), "PersonConferences_Payment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.PersonConferences_Payment), true)]
 
 #endregion
 
@@ -2568,20 +2568,16 @@ namespace WPFDB.Model
         /// Create a new Iacmac object.
         /// </summary>
         /// <param name="isMember">Initial value of the IsMember property.</param>
-        /// <param name="dateRegistration">Initial value of the DateRegistration property.</param>
         /// <param name="number">Initial value of the Number property.</param>
-        /// <param name="code">Initial value of the Code property.</param>
         /// <param name="isCardCreate">Initial value of the IsCardCreate property.</param>
         /// <param name="isCardSent">Initial value of the IsCardSent property.</param>
         /// <param name="isForm">Initial value of the IsForm property.</param>
         /// <param name="personId">Initial value of the PersonId property.</param>
-        public static Iacmac CreateIacmac(global::System.Boolean isMember, global::System.DateTime dateRegistration, global::System.Int32 number, global::System.String code, global::System.Boolean isCardCreate, global::System.Boolean isCardSent, global::System.Boolean isForm, global::System.Guid personId)
+        public static Iacmac CreateIacmac(global::System.Boolean isMember, global::System.Int32 number, global::System.Boolean isCardCreate, global::System.Boolean isCardSent, global::System.Boolean isForm, global::System.Guid personId)
         {
             Iacmac iacmac = new Iacmac();
             iacmac.IsMember = isMember;
-            iacmac.DateRegistration = dateRegistration;
             iacmac.Number = number;
-            iacmac.Code = code;
             iacmac.IsCardCreate = isCardCreate;
             iacmac.IsCardSent = isCardSent;
             iacmac.IsForm = isForm;
@@ -2620,9 +2616,9 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime DateRegistration
+        public Nullable<global::System.DateTime> DateRegistration
         {
             get
             {
@@ -2637,8 +2633,8 @@ namespace WPFDB.Model
                 OnDateRegistrationChanged();
             }
         }
-        private global::System.DateTime _DateRegistration;
-        partial void OnDateRegistrationChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _DateRegistration;
+        partial void OnDateRegistrationChanging(Nullable<global::System.DateTime> value);
         partial void OnDateRegistrationChanged();
     
         /// <summary>
@@ -2668,7 +2664,7 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Code
         {
@@ -2680,7 +2676,7 @@ namespace WPFDB.Model
             {
                 OnCodeChanging(value);
                 ReportPropertyChanging("Code");
-                _Code = StructuralObject.SetValidValue(value, false, "Code");
+                _Code = StructuralObject.SetValidValue(value, true, "Code");
                 ReportPropertyChanged("Code");
                 OnCodeChanged();
             }
@@ -2974,18 +2970,18 @@ namespace WPFDB.Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "PersonConferences_PaymentOrderStatus", "PersonConferences_Payment")]
-        public EntityCollection<PersonConferences_Payment> PersonConferences_Payment
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "OrderStatusPersonConferences_Payment", "PersonConferences_Payment")]
+        public EntityCollection<PersonConferences_Payment> OrderStatusId
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PersonConferences_Payment>("ConferenceModel.PersonConferences_PaymentOrderStatus", "PersonConferences_Payment");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PersonConferences_Payment>("ConferenceModel.OrderStatusPersonConferences_Payment", "PersonConferences_Payment");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonConferences_Payment>("ConferenceModel.PersonConferences_PaymentOrderStatus", "PersonConferences_Payment", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonConferences_Payment>("ConferenceModel.OrderStatusPersonConferences_Payment", "PersonConferences_Payment", value);
                 }
             }
         }
@@ -4075,20 +4071,18 @@ namespace WPFDB.Model
         /// <param name="companyId">Initial value of the CompanyId property.</param>
         /// <param name="isBadge">Initial value of the IsBadge property.</param>
         /// <param name="isArrive">Initial value of the IsArrive property.</param>
-        /// <param name="dateArrive">Initial value of the DateArrive property.</param>
         /// <param name="isAbstract">Initial value of the IsAbstract property.</param>
         /// <param name="isNeedBadge">Initial value of the IsNeedBadge property.</param>
         /// <param name="isAutoreg">Initial value of the IsAutoreg property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
         /// <param name="personConferenceId">Initial value of the PersonConferenceId property.</param>
-        public static PersonConferences_Detail CreatePersonConferences_Detail(global::System.Guid rankId, global::System.Guid companyId, global::System.Boolean isBadge, global::System.Boolean isArrive, global::System.DateTime dateArrive, global::System.Boolean isAbstract, global::System.Boolean isNeedBadge, global::System.Boolean isAutoreg, global::System.Int32 sourceId, global::System.Guid personConferenceId)
+        public static PersonConferences_Detail CreatePersonConferences_Detail(global::System.Guid rankId, global::System.Guid companyId, global::System.Boolean isBadge, global::System.Boolean isArrive, global::System.Boolean isAbstract, global::System.Boolean isNeedBadge, global::System.Boolean isAutoreg, global::System.Int32 sourceId, global::System.Guid personConferenceId)
         {
             PersonConferences_Detail personConferences_Detail = new PersonConferences_Detail();
             personConferences_Detail.RankId = rankId;
             personConferences_Detail.CompanyId = companyId;
             personConferences_Detail.IsBadge = isBadge;
             personConferences_Detail.IsArrive = isArrive;
-            personConferences_Detail.DateArrive = dateArrive;
             personConferences_Detail.IsAbstract = isAbstract;
             personConferences_Detail.IsNeedBadge = isNeedBadge;
             personConferences_Detail.IsAutoreg = isAutoreg;
@@ -4200,9 +4194,9 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime DateArrive
+        public Nullable<global::System.DateTime> DateArrive
         {
             get
             {
@@ -4217,8 +4211,8 @@ namespace WPFDB.Model
                 OnDateArriveChanged();
             }
         }
-        private global::System.DateTime _DateArrive;
-        partial void OnDateArriveChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _DateArrive;
+        partial void OnDateArriveChanging(Nullable<global::System.DateTime> value);
         partial void OnDateArriveChanged();
     
         /// <summary>
@@ -4481,25 +4475,23 @@ namespace WPFDB.Model
         /// </summary>
         /// <param name="paymentTypeId">Initial value of the PaymentTypeId property.</param>
         /// <param name="companyId">Initial value of the CompanyId property.</param>
-        /// <param name="paymentDocument">Initial value of the PaymentDocument property.</param>
-        /// <param name="paymentDate">Initial value of the PaymentDate property.</param>
         /// <param name="money">Initial value of the Money property.</param>
         /// <param name="isComplect">Initial value of the IsComplect property.</param>
         /// <param name="orderNumber">Initial value of the OrderNumber property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
         /// <param name="personConferenceId">Initial value of the PersonConferenceId property.</param>
-        public static PersonConferences_Payment CreatePersonConferences_Payment(global::System.Guid paymentTypeId, global::System.Guid companyId, global::System.String paymentDocument, global::System.DateTime paymentDate, global::System.Decimal money, global::System.Boolean isComplect, global::System.Int32 orderNumber, global::System.Int32 sourceId, global::System.Guid personConferenceId)
+        /// <param name="orderStatusId">Initial value of the OrderStatusId property.</param>
+        public static PersonConferences_Payment CreatePersonConferences_Payment(global::System.Guid paymentTypeId, global::System.Guid companyId, global::System.Decimal money, global::System.Boolean isComplect, global::System.Int32 orderNumber, global::System.Int32 sourceId, global::System.Guid personConferenceId, global::System.Guid orderStatusId)
         {
             PersonConferences_Payment personConferences_Payment = new PersonConferences_Payment();
             personConferences_Payment.PaymentTypeId = paymentTypeId;
             personConferences_Payment.CompanyId = companyId;
-            personConferences_Payment.PaymentDocument = paymentDocument;
-            personConferences_Payment.PaymentDate = paymentDate;
             personConferences_Payment.Money = money;
             personConferences_Payment.IsComplect = isComplect;
             personConferences_Payment.OrderNumber = orderNumber;
             personConferences_Payment.SourceId = sourceId;
             personConferences_Payment.PersonConferenceId = personConferenceId;
+            personConferences_Payment.OrderStatusId = orderStatusId;
             return personConferences_Payment;
         }
 
@@ -4558,7 +4550,7 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String PaymentDocument
         {
@@ -4570,7 +4562,7 @@ namespace WPFDB.Model
             {
                 OnPaymentDocumentChanging(value);
                 ReportPropertyChanging("PaymentDocument");
-                _PaymentDocument = StructuralObject.SetValidValue(value, false, "PaymentDocument");
+                _PaymentDocument = StructuralObject.SetValidValue(value, true, "PaymentDocument");
                 ReportPropertyChanged("PaymentDocument");
                 OnPaymentDocumentChanged();
             }
@@ -4582,9 +4574,9 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime PaymentDate
+        public Nullable<global::System.DateTime> PaymentDate
         {
             get
             {
@@ -4599,8 +4591,8 @@ namespace WPFDB.Model
                 OnPaymentDateChanged();
             }
         }
-        private global::System.DateTime _PaymentDate;
-        partial void OnPaymentDateChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _PaymentDate;
+        partial void OnPaymentDateChanging(Nullable<global::System.DateTime> value);
         partial void OnPaymentDateChanged();
     
         /// <summary>
@@ -4725,6 +4717,30 @@ namespace WPFDB.Model
         private global::System.Guid _PersonConferenceId;
         partial void OnPersonConferenceIdChanging(global::System.Guid value);
         partial void OnPersonConferenceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid OrderStatusId
+        {
+            get
+            {
+                return _OrderStatusId;
+            }
+            set
+            {
+                OnOrderStatusIdChanging(value);
+                ReportPropertyChanging("OrderStatusId");
+                _OrderStatusId = StructuralObject.SetValidValue(value, "OrderStatusId");
+                ReportPropertyChanged("OrderStatusId");
+                OnOrderStatusIdChanged();
+            }
+        }
+        private global::System.Guid _OrderStatusId;
+        partial void OnOrderStatusIdChanging(global::System.Guid value);
+        partial void OnOrderStatusIdChanged();
 
         #endregion
 
@@ -4850,16 +4866,16 @@ namespace WPFDB.Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "PersonConferences_PaymentOrderStatus", "OrderStatus")]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "OrderStatusPersonConferences_Payment", "OrderStatus")]
         public OrderStatus OrderStatus
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OrderStatus>("ConferenceModel.PersonConferences_PaymentOrderStatus", "OrderStatus").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OrderStatus>("ConferenceModel.OrderStatusPersonConferences_Payment", "OrderStatus").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OrderStatus>("ConferenceModel.PersonConferences_PaymentOrderStatus", "OrderStatus").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OrderStatus>("ConferenceModel.OrderStatusPersonConferences_Payment", "OrderStatus").Value = value;
             }
         }
         /// <summary>
@@ -4871,13 +4887,13 @@ namespace WPFDB.Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OrderStatus>("ConferenceModel.PersonConferences_PaymentOrderStatus", "OrderStatus");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OrderStatus>("ConferenceModel.OrderStatusPersonConferences_Payment", "OrderStatus");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<OrderStatus>("ConferenceModel.PersonConferences_PaymentOrderStatus", "OrderStatus", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<OrderStatus>("ConferenceModel.OrderStatusPersonConferences_Payment", "OrderStatus", value);
                 }
             }
         }

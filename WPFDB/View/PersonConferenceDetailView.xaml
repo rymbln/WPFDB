@@ -61,9 +61,9 @@
                   IsChecked="{Binding Path=IsBadge, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                   Width="150" />
 
-                <Label Grid.Column="0" Grid.Row="6" Content="Is Additional Material:" />
+                <Label Grid.Column="0" Grid.Row="6" Content="Is Abstract:" />
                 <CheckBox Grid.Column="1" Grid.Row="6" Width="150" 
-                  IsChecked="{Binding Path=IsAdditionalMaterial, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  IsChecked="{Binding Path=IsAbstract, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                    />
 
                 <Label Grid.Column="0" Grid.Row="7" Content="Is Autoreg:" />

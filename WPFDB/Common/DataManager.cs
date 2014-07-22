@@ -418,7 +418,38 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("person");
             }
+            var lst = obj.PersonConferences;
+            foreach (var item in lst)
+            {
+                RemovePersonConference(item);
+            }
             this.underlyingContext.Persons.DeleteObject(obj);
+            Save();
+        }
+
+        private void RemovePersonConference(PersonConference obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("personConference");
+            }
+            var lst = obj.Abstracts;
+            foreach (var item in lst)
+            {
+                RemoveAbstract(item);
+            }
+            this.underlyingContext.PersonConferences.DeleteObject(obj);
+            Save();
+        }
+
+        private void RemoveAbstract(Abstract obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("abstract");
+            }
+
+            this.underlyingContext.Abstracts.DeleteObject(obj);
             Save();
         }
 
@@ -558,6 +589,7 @@ namespace WPFDB.Common
             {
                 underlyingContext.Abstracts.DeleteObject(obj);
             }
+            Save();
             foreach (var obj in underlyingContext.PersonConferences)
             {
                 underlyingContext.PersonConferences.DeleteObject(obj);
@@ -570,17 +602,19 @@ namespace WPFDB.Common
                 {
                     underlyingContext.Emails.DeleteObject(email);
                 }
+                Save();
                 var phones = new List<Phone>();
                 foreach (var phone in obj.Phones.ToList())
                 {
                     underlyingContext.Phones.DeleteObject(phone);
                 }
-
+                Save();
                 foreach (var adr in obj.Addresses.ToList())
                 {
                     underlyingContext.Addresses.DeleteObject(adr);
                 }
                 underlyingContext.Persons.DeleteObject(obj);
+                Save();
             }
             Save();
 

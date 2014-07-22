@@ -71,9 +71,9 @@ namespace WPFDB.ViewModel
             get { return this.Model.PaymentDocument; }
             set { this.Model.PaymentDocument = value; this.OnPropertyChanged("PaymentDocument"); }
         }
-        public DateTime PaymentDate
+        public DateTime? PaymentDate
         {
-            get { return this.Model.PaymentDate; }
+            get { return (this.Model.PaymentDate == null) ? DateTime.Now : this.Model.PaymentDate; }
             set { this.Model.PaymentDate = value; this.OnPropertyChanged("PaymentDate"); }
         }
         public Decimal Money

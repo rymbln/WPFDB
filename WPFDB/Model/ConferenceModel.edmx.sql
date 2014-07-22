@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 07/17/2014 11:42:03
--- Generated from EDMX file: C:\Users\rymbln\Documents\GitHub\WPFDB\WPFDB\Model\ConferenceModel.edmx
+-- Date Created: 07/22/2014 12:40:00
+-- Generated from EDMX file: C:\Users\Rymbln\Documents\GitHub\WPFDB\WPFDB\Model\ConferenceModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -56,9 +56,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PersonIacmac]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Iacmacs] DROP CONSTRAINT [FK_PersonIacmac];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PersonConferences_PaymentOrderStatus]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_PersonConferences_PaymentOrderStatus];
-GO
 IF OBJECT_ID(N'[dbo].[FK_ContactTypeEmail]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Emails] DROP CONSTRAINT [FK_ContactTypeEmail];
 GO
@@ -88,6 +85,9 @@ IF OBJECT_ID(N'[dbo].[FK_AbstractStatusAbstractWork]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserAbstractWork]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AbstractWorks] DROP CONSTRAINT [FK_UserAbstractWork];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OrderStatusPersonConferences_Payment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_OrderStatusPersonConferences_Payment];
 GO
 
 -- --------------------------------------------------
@@ -294,7 +294,7 @@ CREATE TABLE [dbo].[PersonConferences_Detail] (
     [CompanyId] uniqueidentifier  NOT NULL,
     [IsBadge] bit  NOT NULL,
     [IsArrive] bit  NOT NULL,
-    [DateArrive] datetime  NOT NULL,
+    [DateArrive] datetime  NULL,
     [IsAbstract] bit  NOT NULL,
     [IsNeedBadge] bit  NOT NULL,
     [IsAutoreg] bit  NOT NULL,
@@ -307,23 +307,23 @@ GO
 CREATE TABLE [dbo].[PersonConferences_Payment] (
     [PaymentTypeId] uniqueidentifier  NOT NULL,
     [CompanyId] uniqueidentifier  NOT NULL,
-    [PaymentDocument] nvarchar(max)  NOT NULL,
-    [PaymentDate] datetime  NOT NULL,
+    [PaymentDocument] nvarchar(max)  NULL,
+    [PaymentDate] datetime  NULL,
     [Money] decimal(18,0)  NOT NULL,
     [IsComplect] bit  NOT NULL,
     [OrderNumber] int  NOT NULL,
     [SourceId] int  NOT NULL,
     [PersonConferenceId] uniqueidentifier  NOT NULL,
-    [OrderStatus_Id] uniqueidentifier  NOT NULL
+    [OrderStatusId] uniqueidentifier  NOT NULL
 );
 GO
 
 -- Creating table 'Iacmacs'
 CREATE TABLE [dbo].[Iacmacs] (
     [IsMember] bit  NOT NULL,
-    [DateRegistration] datetime  NOT NULL,
+    [DateRegistration] datetime  NULL,
     [Number] int  NOT NULL,
-    [Code] nvarchar(max)  NOT NULL,
+    [Code] nvarchar(max)  NULL,
     [IsCardCreate] bit  NOT NULL,
     [IsCardSent] bit  NOT NULL,
     [IsForm] bit  NOT NULL,
@@ -729,20 +729,6 @@ ADD CONSTRAINT [FK_PersonIacmac]
     ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [OrderStatus_Id] in table 'PersonConferences_Payment'
-ALTER TABLE [dbo].[PersonConferences_Payment]
-ADD CONSTRAINT [FK_PersonConferences_PaymentOrderStatus]
-    FOREIGN KEY ([OrderStatus_Id])
-    REFERENCES [dbo].[OrderStatuses]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PersonConferences_PaymentOrderStatus'
-CREATE INDEX [IX_FK_PersonConferences_PaymentOrderStatus]
-ON [dbo].[PersonConferences_Payment]
-    ([OrderStatus_Id]);
-GO
-
 -- Creating foreign key on [ContactTypeId] in table 'Emails'
 ALTER TABLE [dbo].[Emails]
 ADD CONSTRAINT [FK_ContactTypeEmail]
@@ -881,6 +867,20 @@ ADD CONSTRAINT [FK_UserAbstractWork]
 CREATE INDEX [IX_FK_UserAbstractWork]
 ON [dbo].[AbstractWorks]
     ([UserId]);
+GO
+
+-- Creating foreign key on [OrderStatusId] in table 'PersonConferences_Payment'
+ALTER TABLE [dbo].[PersonConferences_Payment]
+ADD CONSTRAINT [FK_OrderStatusPersonConferences_Payment]
+    FOREIGN KEY ([OrderStatusId])
+    REFERENCES [dbo].[OrderStatuses]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_OrderStatusPersonConferences_Payment'
+CREATE INDEX [IX_FK_OrderStatusPersonConferences_Payment]
+ON [dbo].[PersonConferences_Payment]
+    ([OrderStatusId]);
 GO
 
 -- --------------------------------------------------

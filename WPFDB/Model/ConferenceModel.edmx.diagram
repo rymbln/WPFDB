@@ -34,7 +34,6 @@
         <EntityTypeShape EntityType="ConferenceModel.Iacmac" Width="2.25" PointX="5.25" PointY="17.625" />
         <AssociationConnector Association="ConferenceModel.PersonIacmac" />
         <EntityTypeShape EntityType="ConferenceModel.OrderStatus" Width="2.25" PointX="14.625" PointY="7.375" />
-        <AssociationConnector Association="ConferenceModel.PersonConferences_PaymentOrderStatus" />
         <EntityTypeShape EntityType="ConferenceModel.ContactType" Width="1.5" PointX="0.5" PointY="13.125" />
         <EntityTypeShape EntityType="ConferenceModel.Email" Width="1.75" PointX="2.75" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ConferenceModel.Phone" Width="2" PointX="2.75" PointY="15.25" />
@@ -53,6 +52,7 @@
         <AssociationConnector Association="ConferenceModel.AbstractAbstractWork" />
         <AssociationConnector Association="ConferenceModel.AbstractStatusAbstractWork" />
         <AssociationConnector Association="ConferenceModel.UserAbstractWork" />
+        <AssociationConnector Association="ConferenceModel.OrderStatusPersonConferences_Payment" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

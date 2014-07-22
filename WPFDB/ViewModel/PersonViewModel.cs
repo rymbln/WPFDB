@@ -329,11 +329,11 @@ namespace WPFDB.ViewModel
                 this.OnPropertyChanged("IsForm");
             }
         }
-        public DateTime DateRegistration
+        public DateTime? DateRegistration
         {
             get
             {
-                return this.Model.Iacmac.DateRegistration;
+                return (this.Model.Iacmac.DateRegistration == null) ? DateTime.Now : this.Model.Iacmac.DateRegistration;
             }
 
             set

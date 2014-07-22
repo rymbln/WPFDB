@@ -58,9 +58,9 @@ namespace WPFDB.ViewModel
             
         }
 
-        public DateTime DateArrive
+        public DateTime? DateArrive
         {
-            get { return this.Model.DateArrive; }
+            get { return (this.Model.DateArrive == null ) ? DateTime.Now : this.Model.DateArrive ; }
             set { this.Model.DateArrive = value; this.OnPropertyChanged("DateArrive"); }
         }
         public bool IsBadge

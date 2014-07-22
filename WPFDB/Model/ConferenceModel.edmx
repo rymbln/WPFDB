@@ -81,10 +81,6 @@
       <End Role="Person" EntitySet="Persons" />
       <End Role="Iacmac" EntitySet="Iacmacs" />
     </AssociationSet>
-    <AssociationSet Name="PersonConferences_PaymentOrderStatus" Association="ConferenceModel.Store.PersonConferences_PaymentOrderStatus">
-      <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
-      <End Role="OrderStatus" EntitySet="OrderStatuses" />
-    </AssociationSet>
     <AssociationSet Name="ContactTypeEmail" Association="ConferenceModel.Store.ContactTypeEmail">
       <End Role="ContactType" EntitySet="ContactTypes" />
       <End Role="Email" EntitySet="Emails" />
@@ -124,6 +120,10 @@
     <AssociationSet Name="UserAbstractWork" Association="ConferenceModel.Store.UserAbstractWork">
       <End Role="User" EntitySet="Users" />
       <End Role="AbstractWork" EntitySet="AbstractWorks" />
+    </AssociationSet>
+    <AssociationSet Name="OrderStatusPersonConferences_Payment" Association="ConferenceModel.Store.OrderStatusPersonConferences_Payment">
+      <End Role="OrderStatus" EntitySet="OrderStatuses" />
+      <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Persons">
@@ -254,7 +254,7 @@
     <Property Name="CompanyId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="IsBadge" Type="bit" Nullable="false" />
     <Property Name="IsArrive" Type="bit" Nullable="false" />
-    <Property Name="DateArrive" Type="datetime" Nullable="false" />
+    <Property Name="DateArrive" Type="datetime" Nullable="true" />
     <Property Name="IsAbstract" Type="bit" Nullable="false" />
     <Property Name="IsNeedBadge" Type="bit" Nullable="false" />
     <Property Name="IsAutoreg" Type="bit" Nullable="false" />
@@ -267,23 +267,23 @@
     </Key>
     <Property Name="PaymentTypeId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="CompanyId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="PaymentDocument" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+    <Property Name="PaymentDocument" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PaymentDate" Type="datetime" Nullable="true" />
     <Property Name="Money" Type="decimal" Nullable="false" Precision="18" Scale="0" />
     <Property Name="IsComplect" Type="bit" Nullable="false" />
     <Property Name="OrderNumber" Type="int" Nullable="false" />
     <Property Name="SourceId" Type="int" Nullable="false" />
     <Property Name="PersonConferenceId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="OrderStatus_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OrderStatusId" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="Iacmacs">
     <Key>
       <PropertyRef Name="PersonId" />
     </Key>
     <Property Name="IsMember" Type="bit" Nullable="false" />
-    <Property Name="DateRegistration" Type="datetime" Nullable="false" />
+    <Property Name="DateRegistration" Type="datetime" Nullable="true" />
     <Property Name="Number" Type="int" Nullable="false" />
-    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="true" />
     <Property Name="IsCardCreate" Type="bit" Nullable="false" />
     <Property Name="IsCardSent" Type="bit" Nullable="false" />
     <Property Name="IsForm" Type="bit" Nullable="false" />
@@ -536,18 +536,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="PersonConferences_PaymentOrderStatus">
-    <End Role="PersonConferences_Payment" Type="ConferenceModel.Store.PersonConferences_Payment" Multiplicity="*" />
-    <End Role="OrderStatus" Type="ConferenceModel.Store.OrderStatuses" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="OrderStatus">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PersonConferences_Payment">
-        <PropertyRef Name="OrderStatus_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="ContactTypeEmail">
     <End Role="ContactType" Type="ConferenceModel.Store.ContactTypes" Multiplicity="1" />
     <End Role="Email" Type="ConferenceModel.Store.Emails" Multiplicity="*" />
@@ -668,6 +656,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="OrderStatusPersonConferences_Payment">
+    <End Role="OrderStatus" Type="ConferenceModel.Store.OrderStatuses" Multiplicity="1" />
+    <End Role="PersonConferences_Payment" Type="ConferenceModel.Store.PersonConferences_Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonConferences_Payment">
+        <PropertyRef Name="OrderStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -741,10 +741,6 @@
             <End Role="Iacmac" EntitySet="Iacmacs" />
           </AssociationSet>
           <EntitySet Name="OrderStatuses" EntityType="ConferenceModel.OrderStatus" />
-          <AssociationSet Name="PersonConferences_PaymentOrderStatus" Association="ConferenceModel.PersonConferences_PaymentOrderStatus">
-            <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
-            <End Role="OrderStatus" EntitySet="OrderStatuses" />
-          </AssociationSet>
           <EntitySet Name="ContactTypes" EntityType="ConferenceModel.ContactType" />
           <EntitySet Name="Emails" EntityType="ConferenceModel.Email" />
           <EntitySet Name="Phones" EntityType="ConferenceModel.Phone" />
@@ -791,6 +787,10 @@
           <AssociationSet Name="UserAbstractWork" Association="ConferenceModel.UserAbstractWork">
             <End Role="User" EntitySet="Users" />
             <End Role="AbstractWork" EntitySet="AbstractWorks" />
+          </AssociationSet>
+          <AssociationSet Name="OrderStatusPersonConferences_Payment" Association="ConferenceModel.OrderStatusPersonConferences_Payment">
+            <End Role="OrderStatus" EntitySet="OrderStatuses" />
+            <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Person">
@@ -1017,7 +1017,7 @@
           <Property Type="Guid" Name="CompanyId" Nullable="false" />
           <Property Type="Boolean" Name="IsBadge" Nullable="false" />
           <Property Type="Boolean" Name="IsArrive" Nullable="false" />
-          <Property Type="DateTime" Name="DateArrive" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="DateArrive" Precision="3" Nullable="true" />
           <Property Type="Boolean" Name="IsAbstract" Nullable="false" />
           <Property Type="Boolean" Name="IsNeedBadge" Nullable="false" />
           <Property Type="Boolean" Name="IsAutoreg" Nullable="false" />
@@ -1033,8 +1033,8 @@
           </Key>
           <Property Type="Guid" Name="PaymentTypeId" Nullable="false" />
           <Property Type="Guid" Name="CompanyId" Nullable="false" />
-          <Property Type="String" Name="PaymentDocument" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="PaymentDate" Nullable="false" Precision="3" />
+          <Property Type="String" Name="PaymentDocument" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="DateTime" Name="PaymentDate" Nullable="true" />
           <Property Type="Decimal" Name="Money" Nullable="false" Precision="18" Scale="0" />
           <Property Type="Boolean" Name="IsComplect" Nullable="false" />
           <Property Type="Int32" Name="OrderNumber" Nullable="false" />
@@ -1043,7 +1043,8 @@
           <NavigationProperty Name="Company" Relationship="ConferenceModel.FK_CompanyPersonConferenceMoney" FromRole="PersonConferences_Payment" ToRole="Company" />
           <NavigationProperty Name="PaymentType" Relationship="ConferenceModel.FK_PaymentTypePersonConferenceMoney" FromRole="PersonConferences_Payment" ToRole="PaymentType" />
           <NavigationProperty Name="PersonConference" Relationship="ConferenceModel.FK_Payment_inherits_PersonConference" FromRole="PersonConferences_Payment" ToRole="PersonConference" />
-          <NavigationProperty Name="OrderStatus" Relationship="ConferenceModel.PersonConferences_PaymentOrderStatus" FromRole="PersonConferences_Payment" ToRole="OrderStatus" />
+          <NavigationProperty Name="OrderStatus" Relationship="ConferenceModel.OrderStatusPersonConferences_Payment" FromRole="PersonConferences_Payment" ToRole="OrderStatus" />
+          <Property Type="Guid" Name="OrderStatusId" Nullable="false" />
         </EntityType>
         <Association Name="FK_CompanyPersonConferenceDetail">
           <End Type="ConferenceModel.Company" Role="Company" Multiplicity="1" />
@@ -1126,9 +1127,9 @@
             <PropertyRef Name="PersonId" />
           </Key>
           <Property Type="Boolean" Name="IsMember" Nullable="false" />
-          <Property Type="DateTime" Name="DateRegistration" Nullable="false" />
+          <Property Type="DateTime" Name="DateRegistration" Nullable="true" />
           <Property Type="Int32" Name="Number" Nullable="false" />
-          <Property Type="String" Name="Code" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="true" />
           <Property Type="Boolean" Name="IsCardCreate" Nullable="false" />
           <Property Type="Boolean" Name="IsCardSent" Nullable="false" />
           <Property Type="Boolean" Name="IsForm" Nullable="false" />
@@ -1157,12 +1158,8 @@
           <Property Type="String" Name="Code" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" />
           <Property Type="Int32" Name="SourceId" Nullable="false" />
-          <NavigationProperty Name="PersonConferences_Payment" Relationship="ConferenceModel.PersonConferences_PaymentOrderStatus" FromRole="OrderStatus" ToRole="PersonConferences_Payment" />
+          <NavigationProperty Name="OrderStatusId" Relationship="ConferenceModel.OrderStatusPersonConferences_Payment" FromRole="OrderStatus" ToRole="PersonConferences_Payment" />
         </EntityType>
-        <Association Name="PersonConferences_PaymentOrderStatus">
-          <End Type="ConferenceModel.PersonConferences_Payment" Role="PersonConferences_Payment" Multiplicity="*" />
-          <End Type="ConferenceModel.OrderStatus" Role="OrderStatus" Multiplicity="1" />
-        </Association>
         <EntityType Name="ContactType">
           <Key>
             <PropertyRef Name="Id" />
@@ -1374,6 +1371,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="OrderStatusPersonConferences_Payment">
+          <End Type="ConferenceModel.OrderStatus" Role="OrderStatus" Multiplicity="1" />
+          <End Type="ConferenceModel.PersonConferences_Payment" Role="PersonConferences_Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonConferences_Payment">
+              <PropertyRef Name="OrderStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1540,6 +1549,7 @@
           <ScalarProperty Name="IsComplect" ColumnName="IsComplect" />
           <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
           <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+          <ScalarProperty Name="OrderStatusId" ColumnName="OrderStatusId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1650,14 +1660,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="PersonConferences_PaymentOrderStatus" TypeName="ConferenceModel.PersonConferences_PaymentOrderStatus" StoreEntitySet="PersonConferences_Payment">
-      <EndProperty Name="OrderStatus">
-        <ScalarProperty Name="Id" ColumnName="OrderStatus_Id" />
-      </EndProperty>
-      <EndProperty Name="PersonConferences_Payment">
-        <ScalarProperty Name="PersonConferenceId" ColumnName="PersonConferenceId" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

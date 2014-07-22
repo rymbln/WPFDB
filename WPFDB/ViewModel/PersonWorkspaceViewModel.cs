@@ -73,10 +73,7 @@ namespace WPFDB.ViewModel
 
      private void AddPerson()
         {
-            Person p = this.dm.CreateObject<Person>();
-            p.Id = GuidComb.Generate();
-            this.dm.AddPerson(p);
-
+            Person p = DefaultManager.Instance.DefaultPerson;
             PersonViewModel vm = new PersonViewModel(p);
             this.AllPersons.Add(vm);
             this.CurrentPerson = vm;
