@@ -25,7 +25,8 @@
             <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
 
-        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="0" Grid.Row="0">
+        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" 
+                                Grid.Column="0" Grid.Row="0">
             <HeaderedContentControl.Header>
                 Persons
             </HeaderedContentControl.Header>

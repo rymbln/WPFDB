@@ -304,6 +304,25 @@ namespace WPFDB.ViewModel
                 this.OnPropertyChanged("IsCardCreate");
             }
         }
+
+        public string FullName
+        {
+            get { return this.Model.FirstName + " " + Model.SecondName + " " + Model.ThirdName; }
+        }
+
+        public string FullNameInitials
+        {
+            get { return this.Model.FirstName + " " + Model.SecondName.Substring(0,1) + "." + Model.ThirdName.Substring(0,1) + "."; }
+        }
+
+        public string Initials
+        {
+            get
+            {
+                return this.Model.FirstName.Substring(1, 1) + "." + this.Model.SecondName.Substring(1, 1) + "." +
+                       this.Model.ThirdName.Substring(1, 1) + ".";
+            }
+        }
         public bool IsCardSent
         {
             get

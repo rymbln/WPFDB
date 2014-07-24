@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type vm:AbstractViewModel}">
+        <DataTemplate DataType="{x:Type vm:AbstractDetailsViewModel}">
             <v:AbstractItemView/>
         </DataTemplate>
 
@@ -54,7 +54,7 @@
             <ContentControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right" 
                         Content="{Binding Path=CurrentAbstract}" >
                 <ContentControl.Resources>
-                <DataTemplate DataType="{x:Type vm:AbstractViewModel}">
+                <DataTemplate DataType="{x:Type vm:AbstractDetailsViewModel}">
                     <v:AbstractDetailView/>
                 </DataTemplate>
                 </ContentControl.Resources>

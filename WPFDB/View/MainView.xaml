@@ -15,7 +15,10 @@
         <DataTemplate DataType="{x:Type vm:PersonWorkspaceViewModel}">
             <v:PersonWorkspaceView/>
         </DataTemplate>
-       
+        <DataTemplate DataType="{x:Type vm:AbstractWorkspaceViewModel}">
+            <v:AbstractWorkspaceView/>
+        </DataTemplate>
+
     </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -74,6 +77,10 @@
             <TabItem>
                 <TabItem.Header>Person</TabItem.Header>
                 <ContentControl Content="{Binding Path=.PersonWorkspace}"  />
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Abstracts</TabItem.Header>
+                <ContentControl Content="{Binding Path=.AbstractWorkspace}"  />
             </TabItem>
             
         </TabControl>

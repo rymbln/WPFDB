@@ -954,5 +954,16 @@ namespace WPFDB.Common
         {
             return this.underlyingContext.Abstracts.Where(a => a.PersonConference.PersonId == person.Id).ToList();
         }
+
+        public Person GetPersonByPersonConferenceId(Guid id)
+        {
+            return this.underlyingContext.PersonConferences.FirstOrDefault(o => o.PersonConferenceId == id).Person;
+
+        }
+
+        public IEnumerable<Email> GetEmailsByPersonId(Guid id)
+        {
+            return this.underlyingContext.Emails.Where(o => o.PersonId == id).ToList();
+        }
     }
 }

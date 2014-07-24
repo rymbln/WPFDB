@@ -16,22 +16,18 @@ namespace WPFDB.ViewModel
     public class PersonWorkspaceViewModel : ViewModelBase
     {
         private PersonViewModel currentPerson;
+        private ConferenceViewModel filterConference;
+        private bool filterAllConferences;
      
-        private DataManager dm = DataManager.Instance;
-
         public PersonWorkspaceViewModel()
         {
             AllPersons = new ObservableCollection<PersonViewModel>();
 
-            foreach (var item in dm.GetAllPersons())
+            foreach (var item in DataManager.Instance.GetAllPersons())
             {
                 AllPersons.Add(new PersonViewModel(item));
             }
             this.CurrentPerson = AllPersons.Count > 0 ? AllPersons[0] : null;
-
-            //this.PersonConference = new PersonConferenceWorkspaceViewModel(
-            //    DataManager.Instance.GetPersonConference(CurrentPerson.Model,
-            //    DefaultManager.Instance.DefaultConference));
 
             this.AllPersons.CollectionChanged += (sender, e) =>
             {
@@ -45,6 +41,7 @@ namespace WPFDB.ViewModel
             this.DeletePersonCommand = new DelegateCommand((o) => this.DeleteCurrentPerson());
             this.RefreshCommand = new DelegateCommand((o) => this.RefreshPersons());
             this.OpenPersonCommand = new DelegateCommand((o) => this.OpenPerson());
+            this.ApplyFiltersCommand = new DelegateCommand((o) => this.ApplyFilters());
 
         }
 
@@ -52,6 +49,7 @@ namespace WPFDB.ViewModel
         public ICommand DeletePersonCommand { get; private set; }
         public ICommand RefreshCommand { get; private set; }
         public ICommand OpenPersonCommand { get; private set; }
+        public ICommand ApplyFiltersCommand { get; private set; }
  
 
         public ObservableCollection<PersonViewModel> AllPersons { get; private set; }
@@ -61,13 +59,28 @@ namespace WPFDB.ViewModel
             get { return this.currentPerson; }
             set
             {
-                this.currentPerson = value; this.OnPropertyChanged("CurrentPerson");
-               
+                this.currentPerson = value; 
+                this.OnPropertyChanged("CurrentPerson");
+              }
+        }
 
+        public ConferenceViewModel FilterConference
+        {
+            get { return this.filterConference; }
+            set
+            {
+                this.filterConference = value;
+                OnPropertyChanged("FilterConference");
+            }
+        }
 
-        //        this.PersonConference = new PersonConferenceWorkspaceViewModel(
-        //DataManager.Instance.GetPersonConference(CurrentPerson.Model,
-        //DefaultManager.Instance.DefaultConference));
+        public bool FilterAllConferences
+        {
+            get { return this.filterAllConferences; }
+            set
+            {
+                this.filterAllConferences = value;
+                OnPropertyChanged("FilterAllConferences");
             }
         }
 
@@ -83,7 +96,7 @@ namespace WPFDB.ViewModel
 
         private void DeleteCurrentPerson()
         {
-            this.dm.RemovePerson(this.CurrentPerson.Model);
+            DataManager.Instance.RemovePerson(this.CurrentPerson.Model);
             this.AllPersons.Remove(this.CurrentPerson);
             this.CurrentPerson = null;
 
@@ -93,7 +106,7 @@ namespace WPFDB.ViewModel
         {
             AllPersons = new ObservableCollection<PersonViewModel>();
 
-            foreach (var item in dm.GetAllPersons())
+            foreach (var item in DataManager.Instance.GetAllPersons())
             {
                 AllPersons.Add(new PersonViewModel(item));
             }
@@ -104,6 +117,11 @@ namespace WPFDB.ViewModel
             PersonFormViewModel vm = new PersonFormViewModel(CurrentPerson);
             PersonFormView v = new PersonFormView{DataContext = vm};
             v.Show();
+        }
+
+        private void ApplyFilters()
+        {
+            //TODO ApplyFilters
         }
 
     }

@@ -29,6 +29,7 @@ namespace WPFDB.ViewModel
         public MainViewModel()
         {
             this.PersonWorkspace = new PersonWorkspaceViewModel();
+            this.AbstractWorkspace = new AbstractWorkspaceViewModel();
             this.SaveCommand = new DelegateCommand((o) => this.Save());
             this.OpenKnowallsCommand = new DelegateCommand((o) => this.OpenKnowalls());
             this.FillDataCommand = new DelegateCommand((o) => this.FillDatabase());
@@ -52,7 +53,7 @@ namespace WPFDB.ViewModel
         public ScienceStatusWorkspaceViewModel ScienceStatusWorkspace { get; private set; }
         public ConferenceWorkspaceViewModel ConferenceWorkspace { get; private set; }
         public PersonWorkspaceViewModel PersonWorkspace { get; private set; }
-
+        public AbstractWorkspaceViewModel AbstractWorkspace { get; private set; }
         /// <summary>
         /// Saves all changes made in the current sessions DataManager
         /// </summary>
@@ -80,9 +81,5 @@ namespace WPFDB.ViewModel
             v.Show();
         }
 
-        private void OpenPerson(PersonViewModel person)
-        {
-            
-        }
     }
 }

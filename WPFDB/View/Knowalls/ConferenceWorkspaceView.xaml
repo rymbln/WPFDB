@@ -49,7 +49,9 @@
             </ScrollViewer>
         </HeaderedContentControl>
 
-        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Margin="10,0,0,0" Grid.Column="1">
+        <HeaderedContentControl 
+            Style="{StaticResource SubDisplayArea}" 
+            Margin="10,0,0,0" Grid.Column="1">
             <HeaderedContentControl.Header>
                 Properties
             </HeaderedContentControl.Header>

@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="WPFDB.View.AbstractWorkspaceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:WPFDB.ViewModel"
+             xmlns:view="clr-namespace:WPFDB.View"
+             mc:Ignorable="d" 
+          >
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:AbstractViewModel}">
+            <view:AbstractView />
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="50*"/>
+        </Grid.RowDefinitions>
+        <HeaderedContentControl Style="{StaticResource SubDisplayArea}"
+                                Grid.Column="0" Grid.Row="0">
+            <HeaderedContentControl.Header>
+                Abstracts
+            </HeaderedContentControl.Header>
+            <ScrollViewer>
+                <HeaderedContentControl>
+                    <HeaderedContentControl.Header>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                            <ToolBar>
+                                <Button Command="{Binding ApplyFilterCommand}">
+                                    <AccessText Text="Apply"/>
+                                </Button>
+                            </ToolBar>
+                        </StackPanel>
+                    </HeaderedContentControl.Header>
+                    <DataGrid SelectedItem="{Binding Path=CurrentAbstract, Mode=OneWay}"
+                              ItemsSource="{Binding Path=AllAbstracts}"
+                              AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Main Author" Binding="{Binding Path=AuthorNameShort}" />
+                            <DataGridTextColumn Header="Other Authors" Binding="{Binding Path=OtherAuthorsShort}" />
+                            <DataGridTextColumn Header="Name" Binding="{Binding Path=NameShort}" />
+                            <DataGridTextColumn Header="Email" Binding="{Binding Path=AuthorEmail}" />
+                            <DataGridTextColumn Header="Reviewer Name" Binding="{Binding Path=ReviewerName}" />
+                            <DataGridTextColumn Header="Last State" Binding="{Binding Path=LastState}" />
+                            <DataGridTextColumn Header="Last State Date" Binding="{Binding Path=LastStateDate}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </HeaderedContentControl>
+            </ScrollViewer>
+        </HeaderedContentControl>
+        <ContentControl 
+            Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" 
+            Content="{Binding Path=CurrentAbstract}" />
+    </Grid>
+</UserControl>

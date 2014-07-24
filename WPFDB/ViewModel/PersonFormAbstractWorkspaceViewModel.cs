@@ -13,13 +13,13 @@ namespace WPFDB.ViewModel
 {
     public class PersonFormAbstractWorkspaceViewModel: ViewModelBase
     {
-        private AbstractViewModel currentAbstract;
+        private AbstractDetailsViewModel currentAbstract;
         private PersonViewModel currentPerson;
         private DataManager dm = DataManager.Instance;
 
         public Abstract Model { get; private set; }
 
-        public ObservableCollection<AbstractViewModel> AllAbstracts { get; private set; }
+        public ObservableCollection<AbstractDetailsViewModel> AllAbstracts { get; private set; }
 
         public ICommand AddPersonAbstractCommand { get; private set; }
         public ICommand RemovePersonAbstractCommand { get; private set; }
@@ -27,10 +27,10 @@ namespace WPFDB.ViewModel
 
         public PersonFormAbstractWorkspaceViewModel(PersonViewModel person)
         {
-            AllAbstracts = new ObservableCollection<AbstractViewModel>();
+            AllAbstracts = new ObservableCollection<AbstractDetailsViewModel>();
             foreach (var a in dm.GetAbstractsForPerson(person.Model))
             {
-                AllAbstracts.Add(new AbstractViewModel(a,person.Model));
+                AllAbstracts.Add(new AbstractDetailsViewModel(a,person.Model));
             }
             this.currentPerson = person;
             this.AddPersonAbstractCommand = new DelegateCommand((o) => this.AddPersonAbstract());
@@ -38,7 +38,7 @@ namespace WPFDB.ViewModel
             this.SaveCommand = new DelegateCommand((o) => this.Save());
         }
 
-        public AbstractViewModel CurrentAbstract
+        public AbstractDetailsViewModel CurrentAbstract
         {
             get
             {
@@ -57,7 +57,7 @@ namespace WPFDB.ViewModel
         {
             var abs = DefaultManager.Instance.DefaulAbstract;
             dm.AddAbstractToPerson(this.currentPerson.Model,abs);
-            var vm = new AbstractViewModel(abs, currentPerson.Model);
+            var vm = new AbstractDetailsViewModel(abs, currentPerson.Model);
             AllAbstracts.Add(vm);
             this.currentAbstract = vm;
         }
