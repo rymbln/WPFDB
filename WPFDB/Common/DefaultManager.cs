@@ -117,9 +117,20 @@ namespace WPFDB.Common
             }
         }
 
+        public ContactType DefaultContactType
+        {
+            get
+            {
+                var list = DataManager.Instance.GetAllContactTypes();
+                var obj = list.FirstOrDefault(o => o.Code == "-");
+                return obj;
+            }
+        }
+
+
         private PersonConferences_Detail DefaultPersonConferenceDetail(Guid personConferenceId)
         {
-            
+
             if (personConferenceId == null)
             {
                 throw new ArgumentNullException("personConferenceId");
@@ -131,8 +142,8 @@ namespace WPFDB.Common
             pcd.IsArrive = false;
             pcd.IsBadge = false;
             pcd.IsNeedBadge = true;
-            pcd.RankId = DefaultRank.Id;
-            pcd.CompanyId = DefaultCompany.Id;
+            pcd.Rank = DefaultRank;
+            pcd.Company = DefaultCompany;
             return pcd;
         }
 
@@ -171,7 +182,7 @@ namespace WPFDB.Common
             return iacmac;
         }
 
-      
+
 
 
         public Person DefaultPerson
@@ -180,14 +191,14 @@ namespace WPFDB.Common
             {
                 var p = DataManager.Instance.CreateObject<Person>();
                 p.Id = GuidComb.Generate();
-                p.BirthDate = Convert.ToDateTime("01/01/1900");
+              //  p.BirthDate = Convert.ToDateTime("01/01/1900");
                 p.FirstName = "---";
                 p.SecondName = "---";
                 p.ThirdName = "---";
-                p.SexId = DefaultSex.Id;
-                p.SpecialityId = DefaultSpeciality.Id;
-                p.ScienceDegreeId = DefaultScienceDegree.Id;
-                p.ScienceStatusId = DefaultScienceStatus.Id;
+                p.Sex = DefaultSex;
+                p.Speciality = DefaultSpeciality;
+                p.ScienceDegree = DefaultScienceDegree;
+                p.ScienceStatus = DefaultScienceStatus;
                 p.Iacmac = DefaultIacmac(p.Id);
                 DataManager.Instance.AddPerson(p);
                 DataManager.Instance.Save();
@@ -195,8 +206,8 @@ namespace WPFDB.Common
                 var pc = DataManager.Instance.CreateObject<PersonConference>();
                 pc.PersonConferenceId = GuidComb.Generate();
                 pc.PersonId = p.Id;
-                pc.ConferenceId = DefaultConference.Id;
-                
+                pc.Conference = DefaultConference;
+
                 pc.PersonConferences_Payment = DefaultPersonConferencePayment(pc.PersonConferenceId);
                 pc.PersonConferences_Detail = DefaultPersonConferenceDetail(pc.PersonConferenceId);
 
@@ -206,5 +217,64 @@ namespace WPFDB.Common
             }
         }
 
+
+
+
+        public Email DefaultEmail
+        {
+            get
+            {
+                var e = DataManager.Instance.CreateObject<Email>();
+                e.Id = GuidComb.Generate();
+                e.Name = "---";
+                e.ContactType = DefaultContactType;
+                return e;
+            }
+        }
+
+        public Address DefaultAddress
+        {
+            get
+            {
+                var a = DataManager.Instance.CreateObject<Address>();
+                a.Id = GuidComb.Generate();
+                a.ZipCode = "000000";
+                a.CountryName = "---";
+                a.RegionName = "---";
+                a.CityName = "---";
+                a.StreetHouseName = "---";
+                a.ContactType = DefaultContactType;
+                return a;
+            }
+        }
+
+        public Phone DefaultPhone
+        {
+            get
+            {
+                var p = DataManager.Instance.CreateObject<Phone>();
+                p.Id = GuidComb.Generate();
+                p.Number = "000000";
+                p.ContactType = DefaultContactType;
+
+                return p;
+            }
+        }
+
+        public Abstract DefaulAbstract
+        {
+            get
+            {
+                var abs = DataManager.Instance.CreateObject<Abstract>();
+                abs.Id = GuidComb.Generate();
+                abs.Name = "---";
+                abs.OtherAuthors = "---";
+                abs.Text = "---";
+                abs.Link = "---";
+                return abs;
+            }
+        }
+
+       
     }
 }

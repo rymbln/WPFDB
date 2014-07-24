@@ -55,13 +55,8 @@ namespace WPFDB.ViewModel
 
         public void AddPersonAbstract()
         {
-            var abs = dm.CreateObject<Abstract>();
-            abs.Id = GuidComb.Generate();
-            abs.Name = "-";
-            abs.OtherAuthors = "-";
-            abs.Text = "-";
-            abs.Link = "-";
-            dm.AddAbstractToPerson(this.currentPerson.Model, dm.GetDefaultConference(),abs);
+            var abs = DefaultManager.Instance.DefaulAbstract;
+            dm.AddAbstractToPerson(this.currentPerson.Model,abs);
             var vm = new AbstractViewModel(abs, currentPerson.Model);
             AllAbstracts.Add(vm);
             this.currentAbstract = vm;

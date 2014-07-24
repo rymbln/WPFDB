@@ -418,10 +418,25 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("person");
             }
-            var lst = obj.PersonConferences;
+            var lst = obj.PersonConferences.ToList();
             foreach (var item in lst)
             {
                 RemovePersonConference(item);
+            }
+            var addr = obj.Addresses.ToList();
+            foreach (var item in addr)
+            {
+                RemoveAddress(obj, item);
+            }
+            var phones = obj.Phones.ToList();
+            foreach (var item in phones)
+            {
+                RemovePhone(obj,item);
+            }
+            var emails = obj.Emails.ToList();
+            foreach (var email in emails)
+            {
+                RemoveEmail(obj,email);
             }
             this.underlyingContext.Persons.DeleteObject(obj);
             Save();
@@ -433,7 +448,7 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("personConference");
             }
-            var lst = obj.Abstracts;
+            var lst = obj.Abstracts.ToList();
             foreach (var item in lst)
             {
                 RemoveAbstract(item);
@@ -908,11 +923,14 @@ namespace WPFDB.Common
                 throw new ArgumentNullException("email");
             }
 
-            this.CheckEntityDoesNotBelongToUnitOfWork(email);
+            email.PersonId = person.Id;
+
+            this.CheckEntityBelongsToUnitOfWork(email);
             this.CheckEntityBelongsToUnitOfWork(person);
 
             this.underlyingContext.Emails.AddObject(email);
             person.Emails.Add(email);
+            Save();
         }
 
         public void RemoveEmail(Person person, Email email)
@@ -933,6 +951,7 @@ namespace WPFDB.Common
             }
             person.Emails.Remove(email);
             this.underlyingContext.Emails.DeleteObject(email);
+            Save();
         }
 
         public void AddAddressToPerson(Person person, Address address)
@@ -946,12 +965,13 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("address");
             }
-
-            this.CheckEntityDoesNotBelongToUnitOfWork(address);
+            address.PersonId = person.Id;
+            this.CheckEntityBelongsToUnitOfWork(address);
             this.CheckEntityBelongsToUnitOfWork(person);
 
             this.underlyingContext.Addresses.AddObject(address);
             person.Addresses.Add(address);
+            Save();
         }
 
         public void RemoveAddress(Person person, Address address)
@@ -972,6 +992,7 @@ namespace WPFDB.Common
             }
             person.Addresses.Remove(address);
             this.underlyingContext.Addresses.DeleteObject(address);
+            Save();
         }
 
         public void AddPhoneToPerson(Person person, Phone phone)
@@ -985,12 +1006,13 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("phone");
             }
-
-            this.CheckEntityDoesNotBelongToUnitOfWork(phone);
+            phone.PersonId = person.Id;
+            this.CheckEntityBelongsToUnitOfWork(phone);
             this.CheckEntityBelongsToUnitOfWork(person);
 
             this.underlyingContext.Phones.AddObject(phone);
             person.Phones.Add(phone);
+            Save();
         }
 
         public void RemovePhone(Person person, Phone phone)
@@ -1011,6 +1033,7 @@ namespace WPFDB.Common
             }
             person.Phones.Remove(phone);
             this.underlyingContext.Phones.DeleteObject(phone);
+            Save();
         }
 
         public IEnumerable<AbstractStatus> GetAllAbstractStatuses()
@@ -1030,18 +1053,18 @@ namespace WPFDB.Common
             return this.underlyingContext.Conferences.SingleOrDefault(o => o.Code == "-");
         }
 
-        public void AddAbstractToPerson(Person person, Conference conference, Abstract abs)
+        public void AddAbstractToPerson(Person person, Abstract abs)
         {
             var personConference =
                 this.underlyingContext.PersonConferences.FirstOrDefault(
-                    o => o.PersonId == person.Id && o.ConferenceId == conference.Id);
+                    o => o.PersonId == person.Id && o.ConferenceId == DefaultManager.Instance.DefaultConference.Id);
             if (personConference == null)
             {
                 personConference = new PersonConference
                 {
                     PersonConferenceId = GuidComb.Generate(),
                     PersonId = person.Id,
-                    ConferenceId = conference.Id
+                    ConferenceId = DefaultManager.Instance.DefaultConference.Id
                 };
                 this.underlyingContext.PersonConferences.AddObject(personConference);
                 Save();
