@@ -22,7 +22,7 @@ namespace WPFDB.ViewModel
             }
             if (email.ContactType == null)
             {
-                email.ContactType = DataManager.Instance.GetDefaultContactType();
+                email.ContactType = DefaultManager.Instance.DefaultContactType;
             }
             this.Model = email;
 
@@ -35,7 +35,7 @@ namespace WPFDB.ViewModel
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.ContactType))
                 {
-                    this.ContactType = new ContactTypeViewModel(DataManager.Instance.GetDefaultContactType());
+                    this.ContactType = new ContactTypeViewModel(DefaultManager.Instance.DefaultContactType);
                 }
             };
 
@@ -59,7 +59,7 @@ namespace WPFDB.ViewModel
             {
                 if (this.Model.ContactType == null)
                 {
-                    this.Model.ContactType = DataManager.Instance.GetDefaultContactType();
+                    this.Model.ContactType = DefaultManager.Instance.DefaultContactType;
                 }
                 this.contactType =
                         this.ContactTypeLookup.SingleOrDefault(s => s.Model == this.Model.ContactType);

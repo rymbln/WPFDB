@@ -41,7 +41,7 @@ namespace WPFDB.Common
         /// </summary>
         private IConferenceContext underlyingContext;
 
-    
+
 
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace WPFDB.Common
             }
 
             underlyingContext = context;
-       }
+        }
 
 
 
@@ -172,6 +172,7 @@ namespace WPFDB.Common
 
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.Specialities.AddObject(obj);
+            Save();
         }
         public void AddSex(Sex obj)
         {
@@ -182,6 +183,7 @@ namespace WPFDB.Common
 
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.Sexes.AddObject(obj);
+            Save();
         }
         public void AddScienceStatus(ScienceStatus obj)
         {
@@ -192,6 +194,7 @@ namespace WPFDB.Common
 
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.ScienceStatuses.AddObject(obj);
+            Save();
         }
         public void AddScienceDegree(ScienceDegree obj)
         {
@@ -202,6 +205,7 @@ namespace WPFDB.Common
 
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.ScienceDegrees.AddObject(obj);
+            Save();
         }
 
         public void AddOrderStatus(OrderStatus obj)
@@ -213,6 +217,7 @@ namespace WPFDB.Common
 
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.OrderStatuses.AddObject(obj);
+            Save();
         }
 
         public void AddConference(Conference obj)
@@ -224,6 +229,7 @@ namespace WPFDB.Common
 
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.Conferences.AddObject(obj);
+            Save();
         }
 
         public void AddContactType(ContactType obj)
@@ -235,6 +241,7 @@ namespace WPFDB.Common
 
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.ContactTypes.AddObject(obj);
+            Save();
         }
 
         public void AddUser(User obj)
@@ -244,6 +251,7 @@ namespace WPFDB.Common
                 throw new ArgumentNullException("User");
             }
             this.underlyingContext.Users.AddObject(obj);
+            Save();
         }
 
         public void AddCompany(Company obj)
@@ -254,6 +262,7 @@ namespace WPFDB.Common
                 throw new ArgumentNullException("Company");
             }
             this.underlyingContext.Companies.AddObject(obj);
+            Save();
         }
 
         public void AddPaymentType(PaymentType obj)
@@ -263,6 +272,7 @@ namespace WPFDB.Common
                 throw new ArgumentNullException("PaymentType");
             }
             this.underlyingContext.PaymentTypes.AddObject(obj);
+            Save();
         }
 
         public void AddRank(Rank obj)
@@ -272,6 +282,7 @@ namespace WPFDB.Common
                 throw new ArgumentNullException("Rank");
             }
             this.underlyingContext.Ranks.AddObject(obj);
+            Save();
         }
         public void AddPerson(Person obj)
         {
@@ -281,7 +292,7 @@ namespace WPFDB.Common
                 throw new ArgumentNullException("person");
             }
             this.underlyingContext.Persons.AddObject(obj);
-           Save();
+            Save();
         }
 
         public void AddAbstractStatus(AbstractStatus obj)
@@ -291,6 +302,7 @@ namespace WPFDB.Common
                 throw new ArgumentNullException("abstractStatus");
             }
             underlyingContext.AbstractStatuses.AddObject(obj);
+            Save();
         }
 
         public void AddAbstractWork(AbstractWork obj)
@@ -300,9 +312,10 @@ namespace WPFDB.Common
                 throw new ArgumentNullException("abstractWork");
             }
             underlyingContext.AbstractWorks.AddObject(obj);
+            Save();
         }
 
-     
+
         public void AddAbstract(Abstract obj)
         {
             if (obj == null)
@@ -310,15 +323,29 @@ namespace WPFDB.Common
                 throw new ArgumentNullException("abstract");
             }
             underlyingContext.Abstracts.AddObject(obj);
+            Save();
         }
 
-        public void AddPersonConference(PersonConference obj)
+        public PersonConference AddPersonConference(Person person, Conference conference)
         {
-            if (obj == null)
+            if (person == null)
             {
-                throw new ArgumentNullException("personConference");
+                throw new ArgumentNullException("person");
             }
-            underlyingContext.PersonConferences.AddObject(obj);
+            if (conference == null)
+            {
+                throw new ArgumentNullException("conference");
+            }
+            var personConference = CreateObject<PersonConference>();
+            personConference.PersonConferenceId = GuidComb.Generate();
+            personConference.PersonId = person.Id;
+            personConference.ConferenceId = conference.Id;
+            underlyingContext.PersonConferences.AddObject(personConference);
+            Save();
+            personConference.PersonConferences_Detail = DefaultManager.Instance.DefaultPersonConferenceDetail(personConference.PersonConferenceId);
+            personConference.PersonConferences_Payment = DefaultManager.Instance.DefaultPersonConferencePayment(personConference.PersonConferenceId);
+            Save();
+            return personConference;
         }
 
         #endregion
@@ -339,6 +366,7 @@ namespace WPFDB.Common
             }
 
             this.underlyingContext.Specialities.DeleteObject(obj);
+            Save();
         }
         public void RemoveSex(Sex obj)
         {
@@ -354,6 +382,7 @@ namespace WPFDB.Common
             }
 
             this.underlyingContext.Sexes.DeleteObject(obj);
+            Save();
         }
         public void RemoveScienceDegree(ScienceDegree obj)
         {
@@ -369,6 +398,7 @@ namespace WPFDB.Common
             }
 
             this.underlyingContext.ScienceDegrees.DeleteObject(obj);
+            Save();
         }
 
         public void RemoveOrderStatus(OrderStatus obj)
@@ -380,6 +410,7 @@ namespace WPFDB.Common
 
             this.CheckEntityBelongsToUnitOfWork(obj);
             this.underlyingContext.OrderStatuses.DeleteObject(obj);
+            Save();
         }
 
         public void RemoveScienceStatus(ScienceStatus obj)
@@ -396,6 +427,7 @@ namespace WPFDB.Common
             }
 
             this.underlyingContext.ScienceStatuses.DeleteObject(obj);
+            Save();
         }
         public void RemoveConference(Conference obj)
         {
@@ -411,6 +443,7 @@ namespace WPFDB.Common
             //}
 
             this.underlyingContext.Conferences.DeleteObject(obj);
+            Save();
         }
         public void RemovePerson(Person obj)
         {
@@ -431,12 +464,12 @@ namespace WPFDB.Common
             var phones = obj.Phones.ToList();
             foreach (var item in phones)
             {
-                RemovePhone(obj,item);
+                RemovePhone(obj, item);
             }
             var emails = obj.Emails.ToList();
             foreach (var email in emails)
             {
-                RemoveEmail(obj,email);
+                RemoveEmail(obj, email);
             }
             this.underlyingContext.Persons.DeleteObject(obj);
             Save();
@@ -475,6 +508,7 @@ namespace WPFDB.Common
                 throw new ArgumentNullException("Rank");
             }
             this.underlyingContext.Ranks.DeleteObject(obj);
+            Save();
         }
 
         public void RemoveCompany(Company obj)
@@ -484,6 +518,7 @@ namespace WPFDB.Common
                 throw new ArgumentNullException("Company");
             }
             this.underlyingContext.Companies.DeleteObject(obj);
+            Save();
         }
 
         public void RemoveUser(User obj)
@@ -494,6 +529,7 @@ namespace WPFDB.Common
             }
             this.underlyingContext.Users.DeleteObject(obj);
             this.CheckEntityBelongsToUnitOfWork(obj);
+            Save();
         }
 
         public User GetUser(string name)
@@ -501,7 +537,7 @@ namespace WPFDB.Common
             return this.underlyingContext.Users.FirstOrDefault(o => o.Name == name);
         }
 
-       
+
         public IEnumerable<User> GetUsers()
         {
             return this.underlyingContext.Users.ToList();
@@ -514,62 +550,11 @@ namespace WPFDB.Common
                 throw new ArgumentNullException("PaymentType");
             }
             this.underlyingContext.PaymentTypes.DeleteObject(obj);
+            Save();
         }
         #endregion
 
-        #region Getting Default Values
 
-        public Sex GetDefaultSex()
-        {
-            return this.underlyingContext.Sexes.FirstOrDefault(o => o.Code == "-");
-        }
-
-        public OrderStatus GetDefaultOrderStatus()
-        {
-            return this.underlyingContext.OrderStatuses.FirstOrDefault(o => o.Code == "-");
-        }
-
-        public ContactType GetDefaultContactType()
-        {
-            return this.underlyingContext.ContactTypes.FirstOrDefault(o => o.Code == "-");
-        }
-
-        public Speciality GetDefaultSpeciality()
-        {
-            return this.underlyingContext.Specialities.FirstOrDefault(o => o.Code == "-");
-        }
-        public ScienceDegree GetDefaultScienceDegree()
-        {
-            return this.underlyingContext.ScienceDegrees.FirstOrDefault(o => o.Code == "-");
-        }
-        public ScienceStatus GetDefaultScienceStatus()
-        {
-            return this.underlyingContext.ScienceStatuses.FirstOrDefault(o => o.Code == "-");
-        }
-
-        public Rank GetDefaultRank()
-        {
-            return this.underlyingContext.Ranks.FirstOrDefault(o => o.Code == "-");
-        }
-
-        public Company GetDefaultCompany()
-        {
-            return this.underlyingContext.Companies.FirstOrDefault(o => o.Code == "-");
-        }
-
-        public PaymentType GetDefaultPaymentType()
-        {
-            return this.underlyingContext.PaymentTypes.FirstOrDefault(o => o.Code == "-");
-        }
-
-        public ContactType GetContactTypeByName(string name)
-        {
-            return this.underlyingContext.ContactTypes.FirstOrDefault(o => o.Name == name);
-        }
-
-
-
-        #endregion
 
         #region Getting Users
 
@@ -696,13 +681,13 @@ namespace WPFDB.Common
         }
 
         public void FillData()
-        {      
-            AddUser(new User { Id = GuidComb.Generate(), Name = "user", Password = "user", Email = "user@example.com",Role = "user" });
-            AddUser(new User { Id = GuidComb.Generate(), Name = "admin", Password = "admin", Email = "admin@example.com",  Role = "admin" });
-            AddUser(new User { Id = GuidComb.Generate(), Name = "111", Password = "111", Email = "111@example.com",  Role = "user" });
+        {
+            AddUser(new User { Id = GuidComb.Generate(), Name = "user", Password = "user", Email = "user@example.com", Role = "user" });
+            AddUser(new User { Id = GuidComb.Generate(), Name = "admin", Password = "admin", Email = "admin@example.com", Role = "admin" });
+            AddUser(new User { Id = GuidComb.Generate(), Name = "111", Password = "111", Email = "111@example.com", Role = "user" });
             Save();
-    
-            AddAbstractStatus(new AbstractStatus {Id=GuidComb.Generate(), Code = "-", Name = "-"});
+
+            AddAbstractStatus(new AbstractStatus { Id = GuidComb.Generate(), Code = "-", Name = "-" });
             AddAbstractStatus(new AbstractStatus { Id = GuidComb.Generate(), Code = "I", Name = "In work" });
             AddAbstractStatus(new AbstractStatus { Id = GuidComb.Generate(), Code = "RV", Name = "Revision" });
             AddAbstractStatus(new AbstractStatus { Id = GuidComb.Generate(), Code = "A", Name = "Accepted" });
@@ -710,13 +695,13 @@ namespace WPFDB.Common
             AddAbstractStatus(new AbstractStatus { Id = GuidComb.Generate(), Code = "R2", Name = "Rejected Twice" });
             Save();
 
-            AddContactType(new ContactType{Id=GuidComb.Generate(), Code = "-", Name="-"});
+            AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "-", Name = "-" });
             AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "H", Name = "Home" });
             AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "W", Name = "Work" });
             AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "O", Name = "Other" });
             Save();
 
-            AddOrderStatus(new OrderStatus {Id = GuidComb.Generate(), Code = "-", Name = "-"});
+            AddOrderStatus(new OrderStatus { Id = GuidComb.Generate(), Code = "-", Name = "-" });
             AddOrderStatus(new OrderStatus { Id = GuidComb.Generate(), Code = "P", Name = "Оплачено" });
             AddOrderStatus(new OrderStatus { Id = GuidComb.Generate(), Code = "R", Name = "Возврат" });
             Save();
@@ -753,122 +738,6 @@ namespace WPFDB.Common
             AddPaymentType(new PaymentType { Id = GuidComb.Generate(), Code = "-", Name = "-" });
             AddPaymentType(new PaymentType { Id = GuidComb.Generate(), Code = "", Name = "Payment type 1" });
             AddPaymentType(new PaymentType { Id = GuidComb.Generate(), Code = "", Name = "Payment type 2" });
-            Save();
-            //  var person = new Person
-            //{
-            //    Id = GuidComb.Generate(),
-            //    BirthDate = Convert.ToDateTime("01.01.1990"),
-            //    FirstName = "Иванов",
-            //    SecondName = "Иван",
-            //    ThirdName = "Иванович",
-            //    Post = "Man",
-            //    WorkPlace = "WorkPlace",
-            //    ScienceDegree = scienceDegreeRepository.GetByName("-"),
-            //    ScienceStatus = scienceStatusRepository.GetByName("-"),
-            //    Sex = sexRepository.GetByName("-"),
-            //    Speciality = specialityRepository.GetByName("-"),
-            //    Iacmac = new Iacmac
-            //    {
-            //        Code = "42000001",
-            //        DateRegistration = Convert.ToDateTime("01.01.1990"),
-            //        Number = 1,
-            //        IsCardCreate = true,
-            //        IsCardSent = true,
-            //        IsForm = true,
-            //        IsMember = true
-            //    }
-
-
-            //};
-
-            //AddPerson(person);
-
-            //Save();
-
-            //person.Emails.Add(new Email{ Id=GuidComb.Generate(), Name = "test@mail.ru", ContactType = GetDefaultContactType()});
-            //person.Emails.Add(new Email { Id = GuidComb.Generate(), Name = "work@mail.ru", ContactType = GetContactTypeByName("Work") });
-            //person.Emails.Add(new Email { Id = GuidComb.Generate(), Name = "Home@mail.ru", ContactType = GetContactTypeByName("Home") });
-            //person.Emails.Add(new Email { Id = GuidComb.Generate(), Name = "other@mail.ru", ContactType = GetContactTypeByName("Other") });
-            //Save();
-            //person.Phones.Add(new Phone{Id = GuidComb.Generate(), ContactType = GetDefaultContactType(), Number = "+71234567890"});
-            //person.Phones.Add(new Phone { Id = GuidComb.Generate(), ContactType = GetContactTypeByName("Home"), Number = "+71234567890" });
-            //person.Phones.Add(new Phone { Id = GuidComb.Generate(), ContactType = GetContactTypeByName("Other"), Number = "+71234567890" });
-            //person.Phones.Add(new Phone { Id = GuidComb.Generate(), ContactType = GetContactTypeByName("Work"), Number = "+71234567890" });
-            //Save();
-            //person.Addresses.Add(new Address{Id=GuidComb.Generate(),ZipCode = "214000",ContactType = GetContactTypeByName("Home"), CountryName = "Russia", RegionName = "Smolensk region", CityName = "Smolensk", StreetHouseName = "Petr Alekseev st. 19"});
-            //person.Addresses.Add(new Address { Id = GuidComb.Generate(), ZipCode = "214000",ContactType = GetContactTypeByName("Work"), CountryName = "Russia", RegionName = "Smolensk region", CityName = "Smolensk", StreetHouseName = "Kirov st. 46" });
-            //Save();
-            //var details = new PersonConferences_Detail
-            //{
-            //    Company = companyRepository.GetByName("-"),
-            //    DateArrive = Convert.ToDateTime("12.12.2014"),
-            //    IsAbstract = false,
-            //    IsAutoreg = true,
-            //    IsBadge = true,
-            //    IsNeedBadge = true,
-            //    IsArrive = true,
-            //    Rank = rankRepository.GetByName("-")
-            //};
-            //var payment = new PersonConferences_Payment
-            //{
-            //    Company = companyRepository.GetByName("-"),
-            //    PaymentType = paymentTypeRepository.GetByName("-"),
-            //    PaymentDocument = "Order",
-            //    PaymentDate = Convert.ToDateTime("12.11.2014"),
-            //    Money = 1200,
-            //    IsComplect = true,
-            //    OrderNumber = 5,
-            //    OrderStatus = GetDefaultOrderStatus()
-            //};
-            //personRepository.AddConferenceInfoToPerson(person, conferenceRepository.GetByName("-"), details, payment);
-            //Save();
-            //details = new PersonConferences_Detail
-            //{
-            //    Company = companyRepository.GetByName("Company 1"),
-            //    DateArrive = Convert.ToDateTime("12.12.2014"),
-            //    IsAbstract = false,
-            //    IsAutoreg = true,
-            //    IsBadge = true,
-            //    IsNeedBadge = true,
-            //    IsArrive = true,
-            //    Rank = rankRepository.GetByName("-")
-            //};
-            //payment = new PersonConferences_Payment
-            //{
-            //    Company = companyRepository.GetByName("Company 1"),
-            //    PaymentType = paymentTypeRepository.GetByName("-"),
-            //    PaymentDocument = "Order",
-            //    PaymentDate = Convert.ToDateTime("12.11.2014"),
-            //    Money = 1200,
-            //    IsComplect = true,
-            //    OrderNumber = 5,
-            //    OrderStatus = GetDefaultOrderStatus()
-            //};
-            //personRepository.AddConferenceInfoToPerson(person, conferenceRepository.GetByName("Conference 1"), details, payment);
-            //Save();
-            //details = new PersonConferences_Detail
-            //{
-            //    Company = companyRepository.GetByName("Company 2"),
-            //    DateArrive = Convert.ToDateTime("12.12.2014"),
-            //    IsAbstract = false,
-            //    IsAutoreg = true,
-            //    IsBadge = true,
-            //    IsNeedBadge = true,
-            //    IsArrive = true,
-            //    Rank = rankRepository.GetByName("-")
-            //};
-            //payment = new PersonConferences_Payment
-            //{
-            //    Company = companyRepository.GetByName("Company 2"),
-            //    PaymentType = paymentTypeRepository.GetByName("-"),
-            //    PaymentDocument = "Order",
-            //    PaymentDate = Convert.ToDateTime("12.11.2014"),
-            //    Money = 1200,
-            //    IsComplect = true,
-            //    OrderNumber = 5,
-            //    OrderStatus = GetDefaultOrderStatus()
-            //};
-            //personRepository.AddConferenceInfoToPerson(person, conferenceRepository.GetByName("Conference 2"), details, payment);
             Save();
         }
 
@@ -909,6 +778,7 @@ namespace WPFDB.Common
 
             this.CheckEntityBelongsToUnitOfWork(obj);
             this.underlyingContext.ContactTypes.DeleteObject(obj);
+            Save();
         }
 
         public void AddEmailToPerson(Person person, Email email)
@@ -1071,6 +941,7 @@ namespace WPFDB.Common
             }
 
             abs.PersonConferenceId = personConference.PersonConferenceId;
+            this.underlyingContext.Abstracts.AddObject(abs);
             Save();
         }
 

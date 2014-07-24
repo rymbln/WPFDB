@@ -37,7 +37,7 @@ namespace WPFDB.ViewModel
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.PaymentType))
                 {
-                    this.OrderStatus = new OrderStatusViewModel(DataManager.Instance.GetDefaultOrderStatus());
+                    this.OrderStatus = new OrderStatusViewModel(DefaultManager.Instance.DefaultOrderStatus);
                 }
             };
             PaymentTypeLookup = new ObservableCollection<PaymentTypeViewModel>();
@@ -49,7 +49,7 @@ namespace WPFDB.ViewModel
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.PaymentType))
                 {
-                    this.PaymentType = new PaymentTypeViewModel(DataManager.Instance.GetDefaultPaymentType());
+                    this.PaymentType = new PaymentTypeViewModel(DefaultManager.Instance.DefaultPaymentType);
                 }
             };
             CompanyLookup = new ObservableCollection<CompanyViewModel>();
@@ -61,7 +61,7 @@ namespace WPFDB.ViewModel
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.Company))
                 {
-                    this.Company = new CompanyViewModel(DataManager.Instance.GetDefaultCompany());
+                    this.Company = new CompanyViewModel(DefaultManager.Instance.DefaultCompany);
                 }
             };
         }
@@ -98,7 +98,7 @@ namespace WPFDB.ViewModel
             {
                 if (this.Model.Company == null)
                 {
-                    this.Model.Company = DataManager.Instance.GetDefaultCompany();
+                    this.Model.Company = DefaultManager.Instance.DefaultCompany;
                 }
                 this.company = this.CompanyLookup.SingleOrDefault(r => r.Model == this.Model.Company);
                 return this.company;
@@ -116,7 +116,7 @@ namespace WPFDB.ViewModel
             {
                 if (this.Model.OrderStatus == null)
                 {
-                    this.Model.OrderStatus = DataManager.Instance.GetDefaultOrderStatus();
+                    this.Model.OrderStatus = DefaultManager.Instance.DefaultOrderStatus;
                 }
                 this.orderStatus = this.OrderStatusLookup.SingleOrDefault(r => r.Model == this.Model.OrderStatus);
                 return this.orderStatus;
@@ -134,7 +134,7 @@ namespace WPFDB.ViewModel
                {
                    if (this.Model.PaymentType == null)
                    {
-                       this.Model.PaymentType = DataManager.Instance.GetDefaultPaymentType();
+                       this.Model.PaymentType = DefaultManager.Instance.DefaultPaymentType;
                    }
                    this.paymentType = this.PaymentTypeLookup.SingleOrDefault(r => r.Model == this.Model.PaymentType);
                    return this.paymentType;

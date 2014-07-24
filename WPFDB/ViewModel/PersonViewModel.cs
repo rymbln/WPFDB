@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WPFDB.Common;
 using WPFDB.Model;
 
@@ -61,7 +62,7 @@ namespace WPFDB.ViewModel
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.ScienceDegree))
                 {
-                    this.ScienceDegree = new ScienceDegreeViewModel(dm.GetDefaultScienceDegree());
+                    this.ScienceDegree = new ScienceDegreeViewModel(DefaultManager.Instance.DefaultScienceDegree);
                 }
             };
 
@@ -69,21 +70,21 @@ namespace WPFDB.ViewModel
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.ScienceStatus))
                 {
-                    this.ScienceStatus = new ScienceStatusViewModel(dm.GetDefaultScienceStatus());
+                    this.ScienceStatus = new ScienceStatusViewModel(DefaultManager.Instance.DefaultScienceStatus);
                 }
             };
             this.SexLookup.CollectionChanged += (sender, e) =>
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.Sex))
                 {
-                    this.Sex = new SexViewModel(dm.GetDefaultSex());
+                    this.Sex = new SexViewModel(DefaultManager.Instance.DefaultSex);
                 }
             };
             this.SpecialityLookup.CollectionChanged += (sender, e) =>
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.Speciality))
                 {
-                    this.Speciality = new SpecialityViewModel(dm.GetDefaultSpeciality());
+                    this.Speciality = new SpecialityViewModel(DefaultManager.Instance.DefaultSpeciality);
                 }
             };
         }
@@ -99,7 +100,7 @@ namespace WPFDB.ViewModel
             {
                 if (this.Model.ScienceDegree == null)
                 {
-                    this.Model.ScienceDegree = dm.GetDefaultScienceDegree();
+                    this.Model.ScienceDegree = DefaultManager.Instance.DefaultScienceDegree;
      
                 }
                     this.scienceDegree =
@@ -121,7 +122,7 @@ namespace WPFDB.ViewModel
             {
                 if (this.Model.ScienceStatus == null)
                 {
-                    this.Model.ScienceStatus = dm.GetDefaultScienceStatus();
+                    this.Model.ScienceStatus = DefaultManager.Instance.DefaultScienceStatus;
                 }
                 this.scienceStatus =
                         this.ScienceStatusLookup.SingleOrDefault(s => s.Model == this.Model.ScienceStatus);
@@ -142,7 +143,7 @@ namespace WPFDB.ViewModel
             {
                 if (this.Model.Sex == null)
                 {
-                    this.Model.Sex = dm.GetDefaultSex();
+                    this.Model.Sex = DefaultManager.Instance.DefaultSex;
 
                 }
                 this.sex =
@@ -164,7 +165,7 @@ namespace WPFDB.ViewModel
             {
                 if (this.Model.Speciality == null)
                 {
-                    this.Model.Speciality = dm.GetDefaultSpeciality();
+                    this.Model.Speciality = DefaultManager.Instance.DefaultSpeciality;
                 }
                 this.speciality =
                         this.SpecialityLookup.SingleOrDefault(s => s.Model == this.Model.Speciality);

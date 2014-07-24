@@ -120,34 +120,7 @@ namespace WPFDB.ViewModel
         {
             Person p = CurrentPersonConference.CurrentPerson.Model;
             Conference c = DefaultManager.Instance.DefaultConference;
-            PersonConference pc = dm.CreateObject<PersonConference>();
-            pc.Person = p;
-            pc.Conference = c;
-            var details = new PersonConferences_Detail
-            {
-                Company = DataManager.Instance.GetDefaultCompany(),
-                DateArrive = DateTime.Now,
-                IsAbstract = false,
-                IsAutoreg = true,
-                IsBadge = true,
-                IsNeedBadge = true,
-                IsArrive = true,
-                Rank = DataManager.Instance.GetDefaultRank()
-            };
-            var payment = new PersonConferences_Payment
-            {
-                Company = DataManager.Instance.GetDefaultCompany(),
-                PaymentType = DataManager.Instance.GetDefaultPaymentType(),
-                PaymentDocument = "Order",
-                PaymentDate = DateTime.Now,
-                Money = 1200,
-                IsComplect = true,
-                OrderNumber = 5,
-                OrderStatus = DataManager.Instance.GetDefaultOrderStatus()
-            };
-            pc.PersonConferences_Payment = payment;
-            pc.PersonConferences_Detail = details;
-            DataManager.Instance.AddPersonConference(pc);
+            var pc = DataManager.Instance.AddPersonConference(p,c);
             PersonConferenceViewModel pcvm = new PersonConferenceViewModel(pc);
             AllPersonConferences.Add(pcvm);
             CurrentPersonConference = pcvm;

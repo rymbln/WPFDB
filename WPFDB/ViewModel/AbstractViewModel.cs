@@ -63,13 +63,10 @@ namespace WPFDB.ViewModel
                 var personConference = DataManager.Instance.GetPersonConference(this.currentPerson, value.Model);
                 if (personConference == null)
                 {
-                    personConference = DataManager.Instance.CreateObject<PersonConference>();
-                    personConference.PersonConferenceId = GuidComb.Generate();
-                    personConference.PersonId = this.currentPerson.Id;
-                    personConference.ConferenceId = value.Model.Id;
-                    DataManager.Instance.AddPersonConference(personConference);
+                   personConference = DataManager.Instance.AddPersonConference(this.currentPerson,value.Model);
                     
                 }
+
                 this.Model.PersonConferenceId = personConference.PersonConferenceId;
                 this.Model.PersonConference = personConference;
                 DataManager.Instance.SetPersonConferenceAbstractOn(personConference);

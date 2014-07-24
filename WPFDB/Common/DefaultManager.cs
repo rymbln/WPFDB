@@ -128,7 +128,7 @@ namespace WPFDB.Common
         }
 
 
-        private PersonConferences_Detail DefaultPersonConferenceDetail(Guid personConferenceId)
+        public PersonConferences_Detail DefaultPersonConferenceDetail(Guid personConferenceId)
         {
 
             if (personConferenceId == null)
@@ -147,7 +147,7 @@ namespace WPFDB.Common
             return pcd;
         }
 
-        private PersonConferences_Payment DefaultPersonConferencePayment(Guid personConferenceId)
+        public PersonConferences_Payment DefaultPersonConferencePayment(Guid personConferenceId)
         {
             if (personConferenceId == null)
             {
@@ -203,15 +203,15 @@ namespace WPFDB.Common
                 DataManager.Instance.AddPerson(p);
                 DataManager.Instance.Save();
 
-                var pc = DataManager.Instance.CreateObject<PersonConference>();
-                pc.PersonConferenceId = GuidComb.Generate();
-                pc.PersonId = p.Id;
-                pc.Conference = DefaultConference;
+          //      var pc = DataManager.Instance.CreateObject<PersonConference>();
+           //     pc.PersonConferenceId = GuidComb.Generate();
+              //  pc.PersonId = p.Id;
+               // pc.Conference = DefaultConference;
 
-                pc.PersonConferences_Payment = DefaultPersonConferencePayment(pc.PersonConferenceId);
-                pc.PersonConferences_Detail = DefaultPersonConferenceDetail(pc.PersonConferenceId);
+             //   pc.PersonConferences_Payment = DefaultPersonConferencePayment(pc.PersonConferenceId);
+             //   pc.PersonConferences_Detail = DefaultPersonConferenceDetail(pc.PersonConferenceId);
 
-                DataManager.Instance.AddPersonConference(pc);
+                DataManager.Instance.AddPersonConference(p, DefaultConference);
                 DataManager.Instance.Save();
                 return p;
             }

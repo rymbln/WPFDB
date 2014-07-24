@@ -22,7 +22,7 @@ namespace WPFDB.ViewModel
             }
             if (address.ContactType == null)
             {
-                address.ContactType = DataManager.Instance.GetDefaultContactType();
+                address.ContactType = DefaultManager.Instance.DefaultContactType;
             }
             ContactTypeLookup = new ObservableCollection<ContactTypeViewModel>();
             foreach (var contactType in DataManager.Instance.GetAllContactTypes())
@@ -33,7 +33,7 @@ namespace WPFDB.ViewModel
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.ContactType))
                 {
-                    this.ContactType = new ContactTypeViewModel(DataManager.Instance.GetDefaultContactType());
+                    this.ContactType = new ContactTypeViewModel(DefaultManager.Instance.DefaultContactType);
                 }
             };
             this.Model = address;
@@ -95,7 +95,7 @@ namespace WPFDB.ViewModel
             {
                 if (this.Model.ContactType == null)
                 {
-                    this.Model.ContactType = DataManager.Instance.GetDefaultContactType();
+                    this.Model.ContactType = DefaultManager.Instance.DefaultContactType;
                 }
                 this.contactType =
                         this.ContactTypeLookup.SingleOrDefault(s => s.Model == this.Model.ContactType);

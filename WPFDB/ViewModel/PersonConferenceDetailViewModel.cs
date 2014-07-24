@@ -37,7 +37,7 @@ namespace WPFDB.ViewModel
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.Rank))
                 {
-                    this.Rank = new RankViewModel(DataManager.Instance.GetDefaultRank());
+                    this.Rank = new RankViewModel(DefaultManager.Instance.DefaultRank);
                 }
             };
 
@@ -50,7 +50,7 @@ namespace WPFDB.ViewModel
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.Company))
                 {
-                    this.Company = new CompanyViewModel(DataManager.Instance.GetDefaultCompany());
+                    this.Company = new CompanyViewModel(DefaultManager.Instance.DefaultCompany);
                 }
             };
 
@@ -95,7 +95,7 @@ namespace WPFDB.ViewModel
             {
                 if (this.Model.Rank == null)
                 {
-                    this.Model.Rank = DataManager.Instance.GetDefaultRank();
+                    this.Model.Rank = DefaultManager.Instance.DefaultRank;
                 }
                 this.rank = this.RankLookup.SingleOrDefault(r => r.Model == this.Model.Rank);
                 return this.rank;
@@ -113,7 +113,7 @@ namespace WPFDB.ViewModel
             {
                 if (this.Model.Company == null)
                 {
-                    this.Model.Company = DataManager.Instance.GetDefaultCompany();
+                    this.Model.Company = DefaultManager.Instance.DefaultCompany;
                 }
                 this.company = this.CompanyLookup.SingleOrDefault(r => r.Model == this.Model.Company);
                 return this.company;
