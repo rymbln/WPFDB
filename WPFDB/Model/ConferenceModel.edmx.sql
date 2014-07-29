@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 07/22/2014 12:40:00
+-- Date Created: 07/25/2014 13:39:23
 -- Generated from EDMX file: C:\Users\Rymbln\Documents\GitHub\WPFDB\WPFDB\Model\ConferenceModel.edmx
 -- --------------------------------------------------
 
@@ -402,6 +402,7 @@ CREATE TABLE [dbo].[AbstractWorks] (
     [AbstractStatusId] uniqueidentifier  NOT NULL,
     [AbstractResponsiblePersonId] uniqueidentifier  NOT NULL,
     [IsSentByEmail] bit  NOT NULL,
+    [DateWork] datetime  NOT NULL,
     [SourceId] int  NOT NULL,
     [UserId] uniqueidentifier  NOT NULL
 );

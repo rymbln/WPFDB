@@ -5,12 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:WPFDB.ViewModel"
              xmlns:view="clr-namespace:WPFDB.View"
+             xmlns:p="clr-namespace:WPFDB.Properties"
              mc:Ignorable="d" 
           >
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type vm:AbstractViewModel}">
             <view:AbstractView />
         </DataTemplate>
+    
+        <DataTemplate DataType="{x:Type vm:AbstractWorkViewModel}">
+            <view:AbstractWorkItemView/>
+        </DataTemplate>
+
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -37,11 +43,12 @@
                             </ToolBar>
                         </StackPanel>
                     </HeaderedContentControl.Header>
-                    <DataGrid SelectedItem="{Binding Path=CurrentAbstract, Mode=OneWay}"
+                    <DataGrid SelectedItem="{Binding Path=CurrentAbstract, Mode=TwoWay}"
                               ItemsSource="{Binding Path=AllAbstracts}"
+                              
                               AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Main Author" Binding="{Binding Path=AuthorNameShort}" />
+                            <DataGridTextColumn Header="Main Author" Binding="{Binding Path=AuthorNameShort}"  />
                             <DataGridTextColumn Header="Other Authors" Binding="{Binding Path=OtherAuthorsShort}" />
                             <DataGridTextColumn Header="Name" Binding="{Binding Path=NameShort}" />
                             <DataGridTextColumn Header="Email" Binding="{Binding Path=AuthorEmail}" />
@@ -55,6 +62,37 @@
         </HeaderedContentControl>
         <ContentControl 
             Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" 
-            Content="{Binding Path=CurrentAbstract}" />
+            Content="{Binding Path=CurrentAbstract, Mode=TwoWay}" />
+
+        <HeaderedContentControl  Grid.Row="1" Grid.Column="0" Style="{StaticResource SubDisplayArea}" >
+            <HeaderedContentControl.Header>
+                Abstract Works
+            </HeaderedContentControl.Header>
+            <StackPanel Orientation="Vertical">
+                <ToolBarTray DockPanel.Dock="Top">
+                    <ToolBar>
+                        <Button Command="{Binding AddAbstractWorkCommand}" Content="Add" ToolTip="{x:Static p:Resources.Save}"/>
+                        <Separator/>
+                        <Button Command="{Binding RemoveAbstractWorkCommand}" Content="Remove" ToolTip="{x:Static p:Resources.Save}"/>
+                        <Separator/>
+                    </ToolBar>
+                </ToolBarTray>
+                <ScrollViewer>
+                    <HeaderedContentControl>
+                        <ListBox BorderThickness="0" 
+                     SelectedItem="{Binding Path=CurrentAbstractWork, Mode=TwoWay}" 
+                     ItemsSource="{Binding Path=AbstractWorks, UpdateSourceTrigger=PropertyChanged}" />
+                    </HeaderedContentControl>
+                </ScrollViewer>
+            </StackPanel>
+        </HeaderedContentControl>
+        <ContentControl Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Right" 
+                        Content="{Binding Path=CurrentAbstractWork}" >
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type vm:AbstractWorkViewModel}">
+                    <view:AbstractWorkView/>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
     </Grid>
 </UserControl>

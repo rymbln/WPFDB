@@ -25,38 +25,38 @@
                 <Button Command="{Binding AddPersonAbstractCommand}" Content="Add Abstract" ToolTip="{x:Static p:Resources.Save}"/>
                 <Separator/>
                 <Button Command="{Binding RemovePersonAbstractCommand}" Content="Remove Abstract" ToolTip="{x:Static p:Resources.Save}"/>
-                
+
             </ToolBar>
         </ToolBarTray>
         <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-       
-        <HeaderedContentControl Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Style="{StaticResource SubDisplayArea}" >
-            <HeaderedContentControl.Header>
-                Abstracts
-            </HeaderedContentControl.Header>
-            <ScrollViewer>
-                <HeaderedContentControl>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <HeaderedContentControl Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Style="{StaticResource SubDisplayArea}" >
+                <HeaderedContentControl.Header>
+                    Abstracts
+                </HeaderedContentControl.Header>
+                <ScrollViewer>
+                    <HeaderedContentControl>
                         <ListBox BorderThickness="0" 
                      SelectedItem="{Binding Path=CurrentAbstract, Mode=TwoWay}" 
                      ItemsSource="{Binding Path=AllAbstracts, UpdateSourceTrigger=PropertyChanged}" />
                     </HeaderedContentControl>
-            </ScrollViewer>
-        </HeaderedContentControl>
+                </ScrollViewer>
+            </HeaderedContentControl>
 
             <ContentControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right" 
                         Content="{Binding Path=CurrentAbstract}" >
                 <ContentControl.Resources>
-                <DataTemplate DataType="{x:Type vm:AbstractDetailsViewModel}">
-                    <v:AbstractDetailView/>
-                </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:AbstractDetailsViewModel}">
+                        <v:AbstractDetailView/>
+                    </DataTemplate>
                 </ContentControl.Resources>
             </ContentControl>
 

@@ -138,10 +138,10 @@ namespace WPFDB.ViewModel
 
         private void AddEmail()
         {
-            Email email = DefaultManager.Instance.DefaultEmail;
+            var email = DefaultManager.Instance.DefaultEmail;
             this.dm.AddEmailToPerson(currentPerson.Model, email);
 
-            EmailViewModel vm = new EmailViewModel(email);
+            var vm = new EmailViewModel(email);
             this.PersonEmails.Add(vm);
             this.CurrentEmail = vm;
         }
@@ -155,10 +155,10 @@ namespace WPFDB.ViewModel
 
         private void AddAddress()
         {
-            Address address = DefaultManager.Instance.DefaultAddress;
+            var address = DefaultManager.Instance.DefaultAddress;
             this.dm.AddAddressToPerson(currentPerson.Model, address);
 
-            AddressViewModel vm = new AddressViewModel(address);
+            var vm = new AddressViewModel(address);
             this.PersonAddresses.Add(vm);
             this.CurrentAddress = vm;
         }
@@ -172,10 +172,10 @@ namespace WPFDB.ViewModel
 
         private void AddPhone()
         {
-            Phone phone = DefaultManager.Instance.DefaultPhone;
+            var phone = DefaultManager.Instance.DefaultPhone;
             this.dm.AddPhoneToPerson(currentPerson.Model, phone);
 
-            PhoneViewModel vm = new PhoneViewModel(phone);
+            var vm = new PhoneViewModel(phone);
             this.PersonPhones.Add(vm);
             this.CurrentPhone = vm;
         }

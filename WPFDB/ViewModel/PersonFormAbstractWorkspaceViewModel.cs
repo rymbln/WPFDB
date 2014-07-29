@@ -64,8 +64,9 @@ namespace WPFDB.ViewModel
 
         public void RemoveCurrentPersonAbstract()
         {
+            dm.RemoveAbstract(CurrentAbstract.Model);
             AllAbstracts.Remove(this.CurrentAbstract);
-            dm.RemoveObject(CurrentAbstract.Model);
+
             this.currentAbstract = AllAbstracts.Count > 0 ? AllAbstracts[0] : null;
         }
 

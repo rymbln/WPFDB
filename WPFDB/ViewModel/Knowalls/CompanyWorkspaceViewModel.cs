@@ -11,12 +11,12 @@ using WPFDB.ViewModel.Helpers;
 
 namespace WPFDB.ViewModel
 {
-    public class CompanyWorkspaceViewModel: ViewModelBase
+    public class CompanyWorkspaceViewModel : ViewModelBase
     {
         private CompanyViewModel currentCompany;
         private DataManager dm = DataManager.Instance;
 
-      public CompanyWorkspaceViewModel()
+        public CompanyWorkspaceViewModel()
         {
             AllCompanys = new ObservableCollection<CompanyViewModel>();
             foreach (var item in dm.GetAllCompanies())
@@ -34,7 +34,7 @@ namespace WPFDB.ViewModel
 
             this.AddCompanyCommand = new DelegateCommand((o) => this.AddCompany());
             this.DeleteCompanyCommand = new DelegateCommand((o) => this.DeleteCurrentCompany(), (o) => this.CurrentCompany != null);
-     
+
 
         }
 
@@ -45,7 +45,11 @@ namespace WPFDB.ViewModel
         public CompanyViewModel CurrentCompany
         {
             get { return currentCompany; }
-            set { currentCompany = value; OnPropertyChanged("CurrentCompany"); }
+            set
+            {
+                currentCompany = value;
+                OnPropertyChanged("CurrentCompany");
+            }
         }
 
         public ICommand AddCompanyCommand { get; private set; }

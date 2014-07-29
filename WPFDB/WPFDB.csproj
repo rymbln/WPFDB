@@ -81,6 +81,7 @@
     <Compile Include="ViewModel\AbstractDetailsViewModel.cs" />
     <Compile Include="ViewModel\AbstractViewModel.cs" />
     <Compile Include="ViewModel\AbstractWorkspaceViewModel.cs" />
+    <Compile Include="ViewModel\AbstractWorkViewModel.cs" />
     <Compile Include="ViewModel\AddressViewModel.cs" />
     <Compile Include="ViewModel\ContactTypeViewModel.cs" />
     <Compile Include="ViewModel\ContactTypeWorkspaceViewModel.cs" />
@@ -132,8 +133,14 @@
     <Compile Include="View\AbstractView.xaml.cs">
       <DependentUpon>AbstractView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AbstractWorkItemView.xaml.cs">
+      <DependentUpon>AbstractWorkItemView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AbstractWorkspaceView.xaml.cs">
       <DependentUpon>AbstractWorkspaceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AbstractWorkView.xaml.cs">
+      <DependentUpon>AbstractWorkView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AddressView.xaml.cs">
       <DependentUpon>AddressView.xaml</DependentUpon>
@@ -269,7 +276,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AbstractWorkItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AbstractWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AbstractWorkView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,50 +9,55 @@
         <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="0" Grid.Row="0">
             <HeaderedContentControl.Header>
                 Abstract
+
             </HeaderedContentControl.Header>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Label Grid.Row="0" Content="Main Author:" />
-                <TextBox  Grid.Row="1" 
+            <ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="Main Author:" />
+                    <TextBox  Grid.Row="1" 
                           IsEnabled="False"
                  Text="{Binding Path=AuthorName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
                  Width="300" />
-                <Label Grid.Row="2" Content="Email:" />
-                <TextBox  Grid.Row="3" 
+                    <Label Grid.Row="2" Content="Email:" />
+                    <TextBox  Grid.Row="3" 
                           IsEnabled="False"
                  Text="{Binding Path=AuthorEmail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
                  Width="300" />
-                <Label Grid.Row="4" Content="Other Authors:" />
-                <TextBox  Grid.Row="5" 
+                    <Label Grid.Row="4" Content="Other Authors:" />
+                    <TextBox  Grid.Row="5" 
                  Text="{Binding Path=OtherAuthors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
                  Width="300" />
-                <Label Grid.Row="6" Content="Name:" />
-                <TextBox  Grid.Row="7" 
+                    <Label Grid.Row="6" Content="Name:" />
+                    <TextBox  Grid.Row="7" 
                  Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
                  Width="300" />
-                <Label Grid.Row="8" Content="Text:" />
-                <TextBox  Grid.Row="9" 
+                    <Label Grid.Row="8" Content="Text:" />
+                    <TextBox  Grid.Row="9" 
                           Height="50"
                  Text="{Binding Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
                  Width="300" />
-                <Label Grid.Row="10" Content="Link:" />
-                <TextBox  Grid.Row="11" 
+                    <Label Grid.Row="10" Content="Link:" />
+                    <TextBox  Grid.Row="11" 
                  Text="{Binding Path=Link, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
                  Width="300" />
-            </Grid>
+                </Grid>
+            </ScrollViewer>
         </HeaderedContentControl>
+
     </Grid>
+
 </UserControl>

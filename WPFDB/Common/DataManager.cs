@@ -490,16 +490,16 @@ namespace WPFDB.Common
             Save();
         }
 
-        private void RemoveAbstract(Abstract obj)
-        {
-            if (obj == null)
-            {
-                throw new ArgumentNullException("abstract");
-            }
+        //private void RemoveAbstract(Abstract obj)
+        //{
+        //    if (obj == null)
+        //    {
+        //        throw new ArgumentNullException("abstract");
+        //    }
 
-            this.underlyingContext.Abstracts.DeleteObject(obj);
-            Save();
-        }
+        //    this.underlyingContext.Abstracts.DeleteObject(obj);
+        //    Save();
+        //}
 
         public void RemoveRank(Rank obj)
         {
@@ -964,6 +964,36 @@ namespace WPFDB.Common
         public IEnumerable<Email> GetEmailsByPersonId(Guid id)
         {
             return this.underlyingContext.Emails.Where(o => o.PersonId == id).ToList();
+        }
+
+        public void AddAbstractWorkToAbstract(ViewModel.AbstractViewModel currentAbstract, AbstractWork abstractWork)
+        {
+            abstractWork.AbstractId = Guid.Parse(currentAbstract.Id);
+            this.underlyingContext.AbstractWorks.AddObject(abstractWork);
+            Save();
+
+        }
+
+        public void RemoveAbstractWork(AbstractWork abstractWork)
+        {
+            if (abstractWork == null)
+            {
+                throw new ArgumentNullException("abstractWork");
+            }
+            this.underlyingContext.AbstractWorks.DeleteObject(abstractWork);
+        }
+
+        public  void RemoveAbstract(Abstract p)
+        {
+            if (p.AbstractWorks != null)
+            {
+                foreach (var item in p.AbstractWorks.ToList())
+                {
+                    this.underlyingContext.RemoveObject(item);
+                }
+            }
+            this.underlyingContext.RemoveObject(p);
+            Save();
         }
     }
 }

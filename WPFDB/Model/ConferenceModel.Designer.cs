@@ -1112,9 +1112,10 @@ namespace WPFDB.Model
         /// <param name="abstractStatusId">Initial value of the AbstractStatusId property.</param>
         /// <param name="abstractResponsiblePersonId">Initial value of the AbstractResponsiblePersonId property.</param>
         /// <param name="isSentByEmail">Initial value of the IsSentByEmail property.</param>
+        /// <param name="dateWork">Initial value of the DateWork property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
         /// <param name="userId">Initial value of the UserId property.</param>
-        public static AbstractWork CreateAbstractWork(global::System.Guid id, global::System.Guid abstractId, global::System.Guid abstractStatusId, global::System.Guid abstractResponsiblePersonId, global::System.Boolean isSentByEmail, global::System.Int32 sourceId, global::System.Guid userId)
+        public static AbstractWork CreateAbstractWork(global::System.Guid id, global::System.Guid abstractId, global::System.Guid abstractStatusId, global::System.Guid abstractResponsiblePersonId, global::System.Boolean isSentByEmail, global::System.DateTime dateWork, global::System.Int32 sourceId, global::System.Guid userId)
         {
             AbstractWork abstractWork = new AbstractWork();
             abstractWork.Id = id;
@@ -1122,6 +1123,7 @@ namespace WPFDB.Model
             abstractWork.AbstractStatusId = abstractStatusId;
             abstractWork.AbstractResponsiblePersonId = abstractResponsiblePersonId;
             abstractWork.IsSentByEmail = isSentByEmail;
+            abstractWork.DateWork = dateWork;
             abstractWork.SourceId = sourceId;
             abstractWork.UserId = userId;
             return abstractWork;
@@ -1253,6 +1255,30 @@ namespace WPFDB.Model
         private global::System.Boolean _IsSentByEmail;
         partial void OnIsSentByEmailChanging(global::System.Boolean value);
         partial void OnIsSentByEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime DateWork
+        {
+            get
+            {
+                return _DateWork;
+            }
+            set
+            {
+                OnDateWorkChanging(value);
+                ReportPropertyChanging("DateWork");
+                _DateWork = StructuralObject.SetValidValue(value, "DateWork");
+                ReportPropertyChanged("DateWork");
+                OnDateWorkChanged();
+            }
+        }
+        private global::System.DateTime _DateWork;
+        partial void OnDateWorkChanging(global::System.DateTime value);
+        partial void OnDateWorkChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

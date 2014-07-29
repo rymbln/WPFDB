@@ -275,6 +275,34 @@ namespace WPFDB.Common
             }
         }
 
-       
+
+
+        public User DefaultResponsiblePerson
+        {
+            get
+            {
+                return DataManager.Instance.GetUsers().FirstOrDefault();
+            }
+        }
+
+        public AbstractStatus DefaultAbstractStatus
+        {
+            get { return DataManager.Instance.GetAllAbstractStatuses().FirstOrDefault(o => o.Code == "-"); }
+        }
+
+        public AbstractWork DefaultAbstractWork
+        {
+            get
+            {
+                var obj = DataManager.Instance.CreateObject<AbstractWork>();
+                obj.Id = GuidComb.Generate();
+                obj.AbstractStatus = DefaultAbstractStatus;
+                obj.User = DefaultResponsiblePerson;
+                obj.IsSentByEmail = false;
+                obj.DateWork = DateTime.Now;
+                return obj;
+            }
+        }
+
     }
 }

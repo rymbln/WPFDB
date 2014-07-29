@@ -13,6 +13,7 @@ namespace WPFDB.ViewModel
     public class AbstractWorkspaceViewModel : ViewModelBase
     {
         private AbstractViewModel currentAbstract;
+        private AbstractWorkViewModel currentAbstractWork;
         private string filterMainAuthor;
         private string filterOtherAuthors;
         private string filterName;
@@ -32,12 +33,25 @@ namespace WPFDB.ViewModel
                     this.CurrentAbstract = null;
                 }
             };
-            this.ApplyFiltersCommand = new DelegateCommand((o) => this.ApplyFilters());
+
+            this.AbstractWorks.CollectionChanged += (sender, e) =>
+            {
+                    this.CurrentAbstractWork = AbstractWorks.FirstOrDefault();
+            };
+
+            //    this.ApplyFiltersCommand = new DelegateCommand((o) => this.ApplyFilters());
+            this.AddAbstractWorkCommand = new DelegateCommand((o) => this.AddAbstractWork());
+            this.DeleteAbstractWorkCommand = new DelegateCommand((o) => this.DeleteAbstractWork(), (o) => this.CurrentAbstractWork != null);
+
         }
         public ObservableCollection<AbstractViewModel> AllAbstracts { get; private set; }
+        public ObservableCollection<AbstractWorkViewModel> AbstractWorks { get; private set; }
 
         public ICommand ApplyFiltersCommand { get; private set; }
 
+
+        public ICommand AddAbstractWorkCommand { get; private set; }
+        public ICommand DeleteAbstractWorkCommand { get; private set; }
         public AbstractViewModel CurrentAbstract
         {
             get { return this.currentAbstract; }
@@ -45,42 +59,51 @@ namespace WPFDB.ViewModel
             {
                 this.currentAbstract = value;
                 this.OnPropertyChanged("CurrentAbstract");
+                if (currentAbstract.Model.AbstractWorks != null)
+                {
+                    if (this.currentAbstract.Model.AbstractWorks.Count > 0)
+                    {
+                        AbstractWorks = new ObservableCollection<AbstractWorkViewModel>();
+                        foreach (var abstractWork in this.currentAbstract.Model.AbstractWorks)
+                        {
+                            AbstractWorks.Add(new AbstractWorkViewModel(abstractWork));
+                        }
+                    }
+                }
+                this.OnPropertyChanged("AbstractWorks");
             }
         }
-
-        private void ApplyFilters()
+        public AbstractWorkViewModel CurrentAbstractWork
         {
-            // TODO ApplyFilters
-        }
-
-        public string FilterMainAuthor
-        {
-            get { return filterMainAuthor; }
+            get
+            {
+            //    this.currentAbstractWork = this.AbstractWorks.FirstOrDefault();
+                return this.currentAbstractWork;
+            }
             set
             {
-                this.filterMainAuthor = value;
-                OnPropertyChanged("FilterMainAuthor");
+                this.currentAbstractWork = value;
+                OnPropertyChanged("CurrentAbstractWork");
             }
         }
 
-        public string FilterOtherAuthors
+
+        private void AddAbstractWork()
         {
-            get { return this.filterOtherAuthors; }
-            set
-            {
-                this.filterOtherAuthors = value;
-                OnPropertyChanged("FilterOtherAuthors");
-            }
+            var abstractWork = DefaultManager.Instance.DefaultAbstractWork;
+            DataManager.Instance.AddAbstractWorkToAbstract(currentAbstract, abstractWork);
+
+            var vm = new AbstractWorkViewModel(abstractWork);
+            this.AbstractWorks.Add(vm);
+            this.CurrentAbstractWork = vm;
         }
 
-        public string FilterName
+        private void DeleteAbstractWork()
         {
-            get { return this.filterName; }
-            set
-            {
-                this.filterName = value;
-                OnPropertyChanged("FilterName");
-            }
+            DataManager.Instance.RemoveAbstractWork(CurrentAbstractWork.Model);
+            AbstractWorks.Remove(CurrentAbstractWork);
+            CurrentAbstractWork = null;
         }
     }
 }
+

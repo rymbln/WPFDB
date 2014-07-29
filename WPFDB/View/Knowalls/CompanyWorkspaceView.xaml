@@ -36,7 +36,9 @@
                         </StackPanel>
                     </HeaderedContentControl.Header>
 
-                    <DataGrid SelectedItem="{Binding Path=CurrentCompany}" ItemsSource="{Binding Path=AllCompanys}" AutoGenerateColumns="False" >
+                    <DataGrid SelectedItem="{Binding Path=CurrentCompany}" 
+                              ItemsSource="{Binding Path=AllCompanys}" 
+                              AutoGenerateColumns="False" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Width="Auto" Binding="{Binding Path=Id}" IsReadOnly="True" />
                             <DataGridTextColumn Header="Code" Binding="{Binding Path=Code, Mode=TwoWay}" IsReadOnly="True"/>
