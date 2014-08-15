@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -128,7 +130,11 @@ namespace WPFDB.ViewModel
 
         public void SendEmail()
         {
-
+         
+            var lstEmail = new List<string>();
+            lstEmail.Add("ivan.trushin@antibiotic.ru");
+            EmailManager.Instance.SendMailForAbstract(lstEmail, "Test Email From WPFDB Conference",
+                "This email is sent for testing email manager module", @"D:\ELI_Validation_20140612.xls");
         }
 
         public string ReviewerName

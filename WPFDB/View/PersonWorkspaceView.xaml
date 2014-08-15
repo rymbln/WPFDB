@@ -51,8 +51,9 @@
                                     <AccessText Text="{x:Static p:Resources.RefreshMenu}"/>
                                 </Button>
                                 <Separator/>
-                                <Label Content="{x:Static p:Resources.SearchMenu}" Target="{Binding ElementName=searchBox}" Padding="5,0,7,0" Margin="0" 
-                       VerticalAlignment="Center"/>
+                                <Button Command="{Binding ApplyFilterCommand}">
+                                    <AccessText Text="Filter"/>
+                                </Button>
                                 <TextBox x:Name="searchBox" Width="150" BorderBrush="LightGray" BorderThickness="1" 
                          Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" />
                             </ToolBar>
@@ -61,7 +62,8 @@
 
                     <DataGrid SelectedItem="{Binding Path=CurrentPerson, Mode=TwoWay}" 
                               ItemsSource="{Binding Path=AllPersons}" 
-                              AutoGenerateColumns="False" >
+                              AutoGenerateColumns="False" 
+                             >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}" />
                             <DataGridTextColumn Header="Second Name" Binding="{Binding Path=SecondName}" />

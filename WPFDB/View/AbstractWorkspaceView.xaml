@@ -61,14 +61,16 @@
             </ScrollViewer>
         </HeaderedContentControl>
         <ContentControl 
-            Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" 
+            Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"  HorizontalAlignment="Right" 
             Content="{Binding Path=CurrentAbstract, Mode=TwoWay}" />
 
         <HeaderedContentControl  Grid.Row="1" Grid.Column="0" Style="{StaticResource SubDisplayArea}" >
             <HeaderedContentControl.Header>
                 Abstract Works
             </HeaderedContentControl.Header>
+            <ScrollViewer>
             <StackPanel Orientation="Vertical">
+                
                 <ToolBarTray DockPanel.Dock="Top">
                     <ToolBar>
                         <Button Command="{Binding AddAbstractWorkCommand}" Content="Add" ToolTip="{x:Static p:Resources.Save}"/>
@@ -77,22 +79,21 @@
                         <Separator/>
                     </ToolBar>
                 </ToolBarTray>
-                <ScrollViewer>
-                    <HeaderedContentControl>
+                
                         <ListBox BorderThickness="0" 
                      SelectedItem="{Binding Path=CurrentAbstractWork, Mode=TwoWay}" 
                      ItemsSource="{Binding Path=AbstractWorks, UpdateSourceTrigger=PropertyChanged}" />
-                    </HeaderedContentControl>
-                </ScrollViewer>
+                
             </StackPanel>
+            </ScrollViewer>
         </HeaderedContentControl>
-        <ContentControl Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Right" 
+        <!--<ContentControl Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" 
                         Content="{Binding Path=CurrentAbstractWork}" >
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type vm:AbstractWorkViewModel}">
                     <view:AbstractWorkView/>
                 </DataTemplate>
             </ContentControl.Resources>
-        </ContentControl>
+        </ContentControl>-->
     </Grid>
 </UserControl>

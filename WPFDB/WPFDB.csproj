@@ -67,6 +67,7 @@
     </ApplicationDefinition>
     <Compile Include="Common\Authentification.cs" />
     <Compile Include="Common\DefaultManager.cs" />
+    <Compile Include="Common\EmailManager.cs" />
     <Compile Include="Common\GuidComb.cs" />
     <Compile Include="Common\DataManager.cs" />
     <Compile Include="Model\IConferenceContext.cs" />
@@ -138,9 +139,6 @@
     </Compile>
     <Compile Include="View\AbstractWorkspaceView.xaml.cs">
       <DependentUpon>AbstractWorkspaceView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\AbstractWorkView.xaml.cs">
-      <DependentUpon>AbstractWorkView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AddressView.xaml.cs">
       <DependentUpon>AddressView.xaml</DependentUpon>
@@ -281,10 +279,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AbstractWorkspaceView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AbstractWorkView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

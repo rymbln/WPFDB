@@ -304,5 +304,30 @@ namespace WPFDB.Common
             }
         }
 
+
+        public string GetMailServer()
+        {
+            return "smtp.gmail.com";
+        }
+
+        public string GetMailLogin()
+        {
+            return "rymbln@gmail.com";
+        }
+
+        public string GetMailPassword()
+        {
+            return "windofchange";
+        }
+
+        public string GetMailFrom()
+        {
+            return "rymbln@gmail.com";
+        }
+
+        public int GetMailPort()
+        {
+            return 465;
+        }
     }
 }
