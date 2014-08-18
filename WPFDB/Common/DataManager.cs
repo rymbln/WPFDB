@@ -169,7 +169,10 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("speciality");
             }
-
+            obj.DateAdd = DateTime.Now;
+            obj.DateUpdate = DateTime.Now;
+            var currentUser = Authentification.GetCurrentUser();
+            obj.User = currentUser == null ? "-" : currentUser.Name;
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.Specialities.AddObject(obj);
             Save();
@@ -180,7 +183,10 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("sex");
             }
-
+            obj.DateAdd = DateTime.Now;
+            obj.DateUpdate = DateTime.Now;
+            var currentUser = Authentification.GetCurrentUser();
+            obj.User = currentUser == null ? "-" : currentUser.Name;
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.Sexes.AddObject(obj);
             Save();
@@ -191,7 +197,10 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("scienceStatus");
             }
-
+            obj.DateAdd = DateTime.Now;
+            obj.DateUpdate = DateTime.Now;
+            var currentUser = Authentification.GetCurrentUser();
+            obj.User = currentUser == null ? "-" : currentUser.Name;
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.ScienceStatuses.AddObject(obj);
             Save();
@@ -202,7 +211,10 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("scienceStatus");
             }
-
+            obj.DateAdd = DateTime.Now;
+            obj.DateUpdate = DateTime.Now;
+            var currentUser = Authentification.GetCurrentUser();
+            obj.User = currentUser == null ? "-" : currentUser.Name;
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.ScienceDegrees.AddObject(obj);
             Save();
@@ -214,7 +226,10 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("conference");
             }
-
+            obj.DateAdd = DateTime.Now;
+            obj.DateUpdate = DateTime.Now;
+            var currentUser = Authentification.GetCurrentUser();
+            obj.User = currentUser == null ? "-" : currentUser.Name;
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.OrderStatuses.AddObject(obj);
             Save();
@@ -226,7 +241,10 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("conference");
             }
-
+            obj.DateAdd = DateTime.Now;
+            obj.DateUpdate = DateTime.Now;
+            var currentUser = Authentification.GetCurrentUser();
+            obj.User = currentUser == null ? "-" : currentUser.Name;
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.underlyingContext.Conferences.AddObject(obj);
             Save();
@@ -261,6 +279,10 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("Company");
             }
+            obj.DateAdd = DateTime.Now;
+            obj.DateUpdate = DateTime.Now;
+            var currentUser = Authentification.GetCurrentUser();
+            obj.User = currentUser == null ? "-" : currentUser.Name;
             this.underlyingContext.Companies.AddObject(obj);
             Save();
         }
@@ -271,6 +293,10 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("PaymentType");
             }
+            obj.DateAdd = DateTime.Now;
+            obj.DateUpdate = DateTime.Now;
+            var currentUser = Authentification.GetCurrentUser();
+            obj.User = currentUser == null ? "-" : currentUser.Name;
             this.underlyingContext.PaymentTypes.AddObject(obj);
             Save();
         }
@@ -281,6 +307,10 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("Rank");
             }
+            obj.DateAdd = DateTime.Now;
+            obj.DateUpdate = DateTime.Now;
+            var currentUser = Authentification.GetCurrentUser();
+            obj.User = currentUser == null ? "-" : currentUser.Name;
             this.underlyingContext.Ranks.AddObject(obj);
             Save();
         }
@@ -995,5 +1025,7 @@ namespace WPFDB.Common
             this.underlyingContext.RemoveObject(p);
             Save();
         }
+
+      
     }
 }

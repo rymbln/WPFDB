@@ -30,6 +30,8 @@ namespace WPFDB.ViewModel
         {
             this.PersonWorkspace = new PersonWorkspaceViewModel();
             this.AbstractWorkspace = new AbstractWorkspaceViewModel();
+            this.ImportWorkspace = new ImportWorkspaceViewModel();
+         
             this.SaveCommand = new DelegateCommand((o) => this.Save());
             this.OpenKnowallsCommand = new DelegateCommand((o) => this.OpenKnowalls());
             this.FillDataCommand = new DelegateCommand((o) => this.FillDatabase());
@@ -47,13 +49,14 @@ namespace WPFDB.ViewModel
         /// <summary>
         /// Gets the workspace for managing departments of the company
         /// </summary>
-        public SpecialityWorkspaceViewModel SpecialityWorkspace { get; private set; }
-        public SexWorkspaceViewModel SexWorkspace { get; private set; }
-        public ScienceDegreeWorkspaceViewModel ScienceDegreeWorkspace { get; private set; }
-        public ScienceStatusWorkspaceViewModel ScienceStatusWorkspace { get; private set; }
-        public ConferenceWorkspaceViewModel ConferenceWorkspace { get; private set; }
+        //public SpecialityWorkspaceViewModel SpecialityWorkspace { get; private set; }
+        //public SexWorkspaceViewModel SexWorkspace { get; private set; }
+        //public ScienceDegreeWorkspaceViewModel ScienceDegreeWorkspace { get; private set; }
+        //public ScienceStatusWorkspaceViewModel ScienceStatusWorkspace { get; private set; }
+        //public ConferenceWorkspaceViewModel ConferenceWorkspace { get; private set; }
         public PersonWorkspaceViewModel PersonWorkspace { get; private set; }
         public AbstractWorkspaceViewModel AbstractWorkspace { get; private set; }
+        public ImportWorkspaceViewModel ImportWorkspace { get; private set; }
         /// <summary>
         /// Saves all changes made in the current sessions DataManager
         /// </summary>

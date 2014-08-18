@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 07/25/2014 13:39:23
+-- Date Created: 08/18/2014 16:46:04
 -- Generated from EDMX file: C:\Users\Rymbln\Documents\GitHub\WPFDB\WPFDB\Model\ConferenceModel.edmx
 -- --------------------------------------------------
 
@@ -174,14 +174,17 @@ CREATE TABLE [dbo].[Persons] (
     [FirstName] nvarchar(max)  NOT NULL,
     [SecondName] nvarchar(max)  NOT NULL,
     [ThirdName] nvarchar(max)  NOT NULL,
+    [SexId] uniqueidentifier  NOT NULL,
     [BirthDate] datetime  NULL,
     [WorkPlace] nvarchar(max)  NULL,
     [Post] nvarchar(max)  NULL,
     [SpecialityId] uniqueidentifier  NOT NULL,
     [ScienceDegreeId] uniqueidentifier  NOT NULL,
     [ScienceStatusId] uniqueidentifier  NOT NULL,
-    [SexId] uniqueidentifier  NOT NULL,
-    [SourceId] int  NOT NULL
+    [SourceId] int  NOT NULL,
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
@@ -189,8 +192,11 @@ GO
 CREATE TABLE [dbo].[ScienceDegrees] (
     [Id] uniqueidentifier  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL,
     [SourceId] int  NOT NULL,
-    [Code] nvarchar(max)  NOT NULL
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
@@ -198,8 +204,11 @@ GO
 CREATE TABLE [dbo].[ScienceStatuses] (
     [Id] uniqueidentifier  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL,
     [SourceId] int  NOT NULL,
-    [Code] nvarchar(max)  NOT NULL
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
@@ -207,8 +216,11 @@ GO
 CREATE TABLE [dbo].[Sexes] (
     [Id] uniqueidentifier  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL,
     [SourceId] int  NOT NULL,
-    [Code] nvarchar(max)  NOT NULL
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
@@ -216,8 +228,11 @@ GO
 CREATE TABLE [dbo].[Specialities] (
     [Id] uniqueidentifier  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL,
     [SourceId] int  NOT NULL,
-    [Code] nvarchar(max)  NOT NULL
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
@@ -227,7 +242,8 @@ CREATE TABLE [dbo].[Users] (
     [Name] nvarchar(max)  NOT NULL,
     [Password] nvarchar(max)  NOT NULL,
     [Role] nvarchar(max)  NOT NULL,
-    [Email] nvarchar(max)  NOT NULL
+    [Email] nvarchar(max)  NOT NULL,
+    [SourceId] int  NULL
 );
 GO
 
@@ -247,9 +263,12 @@ GO
 -- Creating table 'Conferences'
 CREATE TABLE [dbo].[Conferences] (
     [Id] uniqueidentifier  NOT NULL,
-    [Code] nvarchar(max)  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [SourceId] int  NOT NULL
+    [Code] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL,
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
@@ -257,25 +276,34 @@ GO
 CREATE TABLE [dbo].[PersonConferences] (
     [PersonConferenceId] uniqueidentifier  NOT NULL,
     [PersonId] uniqueidentifier  NOT NULL,
-    [ConferenceId] uniqueidentifier  NOT NULL
+    [ConferenceId] uniqueidentifier  NOT NULL,
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
 -- Creating table 'Ranks'
 CREATE TABLE [dbo].[Ranks] (
     [Id] uniqueidentifier  NOT NULL,
-    [Name] nvarchar(max)  NOT NULL,
     [Code] nvarchar(max)  NOT NULL,
-    [SourceId] int  NOT NULL
+    [Name] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL,
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
 -- Creating table 'Companies'
 CREATE TABLE [dbo].[Companies] (
     [Id] uniqueidentifier  NOT NULL,
-    [Code] nvarchar(max)  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [SourceId] int  NOT NULL
+    [Code] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL,
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
@@ -284,12 +312,16 @@ CREATE TABLE [dbo].[PaymentTypes] (
     [Id] uniqueidentifier  NOT NULL,
     [Code] nvarchar(max)  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [SourceId] int  NOT NULL
+    [SourceId] int  NOT NULL,
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
 -- Creating table 'PersonConferences_Detail'
 CREATE TABLE [dbo].[PersonConferences_Detail] (
+    [PersonConferenceId] uniqueidentifier  NOT NULL,
     [RankId] uniqueidentifier  NOT NULL,
     [CompanyId] uniqueidentifier  NOT NULL,
     [IsBadge] bit  NOT NULL,
@@ -299,7 +331,9 @@ CREATE TABLE [dbo].[PersonConferences_Detail] (
     [IsNeedBadge] bit  NOT NULL,
     [IsAutoreg] bit  NOT NULL,
     [SourceId] int  NOT NULL,
-    [PersonConferenceId] uniqueidentifier  NOT NULL
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
@@ -314,20 +348,26 @@ CREATE TABLE [dbo].[PersonConferences_Payment] (
     [OrderNumber] int  NOT NULL,
     [SourceId] int  NOT NULL,
     [PersonConferenceId] uniqueidentifier  NOT NULL,
-    [OrderStatusId] uniqueidentifier  NOT NULL
+    [OrderStatusId] uniqueidentifier  NOT NULL,
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
 -- Creating table 'Iacmacs'
 CREATE TABLE [dbo].[Iacmacs] (
+    [PersonId] uniqueidentifier  NOT NULL,
+    [Code] nvarchar(max)  NULL,
+    [Number] int  NOT NULL,
     [IsMember] bit  NOT NULL,
     [DateRegistration] datetime  NULL,
-    [Number] int  NOT NULL,
-    [Code] nvarchar(max)  NULL,
     [IsCardCreate] bit  NOT NULL,
     [IsCardSent] bit  NOT NULL,
     [IsForm] bit  NOT NULL,
-    [PersonId] uniqueidentifier  NOT NULL
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
@@ -336,62 +376,80 @@ CREATE TABLE [dbo].[OrderStatuses] (
     [Id] uniqueidentifier  NOT NULL,
     [Code] nvarchar(max)  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [SourceId] int  NOT NULL
+    [SourceId] int  NOT NULL,
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
 -- Creating table 'ContactTypes'
 CREATE TABLE [dbo].[ContactTypes] (
     [Id] uniqueidentifier  NOT NULL,
-    [Code] nvarchar(max)  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [SourceId] int  NOT NULL
+    [Code] nvarchar(max)  NOT NULL,
+    [SourceId] int  NOT NULL,
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
 -- Creating table 'Emails'
 CREATE TABLE [dbo].[Emails] (
     [Id] uniqueidentifier  NOT NULL,
+    [ContactTypeId] uniqueidentifier  NOT NULL,
+    [PersonId] uniqueidentifier  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [SourceId] int  NOT NULL,
-    [ContactTypeId] uniqueidentifier  NOT NULL,
-    [PersonId] uniqueidentifier  NOT NULL
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
 -- Creating table 'Phones'
 CREATE TABLE [dbo].[Phones] (
     [Id] uniqueidentifier  NOT NULL,
+    [ContactTypeId] uniqueidentifier  NOT NULL,
     [Number] nvarchar(max)  NOT NULL,
     [SourceId] int  NOT NULL,
-    [ContactTypeId] uniqueidentifier  NOT NULL,
-    [PersonId] uniqueidentifier  NOT NULL
+    [PersonId] uniqueidentifier  NOT NULL,
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
 -- Creating table 'Addresses'
 CREATE TABLE [dbo].[Addresses] (
     [Id] uniqueidentifier  NOT NULL,
+    [ContactTypeId] uniqueidentifier  NOT NULL,
+    [PersonId] uniqueidentifier  NOT NULL,
     [ZipCode] nvarchar(max)  NOT NULL,
     [CountryName] nvarchar(max)  NOT NULL,
     [RegionName] nvarchar(max)  NOT NULL,
     [CityName] nvarchar(max)  NOT NULL,
     [StreetHouseName] nvarchar(max)  NOT NULL,
     [SourceId] int  NOT NULL,
-    [ContactTypeId] uniqueidentifier  NOT NULL,
-    [PersonId] uniqueidentifier  NOT NULL
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
 -- Creating table 'Abstracts'
 CREATE TABLE [dbo].[Abstracts] (
     [Id] uniqueidentifier  NOT NULL,
+    [PersonConferenceId] uniqueidentifier  NOT NULL,
     [OtherAuthors] nvarchar(max)  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Text] nvarchar(max)  NOT NULL,
     [Link] nvarchar(max)  NOT NULL,
     [SourceId] int  NOT NULL,
-    [PersonConferenceId] uniqueidentifier  NOT NULL
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
@@ -404,7 +462,10 @@ CREATE TABLE [dbo].[AbstractWorks] (
     [IsSentByEmail] bit  NOT NULL,
     [DateWork] datetime  NOT NULL,
     [SourceId] int  NOT NULL,
-    [UserId] uniqueidentifier  NOT NULL
+    [ReviewerId] uniqueidentifier  NOT NULL,
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
@@ -413,7 +474,10 @@ CREATE TABLE [dbo].[AbstractStatuses] (
     [Id] uniqueidentifier  NOT NULL,
     [Code] nvarchar(max)  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [SourceId] int  NOT NULL
+    [SourceId] int  NOT NULL,
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User] nvarchar(max)  NULL
 );
 GO
 
@@ -856,10 +920,10 @@ ON [dbo].[AbstractWorks]
     ([AbstractStatusId]);
 GO
 
--- Creating foreign key on [UserId] in table 'AbstractWorks'
+-- Creating foreign key on [ReviewerId] in table 'AbstractWorks'
 ALTER TABLE [dbo].[AbstractWorks]
 ADD CONSTRAINT [FK_UserAbstractWork]
-    FOREIGN KEY ([UserId])
+    FOREIGN KEY ([ReviewerId])
     REFERENCES [dbo].[Users]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -867,7 +931,7 @@ ADD CONSTRAINT [FK_UserAbstractWork]
 -- Creating non-clustered index for FOREIGN KEY 'FK_UserAbstractWork'
 CREATE INDEX [IX_FK_UserAbstractWork]
 ON [dbo].[AbstractWorks]
-    ([UserId]);
+    ([ReviewerId]);
 GO
 
 -- Creating foreign key on [OrderStatusId] in table 'PersonConferences_Payment'

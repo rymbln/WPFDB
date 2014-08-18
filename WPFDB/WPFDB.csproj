@@ -70,6 +70,7 @@
     <Compile Include="Common\EmailManager.cs" />
     <Compile Include="Common\GuidComb.cs" />
     <Compile Include="Common\DataManager.cs" />
+    <Compile Include="Common\ImportManager.cs" />
     <Compile Include="Model\IConferenceContext.cs" />
     <Compile Include="Model\ConferenceEntities.cs" />
     <Compile Include="Model\ConferenceModel.Designer.cs">
@@ -87,6 +88,7 @@
     <Compile Include="ViewModel\ContactTypeViewModel.cs" />
     <Compile Include="ViewModel\ContactTypeWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\EmailViewModel.cs" />
+    <Compile Include="ViewModel\ImportWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\AbstractStatusViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\AbstractStatusWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\CompanyViewModel.cs" />
@@ -142,6 +144,9 @@
     </Compile>
     <Compile Include="View\AddressView.xaml.cs">
       <DependentUpon>AddressView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ImportWorkspaceView.xaml.cs">
+      <DependentUpon>ImportWorkspaceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PersonFormAbstractWorkspaceView.xaml.cs">
       <DependentUpon>PersonFormAbstractWorkspaceView.xaml</DependentUpon>
@@ -283,6 +288,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddressView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ImportWorkspaceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

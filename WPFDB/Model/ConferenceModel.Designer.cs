@@ -672,22 +672,22 @@ namespace WPFDB.Model
         /// Create a new Abstract object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="personConferenceId">Initial value of the PersonConferenceId property.</param>
         /// <param name="otherAuthors">Initial value of the OtherAuthors property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="text">Initial value of the Text property.</param>
         /// <param name="link">Initial value of the Link property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
-        /// <param name="personConferenceId">Initial value of the PersonConferenceId property.</param>
-        public static Abstract CreateAbstract(global::System.Guid id, global::System.String otherAuthors, global::System.String name, global::System.String text, global::System.String link, global::System.Int32 sourceId, global::System.Guid personConferenceId)
+        public static Abstract CreateAbstract(global::System.Guid id, global::System.Guid personConferenceId, global::System.String otherAuthors, global::System.String name, global::System.String text, global::System.String link, global::System.Int32 sourceId)
         {
             Abstract @abstract = new Abstract();
             @abstract.Id = id;
+            @abstract.PersonConferenceId = personConferenceId;
             @abstract.OtherAuthors = otherAuthors;
             @abstract.Name = name;
             @abstract.Text = text;
             @abstract.Link = link;
             @abstract.SourceId = sourceId;
-            @abstract.PersonConferenceId = personConferenceId;
             return @abstract;
         }
 
@@ -721,6 +721,30 @@ namespace WPFDB.Model
         private global::System.Guid _Id;
         partial void OnIdChanging(global::System.Guid value);
         partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid PersonConferenceId
+        {
+            get
+            {
+                return _PersonConferenceId;
+            }
+            set
+            {
+                OnPersonConferenceIdChanging(value);
+                ReportPropertyChanging("PersonConferenceId");
+                _PersonConferenceId = StructuralObject.SetValidValue(value, "PersonConferenceId");
+                ReportPropertyChanged("PersonConferenceId");
+                OnPersonConferenceIdChanged();
+            }
+        }
+        private global::System.Guid _PersonConferenceId;
+        partial void OnPersonConferenceIdChanging(global::System.Guid value);
+        partial void OnPersonConferenceIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -845,26 +869,74 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Guid PersonConferenceId
+        public Nullable<global::System.DateTime> DateAdd
         {
             get
             {
-                return _PersonConferenceId;
+                return _DateAdd;
             }
             set
             {
-                OnPersonConferenceIdChanging(value);
-                ReportPropertyChanging("PersonConferenceId");
-                _PersonConferenceId = StructuralObject.SetValidValue(value, "PersonConferenceId");
-                ReportPropertyChanged("PersonConferenceId");
-                OnPersonConferenceIdChanged();
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
             }
         }
-        private global::System.Guid _PersonConferenceId;
-        partial void OnPersonConferenceIdChanging(global::System.Guid value);
-        partial void OnPersonConferenceIdChanged();
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -1063,6 +1135,78 @@ namespace WPFDB.Model
         private global::System.Int32 _SourceId;
         partial void OnSourceIdChanging(global::System.Int32 value);
         partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateAdd
+        {
+            get
+            {
+                return _DateAdd;
+            }
+            set
+            {
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -1114,8 +1258,8 @@ namespace WPFDB.Model
         /// <param name="isSentByEmail">Initial value of the IsSentByEmail property.</param>
         /// <param name="dateWork">Initial value of the DateWork property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
-        /// <param name="userId">Initial value of the UserId property.</param>
-        public static AbstractWork CreateAbstractWork(global::System.Guid id, global::System.Guid abstractId, global::System.Guid abstractStatusId, global::System.Guid abstractResponsiblePersonId, global::System.Boolean isSentByEmail, global::System.DateTime dateWork, global::System.Int32 sourceId, global::System.Guid userId)
+        /// <param name="reviewerId">Initial value of the ReviewerId property.</param>
+        public static AbstractWork CreateAbstractWork(global::System.Guid id, global::System.Guid abstractId, global::System.Guid abstractStatusId, global::System.Guid abstractResponsiblePersonId, global::System.Boolean isSentByEmail, global::System.DateTime dateWork, global::System.Int32 sourceId, global::System.Guid reviewerId)
         {
             AbstractWork abstractWork = new AbstractWork();
             abstractWork.Id = id;
@@ -1125,7 +1269,7 @@ namespace WPFDB.Model
             abstractWork.IsSentByEmail = isSentByEmail;
             abstractWork.DateWork = dateWork;
             abstractWork.SourceId = sourceId;
-            abstractWork.UserId = userId;
+            abstractWork.ReviewerId = reviewerId;
             return abstractWork;
         }
 
@@ -1309,24 +1453,96 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid UserId
+        public global::System.Guid ReviewerId
         {
             get
             {
-                return _UserId;
+                return _ReviewerId;
             }
             set
             {
-                OnUserIdChanging(value);
-                ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value, "UserId");
-                ReportPropertyChanged("UserId");
-                OnUserIdChanged();
+                OnReviewerIdChanging(value);
+                ReportPropertyChanging("ReviewerId");
+                _ReviewerId = StructuralObject.SetValidValue(value, "ReviewerId");
+                ReportPropertyChanged("ReviewerId");
+                OnReviewerIdChanged();
             }
         }
-        private global::System.Guid _UserId;
-        partial void OnUserIdChanging(global::System.Guid value);
-        partial void OnUserIdChanged();
+        private global::System.Guid _ReviewerId;
+        partial void OnReviewerIdChanging(global::System.Guid value);
+        partial void OnReviewerIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateAdd
+        {
+            get
+            {
+                return _DateAdd;
+            }
+            set
+            {
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -1415,7 +1631,7 @@ namespace WPFDB.Model
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "UserAbstractWork", "User")]
-        public User User
+        public User Reviewer
         {
             get
             {
@@ -1431,7 +1647,7 @@ namespace WPFDB.Model
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> UserReference
+        public EntityReference<User> ReviewerReference
         {
             get
             {
@@ -1464,26 +1680,26 @@ namespace WPFDB.Model
         /// Create a new Address object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="contactTypeId">Initial value of the ContactTypeId property.</param>
+        /// <param name="personId">Initial value of the PersonId property.</param>
         /// <param name="zipCode">Initial value of the ZipCode property.</param>
         /// <param name="countryName">Initial value of the CountryName property.</param>
         /// <param name="regionName">Initial value of the RegionName property.</param>
         /// <param name="cityName">Initial value of the CityName property.</param>
         /// <param name="streetHouseName">Initial value of the StreetHouseName property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
-        /// <param name="contactTypeId">Initial value of the ContactTypeId property.</param>
-        /// <param name="personId">Initial value of the PersonId property.</param>
-        public static Address CreateAddress(global::System.Guid id, global::System.String zipCode, global::System.String countryName, global::System.String regionName, global::System.String cityName, global::System.String streetHouseName, global::System.Int32 sourceId, global::System.Guid contactTypeId, global::System.Guid personId)
+        public static Address CreateAddress(global::System.Guid id, global::System.Guid contactTypeId, global::System.Guid personId, global::System.String zipCode, global::System.String countryName, global::System.String regionName, global::System.String cityName, global::System.String streetHouseName, global::System.Int32 sourceId)
         {
             Address address = new Address();
             address.Id = id;
+            address.ContactTypeId = contactTypeId;
+            address.PersonId = personId;
             address.ZipCode = zipCode;
             address.CountryName = countryName;
             address.RegionName = regionName;
             address.CityName = cityName;
             address.StreetHouseName = streetHouseName;
             address.SourceId = sourceId;
-            address.ContactTypeId = contactTypeId;
-            address.PersonId = personId;
             return address;
         }
 
@@ -1517,6 +1733,54 @@ namespace WPFDB.Model
         private global::System.Guid _Id;
         partial void OnIdChanging(global::System.Guid value);
         partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid ContactTypeId
+        {
+            get
+            {
+                return _ContactTypeId;
+            }
+            set
+            {
+                OnContactTypeIdChanging(value);
+                ReportPropertyChanging("ContactTypeId");
+                _ContactTypeId = StructuralObject.SetValidValue(value, "ContactTypeId");
+                ReportPropertyChanged("ContactTypeId");
+                OnContactTypeIdChanged();
+            }
+        }
+        private global::System.Guid _ContactTypeId;
+        partial void OnContactTypeIdChanging(global::System.Guid value);
+        partial void OnContactTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid PersonId
+        {
+            get
+            {
+                return _PersonId;
+            }
+            set
+            {
+                OnPersonIdChanging(value);
+                ReportPropertyChanging("PersonId");
+                _PersonId = StructuralObject.SetValidValue(value, "PersonId");
+                ReportPropertyChanged("PersonId");
+                OnPersonIdChanged();
+            }
+        }
+        private global::System.Guid _PersonId;
+        partial void OnPersonIdChanging(global::System.Guid value);
+        partial void OnPersonIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1665,50 +1929,74 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Guid ContactTypeId
+        public Nullable<global::System.DateTime> DateAdd
         {
             get
             {
-                return _ContactTypeId;
+                return _DateAdd;
             }
             set
             {
-                OnContactTypeIdChanging(value);
-                ReportPropertyChanging("ContactTypeId");
-                _ContactTypeId = StructuralObject.SetValidValue(value, "ContactTypeId");
-                ReportPropertyChanged("ContactTypeId");
-                OnContactTypeIdChanged();
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
             }
         }
-        private global::System.Guid _ContactTypeId;
-        partial void OnContactTypeIdChanging(global::System.Guid value);
-        partial void OnContactTypeIdChanged();
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Guid PersonId
+        public Nullable<global::System.DateTime> DateUpdate
         {
             get
             {
-                return _PersonId;
+                return _DateUpdate;
             }
             set
             {
-                OnPersonIdChanging(value);
-                ReportPropertyChanging("PersonId");
-                _PersonId = StructuralObject.SetValidValue(value, "PersonId");
-                ReportPropertyChanged("PersonId");
-                OnPersonIdChanged();
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
             }
         }
-        private global::System.Guid _PersonId;
-        partial void OnPersonIdChanging(global::System.Guid value);
-        partial void OnPersonIdChanged();
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -1808,15 +2096,15 @@ namespace WPFDB.Model
         /// Create a new Company object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="code">Initial value of the Code property.</param>
         /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="code">Initial value of the Code property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
-        public static Company CreateCompany(global::System.Guid id, global::System.String code, global::System.String name, global::System.Int32 sourceId)
+        public static Company CreateCompany(global::System.Guid id, global::System.String name, global::System.String code, global::System.Int32 sourceId)
         {
             Company company = new Company();
             company.Id = id;
-            company.Code = code;
             company.Name = name;
+            company.Code = code;
             company.SourceId = sourceId;
             return company;
         }
@@ -1857,30 +2145,6 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Code
-        {
-            get
-            {
-                return _Code;
-            }
-            set
-            {
-                OnCodeChanging(value);
-                ReportPropertyChanging("Code");
-                _Code = StructuralObject.SetValidValue(value, false, "Code");
-                ReportPropertyChanged("Code");
-                OnCodeChanged();
-            }
-        }
-        private global::System.String _Code;
-        partial void OnCodeChanging(global::System.String value);
-        partial void OnCodeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.String Name
         {
             get
@@ -1905,6 +2169,30 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, false, "Code");
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Int32 SourceId
         {
             get
@@ -1923,6 +2211,78 @@ namespace WPFDB.Model
         private global::System.Int32 _SourceId;
         partial void OnSourceIdChanging(global::System.Int32 value);
         partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateAdd
+        {
+            get
+            {
+                return _DateAdd;
+            }
+            set
+            {
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -1990,15 +2350,15 @@ namespace WPFDB.Model
         /// Create a new Conference object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="code">Initial value of the Code property.</param>
         /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="code">Initial value of the Code property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
-        public static Conference CreateConference(global::System.Guid id, global::System.String code, global::System.String name, global::System.Int32 sourceId)
+        public static Conference CreateConference(global::System.Guid id, global::System.String name, global::System.String code, global::System.Int32 sourceId)
         {
             Conference conference = new Conference();
             conference.Id = id;
-            conference.Code = code;
             conference.Name = name;
+            conference.Code = code;
             conference.SourceId = sourceId;
             return conference;
         }
@@ -2039,30 +2399,6 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Code
-        {
-            get
-            {
-                return _Code;
-            }
-            set
-            {
-                OnCodeChanging(value);
-                ReportPropertyChanging("Code");
-                _Code = StructuralObject.SetValidValue(value, false, "Code");
-                ReportPropertyChanged("Code");
-                OnCodeChanged();
-            }
-        }
-        private global::System.String _Code;
-        partial void OnCodeChanging(global::System.String value);
-        partial void OnCodeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.String Name
         {
             get
@@ -2087,6 +2423,30 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, false, "Code");
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Int32 SourceId
         {
             get
@@ -2105,6 +2465,78 @@ namespace WPFDB.Model
         private global::System.Int32 _SourceId;
         partial void OnSourceIdChanging(global::System.Int32 value);
         partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateAdd
+        {
+            get
+            {
+                return _DateAdd;
+            }
+            set
+            {
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -2150,15 +2582,15 @@ namespace WPFDB.Model
         /// Create a new ContactType object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="code">Initial value of the Code property.</param>
         /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="code">Initial value of the Code property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
-        public static ContactType CreateContactType(global::System.Guid id, global::System.String code, global::System.String name, global::System.Int32 sourceId)
+        public static ContactType CreateContactType(global::System.Guid id, global::System.String name, global::System.String code, global::System.Int32 sourceId)
         {
             ContactType contactType = new ContactType();
             contactType.Id = id;
-            contactType.Code = code;
             contactType.Name = name;
+            contactType.Code = code;
             contactType.SourceId = sourceId;
             return contactType;
         }
@@ -2199,30 +2631,6 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Code
-        {
-            get
-            {
-                return _Code;
-            }
-            set
-            {
-                OnCodeChanging(value);
-                ReportPropertyChanging("Code");
-                _Code = StructuralObject.SetValidValue(value, false, "Code");
-                ReportPropertyChanged("Code");
-                OnCodeChanged();
-            }
-        }
-        private global::System.String _Code;
-        partial void OnCodeChanging(global::System.String value);
-        partial void OnCodeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.String Name
         {
             get
@@ -2247,6 +2655,30 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, false, "Code");
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Int32 SourceId
         {
             get
@@ -2265,6 +2697,78 @@ namespace WPFDB.Model
         private global::System.Int32 _SourceId;
         partial void OnSourceIdChanging(global::System.Int32 value);
         partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateAdd
+        {
+            get
+            {
+                return _DateAdd;
+            }
+            set
+            {
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -2354,18 +2858,18 @@ namespace WPFDB.Model
         /// Create a new Email object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="sourceId">Initial value of the SourceId property.</param>
         /// <param name="contactTypeId">Initial value of the ContactTypeId property.</param>
         /// <param name="personId">Initial value of the PersonId property.</param>
-        public static Email CreateEmail(global::System.Guid id, global::System.String name, global::System.Int32 sourceId, global::System.Guid contactTypeId, global::System.Guid personId)
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="sourceId">Initial value of the SourceId property.</param>
+        public static Email CreateEmail(global::System.Guid id, global::System.Guid contactTypeId, global::System.Guid personId, global::System.String name, global::System.Int32 sourceId)
         {
             Email email = new Email();
             email.Id = id;
-            email.Name = name;
-            email.SourceId = sourceId;
             email.ContactTypeId = contactTypeId;
             email.PersonId = personId;
+            email.Name = name;
+            email.SourceId = sourceId;
             return email;
         }
 
@@ -2399,6 +2903,54 @@ namespace WPFDB.Model
         private global::System.Guid _Id;
         partial void OnIdChanging(global::System.Guid value);
         partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid ContactTypeId
+        {
+            get
+            {
+                return _ContactTypeId;
+            }
+            set
+            {
+                OnContactTypeIdChanging(value);
+                ReportPropertyChanging("ContactTypeId");
+                _ContactTypeId = StructuralObject.SetValidValue(value, "ContactTypeId");
+                ReportPropertyChanged("ContactTypeId");
+                OnContactTypeIdChanged();
+            }
+        }
+        private global::System.Guid _ContactTypeId;
+        partial void OnContactTypeIdChanging(global::System.Guid value);
+        partial void OnContactTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid PersonId
+        {
+            get
+            {
+                return _PersonId;
+            }
+            set
+            {
+                OnPersonIdChanging(value);
+                ReportPropertyChanging("PersonId");
+                _PersonId = StructuralObject.SetValidValue(value, "PersonId");
+                ReportPropertyChanged("PersonId");
+                OnPersonIdChanged();
+            }
+        }
+        private global::System.Guid _PersonId;
+        partial void OnPersonIdChanging(global::System.Guid value);
+        partial void OnPersonIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2451,50 +3003,74 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Guid ContactTypeId
+        public Nullable<global::System.DateTime> DateAdd
         {
             get
             {
-                return _ContactTypeId;
+                return _DateAdd;
             }
             set
             {
-                OnContactTypeIdChanging(value);
-                ReportPropertyChanging("ContactTypeId");
-                _ContactTypeId = StructuralObject.SetValidValue(value, "ContactTypeId");
-                ReportPropertyChanged("ContactTypeId");
-                OnContactTypeIdChanged();
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
             }
         }
-        private global::System.Guid _ContactTypeId;
-        partial void OnContactTypeIdChanging(global::System.Guid value);
-        partial void OnContactTypeIdChanged();
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Guid PersonId
+        public Nullable<global::System.DateTime> DateUpdate
         {
             get
             {
-                return _PersonId;
+                return _DateUpdate;
             }
             set
             {
-                OnPersonIdChanging(value);
-                ReportPropertyChanging("PersonId");
-                _PersonId = StructuralObject.SetValidValue(value, "PersonId");
-                ReportPropertyChanged("PersonId");
-                OnPersonIdChanged();
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
             }
         }
-        private global::System.Guid _PersonId;
-        partial void OnPersonIdChanging(global::System.Guid value);
-        partial void OnPersonIdChanged();
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -2593,27 +3169,102 @@ namespace WPFDB.Model
         /// <summary>
         /// Create a new Iacmac object.
         /// </summary>
-        /// <param name="isMember">Initial value of the IsMember property.</param>
+        /// <param name="personId">Initial value of the PersonId property.</param>
         /// <param name="number">Initial value of the Number property.</param>
+        /// <param name="isMember">Initial value of the IsMember property.</param>
         /// <param name="isCardCreate">Initial value of the IsCardCreate property.</param>
         /// <param name="isCardSent">Initial value of the IsCardSent property.</param>
         /// <param name="isForm">Initial value of the IsForm property.</param>
-        /// <param name="personId">Initial value of the PersonId property.</param>
-        public static Iacmac CreateIacmac(global::System.Boolean isMember, global::System.Int32 number, global::System.Boolean isCardCreate, global::System.Boolean isCardSent, global::System.Boolean isForm, global::System.Guid personId)
+        public static Iacmac CreateIacmac(global::System.Guid personId, global::System.Int32 number, global::System.Boolean isMember, global::System.Boolean isCardCreate, global::System.Boolean isCardSent, global::System.Boolean isForm)
         {
             Iacmac iacmac = new Iacmac();
-            iacmac.IsMember = isMember;
+            iacmac.PersonId = personId;
             iacmac.Number = number;
+            iacmac.IsMember = isMember;
             iacmac.IsCardCreate = isCardCreate;
             iacmac.IsCardSent = isCardSent;
             iacmac.IsForm = isForm;
-            iacmac.PersonId = personId;
             return iacmac;
         }
 
         #endregion
 
         #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid PersonId
+        {
+            get
+            {
+                return _PersonId;
+            }
+            set
+            {
+                if (_PersonId != value)
+                {
+                    OnPersonIdChanging(value);
+                    ReportPropertyChanging("PersonId");
+                    _PersonId = StructuralObject.SetValidValue(value, "PersonId");
+                    ReportPropertyChanged("PersonId");
+                    OnPersonIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _PersonId;
+        partial void OnPersonIdChanging(global::System.Guid value);
+        partial void OnPersonIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, true, "Code");
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Number
+        {
+            get
+            {
+                return _Number;
+            }
+            set
+            {
+                OnNumberChanging(value);
+                ReportPropertyChanging("Number");
+                _Number = StructuralObject.SetValidValue(value, "Number");
+                ReportPropertyChanged("Number");
+                OnNumberChanged();
+            }
+        }
+        private global::System.Int32 _Number;
+        partial void OnNumberChanging(global::System.Int32 value);
+        partial void OnNumberChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2662,54 +3313,6 @@ namespace WPFDB.Model
         private Nullable<global::System.DateTime> _DateRegistration;
         partial void OnDateRegistrationChanging(Nullable<global::System.DateTime> value);
         partial void OnDateRegistrationChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Number
-        {
-            get
-            {
-                return _Number;
-            }
-            set
-            {
-                OnNumberChanging(value);
-                ReportPropertyChanging("Number");
-                _Number = StructuralObject.SetValidValue(value, "Number");
-                ReportPropertyChanged("Number");
-                OnNumberChanged();
-            }
-        }
-        private global::System.Int32 _Number;
-        partial void OnNumberChanging(global::System.Int32 value);
-        partial void OnNumberChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Code
-        {
-            get
-            {
-                return _Code;
-            }
-            set
-            {
-                OnCodeChanging(value);
-                ReportPropertyChanging("Code");
-                _Code = StructuralObject.SetValidValue(value, true, "Code");
-                ReportPropertyChanged("Code");
-                OnCodeChanged();
-            }
-        }
-        private global::System.String _Code;
-        partial void OnCodeChanging(global::System.String value);
-        partial void OnCodeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2786,29 +3389,74 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Guid PersonId
+        public Nullable<global::System.DateTime> DateAdd
         {
             get
             {
-                return _PersonId;
+                return _DateAdd;
             }
             set
             {
-                if (_PersonId != value)
-                {
-                    OnPersonIdChanging(value);
-                    ReportPropertyChanging("PersonId");
-                    _PersonId = StructuralObject.SetValidValue(value, "PersonId");
-                    ReportPropertyChanged("PersonId");
-                    OnPersonIdChanged();
-                }
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
             }
         }
-        private global::System.Guid _PersonId;
-        partial void OnPersonIdChanging(global::System.Guid value);
-        partial void OnPersonIdChanged();
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -2985,6 +3633,78 @@ namespace WPFDB.Model
         private global::System.Int32 _SourceId;
         partial void OnSourceIdChanging(global::System.Int32 value);
         partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateAdd
+        {
+            get
+            {
+                return _DateAdd;
+            }
+            set
+            {
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -3145,6 +3865,78 @@ namespace WPFDB.Model
         private global::System.Int32 _SourceId;
         partial void OnSourceIdChanging(global::System.Int32 value);
         partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateAdd
+        {
+            get
+            {
+                return _DateAdd;
+            }
+            set
+            {
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -3193,22 +3985,22 @@ namespace WPFDB.Model
         /// <param name="firstName">Initial value of the FirstName property.</param>
         /// <param name="secondName">Initial value of the SecondName property.</param>
         /// <param name="thirdName">Initial value of the ThirdName property.</param>
+        /// <param name="sexId">Initial value of the SexId property.</param>
         /// <param name="specialityId">Initial value of the SpecialityId property.</param>
         /// <param name="scienceDegreeId">Initial value of the ScienceDegreeId property.</param>
         /// <param name="scienceStatusId">Initial value of the ScienceStatusId property.</param>
-        /// <param name="sexId">Initial value of the SexId property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
-        public static Person CreatePerson(global::System.Guid id, global::System.String firstName, global::System.String secondName, global::System.String thirdName, global::System.Guid specialityId, global::System.Guid scienceDegreeId, global::System.Guid scienceStatusId, global::System.Guid sexId, global::System.Int32 sourceId)
+        public static Person CreatePerson(global::System.Guid id, global::System.String firstName, global::System.String secondName, global::System.String thirdName, global::System.Guid sexId, global::System.Guid specialityId, global::System.Guid scienceDegreeId, global::System.Guid scienceStatusId, global::System.Int32 sourceId)
         {
             Person person = new Person();
             person.Id = id;
             person.FirstName = firstName;
             person.SecondName = secondName;
             person.ThirdName = thirdName;
+            person.SexId = sexId;
             person.SpecialityId = specialityId;
             person.ScienceDegreeId = scienceDegreeId;
             person.ScienceStatusId = scienceStatusId;
-            person.SexId = sexId;
             person.SourceId = sourceId;
             return person;
         }
@@ -3315,6 +4107,30 @@ namespace WPFDB.Model
         private global::System.String _ThirdName;
         partial void OnThirdNameChanging(global::System.String value);
         partial void OnThirdNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid SexId
+        {
+            get
+            {
+                return _SexId;
+            }
+            set
+            {
+                OnSexIdChanging(value);
+                ReportPropertyChanging("SexId");
+                _SexId = StructuralObject.SetValidValue(value, "SexId");
+                ReportPropertyChanged("SexId");
+                OnSexIdChanged();
+            }
+        }
+        private global::System.Guid _SexId;
+        partial void OnSexIdChanging(global::System.Guid value);
+        partial void OnSexIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3465,30 +4281,6 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid SexId
-        {
-            get
-            {
-                return _SexId;
-            }
-            set
-            {
-                OnSexIdChanging(value);
-                ReportPropertyChanging("SexId");
-                _SexId = StructuralObject.SetValidValue(value, "SexId");
-                ReportPropertyChanged("SexId");
-                OnSexIdChanged();
-            }
-        }
-        private global::System.Guid _SexId;
-        partial void OnSexIdChanging(global::System.Guid value);
-        partial void OnSexIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.Int32 SourceId
         {
             get
@@ -3507,6 +4299,78 @@ namespace WPFDB.Model
         private global::System.Int32 _SourceId;
         partial void OnSourceIdChanging(global::System.Int32 value);
         partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateAdd
+        {
+            get
+            {
+                return _DateAdd;
+            }
+            set
+            {
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -3897,6 +4761,78 @@ namespace WPFDB.Model
         private global::System.Guid _ConferenceId;
         partial void OnConferenceIdChanging(global::System.Guid value);
         partial void OnConferenceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateAdd
+        {
+            get
+            {
+                return _DateAdd;
+            }
+            set
+            {
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -4093,6 +5029,7 @@ namespace WPFDB.Model
         /// <summary>
         /// Create a new PersonConferences_Detail object.
         /// </summary>
+        /// <param name="personConferenceId">Initial value of the PersonConferenceId property.</param>
         /// <param name="rankId">Initial value of the RankId property.</param>
         /// <param name="companyId">Initial value of the CompanyId property.</param>
         /// <param name="isBadge">Initial value of the IsBadge property.</param>
@@ -4101,10 +5038,10 @@ namespace WPFDB.Model
         /// <param name="isNeedBadge">Initial value of the IsNeedBadge property.</param>
         /// <param name="isAutoreg">Initial value of the IsAutoreg property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
-        /// <param name="personConferenceId">Initial value of the PersonConferenceId property.</param>
-        public static PersonConferences_Detail CreatePersonConferences_Detail(global::System.Guid rankId, global::System.Guid companyId, global::System.Boolean isBadge, global::System.Boolean isArrive, global::System.Boolean isAbstract, global::System.Boolean isNeedBadge, global::System.Boolean isAutoreg, global::System.Int32 sourceId, global::System.Guid personConferenceId)
+        public static PersonConferences_Detail CreatePersonConferences_Detail(global::System.Guid personConferenceId, global::System.Guid rankId, global::System.Guid companyId, global::System.Boolean isBadge, global::System.Boolean isArrive, global::System.Boolean isAbstract, global::System.Boolean isNeedBadge, global::System.Boolean isAutoreg, global::System.Int32 sourceId)
         {
             PersonConferences_Detail personConferences_Detail = new PersonConferences_Detail();
+            personConferences_Detail.PersonConferenceId = personConferenceId;
             personConferences_Detail.RankId = rankId;
             personConferences_Detail.CompanyId = companyId;
             personConferences_Detail.IsBadge = isBadge;
@@ -4113,13 +5050,39 @@ namespace WPFDB.Model
             personConferences_Detail.IsNeedBadge = isNeedBadge;
             personConferences_Detail.IsAutoreg = isAutoreg;
             personConferences_Detail.SourceId = sourceId;
-            personConferences_Detail.PersonConferenceId = personConferenceId;
             return personConferences_Detail;
         }
 
         #endregion
 
         #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid PersonConferenceId
+        {
+            get
+            {
+                return _PersonConferenceId;
+            }
+            set
+            {
+                if (_PersonConferenceId != value)
+                {
+                    OnPersonConferenceIdChanging(value);
+                    ReportPropertyChanging("PersonConferenceId");
+                    _PersonConferenceId = StructuralObject.SetValidValue(value, "PersonConferenceId");
+                    ReportPropertyChanged("PersonConferenceId");
+                    OnPersonConferenceIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _PersonConferenceId;
+        partial void OnPersonConferenceIdChanging(global::System.Guid value);
+        partial void OnPersonConferenceIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -4340,29 +5303,74 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Guid PersonConferenceId
+        public Nullable<global::System.DateTime> DateAdd
         {
             get
             {
-                return _PersonConferenceId;
+                return _DateAdd;
             }
             set
             {
-                if (_PersonConferenceId != value)
-                {
-                    OnPersonConferenceIdChanging(value);
-                    ReportPropertyChanging("PersonConferenceId");
-                    _PersonConferenceId = StructuralObject.SetValidValue(value, "PersonConferenceId");
-                    ReportPropertyChanged("PersonConferenceId");
-                    OnPersonConferenceIdChanged();
-                }
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
             }
         }
-        private global::System.Guid _PersonConferenceId;
-        partial void OnPersonConferenceIdChanging(global::System.Guid value);
-        partial void OnPersonConferenceIdChanged();
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -4767,6 +5775,78 @@ namespace WPFDB.Model
         private global::System.Guid _OrderStatusId;
         partial void OnOrderStatusIdChanging(global::System.Guid value);
         partial void OnOrderStatusIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateAdd
+        {
+            get
+            {
+                return _DateAdd;
+            }
+            set
+            {
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -4942,17 +6022,17 @@ namespace WPFDB.Model
         /// Create a new Phone object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="contactTypeId">Initial value of the ContactTypeId property.</param>
         /// <param name="number">Initial value of the Number property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
-        /// <param name="contactTypeId">Initial value of the ContactTypeId property.</param>
         /// <param name="personId">Initial value of the PersonId property.</param>
-        public static Phone CreatePhone(global::System.Guid id, global::System.String number, global::System.Int32 sourceId, global::System.Guid contactTypeId, global::System.Guid personId)
+        public static Phone CreatePhone(global::System.Guid id, global::System.Guid contactTypeId, global::System.String number, global::System.Int32 sourceId, global::System.Guid personId)
         {
             Phone phone = new Phone();
             phone.Id = id;
+            phone.ContactTypeId = contactTypeId;
             phone.Number = number;
             phone.SourceId = sourceId;
-            phone.ContactTypeId = contactTypeId;
             phone.PersonId = personId;
             return phone;
         }
@@ -4987,6 +6067,30 @@ namespace WPFDB.Model
         private global::System.Guid _Id;
         partial void OnIdChanging(global::System.Guid value);
         partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid ContactTypeId
+        {
+            get
+            {
+                return _ContactTypeId;
+            }
+            set
+            {
+                OnContactTypeIdChanging(value);
+                ReportPropertyChanging("ContactTypeId");
+                _ContactTypeId = StructuralObject.SetValidValue(value, "ContactTypeId");
+                ReportPropertyChanged("ContactTypeId");
+                OnContactTypeIdChanged();
+            }
+        }
+        private global::System.Guid _ContactTypeId;
+        partial void OnContactTypeIdChanging(global::System.Guid value);
+        partial void OnContactTypeIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -5041,30 +6145,6 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ContactTypeId
-        {
-            get
-            {
-                return _ContactTypeId;
-            }
-            set
-            {
-                OnContactTypeIdChanging(value);
-                ReportPropertyChanging("ContactTypeId");
-                _ContactTypeId = StructuralObject.SetValidValue(value, "ContactTypeId");
-                ReportPropertyChanged("ContactTypeId");
-                OnContactTypeIdChanged();
-            }
-        }
-        private global::System.Guid _ContactTypeId;
-        partial void OnContactTypeIdChanging(global::System.Guid value);
-        partial void OnContactTypeIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.Guid PersonId
         {
             get
@@ -5083,6 +6163,78 @@ namespace WPFDB.Model
         private global::System.Guid _PersonId;
         partial void OnPersonIdChanging(global::System.Guid value);
         partial void OnPersonIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateAdd
+        {
+            get
+            {
+                return _DateAdd;
+            }
+            set
+            {
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -5420,15 +6572,15 @@ namespace WPFDB.Model
         /// Create a new Rank object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="name">Initial value of the Name property.</param>
         /// <param name="code">Initial value of the Code property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
-        public static Rank CreateRank(global::System.Guid id, global::System.String name, global::System.String code, global::System.Int32 sourceId)
+        public static Rank CreateRank(global::System.Guid id, global::System.String code, global::System.String name, global::System.Int32 sourceId)
         {
             Rank rank = new Rank();
             rank.Id = id;
-            rank.Name = name;
             rank.Code = code;
+            rank.Name = name;
             rank.SourceId = sourceId;
             return rank;
         }
@@ -5469,30 +6621,6 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                OnNameChanging(value);
-                ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, false, "Name");
-                ReportPropertyChanged("Name");
-                OnNameChanged();
-            }
-        }
-        private global::System.String _Name;
-        partial void OnNameChanging(global::System.String value);
-        partial void OnNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.String Code
         {
             get
@@ -5517,6 +6645,30 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false, "Name");
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Int32 SourceId
         {
             get
@@ -5535,6 +6687,78 @@ namespace WPFDB.Model
         private global::System.Int32 _SourceId;
         partial void OnSourceIdChanging(global::System.Int32 value);
         partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateAdd
+        {
+            get
+            {
+                return _DateAdd;
+            }
+            set
+            {
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -5581,15 +6805,15 @@ namespace WPFDB.Model
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="sourceId">Initial value of the SourceId property.</param>
         /// <param name="code">Initial value of the Code property.</param>
-        public static ScienceDegree CreateScienceDegree(global::System.Guid id, global::System.String name, global::System.Int32 sourceId, global::System.String code)
+        /// <param name="sourceId">Initial value of the SourceId property.</param>
+        public static ScienceDegree CreateScienceDegree(global::System.Guid id, global::System.String name, global::System.String code, global::System.Int32 sourceId)
         {
             ScienceDegree scienceDegree = new ScienceDegree();
             scienceDegree.Id = id;
             scienceDegree.Name = name;
-            scienceDegree.SourceId = sourceId;
             scienceDegree.Code = code;
+            scienceDegree.SourceId = sourceId;
             return scienceDegree;
         }
 
@@ -5653,6 +6877,30 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, false, "Code");
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Int32 SourceId
         {
             get
@@ -5675,26 +6923,74 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Code
+        public Nullable<global::System.DateTime> DateAdd
         {
             get
             {
-                return _Code;
+                return _DateAdd;
             }
             set
             {
-                OnCodeChanging(value);
-                ReportPropertyChanging("Code");
-                _Code = StructuralObject.SetValidValue(value, false, "Code");
-                ReportPropertyChanged("Code");
-                OnCodeChanged();
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
             }
         }
-        private global::System.String _Code;
-        partial void OnCodeChanging(global::System.String value);
-        partial void OnCodeChanged();
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -5741,15 +7037,15 @@ namespace WPFDB.Model
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="sourceId">Initial value of the SourceId property.</param>
         /// <param name="code">Initial value of the Code property.</param>
-        public static ScienceStatus CreateScienceStatus(global::System.Guid id, global::System.String name, global::System.Int32 sourceId, global::System.String code)
+        /// <param name="sourceId">Initial value of the SourceId property.</param>
+        public static ScienceStatus CreateScienceStatus(global::System.Guid id, global::System.String name, global::System.String code, global::System.Int32 sourceId)
         {
             ScienceStatus scienceStatus = new ScienceStatus();
             scienceStatus.Id = id;
             scienceStatus.Name = name;
-            scienceStatus.SourceId = sourceId;
             scienceStatus.Code = code;
+            scienceStatus.SourceId = sourceId;
             return scienceStatus;
         }
 
@@ -5813,6 +7109,30 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, false, "Code");
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Int32 SourceId
         {
             get
@@ -5835,26 +7155,74 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Code
+        public Nullable<global::System.DateTime> DateAdd
         {
             get
             {
-                return _Code;
+                return _DateAdd;
             }
             set
             {
-                OnCodeChanging(value);
-                ReportPropertyChanging("Code");
-                _Code = StructuralObject.SetValidValue(value, false, "Code");
-                ReportPropertyChanged("Code");
-                OnCodeChanged();
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
             }
         }
-        private global::System.String _Code;
-        partial void OnCodeChanging(global::System.String value);
-        partial void OnCodeChanged();
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -5901,15 +7269,15 @@ namespace WPFDB.Model
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="sourceId">Initial value of the SourceId property.</param>
         /// <param name="code">Initial value of the Code property.</param>
-        public static Sex CreateSex(global::System.Guid id, global::System.String name, global::System.Int32 sourceId, global::System.String code)
+        /// <param name="sourceId">Initial value of the SourceId property.</param>
+        public static Sex CreateSex(global::System.Guid id, global::System.String name, global::System.String code, global::System.Int32 sourceId)
         {
             Sex sex = new Sex();
             sex.Id = id;
             sex.Name = name;
-            sex.SourceId = sourceId;
             sex.Code = code;
+            sex.SourceId = sourceId;
             return sex;
         }
 
@@ -5973,6 +7341,30 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, false, "Code");
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Int32 SourceId
         {
             get
@@ -5995,26 +7387,74 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Code
+        public Nullable<global::System.DateTime> DateAdd
         {
             get
             {
-                return _Code;
+                return _DateAdd;
             }
             set
             {
-                OnCodeChanging(value);
-                ReportPropertyChanging("Code");
-                _Code = StructuralObject.SetValidValue(value, false, "Code");
-                ReportPropertyChanged("Code");
-                OnCodeChanged();
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
             }
         }
-        private global::System.String _Code;
-        partial void OnCodeChanging(global::System.String value);
-        partial void OnCodeChanged();
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -6061,15 +7501,15 @@ namespace WPFDB.Model
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="sourceId">Initial value of the SourceId property.</param>
         /// <param name="code">Initial value of the Code property.</param>
-        public static Speciality CreateSpeciality(global::System.Guid id, global::System.String name, global::System.Int32 sourceId, global::System.String code)
+        /// <param name="sourceId">Initial value of the SourceId property.</param>
+        public static Speciality CreateSpeciality(global::System.Guid id, global::System.String name, global::System.String code, global::System.Int32 sourceId)
         {
             Speciality speciality = new Speciality();
             speciality.Id = id;
             speciality.Name = name;
-            speciality.SourceId = sourceId;
             speciality.Code = code;
+            speciality.SourceId = sourceId;
             return speciality;
         }
 
@@ -6133,6 +7573,30 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, false, "Code");
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Int32 SourceId
         {
             get
@@ -6155,26 +7619,74 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Code
+        public Nullable<global::System.DateTime> DateAdd
         {
             get
             {
-                return _Code;
+                return _DateAdd;
             }
             set
             {
-                OnCodeChanging(value);
-                ReportPropertyChanging("Code");
-                _Code = StructuralObject.SetValidValue(value, false, "Code");
-                ReportPropertyChanged("Code");
-                OnCodeChanged();
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
             }
         }
-        private global::System.String _Code;
-        partial void OnCodeChanging(global::System.String value);
-        partial void OnCodeChanged();
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, true, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
 
         #endregion
 
@@ -6361,6 +7873,30 @@ namespace WPFDB.Model
         private global::System.String _Email;
         partial void OnEmailChanging(global::System.String value);
         partial void OnEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> SourceId
+        {
+            get
+            {
+                return _SourceId;
+            }
+            set
+            {
+                OnSourceIdChanging(value);
+                ReportPropertyChanging("SourceId");
+                _SourceId = StructuralObject.SetValidValue(value, "SourceId");
+                ReportPropertyChanged("SourceId");
+                OnSourceIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _SourceId;
+        partial void OnSourceIdChanging(Nullable<global::System.Int32> value);
+        partial void OnSourceIdChanged();
 
         #endregion
 

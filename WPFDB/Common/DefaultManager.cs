@@ -297,7 +297,7 @@ namespace WPFDB.Common
                 var obj = DataManager.Instance.CreateObject<AbstractWork>();
                 obj.Id = GuidComb.Generate();
                 obj.AbstractStatus = DefaultAbstractStatus;
-                obj.User = DefaultResponsiblePerson;
+                obj.Reviewer = DefaultResponsiblePerson;
                 obj.IsSentByEmail = false;
                 obj.DateWork = DateTime.Now;
                 return obj;

@@ -11,9 +11,8 @@ namespace WPFDB.Common
     public class Authentification
     {
         private static Authentification instance;
-        private bool authentificated;
-        private User currentUser;
-        private DataManager dm = DataManager.Instance;
+        private static bool authentificated;
+        private static User currentUser;
 
         public static Authentification Instance
         {
@@ -37,24 +36,24 @@ namespace WPFDB.Common
             return authentificated;
         }
 
-        public User GetCurrentUser()
+        public static User GetCurrentUser()
         {
             return currentUser;
         }
 
-        public bool AuthentificateUser(User user)
+        public static bool AuthentificateUser(User user)
         {
-            var cu = dm.GetUser(user.Name, user.Password);
+            var cu = DataManager.Instance.GetUser(user.Name, user.Password);
             if (cu != null)
             {
-                this.currentUser = cu;
-                this.authentificated = true;
+                currentUser = cu;
+                authentificated = true;
                 return true;
             }
             else
             {
-                this.currentUser = null;
-                this.authentificated = true;
+                currentUser = null;
+                authentificated = true;
                 return true;
             }
         }

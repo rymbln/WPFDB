@@ -22,8 +22,8 @@
             <Label Grid.Column="0" Grid.Row="0"  Content="Reviewer:" />
             <ComboBox Grid.Column="1" Grid.Row="0" 
                           SelectedValuePath="." 
-                          SelectedItem="{Binding Path=ResponsiblePerson, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
-                          ItemsSource="{Binding Path=ResponsiblePersonsLookup}" 
+                          SelectedItem="{Binding Path=Reviewer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
+                          ItemsSource="{Binding Path=ReviewersLookup}" 
                           DisplayMemberPath="Name" />
             <Label Grid.Column="2" Grid.Row="0"  Content="Abstrast Status:" />
             <ComboBox Grid.Column="3" Grid.Row="0" 

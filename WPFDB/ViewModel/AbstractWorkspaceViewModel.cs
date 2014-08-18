@@ -21,6 +21,7 @@ namespace WPFDB.ViewModel
         public AbstractWorkspaceViewModel()
         {
             AllAbstracts = new ObservableCollection<AbstractViewModel>();
+            AbstractWorks = new ObservableCollection<AbstractWorkViewModel>();
             foreach (var item in DataManager.Instance.GetAllAbstracts())
             {
                 AllAbstracts.Add(new AbstractViewModel(item));
@@ -59,7 +60,8 @@ namespace WPFDB.ViewModel
             {
                 this.currentAbstract = value;
                 this.OnPropertyChanged("CurrentAbstract");
-                if (currentAbstract.Model.AbstractWorks != null)
+
+                if (currentAbstract != null && currentAbstract.Model.AbstractWorks != null)
                 {
                     if (this.currentAbstract.Model.AbstractWorks.Count > 0)
                     {

@@ -18,7 +18,9 @@
         <DataTemplate DataType="{x:Type vm:AbstractWorkspaceViewModel}">
             <v:AbstractWorkspaceView/>
         </DataTemplate>
-
+<DataTemplate DataType="{x:Type vm:ImportWorkspaceViewModel}">
+    <v:ImportWorkspaceView/>
+</DataTemplate>
     </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -82,7 +84,10 @@
                 <TabItem.Header>Abstracts</TabItem.Header>
                 <ContentControl Content="{Binding Path=.AbstractWorkspace}"  />
             </TabItem>
-            
+            <TabItem>
+                <TabItem.Header>Imports</TabItem.Header>
+                <ContentControl Content="{Binding Path=.ImportWorkspace}"  />
+            </TabItem>
         </TabControl>
 
 

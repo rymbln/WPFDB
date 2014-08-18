@@ -17,7 +17,7 @@ namespace WPFDB.ViewModel
     public class AbstractWorkViewModel : ViewModelBase
     {
         public AbstractWork Model;
-        private UserViewModel responsiblePerson;
+        private UserViewModel reviewer;
         private AbstractStatusViewModel abstractStatus;
 
         public AbstractWorkViewModel(AbstractWork abstractWork)
@@ -26,9 +26,9 @@ namespace WPFDB.ViewModel
             {
                 throw new ArgumentNullException("abstractWork");
             }
-            if (abstractWork.User == null)
+            if (abstractWork.Reviewer == null)
             {
-                abstractWork.User = DefaultManager.Instance.DefaultResponsiblePerson;
+                abstractWork.Reviewer = DefaultManager.Instance.DefaultResponsiblePerson;
             }
             if (abstractWork.AbstractStatus == null)
             {
@@ -46,23 +46,23 @@ namespace WPFDB.ViewModel
                     this.abstractStatus = new AbstractStatusViewModel(DefaultManager.Instance.DefaultAbstractStatus);
                 }
             };
-            ResponsiblePersonsLookup = new ObservableCollection<UserViewModel>();
+            ReviewersLookup = new ObservableCollection<UserViewModel>();
             foreach (var user in DataManager.Instance.GetAllUsers())
             {
-                ResponsiblePersonsLookup.Add(new UserViewModel(user));
+                ReviewersLookup.Add(new UserViewModel(user));
             }
-            ResponsiblePersonsLookup.CollectionChanged += (sender, e) =>
+            ReviewersLookup.CollectionChanged += (sender, e) =>
             {
-                if (e.OldItems != null && e.OldItems.Contains(this.ResponsiblePerson))
+                if (e.OldItems != null && e.OldItems.Contains(this.Reviewer))
                 {
-                    this.responsiblePerson = new UserViewModel(DefaultManager.Instance.DefaultResponsiblePerson);
+                    this.reviewer = new UserViewModel(DefaultManager.Instance.DefaultResponsiblePerson);
                 }
             };
             this.Model = abstractWork;
             this.SendEmailCommand = new DelegateCommand(o => this.SendEmail());
         }
 
-        public ObservableCollection<UserViewModel> ResponsiblePersonsLookup { get; private set; }
+        public ObservableCollection<UserViewModel> ReviewersLookup { get; private set; }
         public ObservableCollection<AbstractStatusViewModel> AbstractStatusLookup { get; private set; }
 
         public ICommand SendEmailCommand { get; private set; }
@@ -87,23 +87,23 @@ namespace WPFDB.ViewModel
             }
         }
 
-        public UserViewModel ResponsiblePerson
+        public UserViewModel Reviewer
         {
             get
             {
-                if (this.Model.User == null)
+                if (this.Model.Reviewer == null)
                 {
-                    this.Model.User = DefaultManager.Instance.DefaultResponsiblePerson;
+                    this.Model.Reviewer = DefaultManager.Instance.DefaultResponsiblePerson;
                 }
-                this.responsiblePerson =
-                    this.ResponsiblePersonsLookup.SingleOrDefault(s => s.Model == this.Model.User);
-                return this.responsiblePerson;
+                this.reviewer =
+                    this.ReviewersLookup.SingleOrDefault(s => s.Model == this.Model.Reviewer);
+                return this.reviewer;
             }
             set
             {
-                this.responsiblePerson = value;
-                this.Model.User = (value == null) ? null : value.Model;
-                OnPropertyChanged("AbstractResponsiblePerson");
+                this.reviewer = value;
+                this.Model.Reviewer = (value == null) ? null : value.Model;
+                OnPropertyChanged("Reviewer");
             }
         }
 
@@ -139,7 +139,7 @@ namespace WPFDB.ViewModel
 
         public string ReviewerName
         {
-            get { return ResponsiblePerson.Name; }
+            get { return Reviewer.Name; }
         }
 
         public string AbstractStatusName
