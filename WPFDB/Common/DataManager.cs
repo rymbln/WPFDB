@@ -1051,10 +1051,10 @@ namespace WPFDB.Common
             {
                 foreach (var item in p.AbstractWorks.ToList())
                 {
-                    this.underlyingContext.RemoveObject(item);
+                    this.underlyingContext.AbstractWorks.DeleteObject(item);
                 }
             }
-            this.underlyingContext.RemoveObject(p);
+            this.underlyingContext.Abstracts.DeleteObject(p);
             Save();
         }
 

@@ -72,6 +72,7 @@
     <Compile Include="Common\DataManager.cs" />
     <Compile Include="Common\ImportManager.cs" />
     <Compile Include="Common\LogManager.cs" />
+    <Compile Include="Model\Abstract.cs" />
     <Compile Include="Model\IConferenceContext.cs" />
     <Compile Include="Model\ConferenceEntities.cs" />
     <Compile Include="Model\ConferenceModel.Designer.cs">
@@ -79,6 +80,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConferenceModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Person.cs" />
     <Compile Include="Validation\Helpers\ExcludeChar.cs" />
     <Compile Include="Validation\Helpers\Unique.cs" />
     <Compile Include="ViewModel\AbstractDetailsViewModel.cs" />

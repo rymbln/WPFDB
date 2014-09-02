@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WPFDB.Common;
+using WPFDB.Model;
 using WPFDB.ViewModel.Helpers;
 
 namespace WPFDB.ViewModel
@@ -20,18 +21,16 @@ namespace WPFDB.ViewModel
 
         public AbstractWorkspaceViewModel()
         {
-            AllAbstracts = new ObservableCollection<AbstractViewModel>();
+
             AbstractWorks = new ObservableCollection<AbstractWorkViewModel>();
-            foreach (var item in DataManager.Instance.GetAllAbstracts())
-            {
-                AllAbstracts.Add(new AbstractViewModel(item));
-            }
-            this.CurrentAbstract = AllAbstracts.Count > 0 ? AllAbstracts[0] : null;
+            AllAbstracts = new ObservableCollection<Abstract>(DataManager.Instance.GetAllAbstracts());
+            
+            this.CurrentAbstract = new AbstractViewModel(AllAbstracts.Count > 0 ? AllAbstracts[0] : null);
             this.AllAbstracts.CollectionChanged += (sender, e) =>
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.CurrentAbstract))
                 {
-                    this.CurrentAbstract = null;
+                    this.CurrentAbstract = new AbstractViewModel(AllAbstracts.FirstOrDefault());
                 }
             };
 
@@ -45,7 +44,7 @@ namespace WPFDB.ViewModel
             this.DeleteAbstractWorkCommand = new DelegateCommand((o) => this.DeleteAbstractWork(), (o) => this.CurrentAbstractWork != null);
 
         }
-        public ObservableCollection<AbstractViewModel> AllAbstracts { get; private set; }
+        public ObservableCollection<Abstract> AllAbstracts { get; private set; }
         public ObservableCollection<AbstractWorkViewModel> AbstractWorks { get; private set; }
 
         public ICommand ApplyFiltersCommand { get; private set; }

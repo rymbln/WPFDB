@@ -7,7 +7,6 @@
       xmlns:vm="clr-namespace:WPFDB.ViewModel"
       xmlns:p="clr-namespace:WPFDB.Properties"
       mc:Ignorable="d" 
-
 >
 
     <UserControl.Resources>
@@ -15,26 +14,8 @@
             <v:PersonDetailView />
         </DataTemplate>
     </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="50*"/>
-        </Grid.RowDefinitions>
-
-        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" 
-                                Grid.Column="0" Grid.Row="0">
-            <HeaderedContentControl.Header>
-                Persons
-            </HeaderedContentControl.Header>
-            <ScrollViewer>
-                <HeaderedContentControl>
-                    <HeaderedContentControl.Header>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                            <ToolBar>
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
                                 <Button Command="{Binding AddPersonCommand}">
                                     <AccessText Text="{x:Static p:Resources.AddMenu}"/>
                                 </Button>
@@ -57,23 +38,19 @@
                                 <TextBox x:Name="searchBox" Width="150" BorderBrush="LightGray" BorderThickness="1" 
                          Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" />
                             </ToolBar>
-                        </StackPanel>
-                    </HeaderedContentControl.Header>
 
                     <DataGrid SelectedItem="{Binding Path=CurrentPerson, Mode=TwoWay}" 
                               ItemsSource="{Binding Path=AllPersons}" 
-                              AutoGenerateColumns="False" 
+                              AutoGenerateColumns="False" IsReadOnly="True"
                              >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}" />
-                            <DataGridTextColumn Header="Second Name" Binding="{Binding Path=SecondName}" />
-                            <DataGridTextColumn Header="Third Name" Binding="{Binding Path=ThirdName}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </HeaderedContentControl>
-            </ScrollViewer>
-        </HeaderedContentControl>
-      
+                            <DataGridTextColumn Header="First Name" Width="*"  Binding="{Binding Path=FirstName}" />
+                        <DataGridTextColumn Header="Second Name" Width="*" Binding="{Binding Path=SecondName}" />
+                        <DataGridTextColumn Header="Third Name" Width="*" Binding="{Binding Path=ThirdName}" />
+                <DataGridTextColumn Header="Third Name" Width="*" Binding="{Binding Path=ToString}" />
+            </DataGrid.Columns>
 
-    </Grid>
+                    </DataGrid>
+    </DockPanel>
+
 </UserControl>

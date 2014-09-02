@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -17,19 +18,20 @@ namespace WPFDB.ViewModel
 {
     public class PersonWorkspaceViewModel : ViewModelBase
     {
-        private PersonViewModel currentPerson;
+
+        private Person currentPerson;
+        private PersonViewModel currentPersonVM;
         private ConferenceViewModel filterConference;
-        private bool filterAllConferences;
+        // private bool filterAllConferences;
         private string filterText = "";
-         
+
         public PersonWorkspaceViewModel()
         {
-            AllPersons = new ObservableCollection<PersonViewModel>();
-
-            foreach (var item in DataManager.Instance.GetAllPersons())
-            {
-                AllPersons.Add(new PersonViewModel(item));
-            }
+            AllPersons = new ObservableCollection<Person>();
+            AllPersonsDB = new ObservableCollection<Person>();
+            //AllPersons.CollectionChanged += ContentCollectionChanged;
+         //   AllPersons = new ObservableCollection<Person>(DataManager.Instance.GetAllPersons(FilterText, null));
+            RefreshPersons();
             this.CurrentPerson = AllPersons.Count > 0 ? AllPersons[0] : null;
 
             this.AllPersons.CollectionChanged += (sender, e) =>
@@ -57,9 +59,10 @@ namespace WPFDB.ViewModel
         public ICommand ApplyFiltersCommand { get; private set; }
 
 
-        public ObservableCollection<PersonViewModel> AllPersons { get; private set; }
+        public ObservableCollection<Person> AllPersons { get; private set; }
+        public ObservableCollection<Person> AllPersonsDB { get; private set; }
 
-        public PersonViewModel CurrentPerson
+        public Person CurrentPerson
         {
             get { return this.currentPerson; }
             set
@@ -69,6 +72,11 @@ namespace WPFDB.ViewModel
             }
         }
 
+        public PersonViewModel CurrentPersonVM
+        {
+            get { return this.currentPersonVM; }
+            set { }
+        }
         public ConferenceViewModel FilterConference
         {
             get { return this.filterConference; }
@@ -79,29 +87,18 @@ namespace WPFDB.ViewModel
             }
         }
 
-        public bool FilterAllConferences
-        {
-            get { return this.filterAllConferences; }
-            set
-            {
-                this.filterAllConferences = value;
-                OnPropertyChanged("FilterAllConferences");
-            }
-        }
-
         private void AddPerson()
         {
             Person p = DefaultManager.Instance.DefaultPerson;
-            PersonViewModel vm = new PersonViewModel(p);
-            this.AllPersons.Add(vm);
-            this.CurrentPerson = vm;
+            this.AllPersons.Add(p);
+            this.CurrentPerson = p;
 
             OpenPerson();
         }
 
         private void DeleteCurrentPerson()
         {
-            DataManager.Instance.RemovePerson(this.CurrentPerson.Model);
+            DataManager.Instance.RemovePerson(this.CurrentPerson);
             this.AllPersons.Remove(this.CurrentPerson);
             this.CurrentPerson = null;
 
@@ -109,20 +106,30 @@ namespace WPFDB.ViewModel
 
         private void RefreshPersons()
         {
-            foreach (var personViewModel in AllPersons.ToList())
-            {
-                AllPersons.Remove(personViewModel);
-            }
-
-            foreach (var item in DataManager.Instance.GetAllPersons())
-            {
-                AllPersons.Add(new PersonViewModel(item));
-            }
+            filterText = "";
+            this.OnPropertyChanged("FilterText");
+            AllPersonsDB = new ObservableCollection<Person>(DataManager.Instance.GetAllPersons());
+            AllPersons = AllPersonsDB;
+            this.OnPropertyChanged("AllPersons");
+            this.CurrentPerson = AllPersons.Count > 0 ? AllPersons[0] : null;
         }
+        private void FilterPersons()
+        {
+            AllPersons = new ObservableCollection<Person>(AllPersonsDB.Where(o => o.ToString.Contains(filterText)));
+            this.OnPropertyChanged("AllPersons");
+            this.CurrentPerson = AllPersons.Count > 0 ? AllPersons[0] : null;
+        }
+
+
+
+        //public void ContentCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        //{
+        //    //This will get called when the collection is changed
+        //}
 
         private void OpenPerson()
         {
-            PersonFormViewModel vm = new PersonFormViewModel(CurrentPerson);
+            PersonFormViewModel vm = new PersonFormViewModel(new PersonViewModel(currentPerson));
             PersonFormView v = new PersonFormView { DataContext = vm };
             v.Show();
         }
@@ -134,12 +141,19 @@ namespace WPFDB.ViewModel
             {
                 this.filterText = value.Trim();
                 this.OnPropertyChanged("FilterText");
+                if (filterText.Equals(""))
+                {
+                    RefreshPersons();
+                }
+                else
+                {
 
-
+                    FilterPersons();
+                }
             }
         }
 
-  
+
 
     }
 }
