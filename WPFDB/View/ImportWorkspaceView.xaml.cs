@@ -77,17 +77,19 @@ namespace WPFDB.View
         {
             int res;
 
-            res = ImportManager.Instance.ImportContactTypes();
-            MessageBox.Show(res + " ContactTypes");
+            //res = ImportManager.Instance.ImportContactTypes();
+            //MessageBox.Show(res + " ContactTypes");
 
             res = ImportManager.Instance.ImportSpecialities();
             MessageBox.Show(res + "Specialities");
             res = ImportManager.Instance.ImportRanks();
             MessageBox.Show(res + "Ranks");
+            res = ImportManager.Instance.ImportScienceDegrees();
+            MessageBox.Show(res + " ScienceDegree");
+            res = ImportManager.Instance.ImportScienceStatuses();
+            MessageBox.Show(res + "ScienceStatuses");
 
 
-            res = ImportManager.Instance.ImportOrderStatuses();
-            MessageBox.Show(res + " OrderStatuses");
             res = ImportManager.Instance.ImportPaymentTypes();
             MessageBox.Show(res + " PaymentTypes");
 

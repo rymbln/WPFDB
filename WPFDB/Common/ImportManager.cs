@@ -110,7 +110,7 @@ namespace WPFDB.Common
                 ImportSpecialities();
                 ImportRanks();
 
-                ImportOrderStatuses();
+           
                 ImportPaymentTypes();
 
                 ImportConferenceTypes();
@@ -562,7 +562,7 @@ namespace WPFDB.Common
                 var rdr = cmd.ExecuteReader();
                 if (rdr.HasRows)
                 {
-                    var obj = DataManager.Instance.CreateObject<User>();
+                    User obj ;
 
                     while (rdr.Read())
                     {
@@ -606,12 +606,7 @@ namespace WPFDB.Common
                 var rdr = cmd.ExecuteReader();
                 if (rdr.HasRows)
                 {
-                    var obj = DataManager.Instance.CreateObject<Speciality>();
-                    obj.Id = GuidComb.Generate();
-                    obj.Code = "-";
-                    obj.Name = "-";
-                    obj.SourceId = 0;
-                    DataManager.Instance.AddSpeciality(obj);
+                    Speciality obj;
 
                     while (rdr.Read())
                     {
@@ -738,12 +733,7 @@ namespace WPFDB.Common
                 var rdr = cmd.ExecuteReader();
                 if (rdr.HasRows)
                 {
-                    var obj = DataManager.Instance.CreateObject<ScienceStatus>();
-                    obj.Id = GuidComb.Generate();
-                    obj.Code = "-";
-                    obj.Name = "-";
-                    obj.SourceId = 0;
-                    DataManager.Instance.AddScienceStatus(obj);
+                    ScienceStatus obj;
 
                     while (rdr.Read())
                     {
@@ -784,13 +774,8 @@ namespace WPFDB.Common
                 var rdr = cmd.ExecuteReader();
                 if (rdr.HasRows)
                 {
-                    var obj = DataManager.Instance.CreateObject<ScienceDegree>();
-                    obj.Id = GuidComb.Generate();
-                    obj.Code = "-";
-                    obj.Name = "-";
-                    obj.SourceId = 0;
-                    DataManager.Instance.AddScienceDegree(obj);
-
+                    ScienceDegree obj;
+                 
                     while (rdr.Read())
                     {
                         obj = DataManager.Instance.CreateObject<ScienceDegree>();
@@ -830,13 +815,8 @@ namespace WPFDB.Common
                 var rdr = cmd.ExecuteReader();
                 if (rdr.HasRows)
                 {
-                    var obj = DataManager.Instance.CreateObject<Rank>();
-                    obj.Id = GuidComb.Generate();
-                    obj.Code = "-";
-                    obj.Name = "-";
-                    obj.SourceId = 0;
-                    DataManager.Instance.AddRank(obj);
-
+                    Rank obj ;
+                    
                     while (rdr.Read())
                     {
                         obj = DataManager.Instance.CreateObject<Rank>();
@@ -876,12 +856,7 @@ namespace WPFDB.Common
                 var rdr = cmd.ExecuteReader();
                 if (rdr.HasRows)
                 {
-                    var obj = DataManager.Instance.CreateObject<PaymentType>();
-                    obj.Id = GuidComb.Generate();
-                    obj.Code = "-";
-                    obj.Name = "-";
-                    obj.SourceId = 0;
-                    DataManager.Instance.AddPaymentType(obj);
+                    PaymentType obj;
 
                     while (rdr.Read())
                     {
@@ -906,41 +881,7 @@ namespace WPFDB.Common
             return res;
         }
 
-        public int ImportOrderStatuses()
-        {
-            var res = 0;
-            try
-            {
-                var obj = new OrderStatus();
-
-                obj = DataManager.Instance.CreateObject<OrderStatus>();
-                obj.Id = GuidComb.Generate();
-                obj.Code = "-";
-                obj.Name = "Нет";
-                obj.SourceId = 0;
-                DataManager.Instance.AddOrderStatus(obj);
-                obj = DataManager.Instance.CreateObject<OrderStatus>();
-                obj.Id = GuidComb.Generate();
-                obj.Code = "";
-                obj.Name = "Оплачен";
-                obj.SourceId = 1;
-                DataManager.Instance.AddOrderStatus(obj);
-                obj = DataManager.Instance.CreateObject<OrderStatus>();
-                obj.Id = GuidComb.Generate();
-                obj.Code = "";
-                obj.Name = "Возврат";
-                obj.SourceId = 2;
-                DataManager.Instance.AddOrderStatus(obj);
-
-                res = 1;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + " || " + ex.InnerException);
-                res = 0;
-            }
-            return res;
-        }
+     
 
         public int ImportCompanies()
         {
@@ -958,12 +899,8 @@ namespace WPFDB.Common
                 var rdr = cmd.ExecuteReader();
                 if (rdr.HasRows)
                 {
-                    var obj = DataManager.Instance.CreateObject<Company>();
-                    obj.Id = GuidComb.Generate();
-                    obj.Code = "-";
-                    obj.Name = "-";
-                    obj.SourceId = 0;
-                    DataManager.Instance.AddCompany(obj);
+                    Company obj;
+
 
                     while (rdr.Read())
                     {
@@ -1161,12 +1098,7 @@ namespace WPFDB.Common
                 var rdr = cmd.ExecuteReader();
                 if (rdr.HasRows)
                 {
-                    var obj = DataManager.Instance.CreateObject<AbstractStatus>();
-                    obj.Id = GuidComb.Generate();
-                    obj.Code = "-";
-                    obj.Name = "-";
-                    obj.SourceId = 0;
-                    DataManager.Instance.AddAbstractStatus(obj);
+                    AbstractStatus obj;
 
                     while (rdr.Read())
                     {
@@ -1214,13 +1146,8 @@ namespace WPFDB.Common
                 var rdr = cmd.ExecuteReader();
                 if (rdr.HasRows)
                 {
-                    var obj = DataManager.Instance.CreateObject<Conference>();
-                    obj.Id = GuidComb.Generate();
-                    obj.Code = "-";
-                    obj.Name = "-";
-                    obj.SourceId = 0;
-                    DataManager.Instance.AddConference(obj);
-
+                    Conference obj;
+                    
                     while (rdr.Read())
                     {
                         obj = DataManager.Instance.CreateObject<Conference>();
