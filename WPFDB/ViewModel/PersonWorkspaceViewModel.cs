@@ -109,7 +109,10 @@ namespace WPFDB.ViewModel
 
         private void RefreshPersons()
         {
-            AllPersons = new ObservableCollection<PersonViewModel>();
+            foreach (var personViewModel in AllPersons.ToList())
+            {
+                AllPersons.Remove(personViewModel);
+            }
 
             foreach (var item in DataManager.Instance.GetAllPersons())
             {

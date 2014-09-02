@@ -321,6 +321,10 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("person");
             }
+            obj.DateAdd = DateTime.Now;
+            obj.DateUpdate = DateTime.Now;
+            var currentUser = Authentification.GetCurrentUser();
+            obj.User = currentUser == null ? "-" : currentUser.Name;
             this.underlyingContext.Persons.AddObject(obj);
             Save();
         }
@@ -331,6 +335,10 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("abstractStatus");
             }
+            obj.DateAdd = DateTime.Now;
+            obj.DateUpdate = DateTime.Now;
+            var currentUser = Authentification.GetCurrentUser();
+            obj.User = currentUser == null ? "-" : currentUser.Name;
             underlyingContext.AbstractStatuses.AddObject(obj);
             Save();
         }
@@ -341,6 +349,10 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("abstractWork");
             }
+            obj.DateAdd = DateTime.Now;
+            obj.DateUpdate = DateTime.Now;
+            var currentUser = Authentification.GetCurrentUser();
+            obj.User = currentUser == null ? "-" : currentUser.Name;
             underlyingContext.AbstractWorks.AddObject(obj);
             Save();
         }
@@ -352,6 +364,10 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("abstract");
             }
+            obj.DateAdd = DateTime.Now;
+            obj.DateUpdate = DateTime.Now;
+            var currentUser = Authentification.GetCurrentUser();
+            obj.User = currentUser == null ? "-" : currentUser.Name;
             underlyingContext.Abstracts.AddObject(obj);
             Save();
         }
@@ -376,6 +392,14 @@ namespace WPFDB.Common
             personConference.PersonConferences_Payment = DefaultManager.Instance.DefaultPersonConferencePayment(personConference.PersonConferenceId);
             Save();
             return personConference;
+        }
+
+        public void AddPersonConference(PersonConference obj)
+        {
+
+            underlyingContext.PersonConferences.AddObject(obj);
+            Save();
+
         }
 
         #endregion
@@ -615,36 +639,44 @@ namespace WPFDB.Common
 
         public void EraseData()
         {
-            foreach (var obj in underlyingContext.Abstracts)
+            foreach (var obj in underlyingContext.AbstractWorks.ToList())
+            {
+                underlyingContext.AbstractWorks.DeleteObject(obj);
+            }
+            Save();
+            foreach (var obj in underlyingContext.Abstracts.ToList())
             {
                 underlyingContext.Abstracts.DeleteObject(obj);
             }
             Save();
-            foreach (var obj in underlyingContext.PersonConferences)
+            foreach (var obj in underlyingContext.PersonConferences.ToList())
             {
                 underlyingContext.PersonConferences.DeleteObject(obj);
             }
             Save();
-
-            foreach (var obj in underlyingContext.Persons)
+            IList<Person> persons = underlyingContext.Persons.ToList();
+            foreach (Person obj in persons)
             {
-                foreach (var email in obj.Emails.ToList())
-                {
-                    underlyingContext.Emails.DeleteObject(email);
-                }
-                Save();
-                var phones = new List<Phone>();
-                foreach (var phone in obj.Phones.ToList())
-                {
-                    underlyingContext.Phones.DeleteObject(phone);
-                }
-                Save();
-                foreach (var adr in obj.Addresses.ToList())
-                {
-                    underlyingContext.Addresses.DeleteObject(adr);
-                }
-                underlyingContext.Persons.DeleteObject(obj);
-                Save();
+                //       foreach (var email in obj.Emails.ToList())
+                //       {
+                //           obj.Emails.Remove(email);
+                //       }
+                //       Save();
+                //       var phones = new List<Phone>();
+                //       foreach (var phone in obj.Phones.ToList())
+                //       {
+                //           obj.Phones.Remove(phone);
+                //       }
+                //       Save();
+                //       foreach (var adr in obj.Addresses.ToList())
+                //       {
+                //           obj.Addresses.Remove(adr);
+                //       }
+                //       Save();
+                ////       obj.Iacmac = null;
+                RemovePerson(obj);
+                //       underlyingContext.Persons.DeleteObject(obj);
+                //    Save();
             }
             Save();
 
@@ -712,9 +744,9 @@ namespace WPFDB.Common
 
         public void FillData()
         {
-            AddUser(new User { Id = GuidComb.Generate(), Name = "user", Password = "user", Email = "user@example.com", Role = "user" });
-            AddUser(new User { Id = GuidComb.Generate(), Name = "admin", Password = "admin", Email = "admin@example.com", Role = "admin" });
-            AddUser(new User { Id = GuidComb.Generate(), Name = "111", Password = "111", Email = "111@example.com", Role = "user" });
+            AddUser(new User { Id = GuidComb.Generate(), Name = "user", FullName = "user", Password = "user", Email = "user@example.com", Role = "user" });
+            AddUser(new User { Id = GuidComb.Generate(), Name = "admin", FullName = "user", Password = "admin", Email = "admin@example.com", Role = "admin" });
+            AddUser(new User { Id = GuidComb.Generate(), Name = "111", FullName = "user",  Password = "111", Email = "111@example.com", Role = "user" });
             Save();
 
             AddAbstractStatus(new AbstractStatus { Id = GuidComb.Generate(), Code = "-", Name = "-" });
@@ -825,8 +857,8 @@ namespace WPFDB.Common
 
             email.PersonId = person.Id;
 
-            this.CheckEntityBelongsToUnitOfWork(email);
-            this.CheckEntityBelongsToUnitOfWork(person);
+    //        this.CheckEntityBelongsToUnitOfWork(email);
+    //        this.CheckEntityBelongsToUnitOfWork(person);
 
             this.underlyingContext.Emails.AddObject(email);
             person.Emails.Add(email);
@@ -866,8 +898,8 @@ namespace WPFDB.Common
                 throw new ArgumentNullException("address");
             }
             address.PersonId = person.Id;
-            this.CheckEntityBelongsToUnitOfWork(address);
-            this.CheckEntityBelongsToUnitOfWork(person);
+    //        this.CheckEntityBelongsToUnitOfWork(address);
+    //        this.CheckEntityBelongsToUnitOfWork(person);
 
             this.underlyingContext.Addresses.AddObject(address);
             person.Addresses.Add(address);
@@ -907,8 +939,8 @@ namespace WPFDB.Common
                 throw new ArgumentNullException("phone");
             }
             phone.PersonId = person.Id;
-            this.CheckEntityBelongsToUnitOfWork(phone);
-            this.CheckEntityBelongsToUnitOfWork(person);
+    //        this.CheckEntityBelongsToUnitOfWork(phone);
+      //      this.CheckEntityBelongsToUnitOfWork(person);
 
             this.underlyingContext.Phones.AddObject(phone);
             person.Phones.Add(phone);
@@ -1013,7 +1045,7 @@ namespace WPFDB.Common
             this.underlyingContext.AbstractWorks.DeleteObject(abstractWork);
         }
 
-        public  void RemoveAbstract(Abstract p)
+        public void RemoveAbstract(Abstract p)
         {
             if (p.AbstractWorks != null)
             {
@@ -1026,6 +1058,137 @@ namespace WPFDB.Common
             Save();
         }
 
-      
+        public Sex GetSexBySourceId(int id)
+        {
+            var obj = underlyingContext.Sexes.FirstOrDefault(o => o.SourceId == id);
+            return (obj == null) ? DefaultManager.Instance.DefaultSex : obj;
+        }
+
+        public Speciality GetSpecialityBySourceId(int id)
+        {
+            var obj = underlyingContext.Specialities.FirstOrDefault(o => o.SourceId == id);
+            return (obj == null) ? DefaultManager.Instance.DefaultSpeciality : obj;
+        }
+
+        public ScienceDegree GetScienceDegreeBySourceID(int id)
+        {
+            var obj = underlyingContext.ScienceDegrees.FirstOrDefault(o => o.SourceId == id);
+            return (obj == null) ? DefaultManager.Instance.DefaultScienceDegree : obj;
+        }
+
+        public ScienceStatus GetScienceStatusBySourceId(int id)
+        {
+            var obj = underlyingContext.ScienceStatuses.FirstOrDefault(o => o.SourceId == id);
+            return (obj == null) ? DefaultManager.Instance.DefaultScienceStatus : obj;
+        }
+
+        public bool GetBoolLogicBySourceId(int id)
+        {
+            switch (id)
+            {
+                case 1:
+                    return false;
+                    break;
+                case 2:
+                    return true;
+                    break;
+                default:
+                    return false;
+                    break;
+            }
+        }
+
+
+        public void AddIacmacToPerson(Person obj, Iacmac iacmac)
+        {
+            iacmac.PersonId = obj.Id;
+            obj.Iacmac = iacmac;
+            Save();
+        }
+
+        public Person GetPersonBySourceId(int id)
+        {
+            var obj = underlyingContext.Persons.FirstOrDefault(o => o.SourceId == id);
+            return obj;
+        }
+
+        public Conference GetConferenceBySourceId(int id)
+        {
+            var obj = underlyingContext.Conferences.FirstOrDefault(o => o.SourceId == id);
+            return obj;
+        }
+
+        public PersonConference GetPersonConferenceBySourceID(int p)
+        {
+            var obj = underlyingContext.PersonConferences.FirstOrDefault(o => o.SourceId == p);
+            return obj;
+        }
+
+        public Rank GetRankBySourceId(int p)
+        {
+            var obj = underlyingContext.Ranks.FirstOrDefault(o => o.SourceId == p);
+            return obj;
+        }
+
+        public Company GetCompanyBySourceId(int p)
+        {
+            var obj = underlyingContext.Companies.FirstOrDefault(o => o.SourceId == p);
+            return obj;
+        }
+
+        public void AddPersonConferenceDetail(PersonConferences_Detail obj)
+        {
+            var personConference =
+                underlyingContext.PersonConferences.FirstOrDefault(o => o.PersonConferenceId == obj.PersonConferenceId);
+            personConference.PersonConferences_Detail = obj;
+            Save();
+        }
+
+        public void AddPersonConferenceMoney(PersonConferences_Payment obj)
+        {
+            var personConference =
+                underlyingContext.PersonConferences.FirstOrDefault(o => o.PersonConferenceId == obj.PersonConferenceId);
+            personConference.PersonConferences_Payment = obj;
+            Save();
+        }
+
+        public PaymentType GetPaymentTypeBySourceId(int p)
+        {
+            var obj = underlyingContext.PaymentTypes.FirstOrDefault(o => o.SourceId == p);
+            return obj;
+        }
+
+        public OrderStatus GetOrderStatusBySourceId(int p)
+        {
+            var obj = underlyingContext.OrderStatuses.FirstOrDefault(o => o.SourceId == p);
+            return obj;
+        }
+
+        public AbstractStatus GetAbstractStatusBySourceId(int p)
+        {
+            var obj = underlyingContext.AbstractStatuses.FirstOrDefault(o => o.SourceId == p);
+            return obj;
+        }
+
+
+
+        public Abstract GetAbstractBySourceId(int p)
+        {
+            var obj = underlyingContext.Abstracts.FirstOrDefault((o => o.SourceId == p));
+            return obj;
+
+        }
+
+        public User GetUserBySourceId(int p)
+        {
+            var obj = underlyingContext.Users.FirstOrDefault(o => o.SourceId == p);
+            return obj;
+        }
+
+        public ContactType GetContactTypeBySourceId(int p)
+        {
+            var obj = underlyingContext.ContactTypes.FirstOrDefault(o => o.SourceId == p);
+            return obj;
+        }
     }
 }

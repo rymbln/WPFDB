@@ -53,7 +53,7 @@ namespace WPFDB.View
             }
             else
             {
-                MessageBox.Show("Import Finished");
+                MessageBox.Show("Import Finished - " + e.Result);
             }
         }
 
@@ -65,6 +65,91 @@ namespace WPFDB.View
         private void cmdCancel_Click(object sender, RoutedEventArgs e)
         {
             backgroundWorker.CancelAsync();
+        }
+
+        private void btnImportPersons_Click(object sender, RoutedEventArgs e)
+        {
+            var res = ImportManager.Instance.ImportPersons();
+            MessageBox.Show(res + " persons imported ");
+        }
+
+        private void btnImportKnowalls_Click(object sender, RoutedEventArgs e)
+        {
+            int res;
+
+            res = ImportManager.Instance.ImportContactTypes();
+            MessageBox.Show(res + " ContactTypes");
+
+            res = ImportManager.Instance.ImportSpecialities();
+            MessageBox.Show(res + "Specialities");
+            res = ImportManager.Instance.ImportRanks();
+            MessageBox.Show(res + "Ranks");
+
+
+            res = ImportManager.Instance.ImportOrderStatuses();
+            MessageBox.Show(res + " OrderStatuses");
+            res = ImportManager.Instance.ImportPaymentTypes();
+            MessageBox.Show(res + " PaymentTypes");
+
+            res = ImportManager.Instance.ImportConferenceTypes();
+            MessageBox.Show(res + " ConferenceTypes");
+
+            res = ImportManager.Instance.ImportCompanies();
+            MessageBox.Show(res + " Companies");
+
+            res = ImportManager.Instance.ImportAbstractStatuses();
+            MessageBox.Show(res + " AbstractStatuses");
+
+            res = ImportManager.Instance.ImportUsers();
+            MessageBox.Show(res + " Users");
+        }
+
+        private void btnIMportPersonConferences_Click(object sender, RoutedEventArgs e)
+        {
+            var res = ImportManager.Instance.ImportPersonConferences();
+            MessageBox.Show(res + " PersonConference");
+        }
+
+        private void btnImportPersonConferenceDetail_Click(object sender, RoutedEventArgs e)
+        {
+            var res = ImportManager.Instance.ImportPersonConferenceDetail();
+            MessageBox.Show(res + " PersonConferenceDetail");
+        }
+
+        private void btnImportPErsonConferenceMoney_Click(object sender, RoutedEventArgs e)
+        {
+            var res = ImportManager.Instance.ImportPersonConferenceMoney();
+            MessageBox.Show(res + " PersonConferenceMoney");
+        }
+
+        private void btnImportAbstract_Click(object sender, RoutedEventArgs e)
+        {
+            var res = ImportManager.Instance.ImportAbstracts();
+            MessageBox.Show(res + " Abstracts");
+        }
+
+        private void btnImportAbstractWorks_Click(object sender, RoutedEventArgs e)
+        {
+            var res = ImportManager.Instance.ImportAbstractsWorks();
+            MessageBox.Show(res + " Abstract Works");
+        }
+
+        private void btnImportAddresses_Click(object sender, RoutedEventArgs e)
+        {
+            var res = ImportManager.Instance.ImportAdresses();
+            MessageBox.Show(res + " Addresses");
+        }
+
+        private void btnImportEmails_Click(object sender, RoutedEventArgs e)
+        {
+            var res = ImportManager.Instance.ImportEmails();
+            MessageBox.Show(res + " Emails");
+        }
+
+        private void btnImportPhones_Click(object sender, RoutedEventArgs e)
+        {
+            var res = ImportManager.Instance.ImportPhones();
+            MessageBox.Show(res + " Phones");
         }
     }
 }

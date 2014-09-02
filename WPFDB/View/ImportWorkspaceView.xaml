@@ -6,11 +6,20 @@
              xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=System"
 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-
+>
     <Grid>
         <StackPanel>
             <Button Content="Import"  Click="Button_Click"/>
+            <Button Content="Import KNowalls"  Name="btnImportKnowalls" Click="btnImportKnowalls_Click"/>
+            <Button Content="Import Persons" Name="btnImportPersons" Click="btnImportPersons_Click" />
+            <Button Content="Import PersonConferences" Name="btnIMportPersonConferences" Click="btnIMportPersonConferences_Click" />
+            <Button Content="Import PersonConferenceDetail" Name="btnImportPersonConferenceDetail" Click="btnImportPersonConferenceDetail_Click"/>
+            <Button Content="Import PersonConferenceMoney" x:Name="btnImportPErsonConferenceMoney" Click="btnImportPErsonConferenceMoney_Click"/>
+            <Button Content="Import Abstract" Name="btnImportAbstract" Click="btnImportAbstract_Click"/>
+            <Button Content="Import Abstract Works" Name="btnImportAbstractWorks" Click="btnImportAbstractWorks_Click"/>
+            <Button Content="IMport Phones" Name="btnImportPhones" Click="btnImportPhones_Click" />
+            <Button Content="IMport Adresses" Name="btnImportAddresses" Click="btnImportAddresses_Click"/>
+            <Button Content="IMport Emails" Name="btnImportEmails" Click="btnImportEmails_Click"/>
             <Button Name="cmdCancel" Margin="5" Padding="3" IsEnabled="False" Click="cmdCancel_Click">Остановить</Button>
             <ProgressBar Name="progressBar" Margin="5" VerticalAlignment="Bottom" 
                      MinHeight="20" Minimum="0" Maximum="100" Height="20"/>

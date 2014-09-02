@@ -14,10 +14,10 @@
         <AssociationConnector Association="ConferenceModel.FK_ScienceStatusPerson" ManuallyRouted="false" />
         <AssociationConnector Association="ConferenceModel.FK_SexPerson" ManuallyRouted="false" />
         <AssociationConnector Association="ConferenceModel.FK_SpecialityPerson" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ConferenceModel.Conference" Width="1.75" PointX="8.25" PointY="15.375" />
+        <EntityTypeShape EntityType="ConferenceModel.Conference" Width="1.75" PointX="8.25" PointY="16" />
         <EntityTypeShape EntityType="ConferenceModel.User" Width="2.75" PointX="19.125" PointY="18" />
         <EntityTypeShape EntityType="ConferenceModel.Propertie" Width="2.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ConferenceModel.PersonConference" Width="2.375" PointX="8.125" PointY="12.375" />
+        <EntityTypeShape EntityType="ConferenceModel.PersonConference" Width="2.375" PointX="8.25" PointY="11.75" />
         <EntityTypeShape EntityType="ConferenceModel.Rank" Width="1.5" PointX="14.625" PointY="15.5" />
         <EntityTypeShape EntityType="ConferenceModel.Company" Width="2.5" PointX="15" PointY="10.5" />
         <EntityTypeShape EntityType="ConferenceModel.PaymentType" Width="2.25" PointX="14.625" PointY="4.625" />

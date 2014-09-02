@@ -199,11 +199,15 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Role" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
     <Property Name="SourceId" Type="int" Nullable="true" />
+    <Property Name="DateAdd" Type="datetime" Nullable="true" />
+    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
+    <Property Name="User1" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Properties">
     <Key>
@@ -240,6 +244,7 @@
     <Property Name="DateAdd" Type="datetime" Nullable="true" />
     <Property Name="DateUpdate" Type="datetime" Nullable="true" />
     <Property Name="User" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="SourceId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Ranks">
     <Key>
@@ -1005,12 +1010,16 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Guid" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Type="String" Name="FullName" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="String" Name="Password" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Type="String" Name="Role" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="AbstractWorks" Relationship="ConferenceModel.UserAbstractWork" FromRole="User" ToRole="AbstractWork" />
           <Property Type="String" Name="Email" Nullable="false" />
           <Property Type="Int32" Name="SourceId" Nullable="true" />
+          <Property Type="DateTime" Name="DateAdd" Nullable="true" />
+          <Property Type="DateTime" Name="DateUpdate" Nullable="true" />
+          <Property Type="String" Name="User1" Nullable="true" />
         </EntityType>
         <EntityType Name="Propertie">
           <Key>
@@ -1040,6 +1049,7 @@
           <NavigationProperty Name="PersonConferences_Detail" Relationship="ConferenceModel.FK_Detail_inherits_PersonConference" FromRole="PersonConference" ToRole="PersonConferences_Detail" />
           <NavigationProperty Name="PersonConferences_Payment" Relationship="ConferenceModel.FK_Payment_inherits_PersonConference" FromRole="PersonConference" ToRole="PersonConferences_Payment" />
           <NavigationProperty Name="Abstracts" Relationship="ConferenceModel.PersonConferenceAbstract" FromRole="PersonConference" ToRole="Abstract" />
+          <Property Type="Int32" Name="SourceId" Nullable="true" />
         </EntityType>
         <EntityType Name="Rank">
           <Key>
@@ -1596,11 +1606,15 @@
       <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.User)">
         <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Role" ColumnName="Role" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+          <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
+          <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
+          <ScalarProperty Name="User1" ColumnName="User1" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1640,6 +1654,7 @@
           <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
           <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
           <ScalarProperty Name="User" ColumnName="User" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

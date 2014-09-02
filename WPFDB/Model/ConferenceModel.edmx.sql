@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 08/18/2014 16:46:04
+-- Date Created: 09/01/2014 17:12:20
 -- Generated from EDMX file: C:\Users\Rymbln\Documents\GitHub\WPFDB\WPFDB\Model\ConferenceModel.edmx
 -- --------------------------------------------------
 
@@ -239,11 +239,15 @@ GO
 -- Creating table 'Users'
 CREATE TABLE [dbo].[Users] (
     [Id] uniqueidentifier  NOT NULL,
+    [FullName] nvarchar(max)  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Password] nvarchar(max)  NOT NULL,
     [Role] nvarchar(max)  NOT NULL,
     [Email] nvarchar(max)  NOT NULL,
-    [SourceId] int  NULL
+    [SourceId] int  NULL,
+    [DateAdd] datetime  NULL,
+    [DateUpdate] datetime  NULL,
+    [User1] nvarchar(max)  NULL
 );
 GO
 
@@ -279,7 +283,8 @@ CREATE TABLE [dbo].[PersonConferences] (
     [ConferenceId] uniqueidentifier  NOT NULL,
     [DateAdd] datetime  NULL,
     [DateUpdate] datetime  NULL,
-    [User] nvarchar(max)  NULL
+    [User] nvarchar(max)  NULL,
+    [SourceId] int  NULL
 );
 GO
 

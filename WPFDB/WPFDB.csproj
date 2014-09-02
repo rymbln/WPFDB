@@ -71,6 +71,7 @@
     <Compile Include="Common\GuidComb.cs" />
     <Compile Include="Common\DataManager.cs" />
     <Compile Include="Common\ImportManager.cs" />
+    <Compile Include="Common\LogManager.cs" />
     <Compile Include="Model\IConferenceContext.cs" />
     <Compile Include="Model\ConferenceEntities.cs" />
     <Compile Include="Model\ConferenceModel.Designer.cs">

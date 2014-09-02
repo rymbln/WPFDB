@@ -4833,6 +4833,30 @@ namespace WPFDB.Model
         private global::System.String _User;
         partial void OnUserChanging(global::System.String value);
         partial void OnUserChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> SourceId
+        {
+            get
+            {
+                return _SourceId;
+            }
+            set
+            {
+                OnSourceIdChanging(value);
+                ReportPropertyChanging("SourceId");
+                _SourceId = StructuralObject.SetValidValue(value, "SourceId");
+                ReportPropertyChanged("SourceId");
+                OnSourceIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _SourceId;
+        partial void OnSourceIdChanging(Nullable<global::System.Int32> value);
+        partial void OnSourceIdChanged();
 
         #endregion
 
@@ -7732,14 +7756,16 @@ namespace WPFDB.Model
         /// Create a new User object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="fullName">Initial value of the FullName property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="password">Initial value of the Password property.</param>
         /// <param name="role">Initial value of the Role property.</param>
         /// <param name="email">Initial value of the Email property.</param>
-        public static User CreateUser(global::System.Guid id, global::System.String name, global::System.String password, global::System.String role, global::System.String email)
+        public static User CreateUser(global::System.Guid id, global::System.String fullName, global::System.String name, global::System.String password, global::System.String role, global::System.String email)
         {
             User user = new User();
             user.Id = id;
+            user.FullName = fullName;
             user.Name = name;
             user.Password = password;
             user.Role = role;
@@ -7777,6 +7803,30 @@ namespace WPFDB.Model
         private global::System.Guid _Id;
         partial void OnIdChanging(global::System.Guid value);
         partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String FullName
+        {
+            get
+            {
+                return _FullName;
+            }
+            set
+            {
+                OnFullNameChanging(value);
+                ReportPropertyChanging("FullName");
+                _FullName = StructuralObject.SetValidValue(value, false, "FullName");
+                ReportPropertyChanged("FullName");
+                OnFullNameChanged();
+            }
+        }
+        private global::System.String _FullName;
+        partial void OnFullNameChanging(global::System.String value);
+        partial void OnFullNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -7897,6 +7947,78 @@ namespace WPFDB.Model
         private Nullable<global::System.Int32> _SourceId;
         partial void OnSourceIdChanging(Nullable<global::System.Int32> value);
         partial void OnSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateAdd
+        {
+            get
+            {
+                return _DateAdd;
+            }
+            set
+            {
+                OnDateAddChanging(value);
+                ReportPropertyChanging("DateAdd");
+                _DateAdd = StructuralObject.SetValidValue(value, "DateAdd");
+                ReportPropertyChanged("DateAdd");
+                OnDateAddChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateAdd;
+        partial void OnDateAddChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateAddChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateUpdate
+        {
+            get
+            {
+                return _DateUpdate;
+            }
+            set
+            {
+                OnDateUpdateChanging(value);
+                ReportPropertyChanging("DateUpdate");
+                _DateUpdate = StructuralObject.SetValidValue(value, "DateUpdate");
+                ReportPropertyChanged("DateUpdate");
+                OnDateUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateUpdate;
+        partial void OnDateUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String User1
+        {
+            get
+            {
+                return _User1;
+            }
+            set
+            {
+                OnUser1Changing(value);
+                ReportPropertyChanging("User1");
+                _User1 = StructuralObject.SetValidValue(value, true, "User1");
+                ReportPropertyChanged("User1");
+                OnUser1Changed();
+            }
+        }
+        private global::System.String _User1;
+        partial void OnUser1Changing(global::System.String value);
+        partial void OnUser1Changed();
 
         #endregion
 
