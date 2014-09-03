@@ -10,6 +10,19 @@ namespace WPFDB.Model
 {
     public partial class Abstract : EntityObject
     {
+     
+
+        public string ToFilterString
+        {
+            get
+            {
+                var str = new StringBuilder();
+                str.Append(this.Name);
+                str.Append(this.PersonConference.Person.FullNameInitials);
+                
+                return str.ToString();
+            }
+        }
         public string OtherAuthorsShort
         {
             get
@@ -42,22 +55,17 @@ namespace WPFDB.Model
             set { }
         }
 
-        public string AuthorNameShort
+        public string AuthorName
         {
-            get
-            {
-                var person = DataManager.Instance.GetPersonByPersonConferenceId(this.PersonConferenceId);
-                return person.FirstName + " " + person.SecondName.Substring(0, 1) + "." + person.ThirdName.Substring(0, 1) + ".";
-            }
-            set { }
+            get { return this.PersonConference.Person.FullNameInitials; }
+          
         }
 
         public string AuthorEmail
         {
             get
             {
-                var person = DataManager.Instance.GetPersonByPersonConferenceId(this.PersonConferenceId);
-                var emails = DataManager.Instance.GetEmailsByPersonId(person.Id);
+                var emails = this.PersonConference.Person.Emails.ToList();
                 string email_string = "";
                 if (emails.Count() > 0)
                 {
@@ -81,23 +89,28 @@ namespace WPFDB.Model
 
         public string ReviewerName
         {
-            //todo Добавить отображение рецензента
-            get { return ""; }
-            set { }
+
+            get
+            {
+                return this.AbstractWorks.OrderByDescending(o => o.DateWork).FirstOrDefault().User;
+            }
+         
         }
 
         public string LastState
         {
-            // todo Добавить отображение последнего состояния
-            get { return ""; }
-            set { }
+            get
+            {
+                return this.AbstractWorks.OrderByDescending(o => o.DateWork).FirstOrDefault().AbstractStatus.Name;
+            }
         }
 
         public DateTime? LastStateDate
         {
-            //todo Добавить отображение даты последнего состояния
-            get { return null; }
-            set { }
+            get
+            {
+                return this.AbstractWorks.OrderByDescending(o => o.DateWork).FirstOrDefault().DateWork;
+            }
         }
     }
 }

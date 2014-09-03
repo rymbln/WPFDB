@@ -84,6 +84,7 @@
     <Compile Include="Validation\Helpers\ExcludeChar.cs" />
     <Compile Include="Validation\Helpers\Unique.cs" />
     <Compile Include="ViewModel\AbstractDetailsViewModel.cs" />
+    <Compile Include="ViewModel\AbstractFormViewModel.cs" />
     <Compile Include="ViewModel\AbstractViewModel.cs" />
     <Compile Include="ViewModel\AbstractWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\AbstractWorkViewModel.cs" />
@@ -132,6 +133,9 @@
     <Compile Include="ViewModel\PhoneViewModel.cs" />
     <Compile Include="View\AbstractDetailView.xaml.cs">
       <DependentUpon>AbstractDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AbstractFormView.xaml.cs">
+      <DependentUpon>AbstractFormView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AbstractItemView.xaml.cs">
       <DependentUpon>AbstractItemView.xaml</DependentUpon>
@@ -274,6 +278,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AbstractDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AbstractFormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

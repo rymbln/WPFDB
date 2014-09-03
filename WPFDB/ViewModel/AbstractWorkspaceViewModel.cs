@@ -7,104 +7,146 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WPFDB.Common;
 using WPFDB.Model;
+using WPFDB.View;
 using WPFDB.ViewModel.Helpers;
 
 namespace WPFDB.ViewModel
 {
     public class AbstractWorkspaceViewModel : ViewModelBase
     {
-        private AbstractViewModel currentAbstract;
-        private AbstractWorkViewModel currentAbstractWork;
-        private string filterMainAuthor;
-        private string filterOtherAuthors;
-        private string filterName;
+        private Abstract currentAbstract { get; set; }
+        private AbstractViewModel currentAbstractVM { get; set; }
+
+        private string filterText = "";
 
         public AbstractWorkspaceViewModel()
         {
 
-            AbstractWorks = new ObservableCollection<AbstractWorkViewModel>();
-            AllAbstracts = new ObservableCollection<Abstract>(DataManager.Instance.GetAllAbstracts());
-            
-            this.CurrentAbstract = new AbstractViewModel(AllAbstracts.Count > 0 ? AllAbstracts[0] : null);
-            this.AllAbstracts.CollectionChanged += (sender, e) =>
-            {
-                if (e.OldItems != null && e.OldItems.Contains(this.CurrentAbstract))
-                {
-                    this.CurrentAbstract = new AbstractViewModel(AllAbstracts.FirstOrDefault());
-                }
-            };
+            AllAbstracts = new ObservableCollection<Abstract>();
+            AllAbstractsDB = new ObservableCollection<Abstract>();
 
-            this.AbstractWorks.CollectionChanged += (sender, e) =>
-            {
-                    this.CurrentAbstractWork = AbstractWorks.FirstOrDefault();
-            };
+            RefreshAbstracts();
 
-            //    this.ApplyFiltersCommand = new DelegateCommand((o) => this.ApplyFilters());
-            this.AddAbstractWorkCommand = new DelegateCommand((o) => this.AddAbstractWork());
-            this.DeleteAbstractWorkCommand = new DelegateCommand((o) => this.DeleteAbstractWork(), (o) => this.CurrentAbstractWork != null);
+            this.OpenAbstractCommand = new DelegateCommand((o) => this.OpenAbstract());
+            this.DeleteAbstractCommand = new DelegateCommand((o) => this.DeleteAbstract());
+            this.RefreshCommand = new DelegateCommand((o) => this.RefreshAbstracts());
+
 
         }
         public ObservableCollection<Abstract> AllAbstracts { get; private set; }
-        public ObservableCollection<AbstractWorkViewModel> AbstractWorks { get; private set; }
-
+        public ObservableCollection<Abstract> AllAbstractsDB { get; private set; }
+        public ICommand RefreshCommand { get; private set; }
         public ICommand ApplyFiltersCommand { get; private set; }
 
 
-        public ICommand AddAbstractWorkCommand { get; private set; }
-        public ICommand DeleteAbstractWorkCommand { get; private set; }
-        public AbstractViewModel CurrentAbstract
+        public ICommand OpenAbstractCommand{ get; private set; }
+        public ICommand DeleteAbstractCommand { get; private set; }
+
+        public Abstract CurrentAbstract
         {
             get { return this.currentAbstract; }
             set
             {
                 this.currentAbstract = value;
-                this.OnPropertyChanged("CurrentAbstract");
-
-                if (currentAbstract != null && currentAbstract.Model.AbstractWorks != null)
+                if (CurrentAbstract != null)
                 {
-                    if (this.currentAbstract.Model.AbstractWorks.Count > 0)
-                    {
-                        AbstractWorks = new ObservableCollection<AbstractWorkViewModel>();
-                        foreach (var abstractWork in this.currentAbstract.Model.AbstractWorks)
-                        {
-                            AbstractWorks.Add(new AbstractWorkViewModel(abstractWork));
-                        }
-                    }
+                    this.currentAbstractVM = new AbstractViewModel(currentAbstract);
                 }
-                this.OnPropertyChanged("AbstractWorks");
+                this.OnPropertyChanged("CurrentAbstract");
             }
         }
-        public AbstractWorkViewModel CurrentAbstractWork
+
+        public AbstractViewModel CurrentAbstractVM
         {
-            get
-            {
-            //    this.currentAbstractWork = this.AbstractWorks.FirstOrDefault();
-                return this.currentAbstractWork;
-            }
+            get { return this.currentAbstractVM; }
             set
             {
-                this.currentAbstractWork = value;
-                OnPropertyChanged("CurrentAbstractWork");
+                currentAbstractVM = value;
+                OnPropertyChanged("CurrentAbstractVM");
             }
         }
 
-
-        private void AddAbstractWork()
+        private void DeleteAbstract()
         {
-            var abstractWork = DefaultManager.Instance.DefaultAbstractWork;
-            DataManager.Instance.AddAbstractWorkToAbstract(currentAbstract, abstractWork);
-
-            var vm = new AbstractWorkViewModel(abstractWork);
-            this.AbstractWorks.Add(vm);
-            this.CurrentAbstractWork = vm;
+            DataManager.Instance.RemoveAbstract(CurrentAbstract);
+            AllAbstracts.Remove(CurrentAbstract);
+            OnPropertyChanged("AllAbstracts");
         }
 
-        private void DeleteAbstractWork()
+        private void RefreshAbstracts()
         {
-            DataManager.Instance.RemoveAbstractWork(CurrentAbstractWork.Model);
-            AbstractWorks.Remove(CurrentAbstractWork);
-            CurrentAbstractWork = null;
+            filterText = "";
+            this.OnPropertyChanged("FilterText");
+            AllAbstractsDB = new ObservableCollection<Abstract>(DataManager.Instance.GetAllAbstracts());
+            AllAbstracts = AllAbstractsDB;
+            this.OnPropertyChanged("AllAbstracts");
+            this.CurrentAbstract = AllAbstracts.Count > 0 ? AllAbstracts[0] : null;
         }
+
+        private void FilterAbstracts()
+        {
+            AllAbstracts = new ObservableCollection<Abstract>(AllAbstractsDB.Where(o => o.ToFilterString.ToUpper().Contains(filterText.ToUpper())));
+            this.OnPropertyChanged("AllAbstracts");
+            this.CurrentAbstract = AllAbstracts.Count > 0 ? AllAbstracts[0] : null;
+        }
+
+        private void OpenAbstract()
+        {
+            AbstractFormViewModel vm = new AbstractFormViewModel(new AbstractViewModel(currentAbstract));
+            AbstractFormView v = new AbstractFormView{DataContext = vm};
+            v.Show();
+        }
+
+        public string FilterText
+        {
+            get { return this.filterText; }
+            set
+            {
+                this.filterText = value.Trim();
+                this.OnPropertyChanged("FilterText");
+                if (filterText.Equals(""))
+                {
+                    RefreshAbstracts();
+                }
+                else
+                {
+
+                    FilterAbstracts();
+                }
+            }
+        }
+
+        //public AbstractWorkViewModel CurrentAbstractWork
+        //{
+        //    get
+        //    {
+        //    //    this.currentAbstractWork = this.AbstractWorks.FirstOrDefault();
+        //        return this.currentAbstractWork;
+        //    }
+        //    set
+        //    {
+        //        this.currentAbstractWork = value;
+        //        OnPropertyChanged("CurrentAbstractWork");
+        //    }
+        //}
+
+
+        //private void AddAbstractWork()
+        //{
+        //    var abstractWork = DefaultManager.Instance.DefaultAbstractWork;
+        //    DataManager.Instance.AddAbstractWorkToAbstract(currentAbstract, abstractWork);
+
+        //    var vm = new AbstractWorkViewModel(abstractWork);
+        //    this.AbstractWorks.Add(vm);
+        //    this.CurrentAbstractWork = vm;
+        //}
+
+        //private void DeleteAbstractWork()
+        //{
+        //    DataManager.Instance.RemoveAbstractWork(CurrentAbstractWork.Model);
+        //    AbstractWorks.Remove(CurrentAbstractWork);
+        //    CurrentAbstractWork = null;
+        //}
     }
 }
 

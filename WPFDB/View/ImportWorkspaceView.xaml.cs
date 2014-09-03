@@ -40,9 +40,62 @@ namespace WPFDB.View
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            var res = ImportManager.Instance.ImportAll(backgroundWorker);
+          //  var res = ImportManager.Instance.ImportAll(backgroundWorker);
+            int res;
+ //res = ImportManager.Instance.ImportContactTypes();
+            //MessageBox.Show(res + " ContactTypes");
 
-            e.Result = res;
+            res = ImportManager.Instance.ImportSpecialities();
+            MessageBox.Show(res + "Specialities");
+            res = ImportManager.Instance.ImportRanks();
+            MessageBox.Show(res + "Ranks");
+            res = ImportManager.Instance.ImportScienceDegrees();
+            MessageBox.Show(res + " ScienceDegree");
+            res = ImportManager.Instance.ImportScienceStatuses();
+            MessageBox.Show(res + "ScienceStatuses");
+
+
+            res = ImportManager.Instance.ImportPaymentTypes();
+            MessageBox.Show(res + " PaymentTypes");
+
+            res = ImportManager.Instance.ImportConferenceTypes();
+            MessageBox.Show(res + " ConferenceTypes");
+
+            res = ImportManager.Instance.ImportCompanies();
+            MessageBox.Show(res + " Companies");
+
+            res = ImportManager.Instance.ImportAbstractStatuses();
+            MessageBox.Show(res + " AbstractStatuses");
+
+            res = ImportManager.Instance.ImportUsers();
+            MessageBox.Show(res + " Users");
+
+             res = ImportManager.Instance.ImportPersons();
+            MessageBox.Show(res + " persons imported ");
+
+             res = ImportManager.Instance.ImportPersonConferences();
+            MessageBox.Show(res + " PersonConference");
+
+             res = ImportManager.Instance.ImportPersonConferenceDetail();
+            MessageBox.Show(res + " PersonConferenceDetail");
+
+             res = ImportManager.Instance.ImportPersonConferenceMoney();
+            MessageBox.Show(res + " PersonConferenceMoney");
+
+             res = ImportManager.Instance.ImportAbstracts();
+            MessageBox.Show(res + " Abstracts");
+
+             res = ImportManager.Instance.ImportAbstractsWorks();
+            MessageBox.Show(res + " Abstract Works");
+             res = ImportManager.Instance.ImportAdresses();
+            MessageBox.Show(res + " Addresses");
+            res = ImportManager.Instance.ImportEmails();
+            MessageBox.Show(res + " Emails");
+         res = ImportManager.Instance.ImportPhones();
+            MessageBox.Show(res + " Phones");
+
+            string result = "Finish";
+            e.Result = result;
         }
 
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

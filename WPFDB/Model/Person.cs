@@ -9,6 +9,14 @@ namespace WPFDB.Model
 {
     public partial class Person: EntityObject
     {
+        public string FullName
+        {
+            get { return this.FirstName + " " + SecondName + " " + ThirdName; }
+        }
+        public string FullNameInitials
+        {
+            get { return this.FirstName + " " + SecondName.Substring(0, 1) + "." + ThirdName.Substring(0, 1) + "."; }
+        }
         public string ToString
         {
             get

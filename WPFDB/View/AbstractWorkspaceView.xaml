@@ -12,59 +12,61 @@
         <DataTemplate DataType="{x:Type vm:AbstractViewModel}">
             <view:AbstractView />
         </DataTemplate>
-    
-        <DataTemplate DataType="{x:Type vm:AbstractWorkViewModel}">
-            <view:AbstractWorkItemView/>
-        </DataTemplate>
-
     </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="50*"/>
-        </Grid.RowDefinitions>
-        <HeaderedContentControl Style="{StaticResource SubDisplayArea}"
-                                Grid.Column="0" Grid.Row="0">
-            <HeaderedContentControl.Header>
-                Abstracts
-            </HeaderedContentControl.Header>
-            <ScrollViewer>
-                <HeaderedContentControl>
-                    <HeaderedContentControl.Header>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                            <ToolBar>
-                                <Button Command="{Binding ApplyFilterCommand}">
-                                    <AccessText Text="Apply"/>
-                                </Button>
-                            </ToolBar>
-                        </StackPanel>
-                    </HeaderedContentControl.Header>
-                    <DataGrid SelectedItem="{Binding Path=CurrentAbstract, Mode=TwoWay}"
-                              ItemsSource="{Binding Path=AllAbstracts}"
-                              IsReadOnly="True"
-                              AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Main Author" Binding="{Binding Path=AuthorNameShort}"  />
-                            <DataGridTextColumn Header="Other Authors" Binding="{Binding Path=OtherAuthorsShort}" />
-                            <DataGridTextColumn Header="Name" Binding="{Binding Path=NameShort}" />
-                            <DataGridTextColumn Header="Email" Binding="{Binding Path=AuthorEmail}" />
-                            <DataGridTextColumn Header="Reviewer Name" Binding="{Binding Path=ReviewerName}" />
-                            <DataGridTextColumn Header="Last State" Binding="{Binding Path=LastState}" />
-                            <DataGridTextColumn Header="Last State Date" Binding="{Binding Path=LastStateDate}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </HeaderedContentControl>
-            </ScrollViewer>
-        </HeaderedContentControl>
-        <ContentControl 
-            Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"  HorizontalAlignment="Right" 
-            Content="{Binding Path=CurrentAbstract, Mode=TwoWay}" />
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
+            <Button Command="{Binding OpenAbstractCommand}">
+                <AccessText Text="Open"/>
+            </Button>
+            <Separator/>
+            <Button Command="{Binding DeleteAbstractCommand}">
+                <AccessText Text="{x:Static p:Resources.RemoveMenu}"/>
+            </Button>
+            <Separator/>
+            <Button Command="{Binding RefreshCommand}">
+                <AccessText Text="{x:Static p:Resources.RefreshMenu}"/>
+            </Button>
+            <Separator/>
+            <Button Command="{Binding ApplyFilterCommand}">
+                <AccessText Text="Filter"/>
+            </Button>
+            <TextBox x:Name="searchBox" Width="150" BorderBrush="LightGray" BorderThickness="1" 
+                         Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" />
+        </ToolBar>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid Grid.Column="0"
+                 SelectedItem="{Binding Path=CurrentAbstract, Mode=TwoWay}" 
+                              ItemsSource="{Binding Path=AllAbstracts}" 
+                              AutoGenerateColumns="False" IsReadOnly="True"
+                             >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Автор" Width="*"  Binding="{Binding Path=AuthorName}" />
+                    <DataGridTextColumn Header="Другие авторы" Width="*" Binding="{Binding Path=OtherAuthorsShort}" />
+                    <DataGridTextColumn Header="Тема" Width="*" Binding="{Binding Path=NameShort}" />
+                    <DataGridTextColumn Header="Email Автора" Width="*" Binding="{Binding Path=AuthorEmail}" />
+                    <DataGridTextColumn Header="Рецензент" Width="*" Binding="{Binding Path=ReviewerName}" />
+                    <DataGridTextColumn Header="Последнее состояние" Width="*" Binding="{Binding Path=LastState}" />
+                    <DataGridTextColumn Header="Дата состояния" Width="*" Binding="{Binding Path=LastStateDate}" />
+                </DataGrid.Columns>
 
-        <HeaderedContentControl  Grid.Row="1" Grid.Column="0" Style="{StaticResource SubDisplayArea}" >
+            </DataGrid>
+            <!--<GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+            <ContentControl  Grid.Column="2" Content="{Binding Path=CurrentPersonVM}" HorizontalAlignment="Right" />-->
+
+        </Grid>
+    </DockPanel>
+     
+        <!--<ContentControl 
+            Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"  HorizontalAlignment="Right" 
+            Content="{Binding Path=CurrentAbstract, Mode=TwoWay}" />-->
+
+        <!--<HeaderedContentControl  Grid.Row="1" Grid.Column="0" Style="{StaticResource SubDisplayArea}" >
             <HeaderedContentControl.Header>
                 Abstract Works
             </HeaderedContentControl.Header>
@@ -86,7 +88,7 @@
                 
             </StackPanel>
             </ScrollViewer>
-        </HeaderedContentControl>
+        </HeaderedContentControl>-->
         <!--<ContentControl Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" 
                         Content="{Binding Path=CurrentAbstractWork}" >
             <ContentControl.Resources>
@@ -95,5 +97,5 @@
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>-->
-    </Grid>
+
 </UserControl>

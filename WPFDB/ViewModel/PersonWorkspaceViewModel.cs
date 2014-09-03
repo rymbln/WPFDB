@@ -108,7 +108,8 @@ namespace WPFDB.ViewModel
         {
             DataManager.Instance.RemovePerson(this.CurrentPerson);
             this.AllPersons.Remove(this.CurrentPerson);
-            this.CurrentPerson = null;
+            OnPropertyChanged("AllPersons");
+         //   this.CurrentPerson = null;
 
         }
 
