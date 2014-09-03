@@ -20,73 +20,72 @@ namespace WPFDB.ViewModel
         private DataManager dm = DataManager.Instance;
 
         public PersonViewModel(Person person)
-            
         {
-            if (person == null)
+            if (person != null)
             {
-                throw new ArgumentNullException("person");
-            }
-            if (person.Iacmac == null)
-            {
-                person.Iacmac = new Iacmac{PersonId = person.Id, IsMember = false};
-            }
-            this.Model = person;
-            ScienceDegreeLookup = new ObservableCollection<ScienceDegreeViewModel>();
-            ScienceStatusLookup = new ObservableCollection<ScienceStatusViewModel>();
-            SexLookup = new ObservableCollection<SexViewModel>();
-            SpecialityLookup = new ObservableCollection<SpecialityViewModel>();
+
+                //if (person.Iacmac == null)
+                //{
+                //    person.Iacmac = new Iacmac{PersonId = person.Id, IsMember = false};
+                //}
+                this.Model = person;
+                ScienceDegreeLookup = new ObservableCollection<ScienceDegreeViewModel>();
+                ScienceStatusLookup = new ObservableCollection<ScienceStatusViewModel>();
+                SexLookup = new ObservableCollection<SexViewModel>();
+                SpecialityLookup = new ObservableCollection<SpecialityViewModel>();
 
 
-            foreach (var item in dm.GetAllSpecialities())
-            {
-                SpecialityLookup.Add(new SpecialityViewModel(item));
-            }
-            foreach (var item in dm.GetAllSexes())
-            {
-                SexLookup.Add(new SexViewModel(item));
-            }
-            foreach (var item in dm.GetAllScienceStatuses())
-            {
-                ScienceStatusLookup.Add(new ScienceStatusViewModel(item));
-            }
-            foreach (var item in dm.GetAllScienceDegrees())
-            {
-                ScienceDegreeLookup.Add(new ScienceDegreeViewModel(item));
-            }
-            //this.ScienceDegreeLookup = ScienceDegreeLookup;
-            //this.ScienceStatusLookup = ScienceStatusLookup;
-            //this.SexLookup = SexLookup;
-            //this.SpecialityLookup = SpecialityLookup;
+                foreach (var item in dm.GetAllSpecialities())
+                {
+                    SpecialityLookup.Add(new SpecialityViewModel(item));
+                }
+                foreach (var item in dm.GetAllSexes())
+                {
+                    SexLookup.Add(new SexViewModel(item));
+                }
+                foreach (var item in dm.GetAllScienceStatuses())
+                {
+                    ScienceStatusLookup.Add(new ScienceStatusViewModel(item));
+                }
+                foreach (var item in dm.GetAllScienceDegrees())
+                {
+                    ScienceDegreeLookup.Add(new ScienceDegreeViewModel(item));
+                }
+                //this.ScienceDegreeLookup = ScienceDegreeLookup;
+                //this.ScienceStatusLookup = ScienceStatusLookup;
+                //this.SexLookup = SexLookup;
+                //this.SpecialityLookup = SpecialityLookup;
 
-            this.ScienceDegreeLookup.CollectionChanged += (sender, e) =>
-            {
-                if (e.OldItems != null && e.OldItems.Contains(this.ScienceDegree))
+                this.ScienceDegreeLookup.CollectionChanged += (sender, e) =>
                 {
-                    this.ScienceDegree = new ScienceDegreeViewModel(DefaultManager.Instance.DefaultScienceDegree);
-                }
-            };
+                    if (e.OldItems != null && e.OldItems.Contains(this.ScienceDegree))
+                    {
+                        this.ScienceDegree = new ScienceDegreeViewModel(DefaultManager.Instance.DefaultScienceDegree);
+                    }
+                };
 
-            this.ScienceStatusLookup.CollectionChanged += (sender, e) =>
-            {
-                if (e.OldItems != null && e.OldItems.Contains(this.ScienceStatus))
+                this.ScienceStatusLookup.CollectionChanged += (sender, e) =>
                 {
-                    this.ScienceStatus = new ScienceStatusViewModel(DefaultManager.Instance.DefaultScienceStatus);
-                }
-            };
-            this.SexLookup.CollectionChanged += (sender, e) =>
-            {
-                if (e.OldItems != null && e.OldItems.Contains(this.Sex))
+                    if (e.OldItems != null && e.OldItems.Contains(this.ScienceStatus))
+                    {
+                        this.ScienceStatus = new ScienceStatusViewModel(DefaultManager.Instance.DefaultScienceStatus);
+                    }
+                };
+                this.SexLookup.CollectionChanged += (sender, e) =>
                 {
-                    this.Sex = new SexViewModel(DefaultManager.Instance.DefaultSex);
-                }
-            };
-            this.SpecialityLookup.CollectionChanged += (sender, e) =>
-            {
-                if (e.OldItems != null && e.OldItems.Contains(this.Speciality))
+                    if (e.OldItems != null && e.OldItems.Contains(this.Sex))
+                    {
+                        this.Sex = new SexViewModel(DefaultManager.Instance.DefaultSex);
+                    }
+                };
+                this.SpecialityLookup.CollectionChanged += (sender, e) =>
                 {
-                    this.Speciality = new SpecialityViewModel(DefaultManager.Instance.DefaultSpeciality);
-                }
-            };
+                    if (e.OldItems != null && e.OldItems.Contains(this.Speciality))
+                    {
+                        this.Speciality = new SpecialityViewModel(DefaultManager.Instance.DefaultSpeciality);
+                    }
+                };
+            }
         }
 
         public ObservableCollection<ScienceDegreeViewModel> ScienceDegreeLookup { get; private set; }
@@ -101,11 +100,11 @@ namespace WPFDB.ViewModel
                 if (this.Model.ScienceDegree == null)
                 {
                     this.Model.ScienceDegree = DefaultManager.Instance.DefaultScienceDegree;
-     
+
                 }
-                    this.scienceDegree =
-                        this.ScienceDegreeLookup.SingleOrDefault(s => s.Model == this.Model.ScienceDegree);
-              
+                this.scienceDegree =
+                    this.ScienceDegreeLookup.SingleOrDefault(s => s.Model == this.Model.ScienceDegree);
+
                 return this.scienceDegree;
             }
 
@@ -291,6 +290,20 @@ namespace WPFDB.ViewModel
                 this.OnPropertyChanged("IsMember");
             }
         }
+        public string IsMemberName
+        {
+            get
+            {
+                if (this.Model.Iacmac.IsMember)
+                {
+                    return "Да";
+                }
+                else
+                {
+                    return "Нет";
+                };
+            }
+        }
         public bool IsCardCreate
         {
             get
@@ -304,17 +317,28 @@ namespace WPFDB.ViewModel
                 this.OnPropertyChanged("IsCardCreate");
             }
         }
-
+        public string IsCardCreateName
+        {
+            get
+            {
+                if (this.Model.Iacmac.IsCardCreate)
+                {
+                    return "Да";
+                }
+                else
+                {
+                    return "Нет";
+                };
+            }
+        }
         public string FullName
         {
             get { return this.Model.FirstName + " " + Model.SecondName + " " + Model.ThirdName; }
         }
-
         public string FullNameInitials
         {
-            get { return this.Model.FirstName + " " + Model.SecondName.Substring(0,1) + "." + Model.ThirdName.Substring(0,1) + "."; }
+            get { return this.Model.FirstName + " " + Model.SecondName.Substring(0, 1) + "." + Model.ThirdName.Substring(0, 1) + "."; }
         }
-
         public string Initials
         {
             get
@@ -322,6 +346,10 @@ namespace WPFDB.ViewModel
                 return this.Model.FirstName.Substring(1, 1) + "." + this.Model.SecondName.Substring(1, 1) + "." +
                        this.Model.ThirdName.Substring(1, 1) + ".";
             }
+        }
+        public string WorkplacePostName
+        {
+            get { return this.Model.WorkPlace + " (" + this.Model.Post + ")"; }
         }
         public bool IsCardSent
         {
@@ -336,6 +364,22 @@ namespace WPFDB.ViewModel
                 this.OnPropertyChanged("IsCardSent");
             }
         }
+        public string IsCardSentName
+        {
+            get
+            {
+                if (this.Model.Iacmac.IsCardSent)
+                {
+                    return "Да";
+                }
+                else
+                {
+                    return "Нет";
+                };
+            }
+
+
+        }
         public bool IsForm
         {
             get
@@ -347,6 +391,20 @@ namespace WPFDB.ViewModel
             {
                 this.Model.Iacmac.IsForm = value;
                 this.OnPropertyChanged("IsForm");
+            }
+        }
+        public string IsFormName
+        {
+            get
+            {
+                if (this.Model.Iacmac.IsForm)
+                {
+                    return "Да";
+                }
+                else
+                {
+                    return "Нет";
+                };
             }
         }
         public DateTime? DateRegistration
@@ -386,6 +444,75 @@ namespace WPFDB.ViewModel
             {
                 this.Model.Iacmac.Code = value;
                 this.OnPropertyChanged("Code");
+            }
+        }
+
+        public List<string> PhonesList
+        {
+            get
+            {
+                var lst = new List<string>();
+                foreach (var phone in Model.Phones)
+                {
+                    lst.Add(phone.ContactType.Name + ": " + phone.Number);
+                }
+                return lst;
+            }
+        }
+
+        public List<string> EmailsList
+        {
+            get
+            {
+                var lst = new List<string>();
+                foreach (var email in Model.Emails)
+                {
+                    lst.Add( email.Name);
+
+                }
+                return lst;
+            }
+        }
+
+        public List<string> AddressesList
+        {
+            get
+            {
+                var lst = new List<string>();
+                foreach (var address in Model.Addresses)
+                {
+                    lst.Add(address.ContactType.Name + ": " + address.CountryName + ", " + address.RegionName +
+                        "," + address.ZipCode + ", " + address.CityName + ", " + address.StreetHouseName);
+                }
+                return lst;
+            }
+        }
+
+        public List<string> ConferencesRegisteredList
+        {
+            get
+            {
+                var lst = new List<string>();
+                var conferences = DataManager.Instance.GetConferenceForPersonRegistered(Model.Id);
+                foreach (var conference in conferences)
+                {
+                    lst.Add(conference.Name);
+                }
+                return lst;
+            }
+        }
+
+        public List<string> ConferencesArrivedList
+        {
+            get
+            {
+                var lst = new List<string>();
+                var conferences = DataManager.Instance.GetConferenceForPersonArrived(Model.Id);
+                foreach (var conference in conferences)
+                {
+                    lst.Add(conference.Name);
+                }
+                return lst;
             }
         }
     }

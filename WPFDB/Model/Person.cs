@@ -37,5 +37,23 @@ namespace WPFDB.Model
                 return str.ToString();
             }
         }
+        public string ToFilterString
+        {
+            get
+            {
+                var str = new StringBuilder();
+                str.Append(this.FirstName);
+                str.Append(this.SecondName);
+                str.Append(this.ThirdName);
+                str.Append(this.Sex.Name);
+                str.Append(this.BirthDate);
+                str.Append(this.Post);
+                str.Append(this.WorkPlace);
+                str.Append(this.Speciality.Name);
+                str.Append(this.ScienceDegree.Name);
+                str.Append(this.ScienceStatus.Name);
+                return str.ToString();
+            }
+        }
     }
 }

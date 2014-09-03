@@ -1190,5 +1190,23 @@ namespace WPFDB.Common
             var obj = underlyingContext.ContactTypes.FirstOrDefault(o => o.SourceId == p);
             return obj;
         }
+
+        public List<Conference> GetConferenceForPersonRegistered(Guid guid)
+        {
+            return underlyingContext.PersonConferences
+                .Where(o => o.PersonId == guid)
+                .Select(o => o.Conference)
+                .OrderBy(o => o.SourceId)
+                .ToList();
+        }
+
+        public List<Conference> GetConferenceForPersonArrived(Guid guid)
+        {
+            return underlyingContext.PersonConferences
+                .Where(o => o.PersonId == guid && o.PersonConferences_Detail.IsArrive == true)
+                .Select(o => o.Conference)
+                .OrderBy(o=>o.SourceId)
+                .ToList();
+        }
     }
 }

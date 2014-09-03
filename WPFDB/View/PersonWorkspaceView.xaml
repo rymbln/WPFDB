@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                xmlns:v="clr-namespace:WPFDB.View"
+      xmlns:v="clr-namespace:WPFDB.View"
       xmlns:vm="clr-namespace:WPFDB.ViewModel"
       xmlns:p="clr-namespace:WPFDB.Properties"
       mc:Ignorable="d" 
@@ -11,7 +11,7 @@
 
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type vm:PersonViewModel}">
-            <v:PersonDetailView />
+            <v:CurrentPersonView />
         </DataTemplate>
     </UserControl.Resources>
     <DockPanel>
@@ -38,19 +38,31 @@
                                 <TextBox x:Name="searchBox" Width="150" BorderBrush="LightGray" BorderThickness="1" 
                          Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" />
                             </ToolBar>
-
-                    <DataGrid SelectedItem="{Binding Path=CurrentPerson, Mode=TwoWay}" 
+<Grid>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid Grid.Column="0"
+                 SelectedItem="{Binding Path=CurrentPerson, Mode=TwoWay}" 
                               ItemsSource="{Binding Path=AllPersons}" 
                               AutoGenerateColumns="False" IsReadOnly="True"
                              >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="First Name" Width="*"  Binding="{Binding Path=FirstName}" />
-                        <DataGridTextColumn Header="Second Name" Width="*" Binding="{Binding Path=SecondName}" />
-                        <DataGridTextColumn Header="Third Name" Width="*" Binding="{Binding Path=ThirdName}" />
-                <DataGridTextColumn Header="Third Name" Width="*" Binding="{Binding Path=ToString}" />
-            </DataGrid.Columns>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="First Name" Width="*"  Binding="{Binding Path=FirstName}" />
+                    <DataGridTextColumn Header="Second Name" Width="*" Binding="{Binding Path=SecondName}" />
+                    <DataGridTextColumn Header="Third Name" Width="*" Binding="{Binding Path=ThirdName}" />
+                    <DataGridTextColumn Header="Third Name" Width="*" Binding="{Binding Path=ToString}" />
+                </DataGrid.Columns>
 
-                    </DataGrid>
+            </DataGrid>
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+            <ContentControl  Grid.Column="2" Content="{Binding Path=CurrentPersonVM}" HorizontalAlignment="Right" />
+
+        </Grid>
+                   
     </DockPanel>
 
 </UserControl>

@@ -26,32 +26,6 @@
     </Style>
 
 
-    <!--Light pane with header, used to isolate sub sections of the interface-->
-    <Style x:Key="SubDisplayArea" TargetType="{x:Type HeaderedContentControl}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type HeaderedContentControl}">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Border Grid.Row="0" Background="LightGray" BorderBrush="LightGray"  Padding="8,2,8,6" CornerRadius="6,6,0,0" BorderThickness="2,2,2,0">
-                            <TextBlock Foreground="#FF282828" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                    <ContentPresenter ContentSource="Header"/>
-                            </TextBlock>
-                        </Border>
-                        <Border Grid.Row="1" Background="White" BorderBrush="LightGray" CornerRadius="0,0,6,6" BorderThickness="2,0,2,2">
-                            <ContentPresenter/>
-                            <Border.RenderTransform>
-                                <ScaleTransform x:Name="ContentScale" ScaleX="1" ScaleY="1" />
-                            </Border.RenderTransform>
-                        </Border>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 
 
     <!--Subtle border used to seperate areas of a pane-->
@@ -73,7 +47,10 @@
         <Setter Property="Margin" Value="10,0,10,0"/>
     </Style>
     <Style TargetType="ComboBox">
-        <Setter Property="Margin" Value="10,0,10,0"/>
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Height" Value="18" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="Margin" Value="2" />
         <Setter Property="IsEditable" Value="True"></Setter>
     </Style>
     <Style TargetType="CheckBox">
@@ -97,18 +74,81 @@
     </Style>
 
 
-    <!--<Style TargetType="{x:Type ComboBox}">
-        <Setter Property="Padding" Value="2" />
+    <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="Padding" Value="0" />
         <Setter Property="Height" Value="18" />
         <Setter Property="FontSize" Value="10" />
         <Setter Property="Margin" Value="2" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
+    <Style x:Key="TextBlockLarge"  TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Margin" Value="2" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="MaxWidth" Value="300"/>
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
 
-    <Style TargetType="{x:Type TextBlock}">
-        <Setter Property="FontSize" Value="10" />
+    <Style x:Key="TextBlockSmall" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="12" />
         <Setter Property="Margin" Value="2" />
         <Setter Property="VerticalAlignment" Value="Center" />
-    </Style>-->
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
 
+    <!--Light pane with header, used to isolate sub sections of the interface-->
+    <Style x:Key="SubDisplayArea" TargetType="{x:Type HeaderedContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type HeaderedContentControl}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="LightGray" BorderBrush="LightGray"  Padding="8,2,8,6" CornerRadius="6,6,0,0" BorderThickness="2,2,2,0">
+                            <TextBlock Style="{StaticResource TextBlockLarge}"  Foreground="#FF282828" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <ContentPresenter ContentSource="Header"/>
+                            </TextBlock>
+                        </Border>
+                        <Border Grid.Row="1" Background="White" BorderBrush="LightGray" CornerRadius="0,0,6,6" BorderThickness="2,0,2,2">
+                            <ContentPresenter/>
+                            <Border.RenderTransform>
+                                <ScaleTransform x:Name="ContentScale" ScaleX="1" ScaleY="1" />
+                            </Border.RenderTransform>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="SubDisplayAreaExpandable" TargetType="{x:Type HeaderedContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type HeaderedContentControl}">
+                    <Border Background="LightGray" BorderBrush="LightGray" CornerRadius="6,6,0,0">
+                        <Expander>
+                            <Expander.Header>
+                                <Border Background="LightGray" BorderBrush="LightGray"  Padding="8,2,8,6" CornerRadius="6,6,0,0" BorderThickness="2,2,2,0">
+                                    <TextBlock Style="{StaticResource TextBlockLarge}" Foreground="#FF282828" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <ContentPresenter ContentSource="Header"/>
+                                    </TextBlock>
+                                </Border>
+                            </Expander.Header>
+                            <Expander.Content>
+                                <Border Background="White" BorderBrush="LightGray" CornerRadius="0,0,6,6" BorderThickness="2,0,2,2">
+                                    <ContentPresenter/>
+                                    <Border.RenderTransform>
+                                        <ScaleTransform x:Name="ContentScale" ScaleX="1" ScaleY="1" />
+                                    </Border.RenderTransform>
+                                </Border>
+                            </Expander.Content>
+                        </Expander>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
