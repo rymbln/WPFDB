@@ -34,6 +34,7 @@ namespace WPFDB.Model
                 str.Append(";");
                 str.Append(this.ScienceStatus.Name);
                 str.Append(";");
+                str.Append(this.Iacmac.Code);
                 return str.ToString();
             }
         }
@@ -52,6 +53,7 @@ namespace WPFDB.Model
                 str.Append(this.Speciality.Name);
                 str.Append(this.ScienceDegree.Name);
                 str.Append(this.ScienceStatus.Name);
+                str.Append(this.Iacmac.Code);
                 return str.ToString();
             }
         }

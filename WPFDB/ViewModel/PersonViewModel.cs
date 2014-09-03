@@ -496,7 +496,7 @@ namespace WPFDB.ViewModel
                 var conferences = DataManager.Instance.GetConferenceForPersonRegistered(Model.Id);
                 foreach (var conference in conferences)
                 {
-                    lst.Add(conference.Name);
+                    lst.Add(conference.Conference.Name + " (" + conference.PersonConferences_Detail.Rank.Name + ")");
                 }
                 return lst;
             }
@@ -510,7 +510,7 @@ namespace WPFDB.ViewModel
                 var conferences = DataManager.Instance.GetConferenceForPersonArrived(Model.Id);
                 foreach (var conference in conferences)
                 {
-                    lst.Add(conference.Name);
+                    lst.Add(conference.Conference.Name + " (" + conference.PersonConferences_Detail.Rank.Name + ")");
                 }
                 return lst;
             }

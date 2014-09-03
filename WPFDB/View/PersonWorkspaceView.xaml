@@ -54,7 +54,7 @@
                     <DataGridTextColumn Header="First Name" Width="*"  Binding="{Binding Path=FirstName}" />
                     <DataGridTextColumn Header="Second Name" Width="*" Binding="{Binding Path=SecondName}" />
                     <DataGridTextColumn Header="Third Name" Width="*" Binding="{Binding Path=ThirdName}" />
-                    <DataGridTextColumn Header="Third Name" Width="*" Binding="{Binding Path=ToString}" />
+                    <DataGridTextColumn Header="Номер МАКМАХ" Width="*" Binding="{Binding Path=Iacmac.Code}" />
                 </DataGrid.Columns>
 
             </DataGrid>

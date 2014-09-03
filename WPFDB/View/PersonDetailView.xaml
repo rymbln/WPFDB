@@ -9,40 +9,40 @@
 >
 
     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Margin="5,0,0,0" >
+        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Margin="2">
             <HeaderedContentControl.Header>
-                Person
+                Личная информация
             </HeaderedContentControl.Header>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Label Grid.Column="0" Grid.Row="0" Content="First Name:"  />
-                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Content="Фамилия:"  />
+                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  />
 
-                    <Label Grid.Column="0" Grid.Row="1" Content="Second Name:" />
-                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=SecondName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
+                <Label Grid.Column="0" Grid.Row="1" Content="Имя:" />
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=SecondName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  />
 
-                    <Label Grid.Column="0" Grid.Row="2" Content="Third Name:" />
-                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=ThirdName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
+                <Label Grid.Column="0" Grid.Row="2" Content="Отчество:" />
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=ThirdName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  />
 
-                    <Label Grid.Column="0" Grid.Row="3" Content="Sex:" />
-                    <ComboBox Grid.Column="1" Grid.Row="3" Width="150" SelectedValuePath="." SelectedItem="{Binding Path=Sex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=SexLookup}" DisplayMemberPath="Name" />
+                <Label Grid.Column="0" Grid.Row="3" Content="Пол:" />
+                <ComboBox Grid.Column="1" Grid.Row="3"  SelectedValuePath="." SelectedItem="{Binding Path=Sex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=SexLookup}" DisplayMemberPath="Name" />
 
-                    <Label Grid.Column="0" Grid.Row="4" Content="BirthDate:" />
-                    <DatePicker Grid.Column="1" Grid.Row="4" Height="26" SelectedDate="{Binding Path=BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
+                <Label Grid.Column="0" Grid.Row="4" Content="Дата рождения:" />
+                <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  />
 
-                </Grid>
+            </Grid>
         </HeaderedContentControl>
-        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Margin="5,0,0,0">
+        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Margin="2">
             <HeaderedContentControl.Header>
                 Work
             </HeaderedContentControl.Header>
@@ -59,61 +59,65 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Column="0" Grid.Row="0" Content="Workplace:" />
-                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=WorkPlace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
+                <TextBox Grid.Column="1" Grid.Row="0" TextWrapping="Wrap"
+                         Text="{Binding Path=WorkPlace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  />
 
                 <Label Grid.Column="0" Grid.Row="1" Content="Post:" />
-                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Post, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" Width="150" />
+                <TextBox Grid.Column="1" Grid.Row="1" TextWrapping="Wrap"
+                         Text="{Binding Path=Post, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  />
 
                 <Label Grid.Column="0" Grid.Row="2" Content="Speciality:" />
-                <ComboBox Grid.Column="1" Grid.Row="2" Width="150" SelectedValuePath="." SelectedItem="{Binding Path=Speciality, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=SpecialityLookup}" DisplayMemberPath="Name"  />
+                <ComboBox Grid.Column="1" Grid.Row="2"  SelectedValuePath="." SelectedItem="{Binding Path=Speciality, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=SpecialityLookup}" DisplayMemberPath="Name"  />
 
                 <Label Grid.Column="0" Grid.Row="3" Content="ScienceDegree:" />
-                <ComboBox Grid.Column="1" Grid.Row="3" Width="150" SelectedValuePath="." SelectedItem="{Binding Path=ScienceDegree, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=ScienceDegreeLookup}" DisplayMemberPath="Name" />
+                <ComboBox Grid.Column="1" Grid.Row="3"  SelectedValuePath="." SelectedItem="{Binding Path=ScienceDegree, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=ScienceDegreeLookup}" DisplayMemberPath="Name" />
 
                 <Label Grid.Column="0" Grid.Row="4" Content="ScienceStatus:" />
-                <ComboBox Grid.Column="1" Grid.Row="4" Width="150" SelectedValuePath="." SelectedItem="{Binding Path=ScienceStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=ScienceStatusLookup}" DisplayMemberPath="Name" />
+                <ComboBox Grid.Column="1" Grid.Row="4"  SelectedValuePath="." SelectedItem="{Binding Path=ScienceStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=ScienceStatusLookup}" DisplayMemberPath="Name" />
 
             </Grid>
         </HeaderedContentControl>
-        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Margin="5,0,5,0">
+        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Margin="2">
             <HeaderedContentControl.Header>
                 Iacmac
             </HeaderedContentControl.Header>
-            <ScrollViewer>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Label Grid.Column="0" Grid.Row="0" Content="Iacmac Member:" />
-                <CheckBox Grid.Column="1" Grid.Row="0" IsChecked="{Binding Path=IsMember, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Content="Iacmac Member:" />
+                    <CheckBox Grid.Column="1" Grid.Row="0" IsChecked="{Binding Path=IsMember, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
 
-                <Label Grid.Column="2" Grid.Row="0" Content="IsForm:" />
-                <CheckBox Grid.Column="3" Grid.Row="0"  IsChecked="{Binding Path=IsForm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+                    <Label Grid.Column="0" Grid.Row="1" Content="IsForm:" />
+                    <CheckBox Grid.Column="1" Grid.Row="1" IsChecked="{Binding Path=IsForm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
 
-                <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Date registration:" Margin="10,10,10,0" />
-                <DatePicker Grid.Column="2" Grid.Row="1"  Grid.ColumnSpan="2" Width="150" Margin="10,10,10,0"  Text="{Binding Path=DateRegistration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  />
+                    <Label Grid.Column="0" Grid.Row="2" Content="IsCardCreate:"/>
+                    <CheckBox Grid.Column="1" Grid.Row="2" IsChecked="{Binding Path=IsCardCreate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+                  
+                    <Label Grid.Column="0" Grid.Row="3" Content="IsCardSend:"  />
+                    <CheckBox Grid.Column="1" Grid.Row="3" IsChecked="{Binding Path=IsCardSend, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+                   
+                    <Label Grid.Column="2" Grid.Row="0" Content="Code:"  />
+                    <TextBox Grid.Column="3" Grid.Row="0"  Text="{Binding Path=Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
 
-                <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Content="Code:"  />
-                <TextBox Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Width="150" Text="{Binding Path=Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+                    <Label Grid.Column="2" Grid.Row="1" Content="Date registration:" />
+                    <TextBox Grid.Column="3" Grid.Row="1"  Text="{Binding Path=DateRegistration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  />
 
-                <Label Grid.Column="0" Grid.Row="3" Content="IsCardCreate:" Margin="10,10,10,0"  />
-                <CheckBox Grid.Column="1" Grid.Row="3" Margin="10,20,10,0"  IsChecked="{Binding Path=IsCardCreate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+               
+               
+                  
 
-                <Label Grid.Column="2" Grid.Row="3" Content="IsCardSend:" Margin="10,10,10,0" />
-                <CheckBox Grid.Column="3" Grid.Row="3" Margin="10,20,10,0"  IsChecked="{Binding Path=IsCardSend, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
-
-
-            </Grid>
-            </ScrollViewer>
+                </Grid>
+  
         </HeaderedContentControl>
     </StackPanel>
 </UserControl>

@@ -12,6 +12,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -20,33 +21,37 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Street Home:" />
-                <TextBox Grid.Row="0" Grid.Column="1" 
-                         Width="100" 
-                         Text="{Binding Path=StreetHouseName}" />
-
-                <TextBlock Grid.Row="0" Grid.Column="2" Text="Usage:" />
-                <ComboBox Grid.Row="0" Grid.Column="3" 
+                
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Тип:" />
+                <ComboBox Grid.Row="0" Grid.Column="1" Style="{StaticResource ComboBoxSmall}" 
                           ItemsSource="{Binding Path=ContactTypeLookup}" 
                           SelectedValue="{Binding Path=ContactType}" 
                           SelectedValuePath="." 
                           DisplayMemberPath="Name" 
-                          Width="60" />
+                     />
 
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Zip Code:" />
-                <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Width="100" Text="{Binding Path=ZipCode}" />
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="Регион:" />
+                <TextBox Grid.Row="1" Grid.Column="3"  Style="{StaticResource TextBoxSmall}"
+                         Text="{Binding Path=RegionName}" />
 
-                <TextBlock Grid.Row="1" Grid.Column="2" Text="City:" />
-                <TextBox Grid.Row="1" Grid.Column="3" Width="60" Text="{Binding Path=CityName}" />
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Страна:" />
+                <TextBox Grid.Row="1" Grid.Column="1"  Style="{StaticResource TextBoxSmall}"
+                         Text="{Binding Path=CountryName}" HorizontalAlignment="Left" />
 
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Region:" />
-                <TextBox Grid.Row="2" Grid.Column="1" Width="50" Text="{Binding Path=RegionName}" />
 
-                <TextBlock Grid.Row="2" Grid.Column="2" Text="Country:" />
-                <TextBox Grid.Row="2" Grid.Column="3" Width="50" Text="{Binding Path=CountryName}" HorizontalAlignment="Left" />
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Индекс:" />
+                <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource TextBoxSmall}"
+                         Text="{Binding Path=ZipCode}" />
 
-                <TextBlock Grid.Row="2" Grid.Column="2" Text="Country:" />
-                <TextBox Grid.Row="2" Grid.Column="3" Width="60" Text="{Binding Path=Country}" />
+                <TextBlock Grid.Row="2" Grid.Column="2" Text="Город:" />
+                <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource TextBoxSmall}"
+                         Text="{Binding Path=CityName}" />
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Адрес:" />
+                <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"
+                         Text="{Binding Path=StreetHouseName}" />
+
+
             </Grid>
         </Border>
     </Grid>

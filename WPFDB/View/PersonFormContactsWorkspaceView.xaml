@@ -32,6 +32,8 @@
                     <Separator/>
                     <Button Command="{Binding DeleteAddressCommand}" Content="Delete Address"></Button>
                 </ToolBar>
+                    
+                    
                         <ListBox BorderThickness="0" 
                      SelectedItem="{Binding Path=CurrentAddress, Mode=TwoWay}" 
                      ItemsSource="{Binding Path=PersonAddresses}" />

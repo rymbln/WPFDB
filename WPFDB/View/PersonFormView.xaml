@@ -23,8 +23,8 @@
         <KeyBinding Command="{Binding SaveCommand}" Key="S" Modifiers="Control"/>
         <KeyBinding Command="{Binding AboutCommand}" Key="F1"/>
     </Window.InputBindings>
-
-    <DockPanel>
+    <ScrollViewer>
+        <DockPanel>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar>
                 <Button Command="{Binding SaveCommand}" Content="Save" ToolTip="{x:Static p:Resources.Save}"/>
@@ -37,12 +37,7 @@
                 <Button Command="ApplicationCommands.Paste" Content="{StaticResource PasteImage}" ToolTip="{x:Static p:Resources.Paste}"/>
              </ToolBar>
         </ToolBarTray>
-        <Grid>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+     <StackPanel>
 
             <ContentControl Grid.Row="0"   HorizontalAlignment="Left" Content="{Binding Path=CurrentPerson}" />
     
@@ -62,7 +57,8 @@
                 </TabItem>
                
             </TabControl>
-        </Grid>
+        </StackPanel>
 
     </DockPanel>
+    </ScrollViewer>
 </Window>

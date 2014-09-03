@@ -43,7 +43,7 @@ namespace WPFDB.ViewModel
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.CurrentEmail))
                 {
-                    this.CurrentEmail = null;
+                    this.CurrentEmail = PersonEmails.FirstOrDefault();
                 }
             };
             if (person.Model.Addresses.Count > 0)
@@ -57,7 +57,7 @@ namespace WPFDB.ViewModel
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.CurrentAddress))
                 {
-                    this.CurrentAddress = null;
+                    this.CurrentAddress = PersonAddresses.FirstOrDefault();
                 }
             };
             if (person.Model.Phones.Count > 0)
@@ -71,7 +71,7 @@ namespace WPFDB.ViewModel
             {
                 if (e.OldItems != null && e.OldItems.Contains(this.CurrentPhone))
                 {
-                    this.CurrentPhone = null;
+                    this.CurrentPhone = PersonPhones.FirstOrDefault();
                 }
             };
 
@@ -97,8 +97,7 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                this.currentEmail = this.PersonEmails.FirstOrDefault();
-                return this.currentEmail;
+              return this.currentEmail;
             }
             set
             {
@@ -112,8 +111,7 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                this.currentAddress = this.PersonAddresses.FirstOrDefault();
-                return this.currentAddress;
+              return this.currentAddress;
             }
             set
             {
@@ -126,8 +124,7 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                this.currentPhone = this.PersonPhones.FirstOrDefault();
-                return this.currentPhone;
+              return this.currentPhone;
             }
             set
             {

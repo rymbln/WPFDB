@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Data.Objects;
 using System.Globalization;
 using System.Linq;
@@ -1191,21 +1192,20 @@ namespace WPFDB.Common
             return obj;
         }
 
-        public List<Conference> GetConferenceForPersonRegistered(Guid guid)
+        public List<PersonConference> GetConferenceForPersonRegistered(Guid guid)
         {
             return underlyingContext.PersonConferences
                 .Where(o => o.PersonId == guid)
-                .Select(o => o.Conference)
-                .OrderBy(o => o.SourceId)
+         //       .Include(o => o.PersonConferences_Detail)
+                
                 .ToList();
         }
 
-        public List<Conference> GetConferenceForPersonArrived(Guid guid)
+        public List<PersonConference> GetConferenceForPersonArrived(Guid guid)
         {
             return underlyingContext.PersonConferences
                 .Where(o => o.PersonId == guid && o.PersonConferences_Detail.IsArrive == true)
-                .Select(o => o.Conference)
-                .OrderBy(o=>o.SourceId)
+           //     .Include(o => o.PersonConferences_Detail)
                 .ToList();
         }
     }
