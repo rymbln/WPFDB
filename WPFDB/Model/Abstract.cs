@@ -92,7 +92,7 @@ namespace WPFDB.Model
 
             get
             {
-                return this.AbstractWorks.OrderByDescending(o => o.DateWork).FirstOrDefault().User;
+                return this.AbstractWorks.OrderByDescending(o => o.DateWork).FirstOrDefault().Reviewer.Name;
             }
          
         }
@@ -109,7 +109,7 @@ namespace WPFDB.Model
         {
             get
             {
-                return this.AbstractWorks.OrderByDescending(o => o.DateWork).FirstOrDefault().DateWork;
+                return this.AbstractWorks.OrderBy(o => o.DateWork).FirstOrDefault().DateWork;
             }
         }
     }

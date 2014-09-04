@@ -16,6 +16,7 @@ namespace WPFDB.ViewModel
     {
         private Abstract currentAbstract { get; set; }
         private AbstractViewModel currentAbstractVM { get; set; }
+      
 
         private string filterText = "";
 
@@ -35,6 +36,7 @@ namespace WPFDB.ViewModel
         }
         public ObservableCollection<Abstract> AllAbstracts { get; private set; }
         public ObservableCollection<Abstract> AllAbstractsDB { get; private set; }
+
         public ICommand RefreshCommand { get; private set; }
         public ICommand ApplyFiltersCommand { get; private set; }
 

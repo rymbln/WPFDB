@@ -976,7 +976,9 @@ namespace WPFDB.Common
 
         public IEnumerable<Abstract> GetAllAbstracts()
         {
-            return this.underlyingContext.Abstracts.ToList();
+            return this.underlyingContext.Abstracts
+                .Include(o => o.AbstractWorks)
+                .Include(o => o.PersonConference.Person).ToList();
         }
 
 

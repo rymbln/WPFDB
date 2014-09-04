@@ -146,25 +146,9 @@ namespace WPFDB.ViewModel
              set { }
          }
 
-         public string ReviewerName
-         {
-             //todo Добавить отображение рецензента
-             get { return ""; }
-             set {}
-         }
-
-         public string LastState
-         {
-             // todo Добавить отображение последнего состояния
-             get { return ""; }
-             set { }
-         }
-
-         public DateTime? LastStateDate
-         {
-             //todo Добавить отображение даты последнего состояния
-             get { return null; }
-             set { }
-         }
+        public List<AbstractWork> Works
+        {
+            get { return Model.AbstractWorks.OrderByDescending(o => o.DateWork).ToList(); }
+        }
     }
 }

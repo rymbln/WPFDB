@@ -39,22 +39,42 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition MinWidth="200" MaxWidth="700"/>
             </Grid.ColumnDefinitions>
-            <DataGrid Grid.Column="0"
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <DataGrid Grid.Row="0"
                  SelectedItem="{Binding Path=CurrentAbstract, Mode=TwoWay}" 
                               ItemsSource="{Binding Path=AllAbstracts}" 
                               AutoGenerateColumns="False" IsReadOnly="True"
                              >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Автор" Width="*"  Binding="{Binding Path=AuthorName}" />
-                    <DataGridTextColumn Header="Другие авторы" Width="*" Binding="{Binding Path=OtherAuthorsShort}" />
-                    <DataGridTextColumn Header="Тема" Width="*" Binding="{Binding Path=NameShort}" />
-                    <DataGridTextColumn Header="Email Автора" Width="*" Binding="{Binding Path=AuthorEmail}" />
-                    <DataGridTextColumn Header="Рецензент" Width="*" Binding="{Binding Path=ReviewerName}" />
-                    <DataGridTextColumn Header="Последнее состояние" Width="*" Binding="{Binding Path=LastState}" />
-                    <DataGridTextColumn Header="Дата состояния" Width="*" Binding="{Binding Path=LastStateDate}" />
-                </DataGrid.Columns>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Автор" Width="*"  Binding="{Binding Path=AuthorName}" />
+                        <DataGridTextColumn Header="Другие авторы" Width="*" Binding="{Binding Path=OtherAuthorsShort}" />
+                        <DataGridTextColumn Header="Тема" Width="*" Binding="{Binding Path=NameShort}" />
+                        <DataGridTextColumn Header="Email Автора" Width="*" Binding="{Binding Path=AuthorEmail}" />
+                        <DataGridTextColumn Header="Рецензент" Width="*" Binding="{Binding Path=ReviewerName}" />
+                        <DataGridTextColumn Header="Последнее состояние" Width="*" Binding="{Binding Path=LastState}" />
+                        <DataGridTextColumn Header="Дата состояния" Width="*" Binding="{Binding Path=LastStateDate}" />
+                    </DataGrid.Columns>
+                    </DataGrid>
+                <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center"  />
+                    <DataGrid Grid.Row="2"
 
-            </DataGrid>
+                              ItemsSource="{Binding Path=CurrentAbstractVM.Works}" 
+                              AutoGenerateColumns="False" IsReadOnly="True"
+                             >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Статус" Width="*"  Binding="{Binding Path=AbstractStatus.Name}" />
+                            <DataGridTextColumn Header="Рецензент" Width="*" Binding="{Binding Path=Reviewer.Name}" />
+                            <DataGridTextColumn Header="Дата" Width="*" Binding="{Binding Path=DateWork}" />
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+            </Grid>
+           
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
             <ScrollViewer Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                 <StackPanel>
