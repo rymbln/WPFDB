@@ -20,7 +20,7 @@ namespace WPFDB.ViewModel
     {
 
         private Person currentPerson { get; set; }
-        private PersonViewModel currentPersonVM { get; set; }
+        private CurrentPersonViewModel currentPersonVM { get; set; }
         private ConferenceViewModel filterConference { get; set; }
         // private bool filterAllConferences;
         private string filterText = "";
@@ -70,13 +70,13 @@ namespace WPFDB.ViewModel
                 this.currentPerson = value;
                 if (CurrentPerson != null)
                 {
-                    this.CurrentPersonVM = new PersonViewModel(currentPerson);
+                    this.CurrentPersonVM = new CurrentPersonViewModel(currentPerson);
                 }
                 this.OnPropertyChanged("CurrentPerson");
             }
         }
 
-        public PersonViewModel CurrentPersonVM
+        public CurrentPersonViewModel CurrentPersonVM
         {
             get { return this.currentPersonVM; }
             set
@@ -134,12 +134,12 @@ namespace WPFDB.ViewModel
         public void AllPersonsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.CurrentPerson = AllPersons.Count > 0 ? AllPersons[0] : null;
-            this.CurrentPersonVM = new PersonViewModel(AllPersons.Count > 0 ? AllPersons[0] : null);
+            this.CurrentPersonVM = new CurrentPersonViewModel(AllPersons.Count > 0 ? AllPersons[0] : null);
         }
 
         private void OpenPerson()
         {
-            PersonFormViewModel vm = new PersonFormViewModel(new PersonViewModel(currentPerson));
+            PersonViewModel vm = new PersonViewModel(currentPerson);
             PersonFormView v = new PersonFormView { DataContext = vm };
             v.Show();
         }

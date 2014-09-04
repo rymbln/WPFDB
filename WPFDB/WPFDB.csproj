@@ -108,6 +108,7 @@
     <Compile Include="ViewModel\AddressViewModel.cs" />
     <Compile Include="ViewModel\ContactTypeViewModel.cs" />
     <Compile Include="ViewModel\ContactTypeWorkspaceViewModel.cs" />
+    <Compile Include="ViewModel\CurrentPersonViewModel.cs" />
     <Compile Include="ViewModel\EmailViewModel.cs" />
     <Compile Include="ViewModel\ImportWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\AbstractStatusViewModel.cs" />
@@ -130,8 +131,6 @@
     <Compile Include="ViewModel\PersonConferenceWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\PersonFormAbstractWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\PersonFormConferencesWorkspaceViewModel.cs" />
-    <Compile Include="ViewModel\PersonFormContactsWorkspaceViewModel.cs" />
-    <Compile Include="ViewModel\PersonFormViewModel.cs" />
     <Compile Include="ViewModel\PersonViewModel.cs" />
     <Compile Include="ViewModel\PersonWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\RankViewModel.cs" />
@@ -220,20 +219,14 @@
     <Compile Include="View\PersonConferenceView.xaml.cs">
       <DependentUpon>PersonConferenceView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PersonDetailView.xaml.cs">
-      <DependentUpon>PersonDetailView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\PersonConferenceDetailView.xaml.cs">
       <DependentUpon>PersonConferenceDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PersonFormConferenceWorkspaceView.xaml.cs">
       <DependentUpon>PersonFormConferenceWorkspaceView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PersonFormContactsWorkspaceView.xaml.cs">
-      <DependentUpon>PersonFormContactsWorkspaceView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PersonFormView.xaml.cs">
-      <DependentUpon>PersonFormView.xaml</DependentUpon>
+    <Compile Include="View\PersonView.xaml.cs">
+      <DependentUpon>PersonView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PersonWorkspaceView.xaml.cs">
       <DependentUpon>PersonWorkspaceView.xaml</DependentUpon>
@@ -393,10 +386,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PersonDetailView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\PersonConferenceDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -405,11 +394,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PersonFormContactsWorkspaceView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\PersonFormView.xaml">
+    <Page Include="View\PersonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
