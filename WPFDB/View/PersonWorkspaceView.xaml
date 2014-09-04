@@ -9,40 +9,35 @@
       mc:Ignorable="d" 
 >
 
-    <UserControl.Resources>
-        <DataTemplate DataType="{x:Type vm:PersonViewModel}">
-            <v:CurrentPersonView />
-        </DataTemplate>
-    </UserControl.Resources>
+
     <DockPanel>
         <ToolBar DockPanel.Dock="Top">
-                                <Button Command="{Binding AddPersonCommand}">
-                                    <AccessText Text="{x:Static p:Resources.AddMenu}"/>
-                                </Button>
-                                <Separator/>
-                                <Button Command="{Binding OpenPersonCommand}">
-                                    <AccessText Text="Open"/>
-                                </Button>
-                                <Separator/>
-                                <Button Command="{Binding DeletePersonCommand}">
-                                    <AccessText Text="{x:Static p:Resources.RemoveMenu}"/>
-                                </Button>
-                                <Separator/>
-                                <Button Command="{Binding RefreshCommand}">
-                                    <AccessText Text="{x:Static p:Resources.RefreshMenu}"/>
-                                </Button>
-                                <Separator/>
-                                <Button Command="{Binding ApplyFilterCommand}">
-                                    <AccessText Text="Filter"/>
-                                </Button>
-                                <TextBox x:Name="searchBox" Width="150" BorderBrush="LightGray" BorderThickness="1" 
+            <Button Command="{Binding AddPersonCommand}">
+                <AccessText Text="{x:Static p:Resources.AddMenu}"/>
+            </Button>
+            <Separator/>
+            <Button Command="{Binding OpenPersonCommand}">
+                <AccessText Text="Open"/>
+            </Button>
+            <Separator/>
+            <Button Command="{Binding DeletePersonCommand}">
+                <AccessText Text="{x:Static p:Resources.RemoveMenu}"/>
+            </Button>
+            <Separator/>
+            <Button Command="{Binding RefreshCommand}">
+                <AccessText Text="{x:Static p:Resources.RefreshMenu}"/>
+            </Button>
+            <Separator/>
+            <Button Command="{Binding ApplyFilterCommand}">
+                <AccessText Text="Filter"/>
+            </Button>
+            <TextBox x:Name="searchBox" Width="150" BorderBrush="LightGray" BorderThickness="1" 
                          Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" />
-                            </ToolBar>
-<Grid>
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*"/>
+        </ToolBar>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <DataGrid Grid.Column="0"
@@ -59,10 +54,186 @@
 
             </DataGrid>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-            <ContentControl  Grid.Column="2" Content="{Binding Path=CurrentPersonVM}" HorizontalAlignment="Right" />
+            <!--<ContentControl VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Column="2" Content="{Binding Path=CurrentPersonVM}"/>-->
+            <ScrollViewer Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="ScrollViewer1">
+                <StackPanel>
+                    <HeaderedContentControl  HorizontalAlignment="Stretch" 
+                                HorizontalContentAlignment="Stretch"
+                                Style="{StaticResource SubDisplayArea}" >
+                        <HeaderedContentControl.Header>
+                            Личная информация
+                        </HeaderedContentControl.Header>
+                        <Grid  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
+
+                            <TextBlock  Grid.Row="0" Grid.Column="0"
+                        Text="ФИО:" HorizontalAlignment="Right"/>
+                            <TextBox Grid.Row="0" Grid.Column="1"
+                     Text="{Binding Path=CurrentPersonVM.FullName, Mode=OneWay}"  
+                                     Style="{StaticResource TextBoxLarge}"
+                                     />
+
+                            <TextBlock Grid.Row="1" Grid.Column="0"
+                Text="Дата рождения:" HorizontalAlignment="Right" />
+                            <TextBox Grid.Row="1" Grid.Column="1"
+                Text="{Binding Path=CurrentPersonVM.BirthDate, Mode=OneWay}" 
+                                     Style="{StaticResource TextBoxLarge}"/>
+
+
+                            <TextBlock Grid.Row="2" Grid.Column="0"
+                Text="Пол:" HorizontalAlignment="Right" />
+                            <TextBox Grid.Row="2" Grid.Column="1"
+                Text="{Binding Path=CurrentPersonVM.Sex.Name, Mode=OneWay}" 
+                                     Style="{StaticResource TextBoxLarge}"
+                                     />
+
+
+                            <TextBlock Grid.Row="3" Grid.Column="0"
+                Text="Место работы:" HorizontalAlignment="Right" />
+                            <TextBox Grid.Row="3" Grid.Column="1"   TextWrapping="Wrap"
+                Text="{Binding Path=CurrentPersonVM.WorkplacePostName, Mode=OneWay}" 
+                                     Style="{StaticResource TextBoxLarge}"
+                                     />
+                            <TextBlock Grid.Row="4" Grid.Column="0"
+                Text="Специальность:" HorizontalAlignment="Right" />
+                            <TextBox Grid.Row="4" Grid.Column="1"   TextWrapping="Wrap"
+                Text="{Binding Path=CurrentPersonVM.Speciality.Name, Mode=OneWay}"  
+                                     Style="{StaticResource TextBoxLarge}"
+                                     />
+                            <TextBlock Grid.Row="5" Grid.Column="0"
+                Text="Научная степень:" HorizontalAlignment="Right" />
+                            <TextBox Grid.Row="5" Grid.Column="1"   TextWrapping="Wrap"
+                Text="{Binding Path=CurrentPersonVM.ScienceDegree.Name, Mode=OneWay}"  
+                                     Style="{StaticResource TextBoxLarge}"
+                                     />
+                            <TextBlock Grid.Row="6" Grid.Column="0"
+                Text="Научное звание:" HorizontalAlignment="Right" />
+                            <TextBox Grid.Row="6" Grid.Column="1"   TextWrapping="Wrap"
+                Text="{Binding Path=CurrentPersonVM.ScienceStatus.Name, Mode=OneWay}" 
+                                     Style="{StaticResource TextBoxLarge}"
+                                     />
+
+
+                        </Grid>
+                    </HeaderedContentControl>
+                    <HeaderedContentControl 
+                                Style="{StaticResource SubDisplayAreaExpandable}" >
+                        <HeaderedContentControl.Header>
+                            МАКМАХ
+                        </HeaderedContentControl.Header>
+                        <Grid  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock  Grid.Row="0" Grid.Column="0"
+                        Text="Член МАКМАХ:" HorizontalAlignment="Right"/>
+                            <TextBox Grid.Row="0" Grid.Column="1"
+                     Text="{Binding Path=CurrentPersonVM.IsMemberName, Mode=OneWay}"  
+                                     Style="{StaticResource TextBoxLarge}"
+                                     />
+                            <TextBlock Grid.Row="1" Grid.Column="0"
+                Text="Карта сделана:" HorizontalAlignment="Right" />
+                            <TextBox Grid.Row="1" Grid.Column="1"
+                Text="{Binding Path=CurrentPersonVM.IsCardCreateName, Mode=OneWay}" 
+                                     Style="{StaticResource TextBoxLarge}"
+                                     />
+                            <TextBlock Grid.Row="2" Grid.Column="0"
+                Text="Карта выслана:" HorizontalAlignment="Right" />
+                            <TextBox Grid.Row="2" Grid.Column="1"
+                Text="{Binding Path=CurrentPersonVM.IsCardSentName, Mode=OneWay}"
+                                     Style="{StaticResource TextBoxLarge}"
+                                     />
+                            <TextBlock Grid.Row="3" Grid.Column="0"
+                Text="Заявление заполнено:" HorizontalAlignment="Right" />
+                            <TextBox Grid.Row="3" Grid.Column="1"   TextWrapping="Wrap"
+                Text="{Binding Path=CurrentPersonVM.IsFormName, Mode=OneWay}" Style="{StaticResource TextBoxLarge}"
+                                     />
+                            <TextBlock Grid.Row="4" Grid.Column="0"
+                Text="Дата регистрации:" HorizontalAlignment="Right" />
+                            <TextBox Grid.Row="4" Grid.Column="1"   
+                Text="{Binding Path=CurrentPersonVM.DateRegistration, Mode=OneWay}" 
+                                     Style="{StaticResource TextBoxLarge}"
+                                     />
+                            <TextBlock Grid.Row="5" Grid.Column="0"
+                Text="Код:" HorizontalAlignment="Right" />
+                            <TextBox Grid.Row="5" Grid.Column="1"   
+                Text="{Binding Path=CurrentPersonVM.Code, Mode=OneWay}" Style="{StaticResource TextBoxLarge}"/>
+                            <TextBlock Grid.Row="6" Grid.Column="0"
+                Text="Номер:" HorizontalAlignment="Right" />
+                            <TextBox Grid.Row="6" Grid.Column="1"  
+                Text="{Binding Path=CurrentPersonVM.Number, Mode=OneWay}"  Style="{StaticResource TextBoxLarge}"/>
+
+
+                        </Grid>
+                    </HeaderedContentControl>
+                    <HeaderedContentControl 
+                                Style="{StaticResource SubDisplayAreaExpandable}" >
+                        <HeaderedContentControl.Header>
+                            Телефоны
+                        </HeaderedContentControl.Header>
+                        <ListView Name="ListViewPhones"  ItemsSource="{Binding Path=CurrentPersonVM.PhonesList}"></ListView>
+                    </HeaderedContentControl>
+                    <HeaderedContentControl 
+                                Style="{StaticResource SubDisplayAreaExpandable}" >
+                        <HeaderedContentControl.Header>
+                            Адреса
+                        </HeaderedContentControl.Header>
+                        <ListView Name="ListViewAddresses" ItemsSource="{Binding Path=CurrentPersonVM.AddressesList}" >
+                        </ListView>
+                    </HeaderedContentControl>
+                    <HeaderedContentControl 
+                                Style="{StaticResource SubDisplayAreaExpandable}" >
+                        <HeaderedContentControl.Header>
+                            Email
+                        </HeaderedContentControl.Header>
+                        <ListView Name="ListViewEmails" ItemsSource="{Binding Path=CurrentPersonVM.EmailsList}"></ListView>
+                    </HeaderedContentControl>
+                    <HeaderedContentControl 
+                                Style="{StaticResource SubDisplayAreaExpandable}" >
+                        <HeaderedContentControl.Header>
+                            Зарегистрирован на конференциях
+                        </HeaderedContentControl.Header>
+                        <ListView Name="ListViewConferenceRegistered" ItemsSource="{Binding Path=CurrentPersonVM.ConferencesRegisteredList}"></ListView>
+                    </HeaderedContentControl>
+                    <HeaderedContentControl 
+                                Style="{StaticResource SubDisplayAreaExpandable}" >
+                        <HeaderedContentControl.Header>
+                            Прибыл на конференции
+                        </HeaderedContentControl.Header>
+                        <ListView Name="ListViewConferenceArrived" ItemsSource="{Binding Path=CurrentPersonVM.ConferencesArrivedList}"></ListView>
+                    </HeaderedContentControl>
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
-                   
+
     </DockPanel>
 
 </UserControl>

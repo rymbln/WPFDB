@@ -37,8 +37,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition MinWidth="200" MaxWidth="700"/>
             </Grid.ColumnDefinitions>
             <DataGrid Grid.Column="0"
                  SelectedItem="{Binding Path=CurrentAbstract, Mode=TwoWay}" 
@@ -56,17 +55,74 @@
                 </DataGrid.Columns>
 
             </DataGrid>
-            <!--<GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-            <ContentControl  Grid.Column="2" Content="{Binding Path=CurrentPersonVM}" HorizontalAlignment="Right" />-->
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+            <ScrollViewer Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                <StackPanel>
+                    <HeaderedContentControl  HorizontalAlignment="Stretch" 
+                                HorizontalContentAlignment="Stretch"
+                                Style="{StaticResource SubDisplayArea}" >
+                        <HeaderedContentControl.Header>
+                            Информация о тезисе
+                        </HeaderedContentControl.Header>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="Автор:" />
+                            <TextBox Grid.Row="1" Style="{StaticResource TextBoxLarge}"
+
+                                Text="{Binding Path=CurrentAbstractVM.AuthorName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+                            <Label Grid.Row="2" Content="Email:" />
+                            <TextBox Grid.Row="3" Style="{StaticResource TextBoxLarge}"
+                      
+                 Text="{Binding Path=CurrentAbstractVM.AuthorEmail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                />
+                            <Label Grid.Row="4" Content="Остальные авторы:" />
+                            <TextBox Grid.Row="5" 
+                                     Style="{StaticResource TextBoxLarge}"
+                 Text="{Binding Path=CurrentAbstractVM.OtherAuthors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                  />
+                            <Label Grid.Row="6" Content="Тезис:" />
+                            <TextBox Grid.Row="7" 
+                                     Style="{StaticResource TextBoxLarge}"
+                                     
+                 Text="{Binding Path=CurrentAbstractVM.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                 />
+                            <Label Grid.Row="8" Content="Описание:" />
+                            <TextBox Grid.Row="8"  
+                                     Style="{StaticResource TextBoxLarge}"
+                                     
+                          Text="{Binding Path=CurrentAbstractVM.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                  />
+                            <Label Grid.Row="9" Content="Ссылка на документ:" />
+                            <TextBox Grid.Row="10" 
+                                     Style="{StaticResource TextBoxLarge}"
+                                     
+                                Text="{Binding Path=CurrentAbstractVM.Link, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                 />
+                        </Grid>
+                    </HeaderedContentControl>
+                </StackPanel>
+            </ScrollViewer>
 
         </Grid>
     </DockPanel>
-     
-        <!--<ContentControl 
+
+    <!--<ContentControl 
             Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"  HorizontalAlignment="Right" 
             Content="{Binding Path=CurrentAbstract, Mode=TwoWay}" />-->
 
-        <!--<HeaderedContentControl  Grid.Row="1" Grid.Column="0" Style="{StaticResource SubDisplayArea}" >
+    <!--<HeaderedContentControl  Grid.Row="1" Grid.Column="0" Style="{StaticResource SubDisplayArea}" >
             <HeaderedContentControl.Header>
                 Abstract Works
             </HeaderedContentControl.Header>
@@ -89,7 +145,7 @@
             </StackPanel>
             </ScrollViewer>
         </HeaderedContentControl>-->
-        <!--<ContentControl Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" 
+    <!--<ContentControl Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" 
                         Content="{Binding Path=CurrentAbstractWork}" >
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type vm:AbstractWorkViewModel}">

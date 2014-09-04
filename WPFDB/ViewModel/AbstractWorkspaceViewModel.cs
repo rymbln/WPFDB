@@ -50,7 +50,7 @@ namespace WPFDB.ViewModel
                 this.currentAbstract = value;
                 if (CurrentAbstract != null)
                 {
-                    this.currentAbstractVM = new AbstractViewModel(currentAbstract);
+                    this.CurrentAbstractVM = new AbstractViewModel(currentAbstract);
                 }
                 this.OnPropertyChanged("CurrentAbstract");
             }

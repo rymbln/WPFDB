@@ -152,9 +152,6 @@
     <Compile Include="View\AddressView.xaml.cs">
       <DependentUpon>AddressView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CurrentPersonView.xaml.cs">
-      <DependentUpon>CurrentPersonView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\ImportWorkspaceView.xaml.cs">
       <DependentUpon>ImportWorkspaceView.xaml</DependentUpon>
     </Compile>
@@ -302,10 +299,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddressView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\CurrentPersonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
