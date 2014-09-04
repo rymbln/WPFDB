@@ -41,12 +41,6 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                if (this.Model.PersonConferenceId == null)
-                {
-                    // Создаем новый элемент PersonConference для текущей конференции
-
-
-                }
                 this.conference =
                     this.ConferenceLookup.SingleOrDefault(c => c.Model.Id == DataManager.Instance.GetPersonConferenceByID(this.Model.PersonConferenceId.ToString()).ConferenceId);
                 return this.conference;

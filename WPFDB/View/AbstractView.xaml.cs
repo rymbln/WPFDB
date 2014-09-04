@@ -10,15 +10,14 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace WPFDB.View
 {
     /// <summary>
-    /// Interaction logic for AbstractView.xaml
+    /// Interaction logic for AbstractFormView.xaml
     /// </summary>
-    public partial class AbstractView : UserControl
+    public partial class AbstractView : Window
     {
         public AbstractView()
         {

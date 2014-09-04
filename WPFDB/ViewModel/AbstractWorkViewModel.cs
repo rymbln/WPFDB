@@ -160,6 +160,7 @@ namespace WPFDB.ViewModel
                     return "Нет";
                 }
             }
+            set {}
         }
 
 

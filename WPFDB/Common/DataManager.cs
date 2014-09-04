@@ -397,7 +397,8 @@ namespace WPFDB.Common
 
         public void AddPersonConference(PersonConference obj)
         {
-
+            obj.PersonConferences_Detail = DefaultManager.Instance.DefaultPersonConferenceDetail(obj.PersonConferenceId);
+            obj.PersonConferences_Payment = DefaultManager.Instance.DefaultPersonConferencePayment(obj.PersonConferenceId);
             underlyingContext.PersonConferences.AddObject(obj);
             Save();
 
@@ -1031,9 +1032,9 @@ namespace WPFDB.Common
             return this.underlyingContext.Emails.Where(o => o.PersonId == id).ToList();
         }
 
-        public void AddAbstractWorkToAbstract(ViewModel.AbstractViewModel currentAbstract, AbstractWork abstractWork)
+        public void AddAbstractWorkToAbstract(Abstract currentAbstract, AbstractWork abstractWork)
         {
-            abstractWork.AbstractId = Guid.Parse(currentAbstract.Id);
+            abstractWork.AbstractId = currentAbstract.Id;
             this.underlyingContext.AbstractWorks.AddObject(abstractWork);
             Save();
 

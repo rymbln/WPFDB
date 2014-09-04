@@ -43,8 +43,7 @@
             <DataGrid Grid.Column="0"
                  SelectedItem="{Binding Path=CurrentPerson, Mode=TwoWay}" 
                               ItemsSource="{Binding Path=AllPersons}" 
-                              AutoGenerateColumns="False" IsReadOnly="True"
-                             >
+                              AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="First Name" Width="*"  Binding="{Binding Path=FirstName}" />
                     <DataGridTextColumn Header="Second Name" Width="*" Binding="{Binding Path=SecondName}" />

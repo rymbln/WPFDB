@@ -1,63 +1,164 @@
-﻿<UserControl x:Class="WPFDB.View.AbstractView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-   >
-    <Grid>
-        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="0" Grid.Row="0">
-            <HeaderedContentControl.Header>
-                Abstract
+﻿<Window x:Class="WPFDB.View.AbstractView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:s="clr-namespace:System;assembly=mscorlib"
+        xmlns:p="clr-namespace:WPFDB.Properties"
+        Title="AbstractFormView" MinHeight="600" MinWidth="1024"  Height="600" Width="1024">
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
 
-            </HeaderedContentControl.Header>
-            <ScrollViewer>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="Main Author:" />
-                    <TextBox  Grid.Row="1" 
-                          IsEnabled="False"
-                 Text="{Binding Path=AuthorName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
-                 Width="300" />
-                    <Label Grid.Row="2" Content="Email:" />
-                    <TextBox  Grid.Row="3" 
-                          IsEnabled="False"
-                 Text="{Binding Path=AuthorEmail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
-                 Width="300" />
-                    <Label Grid.Row="4" Content="Other Authors:" />
-                    <TextBox  Grid.Row="5" 
-                 Text="{Binding Path=OtherAuthors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
-                 Width="300" />
-                    <Label Grid.Row="6" Content="Name:" />
-                    <TextBox  Grid.Row="7" 
-                 Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
-                 Width="300" />
-                    <Label Grid.Row="8" Content="Text:" />
-                    <TextBox  Grid.Row="9" 
-                          Height="50"
-                 Text="{Binding Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
-                 Width="300" />
-                    <Label Grid.Row="10" Content="Link:" />
-                    <TextBox  Grid.Row="11" 
-                 Text="{Binding Path=Link, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
-                 Width="300" />
-                </Grid>
-            </ScrollViewer>
-        </HeaderedContentControl>
+        </ToolBar>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer  Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-    </Grid>
+                <HeaderedContentControl Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" 
+                                HorizontalContentAlignment="Stretch"
+                                Style="{StaticResource SubDisplayArea}" >
+                    <HeaderedContentControl.Header>
+                        Авторы тезиса
+                    </HeaderedContentControl.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
 
-</UserControl>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Style="{StaticResource LabelLeft}"
+                           Content="Автор:" />
+                        <TextBox Grid.Row="1" Style="{StaticResource TextBoxLarge}"
+                             Text="{Binding Path=AuthorName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+                        <Label Grid.Row="2" Style="{StaticResource LabelLeft}"
+                           Content="Email:" />
+                        <TextBox Grid.Row="3" Style="{StaticResource TextBoxLarge}"
+                           Text="{Binding Path=AuthorEmail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+                        <Label Grid.Row="4" Style="{StaticResource LabelLeft}"
+                           Content="Остальные авторы:" />
+                        <TextBox Grid.Row="5" Style="{StaticResource TextBoxLarge}"
+                           Text="{Binding Path=OtherAuthors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+                    </Grid>
+                </HeaderedContentControl>
+                <HeaderedContentControl Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" 
+                                HorizontalContentAlignment="Stretch"
+                                Style="{StaticResource SubDisplayArea}" >
+                    <HeaderedContentControl.Header>
+                        Тезис
+                    </HeaderedContentControl.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Style="{StaticResource LabelLeft}"
+                           Content="Тезис:" />
+                        <TextBox  Grid.Row="1" Style="{StaticResource TextBoxLarge}"
+                             Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+                        <Label Grid.Row="2" Style="{StaticResource LabelLeft}"
+                           Content="Описание:" />
+                        <TextBox Grid.Column="0" Grid.Row="3" Style="{StaticResource TextBoxLarge}"
+                             Text="{Binding Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+                    </Grid>
+                </HeaderedContentControl>
+                <HeaderedContentControl Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"  HorizontalAlignment="Stretch" 
+                                HorizontalContentAlignment="Stretch"
+                                Style="{StaticResource SubDisplayArea}" >
+                    <HeaderedContentControl.Header>
+                        Ссылка на документ
+                    </HeaderedContentControl.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Style="{StaticResource LabelLeft}"
+                           Content="Ссылка на документ:" />
+                        <TextBox  Grid.Column="1" Style="{StaticResource TextBoxLarge}"
+                             Text="{Binding Path=Link, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+                        <Button Grid.Column="2"  Command="{Binding FindFileCommand}" Content="Найти файл" ToolTip="{x:Static p:Resources.Save}"/>
+                        <Button Grid.Column="3"  Command="{Binding OpenFolderCommand}" Content="Открыть папку" ToolTip="{x:Static p:Resources.Save}"/>
+                        <Button Grid.Column="4"  Command="{Binding OpenFileCommand}" Content="Открыть файл" ToolTip="{x:Static p:Resources.Save}"/>
+                    </Grid>
+                </HeaderedContentControl>
+            </Grid>
+                </ScrollViewer>
+
+                    <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center"  />
+            <HeaderedContentControl Grid.Row="2"  HorizontalAlignment="Stretch" 
+                                HorizontalContentAlignment="Stretch"
+                                Style="{StaticResource SubDisplayArea}" >
+                <HeaderedContentControl.Header>
+                    Работы по тезису
+                </HeaderedContentControl.Header>
+                <DockPanel>
+                    <ToolBar DockPanel.Dock="Top">
+                        <Button Command="{Binding AddAbstractWorkCommand}" Content="Add" ToolTip="{x:Static p:Resources.Save}"/>
+                        <Separator/>
+                        <Button Command="{Binding RemoveAbstractWorkCommand}" Content="Remove" ToolTip="{x:Static p:Resources.Save}"/>
+                        <Separator/>
+                        <Button Command="{Binding SendEmailCommand}" Content="Send" ToolTip="{x:Static p:Resources.Save}"/>
+                        <Separator/>
+                    </ToolBar>
+                    <DataGrid AutoGenerateColumns="False" 
+                            ItemsSource="{Binding AbstractWorks}"
+                                  SelectedItem="{Binding CurrentAbstractWork}" CanUserAddRows="False" CanUserDeleteRows="False">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header= "Рецензент" IsReadOnly="True" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+
+                                            <ComboBox 
+                                                          IsEnabled="True"
+                                                          SelectedValuePath="." 
+                                                          SelectedItem="{Binding Path=Reviewer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=False,NotifyOnValidationError=False}" 
+                                                          ItemsSource="{Binding Path=ReviewersLookup}" 
+                                                          DisplayMemberPath="Name" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header= "Состояние" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox IsEnabled="True"
+                                                          SelectedValuePath="." 
+                                                          SelectedItem="{Binding Path=AbstractStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=False,NotifyOnValidationError=False}" 
+                                                          ItemsSource="{Binding Path=AbstractStatusLookup}" 
+                                                          DisplayMemberPath="Name" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Дата" IsReadOnly="True"  Binding="{Binding Path=DateWork, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True}" />
+                            <DataGridTextColumn Header="Послано подтверждение" IsReadOnly="True"  Binding="{Binding Path=IsSentByEmailName, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True}" />
+                               </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </HeaderedContentControl>
+        </Grid>
+    </DockPanel>
+
+
+</Window>

@@ -8,11 +8,6 @@
              xmlns:p="clr-namespace:WPFDB.Properties"
              mc:Ignorable="d" 
           >
-    <UserControl.Resources>
-        <DataTemplate DataType="{x:Type vm:AbstractViewModel}">
-            <view:AbstractView />
-        </DataTemplate>
-    </UserControl.Resources>
     <DockPanel>
         <ToolBar DockPanel.Dock="Top">
             <Button Command="{Binding OpenAbstractCommand}">
@@ -63,7 +58,7 @@
                 <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center"  />
                     <DataGrid Grid.Row="2"
 
-                              ItemsSource="{Binding Path=CurrentAbstractVM.Works}" 
+                              ItemsSource="{Binding Path=CurrentAbstractVM.AbstractWorks}" 
                               AutoGenerateColumns="False" IsReadOnly="True"
                              >
                         <DataGrid.Columns>
@@ -137,41 +132,4 @@
 
         </Grid>
     </DockPanel>
-
-    <!--<ContentControl 
-            Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"  HorizontalAlignment="Right" 
-            Content="{Binding Path=CurrentAbstract, Mode=TwoWay}" />-->
-
-    <!--<HeaderedContentControl  Grid.Row="1" Grid.Column="0" Style="{StaticResource SubDisplayArea}" >
-            <HeaderedContentControl.Header>
-                Abstract Works
-            </HeaderedContentControl.Header>
-            <ScrollViewer>
-            <StackPanel Orientation="Vertical">
-                
-                <ToolBarTray DockPanel.Dock="Top">
-                    <ToolBar>
-                        <Button Command="{Binding AddAbstractWorkCommand}" Content="Add" ToolTip="{x:Static p:Resources.Save}"/>
-                        <Separator/>
-                        <Button Command="{Binding RemoveAbstractWorkCommand}" Content="Remove" ToolTip="{x:Static p:Resources.Save}"/>
-                        <Separator/>
-                    </ToolBar>
-                </ToolBarTray>
-                
-                        <ListBox BorderThickness="0" 
-                     SelectedItem="{Binding Path=CurrentAbstractWork, Mode=TwoWay}" 
-                     ItemsSource="{Binding Path=AbstractWorks, UpdateSourceTrigger=PropertyChanged}" />
-                
-            </StackPanel>
-            </ScrollViewer>
-        </HeaderedContentControl>-->
-    <!--<ContentControl Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" 
-                        Content="{Binding Path=CurrentAbstractWork}" >
-            <ContentControl.Resources>
-                <DataTemplate DataType="{x:Type vm:AbstractWorkViewModel}">
-                    <view:AbstractWorkView/>
-                </DataTemplate>
-            </ContentControl.Resources>
-        </ContentControl>-->
-
 </UserControl>

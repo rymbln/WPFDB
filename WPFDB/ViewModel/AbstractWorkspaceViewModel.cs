@@ -94,8 +94,8 @@ namespace WPFDB.ViewModel
 
         private void OpenAbstract()
         {
-            AbstractFormViewModel vm = new AbstractFormViewModel(new AbstractViewModel(currentAbstract));
-            AbstractFormView v = new AbstractFormView{DataContext = vm};
+            AbstractViewModel vm = new AbstractViewModel(currentAbstract);
+            AbstractView v = new AbstractView{DataContext = vm};
             v.Show();
         }
 
@@ -117,38 +117,6 @@ namespace WPFDB.ViewModel
                 }
             }
         }
-
-        //public AbstractWorkViewModel CurrentAbstractWork
-        //{
-        //    get
-        //    {
-        //    //    this.currentAbstractWork = this.AbstractWorks.FirstOrDefault();
-        //        return this.currentAbstractWork;
-        //    }
-        //    set
-        //    {
-        //        this.currentAbstractWork = value;
-        //        OnPropertyChanged("CurrentAbstractWork");
-        //    }
-        //}
-
-
-        //private void AddAbstractWork()
-        //{
-        //    var abstractWork = DefaultManager.Instance.DefaultAbstractWork;
-        //    DataManager.Instance.AddAbstractWorkToAbstract(currentAbstract, abstractWork);
-
-        //    var vm = new AbstractWorkViewModel(abstractWork);
-        //    this.AbstractWorks.Add(vm);
-        //    this.CurrentAbstractWork = vm;
-        //}
-
-        //private void DeleteAbstractWork()
-        //{
-        //    DataManager.Instance.RemoveAbstractWork(CurrentAbstractWork.Model);
-        //    AbstractWorks.Remove(CurrentAbstractWork);
-        //    CurrentAbstractWork = null;
-        //}
     }
 }
 

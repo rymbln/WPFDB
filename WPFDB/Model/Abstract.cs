@@ -92,7 +92,16 @@ namespace WPFDB.Model
 
             get
             {
-                return this.AbstractWorks.OrderByDescending(o => o.DateWork).FirstOrDefault().Reviewer.Name;
+                try
+                {
+                    return this.AbstractWorks.OrderByDescending(o => o.DateWork).FirstOrDefault().Reviewer.Name;
+
+                }
+                catch (Exception)
+                {
+
+                    return "---";
+                }
             }
          
         }
@@ -101,7 +110,16 @@ namespace WPFDB.Model
         {
             get
             {
-                return this.AbstractWorks.OrderByDescending(o => o.DateWork).FirstOrDefault().AbstractStatus.Name;
+                try
+                {
+                    return this.AbstractWorks.OrderByDescending(o => o.DateWork).FirstOrDefault().AbstractStatus.Name;
+
+                }
+                catch (Exception)
+                {
+
+                    return "---";
+                }
             }
         }
 
@@ -109,7 +127,15 @@ namespace WPFDB.Model
         {
             get
             {
-                return this.AbstractWorks.OrderBy(o => o.DateWork).FirstOrDefault().DateWork;
+                try
+                {
+                    return this.AbstractWorks.OrderByDescending(o => o.DateWork).FirstOrDefault().DateWork;
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+              
             }
         }
     }
