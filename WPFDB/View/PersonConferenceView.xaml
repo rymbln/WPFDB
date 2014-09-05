@@ -5,7 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              >
-    <Border Style="{StaticResource DetailBorder}">
-        <TextBlock  Text="{Binding Path=CurrentConferenceName, UpdateSourceTrigger=PropertyChanged}"/>
-    </Border>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            
+        </Grid.RowDefinitions>
+    </Grid>
 </UserControl>

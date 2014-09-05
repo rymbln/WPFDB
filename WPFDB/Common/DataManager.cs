@@ -825,7 +825,7 @@ namespace WPFDB.Common
 
         public IEnumerable<PersonConference> GetPersonConferencesForPerson(Person person)
         {
-            return this.underlyingContext.PersonConferences.Where(o => o.PersonId == person.Id).ToList();
+            return this.underlyingContext.PersonConferences.Include(o => o.Conference).Where(o => o.PersonId == person.Id).ToList();
         }
 
         public IEnumerable<ContactType> GetAllContactTypes()

@@ -99,6 +99,7 @@
       <DependentUpon>ConferenceModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\PersonConference.cs" />
     <Compile Include="Validation\Helpers\ExcludeChar.cs" />
     <Compile Include="Validation\Helpers\Unique.cs" />
     <Compile Include="ViewModel\AbstractDetailsViewModel.cs" />
@@ -126,9 +127,7 @@
     <Compile Include="ViewModel\Knowalls\PaymentTypeViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\PaymentTypeWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\PersonConferenceDetailViewModel.cs" />
-    <Compile Include="ViewModel\PersonConferencePaymentViewModel.cs" />
     <Compile Include="ViewModel\PersonConferenceViewModel.cs" />
-    <Compile Include="ViewModel\PersonConferenceWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\PersonFormAbstractWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\PersonFormConferencesWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\PersonViewModel.cs" />
@@ -188,9 +187,6 @@
     </Compile>
     <Compile Include="View\Knowalls\OrderStatusWorkspaceView.xaml.cs">
       <DependentUpon>OrderStatusWorkspaceView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PersonConferencePaymentView.xaml.cs">
-      <DependentUpon>PersonConferencePaymentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Knowalls\CompanyDetailView.xaml.cs">
       <DependentUpon>CompanyDetailView.xaml</DependentUpon>
@@ -331,10 +327,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Knowalls\OrderStatusWorkspaceView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\PersonConferencePaymentView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

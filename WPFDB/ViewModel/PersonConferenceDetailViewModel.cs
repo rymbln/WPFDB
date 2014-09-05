@@ -14,7 +14,7 @@ namespace WPFDB.ViewModel
         private RankViewModel rank;
         private CompanyViewModel company;
 
-        public ObservableCollection<RankViewModel> RankLookup { get; private set; }
+     
         public ObservableCollection<CompanyViewModel> CompanyLookup { get; private set; } 
 
         public PersonConferences_Detail Model { get; private set; }
@@ -28,18 +28,7 @@ namespace WPFDB.ViewModel
             }
             this.Model = obj;
 
-            RankLookup = new ObservableCollection<RankViewModel>();
-            foreach (var rank in DataManager.Instance.GetAllRanks())
-            {
-                RankLookup.Add(new RankViewModel(rank));
-            }
-            RankLookup.CollectionChanged += (sender, e) =>
-            {
-                if (e.OldItems != null && e.OldItems.Contains(this.Rank))
-                {
-                    this.Rank = new RankViewModel(DefaultManager.Instance.DefaultRank);
-                }
-            };
+           
 
             CompanyLookup = new ObservableCollection<CompanyViewModel>();
             foreach (var company in DataManager.Instance.GetAllCompanies())
@@ -89,24 +78,24 @@ namespace WPFDB.ViewModel
             set { this.Model.IsAutoreg = value; this.OnPropertyChanged("IsAutoreg"); }
         }
 
-        public RankViewModel Rank
-        {
-            get
-            {
-                if (this.Model.Rank == null)
-                {
-                    this.Model.Rank = DefaultManager.Instance.DefaultRank;
-                }
-                this.rank = this.RankLookup.SingleOrDefault(r => r.Model == this.Model.Rank);
-                return this.rank;
-            }
-            set
-            {
-                this.rank = value;
-                this.Model.Rank = (value == null) ? null : value.Model;
-                this.OnPropertyChanged("Rank");
-            }
-        }
+        //public RankViewModel Rank
+        //{
+        //    get
+        //    {
+        //        if (this.Model.Rank == null)
+        //        {
+        //            this.Model.Rank = DefaultManager.Instance.DefaultRank;
+        //        }
+        //        this.rank = this.RankLookup.SingleOrDefault(r => r.Model == this.Model.Rank);
+        //        return this.rank;
+        //    }
+        //    set
+        //    {
+        //        this.rank = value;
+        //        this.Model.Rank = (value == null) ? null : value.Model;
+        //        this.OnPropertyChanged("Rank");
+        //    }
+        //}
         public CompanyViewModel Company
         {
             get

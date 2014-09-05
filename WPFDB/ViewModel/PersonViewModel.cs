@@ -20,10 +20,7 @@ namespace WPFDB.ViewModel
         private AddressViewModel currentAddress;
         private PhoneViewModel currentPhone;
 
-        private PersonConferenceDetailViewModel currentPersonConferenceDetail;
-        private PersonConferencePaymentViewModel currentPersonConferencePayment;
-        private PersonConferenceViewModel currentPersonConference;
-        private ConferenceViewModel currentConference;
+        private PersonConference currentPersonConference;
 
         public Person Model { get; private set; }
 
@@ -37,6 +34,12 @@ namespace WPFDB.ViewModel
             ScienceStatusLookup = new ObservableCollection<ScienceStatus>(DataManager.Instance.GetAllScienceStatuses());
             SexLookup = new ObservableCollection<Sex>(DataManager.Instance.GetAllSexes());
             SpecialityLookup = new ObservableCollection<Speciality>(DataManager.Instance.GetAllSpecialities());
+            OrderStatusLookup = new ObservableCollection<OrderStatus>(DataManager.Instance.GetAllOrderStatuses());
+            PaymentTypeLookup = new ObservableCollection<PaymentType>(DataManager.Instance.GetAllPaymentTypes());
+            CompanyLookup = new ObservableCollection<Company>(DataManager.Instance.GetAllCompanies());
+            RankLookup = new ObservableCollection<Rank>(DataManager.Instance.GetAllRanks());
+            
+
 
             PersonEmails = new ObservableCollection<EmailViewModel>();
             PersonAddresses = new ObservableCollection<AddressViewModel>();
@@ -81,21 +84,17 @@ namespace WPFDB.ViewModel
                 AllConferences.Add(new ConferenceViewModel(c));
             }
 
-            AllPersonConferences = new ObservableCollection<PersonConferenceViewModel>();
-            foreach (var pc in dm.GetPersonConferencesForPerson(Model))
-            {
-                AllPersonConferences.Add(new PersonConferenceViewModel(pc));
-            }
+            AllPersonConferences = new ObservableCollection<PersonConference>(dm.GetPersonConferencesForPerson(Model));
 
             this.CurrentPersonConference = AllPersonConferences.Count > 0 ? AllPersonConferences[0] : null;
 
             this.AllPersonConferences.CollectionChanged += (sender, e) =>
             {
-                if (e.OldItems != null && e.OldItems.Contains(this.CurrentPersonConference))
-                {
-                    this.CurrentPersonConference = null;
-                }
+                this.CurrentPersonConference = AllPersonConferences.Count > 0 ? AllPersonConferences[0] : null;
+
             };
+
+         
 
             this.PrintBadgeCommand = new DelegateCommand((o) => PrintBadge());
             this.PrintOrderCommand = new DelegateCommand((o) => PrintOrder());
@@ -138,15 +137,23 @@ namespace WPFDB.ViewModel
         public ObservableCollection<Sex> SexLookup { get; private set; }
         public ObservableCollection<Speciality> SpecialityLookup { get; private set; }
 
+        public ObservableCollection<Company> CompanyLookup { get; private set; }
+        public ObservableCollection<PaymentType> PaymentTypeLookup { get; private set; }
+        public ObservableCollection<OrderStatus> OrderStatusLookup { get; private set; }
+        public ObservableCollection<Rank> RankLookup { get; private set; }
+
         public ObservableCollection<EmailViewModel> PersonEmails { get; private set; }
         public ObservableCollection<AddressViewModel> PersonAddresses { get; private set; }
         public ObservableCollection<PhoneViewModel> PersonPhones { get; private set; }
 
-        public ObservableCollection<PersonConferenceViewModel> AllPersonConferences { get; private set; }
+        public ObservableCollection<PersonConference> AllPersonConferences { get; private set; }
         public ObservableCollection<ConferenceViewModel> AllConferences { get; private set; }
-        public string CurrentPersonConferenceName { get; private set; }
 
 
+        public string CurrentPersonConferenceName
+        {
+            get { return CurrentPersonConference.Conference.Name; }
+        }
 
         public ScienceDegree ScienceDegree
         {
@@ -498,7 +505,7 @@ namespace WPFDB.ViewModel
             dm.Rollback();
         }
 
-      
+
 
         public EmailViewModel CurrentEmail
         {
@@ -591,57 +598,215 @@ namespace WPFDB.ViewModel
             this.CurrentPhone = null;
         }
 
-        public ConferenceViewModel CurrentConference
+
+
+
+        public PersonConference CurrentPersonConference
         {
             get
             {
-                this.currentConference =
-                    this.AllConferences.FirstOrDefault(o => o.Id == this.CurrentPersonConference.Model.ConferenceId.ToString());
-                return this.currentConference;
+                return this.currentPersonConference;
+
+                this.OnPropertyChanged("Rank");
+                this.OnPropertyChanged("Company");
+                this.OnPropertyChanged("IsArrive");
+                this.OnPropertyChanged("DateArrive");
+                this.OnPropertyChanged("IsNeedBadge");
+                this.OnPropertyChanged("IsBadge");
+                this.OnPropertyChanged("IsAbstract");
+                this.OnPropertyChanged("IsAutoreg");
+
+                this.OnPropertyChanged("PaymentType");
+                this.OnPropertyChanged("Payment_Company");
+                this.OnPropertyChanged("PaymentDocument");
+                this.OnPropertyChanged("PaymentDate");
+                this.OnPropertyChanged("Money");
+                this.OnPropertyChanged("IsComplect");
+                this.OnPropertyChanged("OrderStatus");
+                this.OnPropertyChanged("OrderNumber");
             }
-            set
-            {
-                this.currentConference = value;
-                this.CurrentPersonConference.Model.Conference = (this.currentConference.Model);
-                this.OnPropertyChanged("CurrentConference");
-
-            }
-        }
-
-        public PersonConferenceDetailViewModel CurrentPersonConferenceDetail
-        {
-            get { return this.currentPersonConferenceDetail; }
-            set
-            {
-                this.currentPersonConferenceDetail = value;
-                this.OnPropertyChanged("CurrentPersonConferenceDetail");
-            }
-
-        }
-
-
-        public PersonConferencePaymentViewModel CurrentPersonConferencePayment
-        {
-            get { return this.currentPersonConferencePayment; }
-            set
-            {
-                this.currentPersonConferencePayment = value;
-                this.OnPropertyChanged("CurrentPersonConferencePayment");
-            }
-
-        }
-
-
-        public PersonConferenceViewModel CurrentPersonConference
-        {
-            get { return this.currentPersonConference; }
             set
             {
                 this.currentPersonConference = value;
-                this.CurrentPersonConferenceDetail = new PersonConferenceDetailViewModel(CurrentPersonConference.Model.PersonConferences_Detail);
-                this.CurrentPersonConferencePayment = new PersonConferencePaymentViewModel(CurrentPersonConference.Model.PersonConferences_Payment);
-                this.OnPropertyChanged("CurrentConference");
-                this.OnPropertyChanged("CurrentPersonConference");
+                this.OnPropertyChanged("CurrentPersonConferences");
+                this.OnPropertyChanged("Rank");
+                this.OnPropertyChanged("Company");
+                this.OnPropertyChanged("IsArrive");
+                this.OnPropertyChanged("DateArrive");
+                this.OnPropertyChanged("IsNeedBadge");
+                this.OnPropertyChanged("IsBadge");
+                this.OnPropertyChanged("IsAbstract");
+                this.OnPropertyChanged("IsAutoreg");
+
+                this.OnPropertyChanged("PaymentType");
+                this.OnPropertyChanged("Payment_Company");
+                this.OnPropertyChanged("PaymentDocument");
+                this.OnPropertyChanged("PaymentDate");
+                this.OnPropertyChanged("Money");
+                this.OnPropertyChanged("IsComplect");
+                this.OnPropertyChanged("OrderStatus");
+                this.OnPropertyChanged("OrderNumber");
+
+            }
+        }
+
+
+
+        public string PaymentDocument
+        {
+            get { return this.CurrentPersonConference.PersonConferences_Payment.PaymentDocument; }
+            set
+            {
+                this.CurrentPersonConference.PersonConferences_Payment.PaymentDocument = value;
+                this.OnPropertyChanged("PaymentDocument");
+            }
+        }
+        public DateTime? PaymentDate
+        {
+            get { return this.CurrentPersonConference.PersonConferences_Payment.PaymentDate ?? DateTime.Now; }
+            set { this.CurrentPersonConference.PersonConferences_Payment.PaymentDate = value; this.OnPropertyChanged("PaymentDate"); }
+        }
+        public Decimal Money
+        {
+            get { return this.CurrentPersonConference.PersonConferences_Payment.Money; }
+            set { this.CurrentPersonConference.PersonConferences_Payment.Money = value; this.OnPropertyChanged("Money"); }
+        }
+        public bool IsComplect
+        {
+            get { return this.CurrentPersonConference.PersonConferences_Payment.IsComplect; }
+            set { this.CurrentPersonConference.PersonConferences_Payment.IsComplect = value; this.OnPropertyChanged("IsComplect"); }
+        }
+        public int OrderNumber
+        {
+            get { return this.CurrentPersonConference.PersonConferences_Payment.OrderNumber; }
+            set { this.CurrentPersonConference.PersonConferences_Payment.OrderNumber = value; this.OnPropertyChanged("OrderNumber"); }
+        }
+
+        public Company Payment_Company
+        {
+            get
+            {
+                if (this.CurrentPersonConference.PersonConferences_Payment.Company == null)
+                {
+                    this.CurrentPersonConference.PersonConferences_Payment.Company = DefaultManager.Instance.DefaultCompany;
+                }
+                return this.CurrentPersonConference.PersonConferences_Payment.Company;
+            }
+            set
+            {
+                this.CurrentPersonConference.PersonConferences_Payment.Company = value;
+                this.OnPropertyChanged("Payment_Company");
+            }
+        }
+        public OrderStatus OrderStatus
+        {
+            get
+            {
+                if (this.CurrentPersonConference.PersonConferences_Payment.OrderStatus == null)
+                {
+                    this.CurrentPersonConference.PersonConferences_Payment.OrderStatus = DefaultManager.Instance.DefaultOrderStatus;
+                }
+                return this.CurrentPersonConference.PersonConferences_Payment.OrderStatus;
+            }
+            set
+            {
+                this.CurrentPersonConference.PersonConferences_Payment.OrderStatus = value;
+                this.OnPropertyChanged("OrderStatus");
+            }
+        }
+
+        public Rank Rank
+        {
+            get { return this.CurrentPersonConference.PersonConferences_Detail.Rank; }
+            set
+            {
+                this.CurrentPersonConference.PersonConferences_Detail.Rank = value;
+                OnPropertyChanged("Rank");
+            }
+        }
+
+        public Company Company
+        {
+            get { return this.CurrentPersonConference.PersonConferences_Detail.Company; }
+            set
+            {
+                this.CurrentPersonConference.PersonConferences_Detail.Company = value;
+                OnPropertyChanged("Company");
+            }
+        }
+
+        public bool IsArrive
+        {
+            get { return this.CurrentPersonConference.PersonConferences_Detail.IsArrive; }
+            set
+            {
+                this.CurrentPersonConference.PersonConferences_Detail.IsArrive = value;
+                OnPropertyChanged("IsArrive");
+            }
+        }
+
+        public DateTime? DateArrive
+        {
+            get { return this.CurrentPersonConference.PersonConferences_Detail.DateArrive; }
+            set
+            {
+                this.CurrentPersonConference.PersonConferences_Detail.DateArrive = value;
+                OnPropertyChanged("DateArrive");
+            }
+        }
+
+        public bool IsNeedBadge
+        {
+            get { return this.CurrentPersonConference.PersonConferences_Detail.IsNeedBadge; }
+            set
+            {
+                this.CurrentPersonConference.PersonConferences_Detail.IsNeedBadge = value;
+                OnPropertyChanged("IsNeedBadge");
+            }
+        }
+        public bool IsBadge
+        {
+            get { return this.CurrentPersonConference.PersonConferences_Detail.IsBadge; }
+            set
+            {
+                this.CurrentPersonConference.PersonConferences_Detail.IsBadge = value;
+                OnPropertyChanged("IsBadge");
+            }
+        }
+        public bool IsAbstract
+        {
+            get { return this.CurrentPersonConference.PersonConferences_Detail.IsAbstract; }
+            set
+            {
+                this.CurrentPersonConference.PersonConferences_Detail.IsAbstract = value;
+                OnPropertyChanged("IsAbstract");
+            }
+        }
+        public bool IsAutoreg
+        {
+            get { return this.CurrentPersonConference.PersonConferences_Detail.IsAutoreg; }
+            set
+            {
+                this.CurrentPersonConference.PersonConferences_Detail.IsAutoreg = value;
+                OnPropertyChanged("IsAutoreg");
+            }
+        }
+
+        public PaymentType PaymentType
+        {
+            get
+            {
+                if (this.CurrentPersonConference.PersonConferences_Payment.PaymentType == null)
+                {
+                    this.CurrentPersonConference.PersonConferences_Payment.PaymentType = DefaultManager.Instance.DefaultPaymentType;
+                }
+
+                return this.CurrentPersonConference.PersonConferences_Payment.PaymentType;
+            }
+            set
+            {
+                this.CurrentPersonConference.PersonConferences_Payment.PaymentType = value;
+                this.OnPropertyChanged("PaymentType");
             }
         }
 
@@ -649,15 +814,15 @@ namespace WPFDB.ViewModel
         {
             Conference c = DefaultManager.Instance.DefaultConference;
             var pc = DataManager.Instance.AddPersonConference(Model, c);
-            PersonConferenceViewModel pcvm = new PersonConferenceViewModel(pc);
-            AllPersonConferences.Add(pcvm);
-            CurrentPersonConference = pcvm;
+          
+            AllPersonConferences.Add(pc);
+            CurrentPersonConference = pc;
         }
 
         public void RemoveCurrentPersonConference()
         {
             AllPersonConferences.Remove(this.CurrentPersonConference);
-            dm.RemoveObject(dm.GetPersonConference(this.CurrentPersonConference.Model.Person, this.CurrentPersonConference.Model.Conference));
+            dm.RemoveObject(dm.GetPersonConference(this.CurrentPersonConference.Person, this.CurrentPersonConference.Conference));
 
             this.CurrentPersonConference = AllPersonConferences.Count > 0 ? AllPersonConferences[0] : null;
         }
