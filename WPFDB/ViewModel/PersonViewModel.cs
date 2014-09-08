@@ -814,17 +814,18 @@ namespace WPFDB.ViewModel
         {
             Conference c = DefaultManager.Instance.DefaultConference;
             var pc = DataManager.Instance.AddPersonConference(Model, c);
-          
+
             AllPersonConferences.Add(pc);
-            CurrentPersonConference = pc;
+            OnPropertyChanged("AllPersonConferences");
         }
 
         public void RemoveCurrentPersonConference()
         {
+            dm.RemovePersonConference(CurrentPersonConference);
             AllPersonConferences.Remove(this.CurrentPersonConference);
-            dm.RemoveObject(dm.GetPersonConference(this.CurrentPersonConference.Person, this.CurrentPersonConference.Conference));
+           
 
-            this.CurrentPersonConference = AllPersonConferences.Count > 0 ? AllPersonConferences[0] : null;
+            OnPropertyChanged("AllPersonConferences");
         }
 
         public void PrintBadge()

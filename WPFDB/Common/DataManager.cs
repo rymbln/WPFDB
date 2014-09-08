@@ -531,17 +531,18 @@ namespace WPFDB.Common
             Save();
         }
 
-        private void RemovePersonConference(PersonConference obj)
+        public void RemovePersonConference(PersonConference obj)
         {
             if (obj == null)
             {
                 throw new ArgumentNullException("personConference");
             }
-            var lst = obj.Abstracts.ToList();
-            foreach (var item in lst)
+          
+            foreach (var item in obj.Abstracts.ToList())
             {
                 RemoveAbstract(item);
             }
+
             this.underlyingContext.PersonConferences.DeleteObject(obj);
             Save();
         }
@@ -1211,5 +1212,7 @@ namespace WPFDB.Common
            //     .Include(o => o.PersonConferences_Detail)
                 .ToList();
         }
+
+
     }
 }
