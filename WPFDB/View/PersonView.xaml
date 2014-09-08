@@ -262,7 +262,7 @@
                                 <ScrollViewer>
                                     <HeaderedContentControl>
                                         <ListBox BorderThickness="0" 
-                                                 SelectedItem="{Binding Path=CurrentPersonConference, Mode=TwoWay}" 
+                                                 SelectedItem="{Binding Path=CurrentPersonConference, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                                  DisplayMemberPath="ConferenceName"
                                                  ItemsSource="{Binding Path=AllPersonConferences, UpdateSourceTrigger=PropertyChanged}" />
                                     </HeaderedContentControl>

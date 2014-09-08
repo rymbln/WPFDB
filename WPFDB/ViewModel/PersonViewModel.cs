@@ -83,17 +83,13 @@ namespace WPFDB.ViewModel
             {
                 AllConferences.Add(new ConferenceViewModel(c));
             }
+            AllConferences.CollectionChanged += AllConferences_CollectionChanged;
 
             AllPersonConferences = new ObservableCollection<PersonConference>(dm.GetPersonConferencesForPerson(Model));
 
             this.CurrentPersonConference = AllPersonConferences.Count > 0 ? AllPersonConferences[0] : null;
 
-            this.AllPersonConferences.CollectionChanged += (sender, e) =>
-            {
-                this.CurrentPersonConference = AllPersonConferences.Count > 0 ? AllPersonConferences[0] : null;
-
-            };
-
+        
          
 
             this.PrintBadgeCommand = new DelegateCommand((o) => PrintBadge());
@@ -114,6 +110,11 @@ namespace WPFDB.ViewModel
 
 
 
+        }
+
+        void AllConferences_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            this.CurrentPersonConference = AllPersonConferences.LastOrDefault();
         }
 
         public ICommand SaveCommand { get; private set; }
@@ -607,27 +608,35 @@ namespace WPFDB.ViewModel
             {
                 return this.currentPersonConference;
 
-                this.OnPropertyChanged("Rank");
-                this.OnPropertyChanged("Company");
-                this.OnPropertyChanged("IsArrive");
-                this.OnPropertyChanged("DateArrive");
-                this.OnPropertyChanged("IsNeedBadge");
-                this.OnPropertyChanged("IsBadge");
-                this.OnPropertyChanged("IsAbstract");
-                this.OnPropertyChanged("IsAutoreg");
+                //this.OnPropertyChanged("Rank");
+                //this.OnPropertyChanged("Company");
+                //this.OnPropertyChanged("IsArrive");
+                //this.OnPropertyChanged("DateArrive");
+                //this.OnPropertyChanged("IsNeedBadge");
+                //this.OnPropertyChanged("IsBadge");
+                //this.OnPropertyChanged("IsAbstract");
+                //this.OnPropertyChanged("IsAutoreg");
 
-                this.OnPropertyChanged("PaymentType");
-                this.OnPropertyChanged("Payment_Company");
-                this.OnPropertyChanged("PaymentDocument");
-                this.OnPropertyChanged("PaymentDate");
-                this.OnPropertyChanged("Money");
-                this.OnPropertyChanged("IsComplect");
-                this.OnPropertyChanged("OrderStatus");
-                this.OnPropertyChanged("OrderNumber");
+                //this.OnPropertyChanged("PaymentType");
+                //this.OnPropertyChanged("Payment_Company");
+                //this.OnPropertyChanged("PaymentDocument");
+                //this.OnPropertyChanged("PaymentDate");
+                //this.OnPropertyChanged("Money");
+                //this.OnPropertyChanged("IsComplect");
+                //this.OnPropertyChanged("OrderStatus");
+                //this.OnPropertyChanged("OrderNumber");
             }
             set
             {
-                this.currentPersonConference = value;
+                if (value == null)
+                {
+                   this.currentPersonConference = AllPersonConferences.LastOrDefault();
+                }
+                else
+                {
+                    this.currentPersonConference = value;
+                    
+                }
                 this.OnPropertyChanged("CurrentPersonConferences");
                 this.OnPropertyChanged("Rank");
                 this.OnPropertyChanged("Company");
@@ -814,18 +823,19 @@ namespace WPFDB.ViewModel
         {
             Conference c = DefaultManager.Instance.DefaultConference;
             var pc = DataManager.Instance.AddPersonConference(Model, c);
-
             AllPersonConferences.Add(pc);
-            OnPropertyChanged("AllPersonConferences");
+            CurrentPersonConference = AllPersonConferences.LastOrDefault();
+            //    OnPropertyChanged("AllPersonConferences");
         }
 
         public void RemoveCurrentPersonConference()
         {
+            
             dm.RemovePersonConference(CurrentPersonConference);
+     
             AllPersonConferences.Remove(this.CurrentPersonConference);
-           
-
-            OnPropertyChanged("AllPersonConferences");
+      //      CurrentPersonConference = AllPersonConferences.FirstOrDefault();
+            //OnPropertyChanged("AllPersonConferences");
         }
 
         public void PrintBadge()
