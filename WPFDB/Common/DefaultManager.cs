@@ -24,6 +24,7 @@ namespace WPFDB.Common
             }
         }
 
+
         public Conference DefaultConference
         {
             get
@@ -261,7 +262,7 @@ namespace WPFDB.Common
             }
         }
 
-        public Abstract DefaulAbstract
+        public Abstract DefaultAbstract
         {
             get
             {

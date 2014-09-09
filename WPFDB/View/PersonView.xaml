@@ -15,9 +15,9 @@
         <DataTemplate DataType="{x:Type vm:PhoneViewModel}">
             <view:PhoneView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:PersonConferenceViewModel}">
+        <!--<DataTemplate DataType="{x:Type vm:PersonConferenceViewModel}">
             <view:PersonConferenceDetailView/>
-        </DataTemplate>
+        </DataTemplate>-->
 
         <!--<DataTemplate DataType="{x:Type vm:PersonFormConferencesWorkspaceViewModel}">
             <view:PersonFormConferenceWorkspaceView />
@@ -100,7 +100,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Grid.Column="0" Grid.Row="0" Content="Workplace:" />
-                        <TextBox Grid.Column="1" Grid.Row="0" TextWrapping="Wrap"
+                        <TextBox Grid.Column="1" Grid.Row="0" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
                          Text="{Binding Path=WorkPlace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  />
 
                         <Label Grid.Column="0" Grid.Row="1" Content="Post:" />
@@ -375,7 +375,7 @@
                                               ItemsSource="{Binding Path=CompanyLookup}" 
                                               DisplayMemberPath="Name" />
 
-                                 <Label Grid.Column="0" Grid.Row="2" Content="Payment Document:" />
+                                    <Label Grid.Column="0" Grid.Row="2" Content="Payment Document:" />
                                     <TextBox Grid.Column="1" Grid.Row="2" 
                                              Text="{Binding Path=PaymentDocument, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
                                              />
@@ -384,7 +384,7 @@
                                                 Text="{Binding Path=PaymentDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
                                                 />
 
-          
+
                                     <Label Grid.Column="0" Grid.Row="4" Content="Money:" />
                                     <TextBox Grid.Column="1" Grid.Row="4" 
                                              Text="{Binding Path=Money, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
@@ -413,7 +413,92 @@
                 </TabItem>
                 <TabItem>
                     <TabItem.Header>Abstracts</TabItem.Header>
-                    <!--<ContentControl Content="{Binding Path=.PersonFormAbstractWorkspace}"  />-->
+                    <DockPanel>
+                        <ToolBarTray DockPanel.Dock="Top">
+                            <ToolBar>
+                                <Button Command="{Binding SaveCommand}" Content="Save" ToolTip="{x:Static p:Resources.Save}"/>
+                                <Separator/>
+                                <Button Command="{Binding CancelCommand}" Content="Cancel" ToolTip="{x:Static p:Resources.Save}"/>
+                                <Separator/>
+                                <Button Command="{Binding AddPersonConferenceCommand}" Content="Add Conference" ToolTip="{x:Static p:Resources.Save}"/>
+                                <Separator/>
+                                <Button Command="{Binding RemovePersonConferenceCommand}" Content="Remove Conference" ToolTip="{x:Static p:Resources.Save}"/>
+                                <Separator/>
+                                <Button Command="{Binding EditPersonConferenceCommand}" Content="Edit PersonConference" ToolTip="{x:Static p:Resources.Save}"/>
+                                <Separator/>
+                                <Button Command="{Binding AddAbstractCommand}" Content="Add Abstract" ToolTip="{x:Static p:Resources.Save}"/>
+                                <Separator/>
+                                <Button Command="{Binding RemoveAbstractCommand}" Content="Remove Abstract" ToolTip="{x:Static p:Resources.Save}"/>
+                                <Separator/>
+                            </ToolBar>
+                        </ToolBarTray>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <HeaderedContentControl Grid.Column="0" Grid.Row="0" Style="{StaticResource SubDisplayArea}" Margin="2">
+                                <HeaderedContentControl.Header>
+                                    Участие в конференциях
+                                </HeaderedContentControl.Header>
+                                <ScrollViewer>
+                                    <HeaderedContentControl>
+                                        <ListBox BorderThickness="0" 
+                                                 SelectedItem="{Binding Path=CurrentPersonConference, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                 DisplayMemberPath="ConferenceName"
+                                                 ItemsSource="{Binding Path=AllPersonConferences, UpdateSourceTrigger=PropertyChanged}" />
+                                    </HeaderedContentControl>
+                                </ScrollViewer>
+                            </HeaderedContentControl>
+
+                            <HeaderedContentControl  Style="{StaticResource SubDisplayArea}" Grid.Column="1" Margin="2">
+                                <HeaderedContentControl.Header>
+                                    Тезисы
+                                </HeaderedContentControl.Header>
+                                <ListBox BorderThickness="0" 
+                                                 SelectedItem="{Binding Path=CurrentAbstract, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                 DisplayMemberPath="Name"
+                                                 ItemsSource="{Binding Path=AllAbstracts, UpdateSourceTrigger=PropertyChanged}" />
+                            </HeaderedContentControl>
+
+                            <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="2" Margin="2">
+                                <HeaderedContentControl.Header>
+                                    Тезис
+                                </HeaderedContentControl.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                  <Label Grid.Row="0" Content="Other Authors:" />
+                                    <TextBox  Grid.Row="1" Style="{StaticResource TextBoxLarge}"
+                                             Text="{Binding Path=AbstractOtherAuthors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                                            />
+                                    <Label Grid.Row="2" Content="Name:" />
+                                    <TextBox  Grid.Row="3" Style="{StaticResource TextBoxLarge}"
+                                             Text="{Binding Path=AbstractName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                                  />
+                                    <Label Grid.Row="4" Content="Text:" />
+                                    <TextBox  Grid.Row="5" Style="{StaticResource TextBoxLarge}"
+                                              MaxHeight="150"
+                                                 Text="{Binding Path=AbstractText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                                       />
+                                    <Label Grid.Row="6" Content="Link:" />
+                                    <TextBox  Grid.Row="7" Style="{StaticResource TextBoxLarge}"
+                                             Text="{Binding Path=AbstractLink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                                            />
+                                </Grid>
+                            </HeaderedContentControl>
+                        </Grid>
+                    </DockPanel>
                 </TabItem>
 
             </TabControl>

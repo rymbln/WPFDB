@@ -19,6 +19,7 @@ namespace WPFDB.ViewModel
         private EmailViewModel currentEmail;
         private AddressViewModel currentAddress;
         private PhoneViewModel currentPhone;
+        private Abstract currentAbstract;
 
         private PersonConference currentPersonConference;
 
@@ -89,7 +90,9 @@ namespace WPFDB.ViewModel
 
             this.CurrentPersonConference = AllPersonConferences.Count > 0 ? AllPersonConferences[0] : null;
 
-        
+        AllAbstracts = new ObservableCollection<Abstract>(DataManager.Instance.GetAbstractsByPersonConferenceID(CurrentPersonConference.PersonConferenceId));
+
+            this.CurrentAbstract = AllAbstracts.FirstOrDefault();
          
 
             this.PrintBadgeCommand = new DelegateCommand((o) => PrintBadge());
@@ -108,7 +111,8 @@ namespace WPFDB.ViewModel
             this.DeleteAddressCommand = new DelegateCommand((o) => this.DeleteAddress(), (o) => this.CurrentAddress != null);
             this.DeletePhoneCommand = new DelegateCommand((o) => this.DeletePhone(), (o) => this.CurrentPhone != null);
 
-
+            this.AddAbstractCommand = new DelegateCommand((o) => this.AddAbstract());
+            this.RemoveAbstractCommand = new DelegateCommand(o => this.DeleteAbstract(), o => CurrentAbstract != null);
 
         }
 
@@ -132,6 +136,9 @@ namespace WPFDB.ViewModel
         public ICommand PrintBadgeCommand { get; private set; }
         public ICommand PrintOrderCommand { get; private set; }
 
+        public ICommand AddAbstractCommand { get; private set; }
+        public ICommand RemoveAbstractCommand { get; private set; }
+
 
         public ObservableCollection<ScienceDegree> ScienceDegreeLookup { get; private set; }
         public ObservableCollection<ScienceStatus> ScienceStatusLookup { get; private set; }
@@ -149,6 +156,8 @@ namespace WPFDB.ViewModel
 
         public ObservableCollection<PersonConference> AllPersonConferences { get; private set; }
         public ObservableCollection<ConferenceViewModel> AllConferences { get; private set; }
+
+        public ObservableCollection<Abstract>  AllAbstracts { get; private set; }
 
 
         public string CurrentPersonConferenceName
@@ -599,7 +608,26 @@ namespace WPFDB.ViewModel
             this.CurrentPhone = null;
         }
 
+        private void AddAbstract()
+        {
+            var abs = DefaultManager.Instance.DefaultAbstract;
+            abs.PersonConferenceId = CurrentPersonConference.PersonConferenceId;
+            DataManager.Instance.AddAbstract(abs);
+            AllAbstracts = new ObservableCollection<Abstract>(DataManager.Instance.GetAbstractsByPersonConferenceID(CurrentPersonConference.PersonConferenceId));
+            CurrentAbstract = AllAbstracts.LastOrDefault();
+            OnPropertyChanged("CurrentAbstract");
+            OnPropertyChanged("AllAbstracts");
+            
+        }
 
+        private void DeleteAbstract()
+        {
+            DataManager.Instance.RemoveAbstract(CurrentAbstract);
+            AllAbstracts = new ObservableCollection<Abstract>(DataManager.Instance.GetAbstractsByPersonConferenceID(CurrentPersonConference.PersonConferenceId));
+            CurrentAbstract = AllAbstracts.FirstOrDefault();
+            OnPropertyChanged("CurrentAbstract");
+            OnPropertyChanged("AllAbstracts");
+        }
 
 
         public PersonConference CurrentPersonConference
@@ -607,24 +635,6 @@ namespace WPFDB.ViewModel
             get
             {
                 return this.currentPersonConference;
-
-                //this.OnPropertyChanged("Rank");
-                //this.OnPropertyChanged("Company");
-                //this.OnPropertyChanged("IsArrive");
-                //this.OnPropertyChanged("DateArrive");
-                //this.OnPropertyChanged("IsNeedBadge");
-                //this.OnPropertyChanged("IsBadge");
-                //this.OnPropertyChanged("IsAbstract");
-                //this.OnPropertyChanged("IsAutoreg");
-
-                //this.OnPropertyChanged("PaymentType");
-                //this.OnPropertyChanged("Payment_Company");
-                //this.OnPropertyChanged("PaymentDocument");
-                //this.OnPropertyChanged("PaymentDate");
-                //this.OnPropertyChanged("Money");
-                //this.OnPropertyChanged("IsComplect");
-                //this.OnPropertyChanged("OrderStatus");
-                //this.OnPropertyChanged("OrderNumber");
             }
             set
             {
@@ -637,7 +647,13 @@ namespace WPFDB.ViewModel
                     this.currentPersonConference = value;
                     
                 }
+
+                AllAbstracts = new ObservableCollection<Abstract>(DataManager.Instance.GetAbstractsByPersonConferenceID(this.currentPersonConference.PersonConferenceId));
+                CurrentAbstract = AllAbstracts.FirstOrDefault();
+
                 this.OnPropertyChanged("CurrentPersonConferences");
+                this.OnPropertyChanged("AllAbstracts");
+                this.OnPropertyChanged("CurrentAbstract");
                 this.OnPropertyChanged("Rank");
                 this.OnPropertyChanged("Company");
                 this.OnPropertyChanged("IsArrive");
@@ -846,6 +862,116 @@ namespace WPFDB.ViewModel
         public void PrintOrder()
         {
 
+        }
+
+        public string AbstractOtherAuthors
+        {
+            get
+            {
+                if (CurrentAbstract != null)
+                {
+                    return this.CurrentAbstract.OtherAuthors;
+                }
+                else
+                {
+                    return null;
+                }
+           
+            }
+            set
+            {
+                if (CurrentAbstract != null)
+                {
+                    this.CurrentAbstract.OtherAuthors = value;
+                    OnPropertyChanged("AbstractOtherAuthors");
+                }
+            }
+        }
+
+        public string AbstractName
+        {
+            get
+            {
+                if (CurrentAbstract != null)
+                {
+                    return this.CurrentAbstract.Name;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                if (CurrentAbstract != null)
+                {
+                    this.CurrentAbstract.Name = value;
+                    OnPropertyChanged("AbstractName");
+                }
+            }
+        }
+        public string AbstractText
+        {
+            get
+            {
+                if (CurrentAbstract != null)
+                {
+                    return this.CurrentAbstract.Text;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                if (CurrentAbstract != null)
+                {
+                    this.CurrentAbstract.Text = value;
+                    OnPropertyChanged("AbstractText");
+                }
+            }
+        }
+        public string AbstractLink
+        {
+            get
+            {
+                if (CurrentAbstract != null)
+                {
+                    return this.CurrentAbstract.Link;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                if (CurrentAbstract != null)
+                {
+                    this.CurrentAbstract.Link = value;
+                    OnPropertyChanged("AbstractLink");
+                }
+            }
+        }
+
+
+        public Abstract CurrentAbstract
+        {
+            get { return this.currentAbstract; }
+            set
+            {
+                if (value != null)
+                {
+                    this.currentAbstract = value;
+                    OnPropertyChanged("CurrentAbstract");
+
+                    OnPropertyChanged("AbstractLink");
+                    OnPropertyChanged("AbstractText");
+                    OnPropertyChanged("AbstractName");
+                    OnPropertyChanged("AbstractOtherAuthors");
+                }
+            }
         }
     }
 }

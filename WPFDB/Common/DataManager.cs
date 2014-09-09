@@ -1205,14 +1205,19 @@ namespace WPFDB.Common
                 .ToList();
         }
 
-        public List<PersonConference> GetConferenceForPersonArrived(Guid guid)
+        public List<PersonConference> GetConferenceForPersonArrived(Guid id)
         {
             return underlyingContext.PersonConferences
-                .Where(o => o.PersonId == guid && o.PersonConferences_Detail.IsArrive == true)
+                .Where(o => o.PersonId == id && o.PersonConferences_Detail.IsArrive == true)
            //     .Include(o => o.PersonConferences_Detail)
                 .ToList();
         }
 
 
+
+        public  List<Abstract> GetAbstractsByPersonConferenceID(Guid id)
+        {
+            return underlyingContext.Abstracts.Where(o => o.PersonConferenceId == id).OrderBy(o => o.DateAdd).ToList();
+        }
     }
 }

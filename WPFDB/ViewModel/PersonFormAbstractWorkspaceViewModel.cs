@@ -55,7 +55,7 @@ namespace WPFDB.ViewModel
 
         public void AddPersonAbstract()
         {
-            var abs = DefaultManager.Instance.DefaulAbstract;
+            var abs = DefaultManager.Instance.DefaultAbstract;
             dm.AddAbstractToPerson(this.currentPerson.Model,abs);
             var vm = new AbstractDetailsViewModel(abs, currentPerson.Model);
             AllAbstracts.Add(vm);

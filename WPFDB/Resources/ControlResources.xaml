@@ -115,6 +115,7 @@
         <Setter Property="MinWidth" Value="75"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
     </Style>
 
     <Style TargetType="DatePicker">
