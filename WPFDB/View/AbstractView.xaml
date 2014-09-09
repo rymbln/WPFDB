@@ -6,9 +6,25 @@
         xmlns:p="clr-namespace:WPFDB.Properties"
         Title="AbstractFormView" MinHeight="600" MinWidth="1024"  Height="600" Width="1024">
     <DockPanel>
-        <ToolBar DockPanel.Dock="Top">
-
-        </ToolBar>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Command="{Binding SaveCommand}" Content="Save" ToolTip="{x:Static p:Resources.Save}"/>
+                <Separator/>
+                <Button Command="{Binding CancelCommand}" Content="Cancel" ToolTip="{x:Static p:Resources.Save}"/>
+                <Separator/>
+                <Button Command="ApplicationCommands.Undo" Content="{StaticResource UndoImage}" ToolTip="{x:Static p:Resources.Undo}"/>
+                <Button Command="ApplicationCommands.Redo" Content="{StaticResource RedoImage}" ToolTip="{x:Static p:Resources.Redo}"/>
+                <Button Command="ApplicationCommands.Cut" Content="{StaticResource CutImage}" ToolTip="{x:Static p:Resources.Cut}"/>
+                <Button Command="ApplicationCommands.Copy" Content="{StaticResource CopyImage}" ToolTip="{x:Static p:Resources.Copy}"/>
+                <Button Command="ApplicationCommands.Paste" Content="{StaticResource PasteImage}" ToolTip="{x:Static p:Resources.Paste}"/>
+                <Separator/>
+                <Button Command="{Binding SelectFileCommand}" Content="Выбрать файл" ToolTip="{x:Static p:Resources.Save}"/>
+                <Separator/>
+                <Button Command="{Binding OpenFileCommand}" Content="Открыть файл" ToolTip="{x:Static p:Resources.Save}"/>
+                <Separator/>
+                <Button Command="{Binding OpenFolderCommand}" Content="Открыть папку с файлом" ToolTip="{x:Static p:Resources.Save}"/>
+            </ToolBar>
+        </ToolBarTray>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -99,9 +115,7 @@
                            Content="Ссылка на документ:" />
                         <TextBox  Grid.Column="1" Style="{StaticResource TextBoxLarge}"
                              Text="{Binding Path=Link, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
-                        <Button Grid.Column="2"  Command="{Binding FindFileCommand}" Content="Найти файл" ToolTip="{x:Static p:Resources.Save}"/>
-                        <Button Grid.Column="3"  Command="{Binding OpenFolderCommand}" Content="Открыть папку" ToolTip="{x:Static p:Resources.Save}"/>
-                        <Button Grid.Column="4"  Command="{Binding OpenFileCommand}" Content="Открыть файл" ToolTip="{x:Static p:Resources.Save}"/>
+   
                     </Grid>
                 </HeaderedContentControl>
             </Grid>

@@ -27,6 +27,11 @@
             </Button>
             <TextBox x:Name="searchBox" Width="150" BorderBrush="LightGray" BorderThickness="1" 
                          Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" />
+            <Separator/>
+              <Button Command="{Binding OpenFileCommand}" Content="Открыть файл" ToolTip="{x:Static p:Resources.Save}"/>
+            <Separator/>
+            <Button Command="{Binding OpenFolderCommand}" Content="Открыть папку с файлом" ToolTip="{x:Static p:Resources.Save}"/>
+
         </ToolBar>
         <Grid>
             <Grid.ColumnDefinitions>

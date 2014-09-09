@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using Microsoft.Win32;
 using WPFDB.Common;
 using WPFDB.Model;
 using WPFDB.ViewModel.Helpers;
+
 
 namespace WPFDB.ViewModel
 {
@@ -30,6 +34,10 @@ namespace WPFDB.ViewModel
             }
             AddAbstractWorkCommand = new DelegateCommand(o => AddAbstractWork());
             RemoveAbstractWorkCommand = new DelegateCommand(o => RemoveAbstractWork(), o => CurrentAbstractWork != null);
+
+            this.SelectFileCommand = new DelegateCommand(o => SelectFile());
+            this.OpenFolderCommand = new DelegateCommand(o => OpenFolder());
+            this.OpenFileCommand = new DelegateCommand(o => OpenFile());
         }
 
         public ObservableCollection<AbstractWorkViewModel> AbstractWorks { get; private set; }
@@ -60,7 +68,8 @@ namespace WPFDB.ViewModel
         }
         private void Save()
         {
-
+            DataManager.Instance.Save();
+            
         }
         private void SendEmail()
         {
@@ -68,16 +77,31 @@ namespace WPFDB.ViewModel
         }
         private void OpenFolder()
         {
-
+            var strPath = Link.Substring(0,Link.LastIndexOf("\\"));
+            Process.Start("explorer.exe", strPath);
         }
         private void OpenFile()
         {
-
+            var strPath = Link;
+            Process.Start("explorer.exe", strPath);
         }
 
         private void SelectFile()
         {
+            // Create OpenFileDialog 
+            OpenFileDialog dlg = new OpenFileDialog();
 
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                string filename = dlg.FileName;
+                this.Link = filename;
+            }
         }
 
         public AbstractWorkViewModel CurrentAbstractWork

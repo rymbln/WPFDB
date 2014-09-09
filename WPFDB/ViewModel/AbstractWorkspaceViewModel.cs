@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.Win32;
 using WPFDB.Common;
 using WPFDB.Model;
 using WPFDB.View;
@@ -28,6 +30,11 @@ namespace WPFDB.ViewModel
 
             RefreshAbstracts();
 
+
+            this.SelectFileCommand = new DelegateCommand(o => SelectFile());
+            this.OpenFolderCommand = new DelegateCommand(o => OpenFolder());
+            this.OpenFileCommand = new DelegateCommand(o => OpenFile());
+
             this.OpenAbstractCommand = new DelegateCommand((o) => this.OpenAbstract());
             this.DeleteAbstractCommand = new DelegateCommand((o) => this.DeleteAbstract());
             this.RefreshCommand = new DelegateCommand((o) => this.RefreshAbstracts());
@@ -40,6 +47,10 @@ namespace WPFDB.ViewModel
         public ICommand RefreshCommand { get; private set; }
         public ICommand ApplyFiltersCommand { get; private set; }
 
+
+        public ICommand OpenFolderCommand { get; private set; }
+        public ICommand OpenFileCommand { get; private set; }
+        public ICommand SelectFileCommand { get; private set; }
 
         public ICommand OpenAbstractCommand{ get; private set; }
         public ICommand DeleteAbstractCommand { get; private set; }
@@ -98,7 +109,34 @@ namespace WPFDB.ViewModel
             AbstractView v = new AbstractView{DataContext = vm};
             v.Show();
         }
+        private void OpenFolder()
+        {
+            var strPath = CurrentAbstract.Link.Substring(0, CurrentAbstract.Link.LastIndexOf("\\"));
+            Process.Start("explorer.exe", strPath);
+        }
+        private void OpenFile()
+        {
+            var strPath = CurrentAbstract.Link;
+            Process.Start("explorer.exe", strPath);
+        }
 
+        private void SelectFile()
+        {
+            // Create OpenFileDialog 
+            OpenFileDialog dlg = new OpenFileDialog();
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                string filename = dlg.FileName;
+                CurrentAbstract.Link = filename;
+            }
+        }
         public string FilterText
         {
             get { return this.filterText; }
