@@ -84,9 +84,60 @@ namespace WPFDB.ViewModel
             }
             AllConferences.CollectionChanged += AllConferences_CollectionChanged;
 
-            AllPersonConferences = new ObservableCollection<PersonConference>(DataManager.Instance.GetPersonConferencesForPerson(Model));
+            // Проверяем режим работы конференция
+            if (DefaultManager.Instance.ConferenceMode)
+            {
+                var defConf = DefaultManager.Instance.DefaultConference;
+                var persConf = DataManager.Instance.GetPersonConference(Model, defConf);
+                if (persConf == null)
+                {
+                    var newPersConf = DataManager.Instance.CreateObject<PersonConference>();
+                    newPersConf.PersonConferenceId = GuidComb.Generate();
+                    newPersConf.PersonId = Model.Id;
+                    newPersConf.ConferenceId = defConf.Id;
+                    newPersConf.PersonConferences_Detail =
+                        DefaultManager.Instance.DefaultPersonConferenceDetail(newPersConf.PersonConferenceId);
+                    newPersConf.PersonConferences_Payment =
+                        DefaultManager.Instance.DefaultPersonConferencePayment(newPersConf.PersonConferenceId);
+                    DataManager.Instance.AddPersonConference(newPersConf);
+                }
+            }
+            // Проверяем режим работы регистрация
+            if (DefaultManager.Instance.RegistrationMode)
+            {
+                var defConf = DefaultManager.Instance.DefaultConference;
+                var persConf = DataManager.Instance.GetPersonConference(Model, defConf);
+                if (persConf == null)
+                {
+                    var newPersConf = DataManager.Instance.CreateObject<PersonConference>();
+                    newPersConf.PersonConferenceId = GuidComb.Generate();
+                    newPersConf.PersonId = Model.Id;
+                    newPersConf.ConferenceId = defConf.Id;
+                    newPersConf.PersonConferences_Detail =
+                        DefaultManager.Instance.DefaultPersonConferenceDetail(newPersConf.PersonConferenceId);
+                    newPersConf.PersonConferences_Detail.IsArrive = true;
+                    newPersConf.PersonConferences_Detail.DateArrive = DateTime.Now;
+                    newPersConf.PersonConferences_Payment =
+                        DefaultManager.Instance.DefaultPersonConferencePayment(newPersConf.PersonConferenceId);
+                    DataManager.Instance.AddPersonConference(newPersConf);
+                }
+                else
+                {
+                    persConf.PersonConferences_Detail.IsArrive = true;
+                    persConf.PersonConferences_Detail.DateArrive = DateTime.Now;
+                    DataManager.Instance.Save();
+                }
+            }
 
+
+            AllPersonConferences = new ObservableCollection<PersonConference>(DataManager.Instance.GetPersonConferencesForPerson(Model));
             CurrentPersonConference = AllPersonConferences.Count > 0 ? AllPersonConferences[0] : null;
+            if (DefaultManager.Instance.ConferenceMode || DefaultManager.Instance.RegistrationMode)
+            {
+                CurrentPersonConference =
+                    AllPersonConferences.SingleOrDefault(o => o.Conference == DefaultManager.Instance.DefaultConference);
+            }
+            
 
         AllAbstracts = new ObservableCollection<Abstract>(DataManager.Instance.GetAbstractsByPersonConferenceID(CurrentPersonConference.PersonConferenceId));
 
