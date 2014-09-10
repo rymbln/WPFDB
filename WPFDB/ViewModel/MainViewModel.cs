@@ -28,14 +28,15 @@ namespace WPFDB.ViewModel
 
         public MainViewModel()
         {
-            this.PersonWorkspace = new PersonWorkspaceViewModel();
-            this.AbstractWorkspace = new AbstractWorkspaceViewModel();
-            this.ImportWorkspace = new ImportWorkspaceViewModel();
+            PersonWorkspace = new PersonWorkspaceViewModel();
+            AbstractWorkspace = new AbstractWorkspaceViewModel();
+            ImportWorkspace = new ImportWorkspaceViewModel();
          
-            this.SaveCommand = new DelegateCommand((o) => this.Save());
-            this.OpenKnowallsCommand = new DelegateCommand((o) => this.OpenKnowalls());
-            this.FillDataCommand = new DelegateCommand((o) => this.FillDatabase());
-            this.EraseDataCommand = new DelegateCommand((o) => this.EraseData());
+            SaveCommand = new DelegateCommand((o) => this.Save());
+            OpenKnowallsCommand = new DelegateCommand((o) => this.OpenKnowalls());
+            FillDataCommand = new DelegateCommand((o) => this.FillDatabase());
+            EraseDataCommand = new DelegateCommand((o) => this.EraseData());
+            OpenSettingsCommand = new DelegateCommand(o => OpenSettings());
          }
 
         /// <summary>
@@ -43,6 +44,7 @@ namespace WPFDB.ViewModel
         /// </summary>
         public ICommand SaveCommand { get; private set; }
         public ICommand OpenKnowallsCommand { get; private set; }
+        public ICommand OpenSettingsCommand { get; private set; }
         public ICommand FillDataCommand { get; private set; }
         public ICommand EraseDataCommand { get; private set; }
 
@@ -60,6 +62,8 @@ namespace WPFDB.ViewModel
         /// <summary>
         /// Saves all changes made in the current sessions DataManager
         /// </summary>
+        /// 
+        /// 
         private void Save()
         {
             this.dm.Save();
@@ -81,6 +85,13 @@ namespace WPFDB.ViewModel
         {
             KnowallViewModel vm = new KnowallViewModel();
             KnowallView v = new KnowallView { DataContext = vm };
+            v.Show();
+        }
+
+        private void OpenSettings()
+        {
+           SettingsViewModel vm = new SettingsViewModel();
+            SettingsView v = new SettingsView {DataContext = vm};
             v.Show();
         }
 

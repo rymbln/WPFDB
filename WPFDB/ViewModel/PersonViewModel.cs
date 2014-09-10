@@ -25,11 +25,9 @@ namespace WPFDB.ViewModel
 
         public Person Model { get; private set; }
 
-        private DataManager dm = DataManager.Instance;
-
         public PersonViewModel(Person person)
         {
-            this.Model = person;
+            Model = person;
 
             ScienceDegreeLookup = new ObservableCollection<ScienceDegree>(DataManager.Instance.GetAllScienceDegrees());
             ScienceStatusLookup = new ObservableCollection<ScienceStatus>(DataManager.Instance.GetAllScienceStatuses());
@@ -52,9 +50,9 @@ namespace WPFDB.ViewModel
                     PersonEmails.Add(new EmailViewModel(email));
                 }
             }
-            this.PersonEmails.CollectionChanged += (sender, e) =>
+            PersonEmails.CollectionChanged += (sender, e) =>
             {
-                this.CurrentEmail = PersonEmails.FirstOrDefault();
+                CurrentEmail = PersonEmails.FirstOrDefault();
             };
             if (Model.Addresses.Count > 0)
             {
@@ -63,9 +61,9 @@ namespace WPFDB.ViewModel
                     PersonAddresses.Add(new AddressViewModel(adr));
                 }
             }
-            this.PersonAddresses.CollectionChanged += (sender, e) =>
+            PersonAddresses.CollectionChanged += (sender, e) =>
             {
-                this.CurrentAddress = PersonAddresses.FirstOrDefault();
+                CurrentAddress = PersonAddresses.FirstOrDefault();
             };
             if (Model.Phones.Count > 0)
             {
@@ -74,51 +72,51 @@ namespace WPFDB.ViewModel
                     PersonPhones.Add(new PhoneViewModel(phone));
                 }
             }
-            this.PersonPhones.CollectionChanged += (sender, e) =>
+            PersonPhones.CollectionChanged += (sender, e) =>
             {
-                this.CurrentPhone = PersonPhones.FirstOrDefault();
+                CurrentPhone = PersonPhones.FirstOrDefault();
             };
 
             AllConferences = new ObservableCollection<ConferenceViewModel>();
-            foreach (var c in dm.GetAllConferences())
+            foreach (var c in DataManager.Instance.GetAllConferences())
             {
                 AllConferences.Add(new ConferenceViewModel(c));
             }
             AllConferences.CollectionChanged += AllConferences_CollectionChanged;
 
-            AllPersonConferences = new ObservableCollection<PersonConference>(dm.GetPersonConferencesForPerson(Model));
+            AllPersonConferences = new ObservableCollection<PersonConference>(DataManager.Instance.GetPersonConferencesForPerson(Model));
 
-            this.CurrentPersonConference = AllPersonConferences.Count > 0 ? AllPersonConferences[0] : null;
+            CurrentPersonConference = AllPersonConferences.Count > 0 ? AllPersonConferences[0] : null;
 
         AllAbstracts = new ObservableCollection<Abstract>(DataManager.Instance.GetAbstractsByPersonConferenceID(CurrentPersonConference.PersonConferenceId));
 
-            this.CurrentAbstract = AllAbstracts.FirstOrDefault();
+            CurrentAbstract = AllAbstracts.FirstOrDefault();
          
 
-            this.PrintBadgeCommand = new DelegateCommand((o) => PrintBadge());
-            this.PrintOrderCommand = new DelegateCommand((o) => PrintOrder());
-            this.AddPersonConferenceCommand = new DelegateCommand((o) => this.AddPersonConference());
-            this.RemovePersonConferenceCommand = new DelegateCommand((o) => this.RemoveCurrentPersonConference(), (o) => this.CurrentPersonConference != null);
+            PrintBadgeCommand = new DelegateCommand(o => PrintBadge());
+            PrintOrderCommand = new DelegateCommand(o => PrintOrder());
+            AddPersonConferenceCommand = new DelegateCommand(o => AddPersonConference());
+            RemovePersonConferenceCommand = new DelegateCommand(o => RemoveCurrentPersonConference(), (o) => CurrentPersonConference != null);
 
 
-            this.SaveCommand = new DelegateCommand((o) => this.Save());
-            this.CancelCommand = new DelegateCommand((o) => this.Cancel());
+            SaveCommand = new DelegateCommand(o => Save());
+            CancelCommand = new DelegateCommand(o => Cancel());
 
-            this.AddEmailCommand = new DelegateCommand((o) => this.AddEmail());
-            this.AddAddressCommand = new DelegateCommand((o) => this.AddAddress());
-            this.AddPhoneCommand = new DelegateCommand((o) => this.AddPhone());
-            this.DeleteEmailCommand = new DelegateCommand((o) => this.DeleteEmail(), (o) => this.CurrentEmail != null);
-            this.DeleteAddressCommand = new DelegateCommand((o) => this.DeleteAddress(), (o) => this.CurrentAddress != null);
-            this.DeletePhoneCommand = new DelegateCommand((o) => this.DeletePhone(), (o) => this.CurrentPhone != null);
+            AddEmailCommand = new DelegateCommand(o => AddEmail());
+            AddAddressCommand = new DelegateCommand(o => AddAddress());
+            AddPhoneCommand = new DelegateCommand(o => AddPhone());
+            DeleteEmailCommand = new DelegateCommand(o => DeleteEmail(), (o) => CurrentEmail != null);
+            DeleteAddressCommand = new DelegateCommand(o => DeleteAddress(), (o) => CurrentAddress != null);
+            DeletePhoneCommand = new DelegateCommand(o => DeletePhone(), (o) => CurrentPhone != null);
 
-            this.AddAbstractCommand = new DelegateCommand((o) => this.AddAbstract());
-            this.RemoveAbstractCommand = new DelegateCommand(o => this.DeleteAbstract(), o => CurrentAbstract != null);
+            AddAbstractCommand = new DelegateCommand(o => AddAbstract());
+            RemoveAbstractCommand = new DelegateCommand(o => DeleteAbstract(), o => CurrentAbstract != null);
 
         }
 
         void AllConferences_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            this.CurrentPersonConference = AllPersonConferences.LastOrDefault();
+            CurrentPersonConference = AllPersonConferences.LastOrDefault();
         }
 
         public ICommand SaveCommand { get; private set; }
@@ -167,74 +165,44 @@ namespace WPFDB.ViewModel
 
         public ScienceDegree ScienceDegree
         {
-            get
-            {
-                if (this.Model.ScienceDegree == null)
-                {
-                    this.Model.ScienceDegree = DefaultManager.Instance.DefaultScienceDegree;
-
-                }
-                return this.Model.ScienceDegree;
-            }
+            get { return Model.ScienceDegree ?? (Model.ScienceDegree = DefaultManager.Instance.DefaultScienceDegree); }
 
             set
             {
-                this.Model.ScienceDegree = value;
-                this.OnPropertyChanged("ScienceDegree");
+                Model.ScienceDegree = value;
+                OnPropertyChanged("ScienceDegree");
             }
         }
 
         public ScienceStatus ScienceStatus
         {
-            get
-            {
-                if (this.Model.ScienceStatus == null)
-                {
-                    this.Model.ScienceStatus = DefaultManager.Instance.DefaultScienceStatus;
-                }
-                return this.Model.ScienceStatus;
-            }
+            get { return Model.ScienceStatus ?? (Model.ScienceStatus = DefaultManager.Instance.DefaultScienceStatus); }
 
             set
             {
-                this.Model.ScienceStatus = value;
-                this.OnPropertyChanged("ScienceStatus");
+                Model.ScienceStatus = value;
+                OnPropertyChanged("ScienceStatus");
             }
         }
 
         public Sex Sex
         {
-            get
-            {
-                if (this.Model.Sex == null)
-                {
-                    this.Model.Sex = DefaultManager.Instance.DefaultSex;
-
-                }
-                return this.Model.Sex;
-            }
+            get { return Model.Sex ?? (Model.Sex = DefaultManager.Instance.DefaultSex); }
 
             set
             {
-                this.Model.Sex = value;
-                this.OnPropertyChanged("Sex");
+                Model.Sex = value;
+                OnPropertyChanged("Sex");
             }
         }
         public Speciality Speciality
         {
-            get
-            {
-                if (this.Model.Speciality == null)
-                {
-                    this.Model.Speciality = DefaultManager.Instance.DefaultSpeciality;
-                }
-                return this.Model.Speciality;
-            }
+            get { return Model.Speciality ?? (Model.Speciality = DefaultManager.Instance.DefaultSpeciality); }
 
             set
             {
-                this.Model.Speciality = value;
-                this.OnPropertyChanged("Speciality");
+                Model.Speciality = value;
+                OnPropertyChanged("Speciality");
             }
         }
 
@@ -243,116 +211,116 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                return this.Model.FirstName;
+                return Model.FirstName;
             }
 
             set
             {
-                this.Model.FirstName = value;
-                this.OnPropertyChanged("FirstName");
+                Model.FirstName = value;
+                OnPropertyChanged("FirstName");
             }
         }
         public string SecondName
         {
             get
             {
-                return this.Model.SecondName;
+                return Model.SecondName;
             }
 
             set
             {
-                this.Model.SecondName = value;
-                this.OnPropertyChanged("SecondName");
+                Model.SecondName = value;
+                OnPropertyChanged("SecondName");
             }
         }
         public string ThirdName
         {
             get
             {
-                return this.Model.ThirdName;
+                return Model.ThirdName;
             }
 
             set
             {
-                this.Model.ThirdName = value;
-                this.OnPropertyChanged("ThirdName");
+                Model.ThirdName = value;
+                OnPropertyChanged("ThirdName");
             }
         }
         public DateTime? BirthDate
         {
             get
             {
-                return this.Model.BirthDate;
+                return Model.BirthDate;
             }
 
             set
             {
-                this.Model.BirthDate = value;
-                this.OnPropertyChanged("BirthDate");
+                Model.BirthDate = value;
+                OnPropertyChanged("BirthDate");
             }
         }
         public string WorkPlace
         {
             get
             {
-                return this.Model.WorkPlace;
+                return Model.WorkPlace;
             }
 
             set
             {
-                this.Model.WorkPlace = value;
-                this.OnPropertyChanged("WorkPlace");
+                Model.WorkPlace = value;
+                OnPropertyChanged("WorkPlace");
             }
         }
         public string Post
         {
             get
             {
-                return this.Model.Post;
+                return Model.Post;
             }
 
             set
             {
-                this.Model.Post = value;
-                this.OnPropertyChanged("Post");
+                Model.Post = value;
+                OnPropertyChanged("Post");
             }
         }
         public string Id
         {
-            get { return this.Model.Id.ToString(); }
+            get { return Model.Id.ToString(); }
             set { }
         }
         public int SourceId
         {
             get
             {
-                return this.Model.SourceId;
+                return Model.SourceId;
             }
 
             set
             {
-                this.Model.SourceId = value;
-                this.OnPropertyChanged("SourceId");
+                Model.SourceId = value;
+                OnPropertyChanged("SourceId");
             }
         }
         public bool IsMember
         {
             get
             {
-                return this.Model.Iacmac.IsMember;
+                return Model.Iacmac.IsMember;
             }
 
             set
             {
-                this.Model.Iacmac.IsMember = value;
-                this.OnPropertyChanged("IsMember");
+                Model.Iacmac.IsMember = value;
+                OnPropertyChanged("IsMember");
             }
         }
         public string IsMemberName
         {
             get
             {
-                if (this.Model.Iacmac.IsMember)
+                if (Model.Iacmac.IsMember)
                 {
                     return "Да";
                 }
@@ -366,20 +334,20 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                return this.Model.Iacmac.IsCardCreate;
+                return Model.Iacmac.IsCardCreate;
             }
 
             set
             {
-                this.Model.Iacmac.IsCardCreate = value;
-                this.OnPropertyChanged("IsCardCreate");
+                Model.Iacmac.IsCardCreate = value;
+                OnPropertyChanged("IsCardCreate");
             }
         }
         public string IsCardCreateName
         {
             get
             {
-                if (this.Model.Iacmac.IsCardCreate)
+                if (Model.Iacmac.IsCardCreate)
                 {
                     return "Да";
                 }
@@ -391,42 +359,42 @@ namespace WPFDB.ViewModel
         }
         public string FullName
         {
-            get { return this.Model.FullName; }
+            get { return Model.FullName; }
         }
         public string FullNameInitials
         {
-            get { return this.Model.FullNameInitials; }
+            get { return Model.FullNameInitials; }
         }
         public string Initials
         {
             get
             {
-                return this.Model.FirstName.Substring(1, 1) + "." + this.Model.SecondName.Substring(1, 1) + "." +
-                       this.Model.ThirdName.Substring(1, 1) + ".";
+                return Model.FirstName.Substring(1, 1) + "." + Model.SecondName.Substring(1, 1) + "." +
+                       Model.ThirdName.Substring(1, 1) + ".";
             }
         }
         public string WorkplacePostName
         {
-            get { return this.Model.WorkPlace + " (" + this.Model.Post + ")"; }
+            get { return Model.WorkPlace + " (" + Model.Post + ")"; }
         }
         public bool IsCardSent
         {
             get
             {
-                return this.Model.Iacmac.IsCardSent;
+                return Model.Iacmac.IsCardSent;
             }
 
             set
             {
-                this.Model.Iacmac.IsCardSent = value;
-                this.OnPropertyChanged("IsCardSent");
+                Model.Iacmac.IsCardSent = value;
+                OnPropertyChanged("IsCardSent");
             }
         }
         public string IsCardSentName
         {
             get
             {
-                if (this.Model.Iacmac.IsCardSent)
+                if (Model.Iacmac.IsCardSent)
                 {
                     return "Да";
                 }
@@ -442,20 +410,20 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                return this.Model.Iacmac.IsForm;
+                return Model.Iacmac.IsForm;
             }
 
             set
             {
-                this.Model.Iacmac.IsForm = value;
-                this.OnPropertyChanged("IsForm");
+                Model.Iacmac.IsForm = value;
+                OnPropertyChanged("IsForm");
             }
         }
         public string IsFormName
         {
             get
             {
-                if (this.Model.Iacmac.IsForm)
+                if (Model.Iacmac.IsForm)
                 {
                     return "Да";
                 }
@@ -469,50 +437,50 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                return this.Model.Iacmac.DateRegistration;
+                return Model.Iacmac.DateRegistration;
             }
 
             set
             {
-                this.Model.Iacmac.DateRegistration = value;
-                this.OnPropertyChanged("DateRegistration");
+                Model.Iacmac.DateRegistration = value;
+                OnPropertyChanged("DateRegistration");
             }
         }
         public int Number
         {
             get
             {
-                return this.Model.Iacmac.Number;
+                return Model.Iacmac.Number;
             }
 
             set
             {
-                this.Model.Iacmac.Number = value;
-                this.OnPropertyChanged("Number");
+                Model.Iacmac.Number = value;
+                OnPropertyChanged("Number");
             }
         }
         public string Code
         {
             get
             {
-                return this.Model.Iacmac.Code;
+                return Model.Iacmac.Code;
             }
 
             set
             {
-                this.Model.Iacmac.Code = value;
-                this.OnPropertyChanged("Code");
+                Model.Iacmac.Code = value;
+                OnPropertyChanged("Code");
             }
         }
 
         private void Save()
         {
-            dm.Save();
+            DataManager.Instance.Save();
         }
 
         private void Cancel()
         {
-            dm.Rollback();
+            DataManager.Instance.Rollback();
         }
 
 
@@ -521,12 +489,12 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                return this.currentEmail;
+                return currentEmail;
             }
             set
             {
-                this.currentEmail = value;
-                this.OnPropertyChanged("CurrentEmail");
+                currentEmail = value;
+                OnPropertyChanged("CurrentEmail");
 
             }
         }
@@ -535,12 +503,12 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                return this.currentAddress;
+                return currentAddress;
             }
             set
             {
-                this.currentAddress = value;
-                this.OnPropertyChanged("CurrentAddress");
+                currentAddress = value;
+                OnPropertyChanged("CurrentAddress");
             }
         }
 
@@ -548,64 +516,64 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                return this.currentPhone;
+                return currentPhone;
             }
             set
             {
-                this.currentPhone = value;
-                this.OnPropertyChanged("CurrentPhone");
+                currentPhone = value;
+                OnPropertyChanged("CurrentPhone");
             }
         }
 
         private void AddEmail()
         {
             var email = DefaultManager.Instance.DefaultEmail;
-            this.dm.AddEmailToPerson(Model, email);
+            DataManager.Instance.AddEmailToPerson(Model, email);
 
             var vm = new EmailViewModel(email);
-            this.PersonEmails.Add(vm);
-            this.CurrentEmail = vm;
+            PersonEmails.Add(vm);
+            CurrentEmail = vm;
         }
 
         private void DeleteEmail()
         {
-            this.dm.RemoveEmail(Model, CurrentEmail.Model);
-            this.PersonEmails.Remove(CurrentEmail);
-            this.CurrentEmail = null;
+            DataManager.Instance.RemoveEmail(Model, CurrentEmail.Model);
+            PersonEmails.Remove(CurrentEmail);
+            CurrentEmail = null;
         }
 
         private void AddAddress()
         {
             var address = DefaultManager.Instance.DefaultAddress;
-            this.dm.AddAddressToPerson(Model, address);
+            DataManager.Instance.AddAddressToPerson(Model, address);
 
             var vm = new AddressViewModel(address);
-            this.PersonAddresses.Add(vm);
-            this.CurrentAddress = vm;
+            PersonAddresses.Add(vm);
+            CurrentAddress = vm;
         }
 
         private void DeleteAddress()
         {
-            this.dm.RemoveAddress(Model, CurrentAddress.Model);
-            this.PersonAddresses.Remove(CurrentAddress);
-            this.CurrentAddress = null;
+            DataManager.Instance.RemoveAddress(Model, CurrentAddress.Model);
+            PersonAddresses.Remove(CurrentAddress);
+            CurrentAddress = null;
         }
 
         private void AddPhone()
         {
             var phone = DefaultManager.Instance.DefaultPhone;
-            this.dm.AddPhoneToPerson(Model, phone);
+            DataManager.Instance.AddPhoneToPerson(Model, phone);
 
             var vm = new PhoneViewModel(phone);
-            this.PersonPhones.Add(vm);
-            this.CurrentPhone = vm;
+            PersonPhones.Add(vm);
+            CurrentPhone = vm;
         }
 
         private void DeletePhone()
         {
-            this.dm.RemovePhone(Model, CurrentPhone.Model);
-            this.PersonPhones.Remove(CurrentPhone);
-            this.CurrentPhone = null;
+            DataManager.Instance.RemovePhone(Model, CurrentPhone.Model);
+            PersonPhones.Remove(CurrentPhone);
+            CurrentPhone = null;
         }
 
         private void AddAbstract()
@@ -634,43 +602,35 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                return this.currentPersonConference;
+                return currentPersonConference;
             }
             set
             {
-                if (value == null)
-                {
-                   this.currentPersonConference = AllPersonConferences.LastOrDefault();
-                }
-                else
-                {
-                    this.currentPersonConference = value;
-                    
-                }
+                currentPersonConference = value ?? AllPersonConferences.LastOrDefault();
 
-                AllAbstracts = new ObservableCollection<Abstract>(DataManager.Instance.GetAbstractsByPersonConferenceID(this.currentPersonConference.PersonConferenceId));
+                AllAbstracts = new ObservableCollection<Abstract>(DataManager.Instance.GetAbstractsByPersonConferenceID(currentPersonConference.PersonConferenceId));
                 CurrentAbstract = AllAbstracts.FirstOrDefault();
 
-                this.OnPropertyChanged("CurrentPersonConferences");
-                this.OnPropertyChanged("AllAbstracts");
-                this.OnPropertyChanged("CurrentAbstract");
-                this.OnPropertyChanged("Rank");
-                this.OnPropertyChanged("Company");
-                this.OnPropertyChanged("IsArrive");
-                this.OnPropertyChanged("DateArrive");
-                this.OnPropertyChanged("IsNeedBadge");
-                this.OnPropertyChanged("IsBadge");
-                this.OnPropertyChanged("IsAbstract");
-                this.OnPropertyChanged("IsAutoreg");
+                OnPropertyChanged("CurrentPersonConferences");
+                OnPropertyChanged("AllAbstracts");
+                OnPropertyChanged("CurrentAbstract");
+                OnPropertyChanged("Rank");
+                OnPropertyChanged("Company");
+                OnPropertyChanged("IsArrive");
+                OnPropertyChanged("DateArrive");
+                OnPropertyChanged("IsNeedBadge");
+                OnPropertyChanged("IsBadge");
+                OnPropertyChanged("IsAbstract");
+                OnPropertyChanged("IsAutoreg");
 
-                this.OnPropertyChanged("PaymentType");
-                this.OnPropertyChanged("Payment_Company");
-                this.OnPropertyChanged("PaymentDocument");
-                this.OnPropertyChanged("PaymentDate");
-                this.OnPropertyChanged("Money");
-                this.OnPropertyChanged("IsComplect");
-                this.OnPropertyChanged("OrderStatus");
-                this.OnPropertyChanged("OrderNumber");
+                OnPropertyChanged("PaymentType");
+                OnPropertyChanged("Payment_Company");
+                OnPropertyChanged("PaymentDocument");
+                OnPropertyChanged("PaymentDate");
+                OnPropertyChanged("Money");
+                OnPropertyChanged("IsComplect");
+                OnPropertyChanged("OrderStatus");
+                OnPropertyChanged("OrderNumber");
 
             }
         }
@@ -679,159 +639,152 @@ namespace WPFDB.ViewModel
 
         public string PaymentDocument
         {
-            get { return this.CurrentPersonConference.PersonConferences_Payment.PaymentDocument; }
+            get { return CurrentPersonConference.PersonConferences_Payment.PaymentDocument; }
             set
             {
-                this.CurrentPersonConference.PersonConferences_Payment.PaymentDocument = value;
-                this.OnPropertyChanged("PaymentDocument");
+                CurrentPersonConference.PersonConferences_Payment.PaymentDocument = value;
+                OnPropertyChanged("PaymentDocument");
             }
         }
         public DateTime? PaymentDate
         {
-            get { return this.CurrentPersonConference.PersonConferences_Payment.PaymentDate ?? DateTime.Now; }
-            set { this.CurrentPersonConference.PersonConferences_Payment.PaymentDate = value; this.OnPropertyChanged("PaymentDate"); }
+            get { return CurrentPersonConference.PersonConferences_Payment.PaymentDate ?? DateTime.Now; }
+            set { CurrentPersonConference.PersonConferences_Payment.PaymentDate = value; OnPropertyChanged("PaymentDate"); }
         }
         public Decimal Money
         {
-            get { return this.CurrentPersonConference.PersonConferences_Payment.Money; }
-            set { this.CurrentPersonConference.PersonConferences_Payment.Money = value; this.OnPropertyChanged("Money"); }
+            get { return CurrentPersonConference.PersonConferences_Payment.Money; }
+            set { CurrentPersonConference.PersonConferences_Payment.Money = value; OnPropertyChanged("Money"); }
         }
         public bool IsComplect
         {
-            get { return this.CurrentPersonConference.PersonConferences_Payment.IsComplect; }
-            set { this.CurrentPersonConference.PersonConferences_Payment.IsComplect = value; this.OnPropertyChanged("IsComplect"); }
+            get { return CurrentPersonConference.PersonConferences_Payment.IsComplect; }
+            set { CurrentPersonConference.PersonConferences_Payment.IsComplect = value; OnPropertyChanged("IsComplect"); }
         }
         public int OrderNumber
         {
-            get { return this.CurrentPersonConference.PersonConferences_Payment.OrderNumber; }
-            set { this.CurrentPersonConference.PersonConferences_Payment.OrderNumber = value; this.OnPropertyChanged("OrderNumber"); }
+            get { return CurrentPersonConference.PersonConferences_Payment.OrderNumber; }
+            set { CurrentPersonConference.PersonConferences_Payment.OrderNumber = value; OnPropertyChanged("OrderNumber"); }
         }
 
         public Company Payment_Company
         {
             get
             {
-                if (this.CurrentPersonConference.PersonConferences_Payment.Company == null)
+                if (CurrentPersonConference.PersonConferences_Payment.Company == null)
                 {
-                    this.CurrentPersonConference.PersonConferences_Payment.Company = DefaultManager.Instance.DefaultCompany;
+                    CurrentPersonConference.PersonConferences_Payment.Company = DefaultManager.Instance.DefaultCompany;
                 }
-                return this.CurrentPersonConference.PersonConferences_Payment.Company;
+                return CurrentPersonConference.PersonConferences_Payment.Company;
             }
             set
             {
-                this.CurrentPersonConference.PersonConferences_Payment.Company = value;
-                this.OnPropertyChanged("Payment_Company");
+                CurrentPersonConference.PersonConferences_Payment.Company = value;
+                OnPropertyChanged("Payment_Company");
             }
         }
         public OrderStatus OrderStatus
         {
-            get
-            {
-                if (this.CurrentPersonConference.PersonConferences_Payment.OrderStatus == null)
-                {
-                    this.CurrentPersonConference.PersonConferences_Payment.OrderStatus = DefaultManager.Instance.DefaultOrderStatus;
-                }
-                return this.CurrentPersonConference.PersonConferences_Payment.OrderStatus;
+            get {
+                return CurrentPersonConference.PersonConferences_Payment.OrderStatus ??
+                       (CurrentPersonConference.PersonConferences_Payment.OrderStatus =
+                           DefaultManager.Instance.DefaultOrderStatus);
             }
             set
             {
-                this.CurrentPersonConference.PersonConferences_Payment.OrderStatus = value;
-                this.OnPropertyChanged("OrderStatus");
+                CurrentPersonConference.PersonConferences_Payment.OrderStatus = value;
+                OnPropertyChanged("OrderStatus");
             }
         }
 
         public Rank Rank
         {
-            get { return this.CurrentPersonConference.PersonConferences_Detail.Rank; }
+            get { return CurrentPersonConference.PersonConferences_Detail.Rank; }
             set
             {
-                this.CurrentPersonConference.PersonConferences_Detail.Rank = value;
+                CurrentPersonConference.PersonConferences_Detail.Rank = value;
                 OnPropertyChanged("Rank");
             }
         }
 
         public Company Company
         {
-            get { return this.CurrentPersonConference.PersonConferences_Detail.Company; }
+            get { return CurrentPersonConference.PersonConferences_Detail.Company; }
             set
             {
-                this.CurrentPersonConference.PersonConferences_Detail.Company = value;
+                CurrentPersonConference.PersonConferences_Detail.Company = value;
                 OnPropertyChanged("Company");
             }
         }
 
         public bool IsArrive
         {
-            get { return this.CurrentPersonConference.PersonConferences_Detail.IsArrive; }
+            get { return CurrentPersonConference.PersonConferences_Detail.IsArrive; }
             set
             {
-                this.CurrentPersonConference.PersonConferences_Detail.IsArrive = value;
+                CurrentPersonConference.PersonConferences_Detail.IsArrive = value;
                 OnPropertyChanged("IsArrive");
             }
         }
 
         public DateTime? DateArrive
         {
-            get { return this.CurrentPersonConference.PersonConferences_Detail.DateArrive; }
+            get { return CurrentPersonConference.PersonConferences_Detail.DateArrive; }
             set
             {
-                this.CurrentPersonConference.PersonConferences_Detail.DateArrive = value;
+                CurrentPersonConference.PersonConferences_Detail.DateArrive = value;
                 OnPropertyChanged("DateArrive");
             }
         }
 
         public bool IsNeedBadge
         {
-            get { return this.CurrentPersonConference.PersonConferences_Detail.IsNeedBadge; }
+            get { return CurrentPersonConference.PersonConferences_Detail.IsNeedBadge; }
             set
             {
-                this.CurrentPersonConference.PersonConferences_Detail.IsNeedBadge = value;
+                CurrentPersonConference.PersonConferences_Detail.IsNeedBadge = value;
                 OnPropertyChanged("IsNeedBadge");
             }
         }
         public bool IsBadge
         {
-            get { return this.CurrentPersonConference.PersonConferences_Detail.IsBadge; }
+            get { return CurrentPersonConference.PersonConferences_Detail.IsBadge; }
             set
             {
-                this.CurrentPersonConference.PersonConferences_Detail.IsBadge = value;
+                CurrentPersonConference.PersonConferences_Detail.IsBadge = value;
                 OnPropertyChanged("IsBadge");
             }
         }
         public bool IsAbstract
         {
-            get { return this.CurrentPersonConference.PersonConferences_Detail.IsAbstract; }
+            get { return CurrentPersonConference.PersonConferences_Detail.IsAbstract; }
             set
             {
-                this.CurrentPersonConference.PersonConferences_Detail.IsAbstract = value;
+                CurrentPersonConference.PersonConferences_Detail.IsAbstract = value;
                 OnPropertyChanged("IsAbstract");
             }
         }
         public bool IsAutoreg
         {
-            get { return this.CurrentPersonConference.PersonConferences_Detail.IsAutoreg; }
+            get { return CurrentPersonConference.PersonConferences_Detail.IsAutoreg; }
             set
             {
-                this.CurrentPersonConference.PersonConferences_Detail.IsAutoreg = value;
+                CurrentPersonConference.PersonConferences_Detail.IsAutoreg = value;
                 OnPropertyChanged("IsAutoreg");
             }
         }
 
         public PaymentType PaymentType
         {
-            get
-            {
-                if (this.CurrentPersonConference.PersonConferences_Payment.PaymentType == null)
-                {
-                    this.CurrentPersonConference.PersonConferences_Payment.PaymentType = DefaultManager.Instance.DefaultPaymentType;
-                }
-
-                return this.CurrentPersonConference.PersonConferences_Payment.PaymentType;
+            get {
+                return CurrentPersonConference.PersonConferences_Payment.PaymentType ??
+                       (CurrentPersonConference.PersonConferences_Payment.PaymentType =
+                           DefaultManager.Instance.DefaultPaymentType);
             }
             set
             {
-                this.CurrentPersonConference.PersonConferences_Payment.PaymentType = value;
-                this.OnPropertyChanged("PaymentType");
+                CurrentPersonConference.PersonConferences_Payment.PaymentType = value;
+                OnPropertyChanged("PaymentType");
             }
         }
 
@@ -847,9 +800,9 @@ namespace WPFDB.ViewModel
         public void RemoveCurrentPersonConference()
         {
             
-            dm.RemovePersonConference(CurrentPersonConference);
+            DataManager.Instance.RemovePersonConference(CurrentPersonConference);
      
-            AllPersonConferences.Remove(this.CurrentPersonConference);
+            AllPersonConferences.Remove(CurrentPersonConference);
       //      CurrentPersonConference = AllPersonConferences.FirstOrDefault();
             //OnPropertyChanged("AllPersonConferences");
         }
@@ -870,7 +823,7 @@ namespace WPFDB.ViewModel
             {
                 if (CurrentAbstract != null)
                 {
-                    return this.CurrentAbstract.OtherAuthors;
+                    return CurrentAbstract.OtherAuthors;
                 }
                 else
                 {
@@ -882,7 +835,7 @@ namespace WPFDB.ViewModel
             {
                 if (CurrentAbstract != null)
                 {
-                    this.CurrentAbstract.OtherAuthors = value;
+                    CurrentAbstract.OtherAuthors = value;
                     OnPropertyChanged("AbstractOtherAuthors");
                 }
             }
@@ -894,7 +847,7 @@ namespace WPFDB.ViewModel
             {
                 if (CurrentAbstract != null)
                 {
-                    return this.CurrentAbstract.Name;
+                    return CurrentAbstract.Name;
                 }
                 else
                 {
@@ -905,7 +858,7 @@ namespace WPFDB.ViewModel
             {
                 if (CurrentAbstract != null)
                 {
-                    this.CurrentAbstract.Name = value;
+                    CurrentAbstract.Name = value;
                     OnPropertyChanged("AbstractName");
                 }
             }
@@ -916,7 +869,7 @@ namespace WPFDB.ViewModel
             {
                 if (CurrentAbstract != null)
                 {
-                    return this.CurrentAbstract.Text;
+                    return CurrentAbstract.Text;
                 }
                 else
                 {
@@ -927,7 +880,7 @@ namespace WPFDB.ViewModel
             {
                 if (CurrentAbstract != null)
                 {
-                    this.CurrentAbstract.Text = value;
+                    CurrentAbstract.Text = value;
                     OnPropertyChanged("AbstractText");
                 }
             }
@@ -938,7 +891,7 @@ namespace WPFDB.ViewModel
             {
                 if (CurrentAbstract != null)
                 {
-                    return this.CurrentAbstract.Link;
+                    return CurrentAbstract.Link;
                 }
                 else
                 {
@@ -949,7 +902,7 @@ namespace WPFDB.ViewModel
             {
                 if (CurrentAbstract != null)
                 {
-                    this.CurrentAbstract.Link = value;
+                    CurrentAbstract.Link = value;
                     OnPropertyChanged("AbstractLink");
                 }
             }
@@ -958,12 +911,12 @@ namespace WPFDB.ViewModel
 
         public Abstract CurrentAbstract
         {
-            get { return this.currentAbstract; }
+            get { return currentAbstract; }
             set
             {
                 if (value != null)
                 {
-                    this.currentAbstract = value;
+                    currentAbstract = value;
                     OnPropertyChanged("CurrentAbstract");
 
                     OnPropertyChanged("AbstractLink");

@@ -1119,8 +1119,18 @@ namespace WPFDB.Common
 
         public Conference GetConferenceBySourceId(int id)
         {
-            var obj = underlyingContext.Conferences.FirstOrDefault(o => o.SourceId == id);
-            return obj;
+            return underlyingContext.Conferences.FirstOrDefault(o => o.SourceId == id);
+            
+        }
+
+        public Conference GetConferenceById(Guid id)
+        {
+            return underlyingContext.Conferences.FirstOrDefault(o => o.Id == id);
+        }
+
+        public Conference GetConferenceByName(string name)
+        {
+            return underlyingContext.Conferences.FirstOrDefault(o => o.Name == name);
         }
 
         public PersonConference GetPersonConferenceBySourceID(int p)
@@ -1218,6 +1228,17 @@ namespace WPFDB.Common
         public  List<Abstract> GetAbstractsByPersonConferenceID(Guid id)
         {
             return underlyingContext.Abstracts.Where(o => o.PersonConferenceId == id).OrderBy(o => o.DateAdd).ToList();
+        }
+
+        public Propertie GetPropertyValue(string name)
+        {
+            return underlyingContext.Properties.SingleOrDefault(o => o.Name == name);
+        }
+
+        public void AddPropertie(Propertie obj)
+        {
+            underlyingContext.Properties.AddObject(obj);
+            Save();
         }
     }
 }

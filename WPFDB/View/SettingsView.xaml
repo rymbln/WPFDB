@@ -1,0 +1,45 @@
+﻿<Window x:Class="WPFDB.View.SettingsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SettingsView" Width="640" Height="480">
+    <DockPanel>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Command="{Binding SaveCommand}" Content="{StaticResource SaveImage}" />
+                <Button ></Button>
+                <Separator/>
+                <Button Command="ApplicationCommands.Undo" Content="{StaticResource UndoImage}"/>
+                <Button Command="ApplicationCommands.Redo" Content="{StaticResource RedoImage}"/>
+                <Button Command="ApplicationCommands.Cut" Content="{StaticResource CutImage}" />
+                <Button Command="ApplicationCommands.Copy" Content="{StaticResource CopyImage}" />
+                <Button Command="ApplicationCommands.Paste" Content="{StaticResource PasteImage}" />
+            </ToolBar>
+        </ToolBarTray>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="70*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock  Grid.Column="0" Grid.Row="0" Text="Активная конференция" />
+            <ComboBox Grid.Column="1" Grid.Row="0"  
+                      SelectedValuePath="." 
+                      SelectedItem="{Binding Path=ACTIVE_CONFERENCE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
+                      ItemsSource="{Binding Path=ConferenceLookup}" 
+                      DisplayMemberPath="Name"  />
+            
+            <TextBlock  Grid.Column="0" Grid.Row="1" Text="Режим конференции" />
+            <CheckBox Grid.Column="1" Grid.Row="1" 
+                      IsChecked="{Binding Path=IsConferenceMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+            <TextBlock  Grid.Column="0" Grid.Row="2" Text="Режим регистрации" />
+            <CheckBox Grid.Column="1" Grid.Row="2" 
+                      IsChecked="{Binding Path=IsRegistrationMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+
+
+        </Grid>
+        </DockPanel>
+</Window>

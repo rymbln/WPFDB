@@ -16,7 +16,7 @@
         <AssociationConnector Association="ConferenceModel.FK_SpecialityPerson" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ConferenceModel.Conference" Width="1.75" PointX="8.25" PointY="16" />
         <EntityTypeShape EntityType="ConferenceModel.User" Width="2.75" PointX="19.125" PointY="18" />
-        <EntityTypeShape EntityType="ConferenceModel.Propertie" Width="2.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ConferenceModel.Propertie" Width="2.5" PointX="4.125" PointY="1.25" />
         <EntityTypeShape EntityType="ConferenceModel.PersonConference" Width="2.375" PointX="8.25" PointY="11.75" />
         <EntityTypeShape EntityType="ConferenceModel.Rank" Width="1.5" PointX="14.625" PointY="15.5" />
         <EntityTypeShape EntityType="ConferenceModel.Company" Width="2.5" PointX="15" PointY="10.5" />

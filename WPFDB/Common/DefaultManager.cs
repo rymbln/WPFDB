@@ -24,18 +24,185 @@ namespace WPFDB.Common
             }
         }
 
+        public bool ConferenceMode
+        {
+            get
+            {
+                var defConf = DataManager.Instance.GetPropertyValue("CONFERENCE_MODE");
+                if (defConf == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "CONFERENCE_MODE";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = "False";
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = 0;
+                    newProp.ValueDecimal = 0;
+                    newProp.ValueLogic = false;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                defConf = DataManager.Instance.GetPropertyValue("CONFERENCE_MODE");
+                return defConf.ValueLogic;
+            }
+            set
+            {
+                var defConf = DataManager.Instance.GetPropertyValue("CONFERENCE_MODE");
+                if (defConf == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "CONFERENCE_MODE";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = "False";
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = 0;
+                    newProp.ValueDecimal = 0;
+                    newProp.ValueLogic = false;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                else
+                {
+                    if (value)
+                    {
+                        defConf.ValueGuid = defConf.Id;
+                        defConf.ValueString = "True";
+                        defConf.ValueDate = DateTime.Now;
+                        defConf.ValueInt = 1;
+                        defConf.ValueDecimal = 1;
+                        defConf.ValueLogic = true;
+                    }
+                    else
+                    {
+                        defConf.ValueGuid = defConf.Id;
+                        defConf.ValueString = "False";
+                        defConf.ValueDate = DateTime.Now;
+                        defConf.ValueInt = 0;
+                        defConf.ValueDecimal = 0;
+                        defConf.ValueLogic = false;
+                    }
+
+                    DataManager.Instance.Save();
+                }
+            }
+        }
+
+        public bool RegistrationMode
+        {
+            get
+            {
+                var defConf = DataManager.Instance.GetPropertyValue("REGISTRATION_MODE");
+                if (defConf == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "REGISTRATION_MODE";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = "False";
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = 0;
+                    newProp.ValueDecimal = 0;
+                    newProp.ValueLogic = false;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                defConf = DataManager.Instance.GetPropertyValue("REGISTRATION_MODE");
+                return defConf.ValueLogic;
+            }
+            set
+            {
+                var defConf = DataManager.Instance.GetPropertyValue("REGISTRATION_MODE");
+                if (defConf == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "REGISTRATION_MODE";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = "False";
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = 0;
+                    newProp.ValueDecimal = 0;
+                    newProp.ValueLogic = false;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                else
+                {
+                    if (value)
+                    {
+                        defConf.ValueGuid = defConf.Id;
+                        defConf.ValueString = "True";
+                        defConf.ValueDate = DateTime.Now;
+                        defConf.ValueInt = 1;
+                        defConf.ValueDecimal = 1;
+                        defConf.ValueLogic = true;
+                    }
+                    else
+                    {
+                        defConf.ValueGuid = defConf.Id;
+                        defConf.ValueString = "False";
+                        defConf.ValueDate = DateTime.Now;
+                        defConf.ValueInt = 0;
+                        defConf.ValueDecimal = 0;
+                        defConf.ValueLogic = false;
+                    }
+
+                    DataManager.Instance.Save();
+                }
+            }
+        }
 
         public Conference DefaultConference
         {
             get
             {
-                var list = DataManager.Instance.GetAllConferences();
-                var obj = list.FirstOrDefault(o => o.Code == "+");
+                var defConf = DataManager.Instance.GetPropertyValue("ACTIVE_CONFERENCE");
+                if (defConf == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "ACTIVE_CONFERENCE";
+                    var conf = DataManager.Instance.GetConferenceBySourceId(0);
+                    newProp.ValueGuid = conf.Id;
+                    newProp.ValueString = conf.Name;
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = conf.SourceId;
+                    newProp.ValueDecimal = 1;
+                    newProp.ValueLogic = true;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                defConf = DataManager.Instance.GetPropertyValue("ACTIVE_CONFERENCE");
+                var obj = DataManager.Instance.GetConferenceById(defConf.ValueGuid);
                 if (obj == null)
                 {
-                    obj = list.FirstOrDefault(o => o.Code == "-");
+                    obj = DataManager.Instance.GetConferenceByName(defConf.ValueString);
                 }
                 return obj;
+            }
+            set
+            {
+                var defConf = DataManager.Instance.GetPropertyValue("ACTIVE_CONFERENCE");
+                if (defConf == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "ACTIVE_CONFERENCE";
+                    newProp.ValueGuid = value.Id;
+                    newProp.ValueString = value.Name;
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = value.SourceId;
+                    newProp.ValueDecimal = 1;
+                    newProp.ValueLogic = true;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                else
+                {
+                    defConf.ValueGuid = value.Id;
+                    defConf.ValueString = value.Name;
+                    defConf.ValueDate = DateTime.Now;
+                    defConf.ValueInt = value.SourceId;
+                    defConf.ValueDecimal = 1;
+                    defConf.ValueLogic = true;
+                    DataManager.Instance.Save();
+                }
             }
         }
 
