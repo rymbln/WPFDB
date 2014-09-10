@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,35 +22,31 @@ namespace WPFDB.ViewModel
 
         private Person currentPerson { get; set; }
         private CurrentPersonViewModel currentPersonVM { get; set; }
-        private ConferenceViewModel filterConference { get; set; }
+        private Conference conferenceFilter { get; set; }
+        private bool isFilterConference { get; set; }
+
         // private bool filterAllConferences;
         private string filterText = "";
 
         public PersonWorkspaceViewModel()
         {
+            isFilterConference = false;
+
             AllPersons = new ObservableCollection<Person>();
             AllPersonsDB = new ObservableCollection<Person>();
             AllPersons.CollectionChanged += AllPersonsCollectionChanged;
-         //   AllPersons = new ObservableCollection<Person>(DataManager.Instance.GetAllPersons(FilterText, null));
+    
             RefreshPersons();
-           //// this.CurrentPerson = AllPersons.Count > 0 ? AllPersons[0] : null;
 
-           // this.AllPersons.CollectionChanged += (sender, e) =>
-           // {
-           //     if (e.OldItems != null && e.OldItems.Contains(this.CurrentPerson))
-           //     {
-           //         this.CurrentPerson = AllPersons.FirstOrDefault();
-           //     }
-           // };
+            ConferenceLookup = new ObservableCollection<Conference>(DataManager.Instance.GetAllConferences());
 
 
-            this.AddPersonCommand = new DelegateCommand((o) => this.AddPerson());
-            this.DeletePersonCommand = new DelegateCommand((o) => this.DeleteCurrentPerson());
-            this.RefreshCommand = new DelegateCommand((o) => this.RefreshPersons());
-            this.OpenPersonCommand = new DelegateCommand((o) => this.OpenPerson());
-            //this.ApplyFiltersCommand = new DelegateCommand((o) => ApplyFilter(FilterText));
-            //  this.ApplyFiltersCommand = new DelegateCommand((o) => this.ApplyFilters());
-
+           AddPersonCommand = new DelegateCommand((o) => this.AddPerson());
+           DeletePersonCommand = new DelegateCommand((o) => this.DeleteCurrentPerson());
+           RefreshCommand = new DelegateCommand((o) => this.RefreshPersons());
+           OpenPersonCommand = new DelegateCommand((o) => this.OpenPerson());
+            ToogleConferenceFilterCommand = new DelegateCommand(o=> ToggleConferenceFilter());
+        
         }
 
         public ICommand AddPersonCommand { get; private set; }
@@ -57,10 +54,50 @@ namespace WPFDB.ViewModel
         public ICommand RefreshCommand { get; private set; }
         public ICommand OpenPersonCommand { get; private set; }
         public ICommand ApplyFiltersCommand { get; private set; }
+        public ICommand ToogleConferenceFilterCommand { get; private set; }
+        
 
 
         public ObservableCollection<Person> AllPersons { get; private set; }
         public ObservableCollection<Person> AllPersonsDB { get; private set; }
+        public ObservableCollection<Conference>  ConferenceLookup { get; private set; }
+
+        private void ToggleConferenceFilter()
+        {
+            IsFilterConference = !IsFilterConference;
+        }
+
+        public Conference ConferenceFilter
+        {
+            get { return this.conferenceFilter; }
+            set
+            {
+                conferenceFilter = value;
+                OnPropertyChanged("ConferenceFilter");
+            }
+        }
+
+        public bool IsFilterConference
+        {
+            get
+            {
+                return isFilterConference;
+                
+            }
+            set
+            {
+                isFilterConference = value;
+                OnPropertyChanged("IsFilterConference");
+                if (isFilterConference)
+                {
+                    FilterPersons();
+                }
+                else
+                {
+                    RefreshPersons();
+                }
+            }
+        }
 
         public Person CurrentPerson
         {
@@ -85,16 +122,7 @@ namespace WPFDB.ViewModel
                 OnPropertyChanged("CurrentPersonVM");
             }
         }
-        public ConferenceViewModel FilterConference
-        {
-            get { return this.filterConference; }
-            set
-            {
-                this.filterConference = value;
-                OnPropertyChanged("FilterConference");
-            }
-        }
-
+       
         private void AddPerson()
         {
             Person p = DefaultManager.Instance.DefaultPerson;
@@ -116,7 +144,9 @@ namespace WPFDB.ViewModel
         private void RefreshPersons()
         {
             filterText = "";
+            isFilterConference = false;
             this.OnPropertyChanged("FilterText");
+            this.OnPropertyChanged("IsFilterConference");
             AllPersonsDB = new ObservableCollection<Person>(DataManager.Instance.GetAllPersons());
             AllPersons = AllPersonsDB;
             this.OnPropertyChanged("AllPersons");
@@ -124,7 +154,18 @@ namespace WPFDB.ViewModel
         }
         private void FilterPersons()
         {
-            AllPersons = new ObservableCollection<Person>(AllPersonsDB.Where(o => o.ToFilterString.ToUpper().Contains(filterText.ToUpper())));
+            if (isFilterConference)
+            {
+                AllPersonsDB =
+                    new ObservableCollection<Person>(DataManager.Instance.GetAllPersonForConference(ConferenceFilter.Id));
+                        AllPersons = new ObservableCollection<Person>(AllPersonsDB.Where(o => o.ToFilterString.ToUpper().Contains(filterText.ToUpper())));
+            }
+            else
+            {
+                AllPersons =
+                    new ObservableCollection<Person>(
+                        AllPersonsDB.Where(o => o.ToFilterString.ToUpper().Contains(filterText.ToUpper())));
+            }
             this.OnPropertyChanged("AllPersons");
             this.CurrentPerson = AllPersons.Count > 0 ? AllPersons[0] : null;
         }

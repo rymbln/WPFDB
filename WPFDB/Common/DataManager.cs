@@ -66,9 +66,15 @@ namespace WPFDB.Common
 
         #region Getting Lists
 
+        public IEnumerable<Person> GetAllPersonForConference(Guid conf)
+        {
+            return underlyingContext.PersonConferences.Where(o => o.Conference.Id == conf).Include(o=>o.Person).Select(o=>o.Person);
+
+        }
+
         public IEnumerable<Person> GetAllPersons()
         {
-            return this.underlyingContext.Persons.ToList();
+            return this.underlyingContext.Persons.Include(o => o.PersonConferences).ToList();
         }
         public IEnumerable<Conference> GetAllConferences()
         {

@@ -17,7 +17,7 @@ namespace WPFDB.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private DataManager dm = DataManager.Instance;
-       
+
 
 
         /// <summary>
@@ -31,13 +31,13 @@ namespace WPFDB.ViewModel
             PersonWorkspace = new PersonWorkspaceViewModel();
             AbstractWorkspace = new AbstractWorkspaceViewModel();
             ImportWorkspace = new ImportWorkspaceViewModel();
-         
+
             SaveCommand = new DelegateCommand((o) => this.Save());
             OpenKnowallsCommand = new DelegateCommand((o) => this.OpenKnowalls());
             FillDataCommand = new DelegateCommand((o) => this.FillDatabase());
             EraseDataCommand = new DelegateCommand((o) => this.EraseData());
             OpenSettingsCommand = new DelegateCommand(o => OpenSettings());
-         }
+        }
 
         /// <summary>
         /// Gets the command to save all changes made in the current sessions DataManager
@@ -90,10 +90,48 @@ namespace WPFDB.ViewModel
 
         private void OpenSettings()
         {
-           SettingsViewModel vm = new SettingsViewModel();
-            SettingsView v = new SettingsView {DataContext = vm};
+            SettingsViewModel vm = new SettingsViewModel();
+            SettingsView v = new SettingsView { DataContext = vm };
             v.Show();
         }
+        public string ACTIVE_CONFERENCE
+        {
+            get { return "Текущая конференция: " + DefaultManager.Instance.DefaultConference.Name; }
+
+        }
+        public string IsConferenceMode
+        {
+            get
+            {
+                if (DefaultManager.Instance.ConferenceMode)
+                {
+                    return "Режим конференции: ВКЛ";
+                }
+                else
+                {
+                    return "Режим конференции: ВЫКЛ";
+                }
+                ;
+            }
+
+        }
+        public string IsRegistrationMode
+        {
+            get
+            {
+                if (DefaultManager.Instance.RegistrationMode)
+                {
+                    return "Режим регистрации: ВКЛ";
+                }
+                else
+                {
+                    return "Режим регистрации: ВЫКЛ";
+                }
+                ;
+            }
+
+        }
+
 
     }
 }

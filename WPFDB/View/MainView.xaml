@@ -69,10 +69,13 @@
                 <Button Command="ApplicationCommands.Copy" Content="{StaticResource CopyImage}" ToolTip="{x:Static p:Resources.Copy}"/>
                 <Button Command="ApplicationCommands.Paste" Content="{StaticResource PasteImage}" ToolTip="{x:Static p:Resources.Paste}"/>
                  </ToolBar>
+               
         </ToolBarTray>
 
         <StatusBar DockPanel.Dock="Bottom">
-            <StatusBarItem Content="Status Bar" />
+            <StatusBarItem Content="{Binding Path=ACTIVE_CONFERENCE,  UpdateSourceTrigger=PropertyChanged}" />
+            <StatusBarItem Content="{Binding Path=IsConferenceMode,  UpdateSourceTrigger=PropertyChanged}" />
+            <StatusBarItem Content="{Binding Path=IsRegistrationMode,  UpdateSourceTrigger=PropertyChanged}" />
         </StatusBar>
 
         <TabControl Padding="0">

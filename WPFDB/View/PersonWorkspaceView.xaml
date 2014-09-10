@@ -28,11 +28,21 @@
                 <AccessText Text="{x:Static p:Resources.RefreshMenu}"/>
             </Button>
             <Separator/>
-            <Button Command="{Binding ApplyFilterCommand}">
-                <AccessText Text="Filter"/>
-            </Button>
+                <TextBlock Text="Filter"/>
             <TextBox x:Name="searchBox" Width="150" BorderBrush="LightGray" BorderThickness="1" 
                          Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" />
+            <ToggleButton 
+                Content="Фильтр по конференции"
+               
+         
+                IsChecked="{Binding Path=IsFilterConference, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <ComboBox Width="150"
+                SelectedValuePath="." 
+                SelectedItem="{Binding Path=ConferenceFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
+                ItemsSource="{Binding Path=ConferenceLookup}" 
+                DisplayMemberPath="Name"  />
+ 
+           
         </ToolBar>
         <Grid>
             <Grid.ColumnDefinitions>
