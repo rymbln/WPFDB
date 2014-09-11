@@ -59,13 +59,11 @@ namespace WPFDB.ViewModel
                 }
             };
             this.Model = abstractWork;
-            this.SendEmailCommand = new DelegateCommand(o => this.SendEmail());
         }
 
         public ObservableCollection<UserViewModel> ReviewersLookup { get; private set; }
         public ObservableCollection<AbstractStatusViewModel> AbstractStatusLookup { get; private set; }
 
-        public ICommand SendEmailCommand { get; private set; }
 
         public bool IsSentByEmail
         {
@@ -128,15 +126,7 @@ namespace WPFDB.ViewModel
             }
         }
 
-        public void SendEmail()
-        {
-         
-            var lstEmail = new List<string>();
-            lstEmail.Add("ivan.trushin@antibiotic.ru");
-            EmailManager.Instance.SendMailForAbstract(lstEmail, "Test Email From WPFDB Conference",
-                "This email is sent for testing email manager module", @"D:\ELI_Validation_20140612.xls");
-        }
-
+ 
         public string ReviewerName
         {
             get { return Reviewer.Name; }

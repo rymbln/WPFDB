@@ -38,6 +38,8 @@ namespace WPFDB.ViewModel
             this.SelectFileCommand = new DelegateCommand(o => SelectFile());
             this.OpenFolderCommand = new DelegateCommand(o => OpenFolder());
             this.OpenFileCommand = new DelegateCommand(o => OpenFile());
+            SaveCommand = new DelegateCommand(o => Save());
+            SendEmailCommand = new DelegateCommand(o => SendEmail(), o=> CurrentAbstractWork != null);
         }
 
         public ObservableCollection<AbstractWorkViewModel> AbstractWorks { get; private set; }
@@ -74,7 +76,11 @@ namespace WPFDB.ViewModel
         private void SendEmail()
         {
 
+            var lstEmail = new List<string> {"ivan.trushin@antibiotic.ru"};
+            EmailManager.Instance.SendMailForAbstract(lstEmail, "Test Email From WPFDB Conference",
+                "This email is sent for testing email manager module", @"D:\ELI_Validation_20140612.xls");
         }
+
         private void OpenFolder()
         {
             var strPath = Link.Substring(0,Link.LastIndexOf("\\"));
@@ -89,10 +95,10 @@ namespace WPFDB.ViewModel
         private void SelectFile()
         {
             // Create OpenFileDialog 
-            OpenFileDialog dlg = new OpenFileDialog();
+            var dlg = new OpenFileDialog();
 
             // Display OpenFileDialog by calling ShowDialog method 
-            Nullable<bool> result = dlg.ShowDialog();
+            bool? result = dlg.ShowDialog();
 
 
             // Get the selected file name and display in a TextBox 

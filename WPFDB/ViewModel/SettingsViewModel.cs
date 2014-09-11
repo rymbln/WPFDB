@@ -45,5 +45,106 @@ namespace WPFDB.ViewModel
                OnPropertyChanged("IsRegistrationMode");
            }
        }
+
+       public string MailServer
+       {
+           get { return DefaultManager.Instance.MailServer; }
+           set
+           {
+               DefaultManager.Instance.MailServer = value;
+               OnPropertyChanged("MailServer");
+           }
+       }
+
+       public string MailPort
+       {
+           get { return DefaultManager.Instance.MailPort; }
+           set
+           {
+               DefaultManager.Instance.MailPort = value;
+               OnPropertyChanged("MailPort");
+           }
+       }
+       public string MailLogin
+       {
+           get { return DefaultManager.Instance.MailLogin; }
+           set
+           {
+               DefaultManager.Instance.MailLogin = value;
+               OnPropertyChanged("MailLogin");
+           }
+       }
+
+       public string MailPassword
+       {
+           get { return DefaultManager.Instance.MailPassword; }
+           set
+           {
+               DefaultManager.Instance.MailPassword = value;
+               OnPropertyChanged("MailPassword");
+           }
+       }
+
+       public string MailHeaderAbstract
+       {
+           get { return DefaultManager.Instance.MailHeaderAbstract; }
+           set
+           {
+               DefaultManager.Instance.MailHeaderAbstract = value;
+               OnPropertyChanged("MailHeaderAbstract");
+           }
+       }
+
+       public string MailHeaderPoster
+       {
+           get { return DefaultManager.Instance.MailHeaderPoster; }
+           set
+           {
+               DefaultManager.Instance.MailHeaderPoster = value;
+               OnPropertyChanged("MailHeaderPoster");
+           }
+       }
+
+       public string MailMessageWork
+       {
+           get { return DefaultManager.Instance.MailMessageWork; }
+           set
+           {
+               DefaultManager.Instance.MailMessageWork = value;
+               OnPropertyChanged("MailMessageWork");
+           }
+       }
+       public string MailMessagePositive
+       {
+           get { return DefaultManager.Instance.MailMessagePositive; }
+           set
+           {
+               DefaultManager.Instance.MailMessagePositive = value;
+               OnPropertyChanged("MailMessagePositive");
+           }
+       }
+
+       public string MailMessageNegative
+       {
+           get { return DefaultManager.Instance.MailMessageNegative; }
+           set
+           {
+               DefaultManager.Instance.MailMessageNegative = value;
+               OnPropertyChanged("MailMessageNegative");
+           }
+       }
+
+       public string MailMessageNegativeSecond
+       {
+           get { return DefaultManager.Instance.MailMessageNegativeSecond; }
+           set
+           {
+               DefaultManager.Instance.MailMessageNegativeSecond = value;
+               OnPropertyChanged("MailMessageNegativeSecond");
+           }
+       }
+
+
+
     }
 }

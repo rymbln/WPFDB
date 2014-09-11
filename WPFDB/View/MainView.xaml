@@ -88,6 +88,10 @@
                 <ContentControl Content="{Binding Path=.AbstractWorkspace}"  />
             </TabItem>
             <TabItem>
+                <TabItem.Header>Статистика</TabItem.Header>
+                <ContentControl Content="{Binding Path=.StatisticsWorkspace}"  />
+            </TabItem>
+            <TabItem>
                 <TabItem.Header>Imports</TabItem.Header>
                 <ContentControl Content="{Binding Path=.ImportWorkspace}"  />
             </TabItem>

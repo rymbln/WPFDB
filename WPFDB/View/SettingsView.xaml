@@ -24,6 +24,14 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock  Grid.Column="0" Grid.Row="0" Text="Активная конференция" />
             <ComboBox Grid.Column="1" Grid.Row="0"  
@@ -38,6 +46,42 @@
             <TextBlock  Grid.Column="0" Grid.Row="2" Text="Режим регистрации" />
             <CheckBox Grid.Column="1" Grid.Row="2" 
                       IsChecked="{Binding Path=IsRegistrationMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+
+            <TextBlock  Grid.Column="0" Grid.Row="3" Text="Почтовый сервер:" />
+            <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
+                <TextBlock Text="Адрес:" />
+                <TextBox Text="{Binding Path=MailServer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+                <TextBlock Text="Порт:" />
+                <TextBox Text="{Binding Path=MailPort, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+            </StackPanel>
+            <TextBlock  Grid.Column="0" Grid.Row="4" Text="Данные для входа:" />
+            <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
+                <TextBlock Text="Логин:" />
+                <TextBox Text="{Binding Path=MailLogin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+                <TextBlock Text="Пароль:" />
+                <TextBox Text="{Binding Path=MailPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+            </StackPanel>
+            <TextBlock Grid.Column="0" Grid.Row="5" Text="Заголовок письма для Тезисов:" />
+            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=MailHeaderAbstract, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+            <TextBlock Grid.Column="0" Grid.Row="6" Text="Заголовок письма для Постерной Сессии:" />
+            <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=MailHeaderPoster, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="7" Text="Сообщение В Работе:" />
+            <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Path=MailMessageWork, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+
+
+            <TextBlock Grid.Column="0" Grid.Row="8" Text="Сообщение Принято:" />
+            <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding Path=MailMessagePositive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+
+
+            <TextBlock Grid.Column="0" Grid.Row="9" Text="Сообщение Отклонено:" />
+            <TextBox Grid.Column="1" Grid.Row="9" Text="{Binding Path=MailMessageNegative, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+
+
+            <TextBlock Grid.Column="0" Grid.Row="10" Text="Сообщение Отклонено Повторно:" />
+            <TextBox Grid.Column="1" Grid.Row="10" Text="{Binding Path=MailMessageNegativeSecond, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+
+
 
 
         </Grid>

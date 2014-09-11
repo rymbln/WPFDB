@@ -24,6 +24,518 @@ namespace WPFDB.Common
             }
         }
 
+        public string MailServer
+        {
+            get
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_SERVER");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_SERVER";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = "---";
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueDecimal = 0;
+                    newProp.ValueInt = 0;
+                    newProp.ValueLogic = false;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                def = DataManager.Instance.GetPropertyValue("MAIL_SERVER");
+                return def.ValueString;
+            }
+            set
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_SERVER");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_SERVER";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = value;
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = 1;
+                    newProp.ValueDecimal = 1;
+                    newProp.ValueLogic = true;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                else
+                {
+                    def.Name = "MAIL_SERVER";
+                    def.ValueGuid = def.Id;
+                    def.ValueString = value;
+                    def.ValueDate = DateTime.Now;
+                    def.ValueInt = 1;
+                    def.ValueDecimal = 1;
+                    def.ValueLogic = true;
+                    DataManager.Instance.Save();
+                }
+            }
+        }
+
+        public string MailPort
+        {
+            get
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_PORT");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_PORT";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = "---";
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueDecimal = 0;
+                    newProp.ValueInt = 0;
+                    newProp.ValueLogic = false;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                def = DataManager.Instance.GetPropertyValue("MAIL_PORT");
+                return def.ValueString;
+            }
+            set
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_PORT");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_PORT";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = value;
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = 1;
+                    newProp.ValueDecimal = 1;
+                    newProp.ValueLogic = true;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                else
+                {
+                    def.Name = "MAIL_PORT";
+                    def.ValueGuid = def.Id;
+                    def.ValueString = value;
+                    def.ValueDate = DateTime.Now;
+                    def.ValueInt = 1;
+                    def.ValueDecimal = 1;
+                    def.ValueLogic = true;
+                    DataManager.Instance.Save();
+                }
+            }
+        }
+
+        public string MailLogin
+        {
+            get
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_LOGIN");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_LOGIN";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = "---";
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueDecimal = 0;
+                    newProp.ValueInt = 0;
+                    newProp.ValueLogic = false;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                def = DataManager.Instance.GetPropertyValue("MAIL_LOGIN");
+                return def.ValueString;
+            }
+            set
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_LOGIN");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_LOGIN";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = value;
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = 1;
+                    newProp.ValueDecimal = 1;
+                    newProp.ValueLogic = true;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                else
+                {
+                    def.Name = "MAIL_LOGIN";
+                    def.ValueGuid = def.Id;
+                    def.ValueString = value;
+                    def.ValueDate = DateTime.Now;
+                    def.ValueInt = 1;
+                    def.ValueDecimal = 1;
+                    def.ValueLogic = true;
+                    DataManager.Instance.Save();
+                }
+            }
+        }
+
+        public string MailPassword
+        {
+            get
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_PASSWORD");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_PASSWORD";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = "---";
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueDecimal = 0;
+                    newProp.ValueInt = 0;
+                    newProp.ValueLogic = false;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                def = DataManager.Instance.GetPropertyValue("MAIL_PASSWORD");
+                return def.ValueString;
+            }
+            set
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_PASSWORD");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_PASSWORD";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = value;
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = 1;
+                    newProp.ValueDecimal = 1;
+                    newProp.ValueLogic = true;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                else
+                {
+                    def.Name = "MAIL_PASSWORD";
+                    def.ValueGuid = def.Id;
+                    def.ValueString = value;
+                    def.ValueDate = DateTime.Now;
+                    def.ValueInt = 1;
+                    def.ValueDecimal = 1;
+                    def.ValueLogic = true;
+                    DataManager.Instance.Save();
+                }
+            }
+        }
+
+        public string MailHeaderAbstract
+        {
+            get
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_HEADER_ABSTRACT");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_HEADER_ABSTRACT";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = "---";
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueDecimal = 0;
+                    newProp.ValueInt = 0;
+                    newProp.ValueLogic = false;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                def = DataManager.Instance.GetPropertyValue("MAIL_HEADER_ABSTRACT");
+                return def.ValueString;
+            }
+            set
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_HEADER_ABSTRACT");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_HEADER_ABSTRACT";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = value;
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = 1;
+                    newProp.ValueDecimal = 1;
+                    newProp.ValueLogic = true;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                else
+                {
+                    def.Name = "MAIL_HEADER_ABSTRACT";
+                    def.ValueGuid = def.Id;
+                    def.ValueString = value;
+                    def.ValueDate = DateTime.Now;
+                    def.ValueInt = 1;
+                    def.ValueDecimal = 1;
+                    def.ValueLogic = true;
+                    DataManager.Instance.Save();
+                }
+            }
+        }
+
+        public string MailHeaderPoster
+        {
+            get
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_HEADER_POSTER");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_HEADER_POSTER";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = "---";
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueDecimal = 0;
+                    newProp.ValueInt = 0;
+                    newProp.ValueLogic = false;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                def = DataManager.Instance.GetPropertyValue("MAIL_HEADER_POSTER");
+                return def.ValueString;
+            }
+            set
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_HEADER_POSTER");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_HEADER_POSTER";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = value;
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = 1;
+                    newProp.ValueDecimal = 1;
+                    newProp.ValueLogic = true;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                else
+                {
+                    def.Name = "MAIL_HEADER_POSTER";
+                    def.ValueGuid = def.Id;
+                    def.ValueString = value;
+                    def.ValueDate = DateTime.Now;
+                    def.ValueInt = 1;
+                    def.ValueDecimal = 1;
+                    def.ValueLogic = true;
+                    DataManager.Instance.Save();
+                }
+            }
+        }
+
+
+        public string MailMessageWork
+        {
+            get
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_MESSAGE_WORK");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_MESSAGE_WORK";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = "---";
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueDecimal = 0;
+                    newProp.ValueInt = 0;
+                    newProp.ValueLogic = false;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                def = DataManager.Instance.GetPropertyValue("MAIL_MESSAGE_WORK");
+                return def.ValueString;
+            }
+            set
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_MESSAGE_WORK");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_MESSAGE_WORK";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = value;
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = 1;
+                    newProp.ValueDecimal = 1;
+                    newProp.ValueLogic = true;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                else
+                {
+                    def.Name = "MAIL_MESSAGE_WORK";
+                    def.ValueGuid = def.Id;
+                    def.ValueString = value;
+                    def.ValueDate = DateTime.Now;
+                    def.ValueInt = 1;
+                    def.ValueDecimal = 1;
+                    def.ValueLogic = true;
+                    DataManager.Instance.Save();
+                }
+            }
+        }
+
+        public string MailMessagePositive
+        {
+            get
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_MESSAGE_POSITIVE");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_MESSAGE_POSITIVE";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = "---";
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueDecimal = 0;
+                    newProp.ValueInt = 0;
+                    newProp.ValueLogic = false;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                def = DataManager.Instance.GetPropertyValue("MAIL_MESSAGE_POSITIVE");
+                return def.ValueString;
+            }
+            set
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_MESSAGE_POSITIVE");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_MESSAGE_POSITIVE";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = value;
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = 1;
+                    newProp.ValueDecimal = 1;
+                    newProp.ValueLogic = true;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                else
+                {
+                    def.Name = "MAIL_MESSAGE_POSITIVE";
+                    def.ValueGuid = def.Id;
+                    def.ValueString = value;
+                    def.ValueDate = DateTime.Now;
+                    def.ValueInt = 1;
+                    def.ValueDecimal = 1;
+                    def.ValueLogic = true;
+                    DataManager.Instance.Save();
+                }
+            }
+        }
+
+        public string MailMessageNegative
+        {
+            get
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_MESSAGE_NEGATIVE");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_MESSAGE_NEGATIVE";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = "---";
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueDecimal = 0;
+                    newProp.ValueInt = 0;
+                    newProp.ValueLogic = false;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                def = DataManager.Instance.GetPropertyValue("MAIL_MESSAGE_NEGATIVE");
+                return def.ValueString;
+            }
+            set
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_MESSAGE_NEGATIVE");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_MESSAGE_NEGATIVE";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = value;
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = 1;
+                    newProp.ValueDecimal = 1;
+                    newProp.ValueLogic = true;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                else
+                {
+                    def.Name = "MAIL_MESSAGE_NEGATIVE";
+                    def.ValueGuid = def.Id;
+                    def.ValueString = value;
+                    def.ValueDate = DateTime.Now;
+                    def.ValueInt = 1;
+                    def.ValueDecimal = 1;
+                    def.ValueLogic = true;
+                    DataManager.Instance.Save();
+                }
+            }
+        }
+
+
+        public string MailMessageNegativeSecond
+        {
+            get
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_MESSAGE_NEGATIVE_SECOND");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_MESSAGE_NEGATIVE_SECOND";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = "---";
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueDecimal = 0;
+                    newProp.ValueInt = 0;
+                    newProp.ValueLogic = false;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                def = DataManager.Instance.GetPropertyValue("MAIL_MESSAGE_NEGATIVE_SECOND");
+                return def.ValueString;
+            }
+            set
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_MESSAGE_NEGATIVE_SECOND");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_MESSAGE_NEGATIVE_SECOND";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = value;
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = 1;
+                    newProp.ValueDecimal = 1;
+                    newProp.ValueLogic = true;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                else
+                {
+                    def.Name = "MAIL_MESSAGE_NEGATIVE_SECOND";
+                    def.ValueGuid = def.Id;
+                    def.ValueString = value;
+                    def.ValueDate = DateTime.Now;
+                    def.ValueInt = 1;
+                    def.ValueDecimal = 1;
+                    def.ValueLogic = true;
+                    DataManager.Instance.Save();
+                }
+            }
+        }
+
         public bool ConferenceMode
         {
             get
@@ -475,12 +987,12 @@ namespace WPFDB.Common
 
         public string GetMailServer()
         {
-            return "smtp.gmail.com";
+            return "smtp.rambler.ru";
         }
 
         public string GetMailLogin()
         {
-            return "rymbln@gmail.com";
+            return "614614@rambler.ru";
         }
 
         public string GetMailPassword()
