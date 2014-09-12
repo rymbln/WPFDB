@@ -68,12 +68,32 @@ namespace WPFDB.ViewModel
 
         private void AbstractToWord()
         {
-            
+            var filePath = WordManager.AbstractToWord(CurrentAbstract);
+            MessageBoxResult messageBoxResult = MessageBox.Show("Файл создан по адресу " + filePath + ". Открыть?" , "Информация", MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                Process.Start("explorer.exe", filePath);
+            }
         }
 
         private void AllAbstractToWord()
         {
-            
+            var cnt = 0;
+                var abstractList = DataManager.Instance.GetAbstractsForPosterSession();
+                foreach (var abs in abstractList)
+                {
+                    if (WordManager.AbstractToWord(abs) != "---")
+                    {
+                        cnt++;
+                    };
+                    
+                }
+                MessageBoxResult messageBoxResult = MessageBox.Show(cnt + " файлов созданы по адресу " + DefaultManager.Instance.AbstractFilePath + ". Открыть?", "Информация", MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    Process.Start("explorer.exe", DefaultManager.Instance.AbstractFilePath);
+                }
+
         }
 
         private void PosterEmail()

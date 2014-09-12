@@ -40,6 +40,11 @@ namespace WPFDB.Model
 
         }
 
+        public Person Author
+        {
+            get { return PersonConference.Person; }
+        }
+
         public string ToFilterString
         {
             get
