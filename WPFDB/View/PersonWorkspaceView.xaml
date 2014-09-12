@@ -33,10 +33,8 @@
                          Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" />
             <ToggleButton 
                 Content="Фильтр по конференции"
-               
-         
-                IsChecked="{Binding Path=IsFilterConference, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <ComboBox Width="150"
+               IsChecked="{Binding Path=IsFilterConference, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <ComboBox 
                 SelectedValuePath="." 
                 SelectedItem="{Binding Path=ConferenceFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
                 ItemsSource="{Binding Path=ConferenceLookup}" 

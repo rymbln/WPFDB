@@ -9,7 +9,8 @@
              mc:Ignorable="d" 
           >
     <DockPanel>
-        <ToolBar DockPanel.Dock="Top">     
+        <ToolBar DockPanel.Dock="Top">
+
             <Button Command="{Binding OpenAbstractCommand}">
                 <AccessText Text="Open"/>
             </Button>
@@ -27,8 +28,18 @@
             </Button>
             <TextBox x:Name="searchBox" Width="150" BorderBrush="LightGray" BorderThickness="1" 
                          Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" />
+            <ToggleButton 
+                Content="Фильтр по конференции"
+               IsChecked="{Binding Path=IsFilterConference, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <ComboBox 
+                SelectedValuePath="." 
+                SelectedItem="{Binding Path=ConferenceFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
+                ItemsSource="{Binding Path=ConferenceLookup}" 
+                DisplayMemberPath="Name"  />
+        </ToolBar>
+        <ToolBar DockPanel.Dock="Top">
             <Separator/>
-              <Button Command="{Binding OpenFileCommand}" Content="Открыть файл" ToolTip="{x:Static p:Resources.Save}"/>
+            <Button Command="{Binding OpenFileCommand}" Content="Открыть файл" ToolTip="{x:Static p:Resources.Save}"/>
             <Separator/>
             <Button Command="{Binding OpenFolderCommand}" Content="Открыть папку с файлом" ToolTip="{x:Static p:Resources.Save}"/>
             <Separator/>
@@ -38,6 +49,7 @@
             <Separator/>
 
             <Button Command="{Binding PosterEmailCommand}" Content="Письма для постеров" ToolTip="{x:Static p:Resources.Save}"/>
+
         </ToolBar>
 
         <Grid>
@@ -68,22 +80,22 @@
                         <DataGridTextColumn Header="Последнее состояние" Width="*" Binding="{Binding Path=LastState}" />
                         <DataGridTextColumn Header="Дата состояния" Width="*" Binding="{Binding Path=LastStateDate}" />
                     </DataGrid.Columns>
-                    </DataGrid>
+                </DataGrid>
                 <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center"  />
-                    <DataGrid Grid.Row="2"
+                <DataGrid Grid.Row="2"
 
                               ItemsSource="{Binding Path=CurrentAbstractVM.AbstractWorks}" 
                               AutoGenerateColumns="False" IsReadOnly="True"
                              >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Статус" Width="*"  Binding="{Binding Path=AbstractStatus.Name}" />
-                            <DataGridTextColumn Header="Рецензент" Width="*" Binding="{Binding Path=Reviewer.Name}" />
-                            <DataGridTextColumn Header="Дата" Width="*" Binding="{Binding Path=DateWork}" />
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Статус" Width="*"  Binding="{Binding Path=AbstractStatus.Name}" />
+                        <DataGridTextColumn Header="Рецензент" Width="*" Binding="{Binding Path=Reviewer.Name}" />
+                        <DataGridTextColumn Header="Дата" Width="*" Binding="{Binding Path=DateWork}" />
 
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
-           
+
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
             <ScrollViewer Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                 <StackPanel>

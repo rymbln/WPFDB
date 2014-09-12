@@ -28,20 +28,13 @@ namespace WPFDB.Common
 
         public static DataManager Instance
         {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new DataManager(new ConferenceEntities());
-                }
-                return instance;
-            }
+            get { return instance ?? (instance = new DataManager(new ConferenceEntities())); }
         }
 
         /// <summary>
         /// The underlying context tracking changes
         /// </summary>
-        private IConferenceContext underlyingContext;
+        private readonly IConferenceContext underlyingContext;
 
 
 
@@ -1075,25 +1068,25 @@ namespace WPFDB.Common
         public Sex GetSexBySourceId(int id)
         {
             var obj = underlyingContext.Sexes.FirstOrDefault(o => o.SourceId == id);
-            return (obj == null) ? DefaultManager.Instance.DefaultSex : obj;
+            return obj ?? DefaultManager.Instance.DefaultSex;
         }
 
         public Speciality GetSpecialityBySourceId(int id)
         {
             var obj = underlyingContext.Specialities.FirstOrDefault(o => o.SourceId == id);
-            return (obj == null) ? DefaultManager.Instance.DefaultSpeciality : obj;
+            return obj ?? DefaultManager.Instance.DefaultSpeciality;
         }
 
         public ScienceDegree GetScienceDegreeBySourceID(int id)
         {
             var obj = underlyingContext.ScienceDegrees.FirstOrDefault(o => o.SourceId == id);
-            return (obj == null) ? DefaultManager.Instance.DefaultScienceDegree : obj;
+            return obj ?? DefaultManager.Instance.DefaultScienceDegree;
         }
 
         public ScienceStatus GetScienceStatusBySourceId(int id)
         {
             var obj = underlyingContext.ScienceStatuses.FirstOrDefault(o => o.SourceId == id);
-            return (obj == null) ? DefaultManager.Instance.DefaultScienceStatus : obj;
+            return obj ?? DefaultManager.Instance.DefaultScienceStatus;
         }
 
         public bool GetBoolLogicBySourceId(int id)
@@ -1256,15 +1249,12 @@ namespace WPFDB.Common
         {
             
             var lst = underlyingContext.Abstracts.Where(o => o.PersonConference.ConferenceId == DefaultManager.Instance.DefaultConference.Id).ToList();
-            var resLst = new List<Abstract>();
-            foreach (var abs in lst)
-            {
-                if (abs.LastState == "Принят")
-                {
-                    resLst.Add(abs);
-                }
-            }
-            return resLst;
+            return lst.Where(abs => abs.LastState == "Принят").ToList();
+        }
+
+        public List<Abstract> GetAllAbstractsForConference(Guid guid)
+        {
+            return underlyingContext.Abstracts.Where(o => o.PersonConference.ConferenceId == guid).ToList();
         }
     }
 }

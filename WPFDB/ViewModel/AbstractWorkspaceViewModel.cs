@@ -19,7 +19,8 @@ namespace WPFDB.ViewModel
     {
         private Abstract currentAbstract { get; set; }
         private AbstractViewModel currentAbstractVM { get; set; }
-      
+        private Conference conferenceFilter { get; set; }
+        private bool isFilterConference;
 
         private string filterText = "";
 
@@ -29,8 +30,13 @@ namespace WPFDB.ViewModel
             AllAbstracts = new ObservableCollection<Abstract>();
             AllAbstractsDB = new ObservableCollection<Abstract>();
 
-            RefreshAbstracts();
+       
 
+            ConferenceLookup = new ObservableCollection<Conference>(DataManager.Instance.GetAllConferences());
+            ConferenceFilter = DefaultManager.Instance.DefaultConference;
+            IsFilterConference = true;
+         //   OnPropertyChanged("IsFilterConference");
+       //     RefreshAbstracts();
 
             this.SelectFileCommand = new DelegateCommand(o => SelectFile());
             this.OpenFolderCommand = new DelegateCommand(o => OpenFolder());
@@ -40,14 +46,16 @@ namespace WPFDB.ViewModel
             this.DeleteAbstractCommand = new DelegateCommand((o) => this.DeleteAbstract());
             this.RefreshCommand = new DelegateCommand((o) => this.RefreshAbstracts());
 
-            AbstractToWordCommand = new DelegateCommand(o => AbstractToWord(), o=>CurrentAbstract!=null);
+            AbstractToWordCommand = new DelegateCommand(o => AbstractToWord(), o => CurrentAbstract != null);
             AllAbstractToWordCommand = new DelegateCommand(o => AllAbstractToWord());
             PosterEmailCommand = new DelegateCommand(o => PosterEmail());
+            ToogleConferenceFilterCommand = new DelegateCommand(o => ToggleConferenceFilter());
 
 
         }
         public ObservableCollection<Abstract> AllAbstracts { get; private set; }
         public ObservableCollection<Abstract> AllAbstractsDB { get; private set; }
+        public ObservableCollection<Conference> ConferenceLookup { get; private set; }
 
         public ICommand RefreshCommand { get; private set; }
         public ICommand ApplyFiltersCommand { get; private set; }
@@ -57,19 +65,60 @@ namespace WPFDB.ViewModel
         public ICommand OpenFileCommand { get; private set; }
         public ICommand SelectFileCommand { get; private set; }
 
-        public ICommand OpenAbstractCommand{ get; private set; }
+        public ICommand OpenAbstractCommand { get; private set; }
         public ICommand DeleteAbstractCommand { get; private set; }
 
         public ICommand AbstractToWordCommand { get; private set; }
         public ICommand AllAbstractToWordCommand { get; private set; }
         public ICommand PosterEmailCommand { get; private set; }
 
+        public ICommand ToogleConferenceFilterCommand { get; private set; }
 
+        private void ToggleConferenceFilter()
+        {
+            IsFilterConference = !IsFilterConference;
+        }
+
+        public Conference ConferenceFilter
+        {
+            get { return this.conferenceFilter; }
+            set
+            {
+                conferenceFilter = value;
+                if (IsFilterConference)
+                {
+                    FilterAbstracts();
+                }
+                OnPropertyChanged("ConferenceFilter");
+            }
+        }
+
+        public bool IsFilterConference
+        {
+            get
+            {
+                return isFilterConference;
+
+            }
+            set
+            {
+                isFilterConference = value;
+                OnPropertyChanged("IsFilterConference");
+                if (isFilterConference)
+                {
+                    FilterAbstracts();
+                }
+                else
+                {
+                    RefreshAbstracts();
+                }
+            }
+        }
 
         private void AbstractToWord()
         {
             var filePath = WordManager.AbstractToWord(CurrentAbstract);
-            MessageBoxResult messageBoxResult = MessageBox.Show("Файл создан по адресу " + filePath + ". Открыть?" , "Информация", MessageBoxButton.YesNo);
+            MessageBoxResult messageBoxResult = MessageBox.Show("Файл создан по адресу " + filePath + ". Открыть?", "Информация", MessageBoxButton.YesNo);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 Process.Start("explorer.exe", filePath);
@@ -79,20 +128,20 @@ namespace WPFDB.ViewModel
         private void AllAbstractToWord()
         {
             var cnt = 0;
-                var abstractList = DataManager.Instance.GetAbstractsForPosterSession();
-                foreach (var abs in abstractList)
+            var abstractList = DataManager.Instance.GetAbstractsForPosterSession();
+            foreach (var abs in abstractList)
+            {
+                if (WordManager.AbstractToWord(abs) != "---")
                 {
-                    if (WordManager.AbstractToWord(abs) != "---")
-                    {
-                        cnt++;
-                    };
-                    
-                }
-                MessageBoxResult messageBoxResult = MessageBox.Show(cnt + " файлов созданы по адресу " + DefaultManager.Instance.AbstractFilePath + ". Открыть?", "Информация", MessageBoxButton.YesNo);
-                if (messageBoxResult == MessageBoxResult.Yes)
-                {
-                    Process.Start("explorer.exe", DefaultManager.Instance.AbstractFilePath);
-                }
+                    cnt++;
+                };
+
+            }
+            MessageBoxResult messageBoxResult = MessageBox.Show(cnt + " файлов созданы по адресу " + DefaultManager.Instance.AbstractFilePath + ". Открыть?", "Информация", MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                Process.Start("explorer.exe", DefaultManager.Instance.AbstractFilePath);
+            }
 
         }
 
@@ -150,7 +199,9 @@ namespace WPFDB.ViewModel
         private void RefreshAbstracts()
         {
             filterText = "";
+       //     isFilterConference = true;
             this.OnPropertyChanged("FilterText");
+            this.OnPropertyChanged("IsFilterConference");
             AllAbstractsDB = new ObservableCollection<Abstract>(DataManager.Instance.GetAllAbstracts());
             AllAbstracts = AllAbstractsDB;
             this.OnPropertyChanged("AllAbstracts");
@@ -159,7 +210,20 @@ namespace WPFDB.ViewModel
 
         private void FilterAbstracts()
         {
-            AllAbstracts = new ObservableCollection<Abstract>(AllAbstractsDB.Where(o => o.ToFilterString.ToUpper().Contains(filterText.ToUpper())));
+            if (isFilterConference)
+            {
+                AllAbstractsDB = new ObservableCollection<Abstract>(
+                    DataManager.Instance.GetAllAbstractsForConference(ConferenceFilter.Id));
+                AllAbstracts = new ObservableCollection<Abstract>(
+                    AllAbstractsDB.Where(o => o.ToFilterString.ToUpper().Contains(filterText.ToUpper())));
+            }
+            else
+            {
+                AllAbstracts =
+                    new ObservableCollection<Abstract>(
+                        AllAbstractsDB.Where(o => o.ToFilterString.ToUpper().Contains(filterText.ToUpper())));
+
+            }
             this.OnPropertyChanged("AllAbstracts");
             this.CurrentAbstract = AllAbstracts.Count > 0 ? AllAbstracts[0] : null;
         }
@@ -167,7 +231,7 @@ namespace WPFDB.ViewModel
         private void OpenAbstract()
         {
             var vm = new AbstractViewModel(currentAbstract);
-            var v = new AbstractView{DataContext = vm};
+            var v = new AbstractView { DataContext = vm };
             v.Show();
         }
         private void OpenFolder()
@@ -181,7 +245,7 @@ namespace WPFDB.ViewModel
             Process.Start("explorer.exe", strPath);
         }
 
-        
+
 
         private void SelectFile()
         {
