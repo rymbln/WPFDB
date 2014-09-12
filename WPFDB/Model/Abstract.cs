@@ -10,7 +10,35 @@ namespace WPFDB.Model
 {
     public partial class Abstract : EntityObject
     {
-     
+
+        public int? DaysInWork
+        {
+            get
+            {
+                if (LastState == "В работе")
+                {
+
+                    var days = 0;
+                    var startDate = DateTime.Now;
+                    var endDate = DateTime.Now;
+                    try
+                    {
+                        startDate = AbstractWorks.OrderBy(o => o.DateWork).FirstOrDefault().DateWork;
+                        days = endDate.DayOfYear - startDate.DayOfYear;
+                        return days;
+                    }
+                    catch (Exception ex)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+        }
 
         public string ToFilterString
         {
@@ -19,7 +47,7 @@ namespace WPFDB.Model
                 var str = new StringBuilder();
                 str.Append(this.Name);
                 str.Append(this.PersonConference.Person.FullNameInitials);
-                
+
                 return str.ToString();
             }
         }
@@ -29,7 +57,7 @@ namespace WPFDB.Model
             {
                 if (OtherAuthors.Length > 30)
                 {
-                    return OtherAuthors.Substring(0, 30)+"...";
+                    return OtherAuthors.Substring(0, 30) + "...";
                 }
                 else
                 {
@@ -45,7 +73,7 @@ namespace WPFDB.Model
             {
                 if (Name.Length > 50)
                 {
-                    return this.Name.Substring(0, 50)+"...";
+                    return this.Name.Substring(0, 50) + "...";
                 }
                 else
                 {
@@ -58,7 +86,7 @@ namespace WPFDB.Model
         public string AuthorName
         {
             get { return this.PersonConference.Person.FullNameInitials; }
-          
+
         }
 
         public string AuthorEmail
@@ -87,23 +115,14 @@ namespace WPFDB.Model
             set { }
         }
 
-        public string ReviewerName
+        public User Reviewer
         {
 
             get
             {
-                try
-                {
-                    return this.AbstractWorks.OrderByDescending(o => o.DateWork).FirstOrDefault().Reviewer.Name;
-
-                }
-                catch (Exception)
-                {
-
-                    return "---";
-                }
+                return this.AbstractWorks.OrderByDescending(o => o.DateWork).Select(o => o.Reviewer).FirstOrDefault();
             }
-         
+
         }
 
         public string LastState
@@ -135,8 +154,10 @@ namespace WPFDB.Model
                 {
                     return null;
                 }
-              
+
             }
         }
+
+
     }
 }

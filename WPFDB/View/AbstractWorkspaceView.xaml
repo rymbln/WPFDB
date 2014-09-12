@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
           >
     <DockPanel>
-        <ToolBar DockPanel.Dock="Top">
+        <ToolBar DockPanel.Dock="Top">     
             <Button Command="{Binding OpenAbstractCommand}">
                 <AccessText Text="Open"/>
             </Button>
@@ -31,8 +31,15 @@
               <Button Command="{Binding OpenFileCommand}" Content="Открыть файл" ToolTip="{x:Static p:Resources.Save}"/>
             <Separator/>
             <Button Command="{Binding OpenFolderCommand}" Content="Открыть папку с файлом" ToolTip="{x:Static p:Resources.Save}"/>
+            <Separator/>
+            <Button Command="{Binding AbstractToWordCommand}" Content="Тезис в Word" ToolTip="{x:Static p:Resources.Save}"/>
+            <Separator/>
+            <Button Command="{Binding AllAbstractToWordCommand}" Content="Все тезисы в Word" ToolTip="{x:Static p:Resources.Save}"/>
+            <Separator/>
 
+            <Button Command="{Binding PosterEmailCommand}" Content="Письма для постеров" ToolTip="{x:Static p:Resources.Save}"/>
         </ToolBar>
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -51,11 +58,13 @@
                               AutoGenerateColumns="False" IsReadOnly="True"
                              >
                     <DataGrid.Columns>
+                        <DataGridTextColumn Header="#" Width="*"  Binding="{Binding Path=SourceId}" />
                         <DataGridTextColumn Header="Автор" Width="*"  Binding="{Binding Path=AuthorName}" />
                         <DataGridTextColumn Header="Другие авторы" Width="*" Binding="{Binding Path=OtherAuthorsShort}" />
                         <DataGridTextColumn Header="Тема" Width="*" Binding="{Binding Path=NameShort}" />
                         <DataGridTextColumn Header="Email Автора" Width="*" Binding="{Binding Path=AuthorEmail}" />
-                        <DataGridTextColumn Header="Рецензент" Width="*" Binding="{Binding Path=ReviewerName}" />
+                        <DataGridTextColumn Header="Рецензент" Width="*" Binding="{Binding Path=Reviewer.Name}" />
+                        <DataGridTextColumn Header="Дней в работе" Width="*" Binding="{Binding Path=DaysInWork}" />
                         <DataGridTextColumn Header="Последнее состояние" Width="*" Binding="{Binding Path=LastState}" />
                         <DataGridTextColumn Header="Дата состояния" Width="*" Binding="{Binding Path=LastStateDate}" />
                     </DataGrid.Columns>

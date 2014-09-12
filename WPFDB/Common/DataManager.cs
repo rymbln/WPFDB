@@ -14,6 +14,7 @@ using System.Windows.Annotations;
 using System.Windows.Documents;
 using WPFDB.Data;
 using WPFDB.Model;
+using Xceed.Wpf.Toolkit.Primitives;
 
 namespace WPFDB.Common
 {
@@ -375,6 +376,8 @@ namespace WPFDB.Common
             obj.DateUpdate = DateTime.Now;
             var currentUser = Authentification.GetCurrentUser();
             obj.User = currentUser == null ? "-" : currentUser.Name;
+            var sourceId = underlyingContext.Abstracts.Select(o => o.SourceId).Max();
+            obj.SourceId = ++sourceId;
             underlyingContext.Abstracts.AddObject(obj);
             Save();
         }
@@ -1245,6 +1248,23 @@ namespace WPFDB.Common
         {
             underlyingContext.Properties.AddObject(obj);
             Save();
+        }
+
+
+
+        public List<Abstract> GetAbstractsForPosterSession()
+        {
+            
+            var lst = underlyingContext.Abstracts.Where(o => o.PersonConference.ConferenceId == DefaultManager.Instance.DefaultConference.Id).ToList();
+            var resLst = new List<Abstract>();
+            foreach (var abs in lst)
+            {
+                if (abs.LastState == "Принят")
+                {
+                    resLst.Add(abs);
+                }
+            }
+            return resLst;
         }
     }
 }

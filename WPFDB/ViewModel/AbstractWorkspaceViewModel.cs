@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
 using WPFDB.Common;
@@ -39,6 +40,10 @@ namespace WPFDB.ViewModel
             this.DeleteAbstractCommand = new DelegateCommand((o) => this.DeleteAbstract());
             this.RefreshCommand = new DelegateCommand((o) => this.RefreshAbstracts());
 
+            AbstractToWordCommand = new DelegateCommand(o => AbstractToWord(), o=>CurrentAbstract!=null);
+            AllAbstractToWordCommand = new DelegateCommand(o => AllAbstractToWord());
+            PosterEmailCommand = new DelegateCommand(o => PosterEmail());
+
 
         }
         public ObservableCollection<Abstract> AllAbstracts { get; private set; }
@@ -54,6 +59,42 @@ namespace WPFDB.ViewModel
 
         public ICommand OpenAbstractCommand{ get; private set; }
         public ICommand DeleteAbstractCommand { get; private set; }
+
+        public ICommand AbstractToWordCommand { get; private set; }
+        public ICommand AllAbstractToWordCommand { get; private set; }
+        public ICommand PosterEmailCommand { get; private set; }
+
+
+
+        private void AbstractToWord()
+        {
+            
+        }
+
+        private void AllAbstractToWord()
+        {
+            
+        }
+
+        private void PosterEmail()
+        {
+
+            MessageBoxResult messageBoxResult = MessageBox.Show("Вы действительно хотите отправить приглашения на постерную сессию по e-mail?", "Подтверждение действия", MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                var abstractList = DataManager.Instance.GetAbstractsForPosterSession();
+                foreach (var abs in abstractList)
+                {
+                    var emails = new List<string>(abs.PersonConference.Person.Emails.Select(o => o.Name));
+                    var topic = DefaultManager.Instance.MailHeaderPoster;
+                    var message = DefaultManager.Instance.MailMessagePosterSession.Replace("<ABSTRACT_NAME>", abs.Name);
+                    var file = WordManager.AbstractToWord(abs);
+                    var emailFrom = abs.Reviewer.Email;
+                    EmailManager.Instance.SendMailForAbstract(emails, emailFrom, topic, message, file);
+                }
+
+            }
+        }
 
         public Abstract CurrentAbstract
         {
@@ -105,8 +146,8 @@ namespace WPFDB.ViewModel
 
         private void OpenAbstract()
         {
-            AbstractViewModel vm = new AbstractViewModel(currentAbstract);
-            AbstractView v = new AbstractView{DataContext = vm};
+            var vm = new AbstractViewModel(currentAbstract);
+            var v = new AbstractView{DataContext = vm};
             v.Show();
         }
         private void OpenFolder()
@@ -120,22 +161,22 @@ namespace WPFDB.ViewModel
             Process.Start("explorer.exe", strPath);
         }
 
+        
+
         private void SelectFile()
         {
             // Create OpenFileDialog 
-            OpenFileDialog dlg = new OpenFileDialog();
+            var dlg = new OpenFileDialog();
 
             // Display OpenFileDialog by calling ShowDialog method 
-            Nullable<bool> result = dlg.ShowDialog();
+            var result = dlg.ShowDialog();
 
 
             // Get the selected file name and display in a TextBox 
-            if (result == true)
-            {
-                // Open document 
-                string filename = dlg.FileName;
-                CurrentAbstract.Link = filename;
-            }
+            if (result != true) return;
+            // Open document 
+            string filename = dlg.FileName;
+            CurrentAbstract.Link = filename;
         }
         public string FilterText
         {

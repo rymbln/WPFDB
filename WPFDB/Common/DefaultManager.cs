@@ -14,15 +14,10 @@ namespace WPFDB.Common
 
         public static DefaultManager Instance
         {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new DefaultManager();
-                }
-                return instance;
-            }
+            get { return instance ?? (instance = new DefaultManager()); }
         }
+
+
 
         public string MailServer
         {
@@ -74,6 +69,58 @@ namespace WPFDB.Common
                 }
             }
         }
+
+        public string AbstractFilePath
+        {
+            get
+            {
+                var def = DataManager.Instance.GetPropertyValue("ABSTRACT_FILE_PATH");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "ABSTRACT_FILE_PATH";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = "---";
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueDecimal = 0;
+                    newProp.ValueInt = 0;
+                    newProp.ValueLogic = false;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                def = DataManager.Instance.GetPropertyValue("ABSTRACT_FILE_PATH");
+                return def.ValueString;
+            }
+            set
+            {
+                var def = DataManager.Instance.GetPropertyValue("ABSTRACT_FILE_PATH");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "ABSTRACT_FILE_PATH";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = value;
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = 1;
+                    newProp.ValueDecimal = 1;
+                    newProp.ValueLogic = true;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                else
+                {
+                    def.Name = "ABSTRACT_FILE_PATH";
+                    def.ValueGuid = def.Id;
+                    def.ValueString = value;
+                    def.ValueDate = DateTime.Now;
+                    def.ValueInt = 1;
+                    def.ValueDecimal = 1;
+                    def.ValueLogic = true;
+                    DataManager.Instance.Save();
+                }
+            }
+        }
+
 
         public string MailPort
         {
@@ -278,6 +325,58 @@ namespace WPFDB.Common
                 }
             }
         }
+
+        public string MailMessagePosterSession
+        {
+            get
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_MESSAGE_POSTER_SESSION");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_MESSAGE_POSTER_SESSION";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = "---";
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueDecimal = 0;
+                    newProp.ValueInt = 0;
+                    newProp.ValueLogic = false;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                def = DataManager.Instance.GetPropertyValue("MAIL_MESSAGE_POSTER_SESSION");
+                return def.ValueString;
+            }
+            set
+            {
+                var def = DataManager.Instance.GetPropertyValue("MAIL_MESSAGE_POSTER_SESSION");
+                if (def == null)
+                {
+                    var newProp = DataManager.Instance.CreateObject<Propertie>();
+                    newProp.Id = GuidComb.Generate();
+                    newProp.Name = "MAIL_MESSAGE_POSTER_SESSION";
+                    newProp.ValueGuid = newProp.Id;
+                    newProp.ValueString = value;
+                    newProp.ValueDate = DateTime.Now;
+                    newProp.ValueInt = 1;
+                    newProp.ValueDecimal = 1;
+                    newProp.ValueLogic = true;
+                    DataManager.Instance.AddPropertie(newProp);
+                }
+                else
+                {
+                    def.Name = "MAIL_MESSAGE_POSTER_SESSION";
+                    def.ValueGuid = def.Id;
+                    def.ValueString = value;
+                    def.ValueDate = DateTime.Now;
+                    def.ValueInt = 1;
+                    def.ValueDecimal = 1;
+                    def.ValueLogic = true;
+                    DataManager.Instance.Save();
+                }
+            }
+        }
+
 
         public string MailHeaderPoster
         {

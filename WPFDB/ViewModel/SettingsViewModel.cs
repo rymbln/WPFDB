@@ -4,8 +4,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Input;
 using WPFDB.Common;
 using WPFDB.Model;
+using WPFDB.ViewModel.Helpers;
 
 namespace WPFDB.ViewModel
 {
@@ -14,6 +17,7 @@ namespace WPFDB.ViewModel
        public SettingsViewModel()
        {
            ConferenceLookup = new ObservableCollection<Conference>(DataManager.Instance.GetAllConferences());
+           SelectFolderCommand = new DelegateCommand(o => SelectFolder());
        }
 
        public ObservableCollection<Conference> ConferenceLookup { get; private set; }
@@ -144,6 +148,41 @@ namespace WPFDB.ViewModel
            }
        }
 
+       public string AbstractFilePath
+       {
+           get { return DefaultManager.Instance.AbstractFilePath; }
+           set
+           {
+               DefaultManager.Instance.AbstractFilePath = value;
+               OnPropertyChanged("AbstractFilePath");
+           }
+       }
+
+       public string MailMessagePosterSession
+       {
+           get { return DefaultManager.Instance.MailMessagePosterSession; }
+           set
+           {
+               DefaultManager.Instance.MailMessagePosterSession = value;
+               OnPropertyChanged("MailMessagePosterSession");
+           }
+       }
+
+       public ICommand SelectFolderCommand { get; private set; }
+
+       private void SelectFolder()
+       {
+           FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+
+           folderBrowserDialog.SelectedPath = @"C:\Users\rymbln\Desktop\Output\";
+           //  openFileDialogCSV.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
+           //  openFileDialogCSV.FilterIndex = 1;
+
+           if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+           {
+              AbstractFilePath = folderBrowserDialog.SelectedPath;
+           }
+       }
 
 
     }

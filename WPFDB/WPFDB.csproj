@@ -48,6 +48,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel.DomainServices.EntityFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -90,6 +91,7 @@
     <Compile Include="Common\DataManager.cs" />
     <Compile Include="Common\ImportManager.cs" />
     <Compile Include="Common\LogManager.cs" />
+    <Compile Include="Common\WordManager.cs" />
     <Compile Include="Model\Abstract.cs" />
     <Compile Include="Model\IConferenceContext.cs" />
     <Compile Include="Model\ConferenceEntities.cs" />

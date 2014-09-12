@@ -6,11 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
-using Microsoft.Win32;
 using WPFDB.Common;
 using WPFDB.Model;
 using WPFDB.ViewModel.Helpers;
+using MessageBox = System.Windows.MessageBox;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 
 namespace WPFDB.ViewModel
@@ -39,7 +42,7 @@ namespace WPFDB.ViewModel
             this.OpenFolderCommand = new DelegateCommand(o => OpenFolder());
             this.OpenFileCommand = new DelegateCommand(o => OpenFile());
             SaveCommand = new DelegateCommand(o => Save());
-            SendEmailCommand = new DelegateCommand(o => SendEmail(), o=> CurrentAbstractWork != null);
+            SendEmailCommand = new DelegateCommand(o => SendEmailForAbstract(), o=> CurrentAbstractWork != null);
         }
 
         public ObservableCollection<AbstractWorkViewModel> AbstractWorks { get; private set; }
@@ -73,12 +76,41 @@ namespace WPFDB.ViewModel
             DataManager.Instance.Save();
             
         }
-        private void SendEmail()
+
+
+        private void SendEmailForAbstract()
         {
 
-            var lstEmail = new List<string> {"ivan.trushin@antibiotic.ru"};
-            EmailManager.Instance.SendMailForAbstract(lstEmail, "Test Email From WPFDB Conference",
-                "This email is sent for testing email manager module", @"D:\ELI_Validation_20140612.xls");
+            MessageBoxResult messageBoxResult = MessageBox.Show("Вы действительно хотите отправить тезисы по e-mail?", "Подтверждение действия", MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                var emails = new List<string>(CurrentAbstractWork.Model.Abstract.PersonConference.Person.Emails.Select(o => o.Name));
+                var topic = DefaultManager.Instance.MailHeaderAbstract + " Тезисы № " + CurrentAbstractWork.Model.Abstract.SourceId;
+                var message = "---";
+                switch (CurrentAbstractWork.AbstractStatusName)
+                {
+                    case "Принят":
+                        message = DefaultManager.Instance.MailMessagePositive.Replace("<ABSTRACT_NAME>", CurrentAbstractWork.Model.Abstract.Name); ;
+                        break;
+                    case "Отклонен":
+                        message = DefaultManager.Instance.MailMessageNegative.Replace("<ABSTRACT_NAME>", CurrentAbstractWork.Model.Abstract.Name); ;
+                        break;
+                    case "Отклонен повторно":
+                        message = DefaultManager.Instance.MailMessageNegativeSecond.Replace("<ABSTRACT_NAME>", CurrentAbstractWork.Model.Abstract.Name); ;
+                        break;
+                    case "В работе":
+                        message = DefaultManager.Instance.MailMessageWork.Replace("<ABSTRACT_NAME>", CurrentAbstractWork.Model.Abstract.Name); ;
+                        break;
+                    default:
+                        break;
+                }
+                var file = WordManager.AbstractToWord(CurrentAbstractWork.Model.Abstract);
+                var emailFrom = CurrentAbstractWork.Reviewer.Email;
+                EmailManager.Instance.SendMailForAbstract(emails, emailFrom, topic, message, file);
+            }
+
+
+          
         }
 
         private void OpenFolder()
