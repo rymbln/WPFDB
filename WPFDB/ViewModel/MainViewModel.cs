@@ -37,6 +37,14 @@ namespace WPFDB.ViewModel
             FillDataCommand = new DelegateCommand((o) => this.FillDatabase());
             EraseDataCommand = new DelegateCommand((o) => this.EraseData());
             OpenSettingsCommand = new DelegateCommand(o => OpenSettings());
+            OpenBadgeDesignerCommand = new DelegateCommand(o => OpenBadgeDesigner());
+        }
+
+        private void OpenBadgeDesigner()
+        {
+            BadgeDesignerViewModel vm = new BadgeDesignerViewModel();
+            BadgeDesignerView v = new BadgeDesignerView { DataContext = vm };
+            v.Show();
         }
 
         /// <summary>
@@ -47,6 +55,7 @@ namespace WPFDB.ViewModel
         public ICommand OpenSettingsCommand { get; private set; }
         public ICommand FillDataCommand { get; private set; }
         public ICommand EraseDataCommand { get; private set; }
+        public ICommand OpenBadgeDesignerCommand { get; private set; }
 
         /// <summary>
         /// Gets the workspace for managing departments of the company

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace WPFDB.View
 {
     /// <summary>
-    /// Interaction logic for AddressView.xaml
+    /// Interaction logic for BadgeElementView.xaml
     /// </summary>
-    public partial class AddressView : UserControl
+    public partial class BadgeElementView : UserControl
     {
-        public AddressView()
+        public BadgeElementView()
         {
             InitializeComponent();
         }

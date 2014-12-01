@@ -53,6 +53,13 @@
         <AssociationConnector Association="ConferenceModel.AbstractStatusAbstractWork" />
         <AssociationConnector Association="ConferenceModel.UserAbstractWork" />
         <AssociationConnector Association="ConferenceModel.OrderStatusPersonConferences_Payment" />
+        <EntityTypeShape EntityType="ConferenceModel.BadgeElementType" Width="1.5" PointX="17.75" PointY="2.25" />
+        <EntityTypeShape EntityType="ConferenceModel.Badge" Width="1.5" PointX="20" PointY="1.125" />
+        <EntityTypeShape EntityType="ConferenceModel.BadgeType" Width="1.5" PointX="17.75" PointY="14" />
+        <EntityTypeShape EntityType="ConferenceModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="ConferenceModel.FK_Badges_BadgeElementTypes" />
+        <AssociationConnector Association="ConferenceModel.FK_Badges_BadgeTypes" />
+        <AssociationConnector Association="ConferenceModel.FK_BadgeTypes_Ranks" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

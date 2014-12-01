@@ -21,7 +21,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                
+
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Тип:" />
                 <ComboBox Grid.Row="0" Grid.Column="1" Style="{StaticResource ComboBoxSmall}" 
                           ItemsSource="{Binding Path=ContactTypeLookup}" 

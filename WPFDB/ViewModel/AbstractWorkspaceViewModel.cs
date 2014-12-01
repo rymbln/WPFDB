@@ -230,19 +230,41 @@ namespace WPFDB.ViewModel
 
         private void OpenAbstract()
         {
-            var vm = new AbstractViewModel(currentAbstract);
-            var v = new AbstractView { DataContext = vm };
-            v.Show();
+            try
+            {
+
+
+                var vm = new AbstractViewModel(currentAbstract);
+                var v = new AbstractView { DataContext = vm };
+                v.Show();
+            }
+            catch (Exception ex)
+            {
+                LogManager.Write(ex);
+            }
         }
         private void OpenFolder()
         {
-            var strPath = CurrentAbstract.Link.Substring(0, CurrentAbstract.Link.LastIndexOf("\\"));
-            Process.Start("explorer.exe", strPath);
+            try
+            {
+                var strPath = CurrentAbstract.Link.Substring(0, CurrentAbstract.Link.LastIndexOf("\\"));
+                Process.Start("explorer.exe", strPath);
+            } catch (Exception ex)
+            {
+                LogManager.Write(ex);
+            }
         }
         private void OpenFile()
         {
-            var strPath = CurrentAbstract.Link;
-            Process.Start("explorer.exe", strPath);
+            try
+            {
+                var strPath = CurrentAbstract.Link;
+                Process.Start("explorer.exe", strPath);
+            }
+            catch (Exception ex)
+            {
+                LogManager.Write(ex);
+            }
         }
 
 

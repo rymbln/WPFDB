@@ -51,6 +51,12 @@ namespace WPFDB.Data
 
         ObjectSet<Propertie>  Properties { get; }
 
+        ObjectSet<Badge> Badges { get; }
+
+        ObjectSet<BadgeType> BadgeTypes { get; }
+
+        ObjectSet<BadgeElementType> BadgeElementTypes { get; }
+
         //ObjectSet<PersonConferences_Detail> PersonConferenceDetails { get; }
 
         //ObjectSet<PersonConferences_Payment> PersonConferencePayments { get; }  

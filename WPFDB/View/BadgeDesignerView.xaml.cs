@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace WPFDB.View
 {
     /// <summary>
-    /// Interaction logic for AddressView.xaml
+    /// Interaction logic for BadgeDesignerView.xaml
     /// </summary>
-    public partial class AddressView : UserControl
+    public partial class BadgeDesignerView : Window
     {
-        public AddressView()
+        public BadgeDesignerView()
         {
             InitializeComponent();
         }
