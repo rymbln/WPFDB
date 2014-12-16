@@ -1256,5 +1256,26 @@ namespace WPFDB.Common
         {
             return underlyingContext.Abstracts.Where(o => o.PersonConference.ConferenceId == guid).ToList();
         }
+
+        public  IEnumerable<BadgeType> GetAllBadges()
+        {
+            return underlyingContext.BadgeTypes.OrderBy(o=>o.Name);
+        }
+
+        public void AddElementToBadge(BadgeType badgeType, Badge element)
+        {
+            element.BadgeTypeId = badgeType.Id;
+            this.underlyingContext.Badges.AddObject(element);
+            Save();
+        }
+
+        public void RemoveBadgeElement(Badge badge)
+        {
+            if (badge == null)
+            {
+                throw new ArgumentNullException("badgeelement");
+            }
+            this.underlyingContext.Badges.DeleteObject(badge);
+        }
     }
 }

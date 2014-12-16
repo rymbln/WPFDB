@@ -3,47 +3,116 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
 >
     <Border Style="{StaticResource DetailBorder}">
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
             
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <StackPanel Grid.Column="0" Orientation="Vertical">
                 <TextBlock  Text="Название:" />
                 <TextBox Style="{StaticResource TextBoxSmall}"
                          Text="{Binding Path=Name}" />
             </StackPanel>
-            <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <TextBlock  Text="Позиция по X:" Margin="20,0,0,0" />
-                <TextBox Style="{StaticResource TextBoxSmall}"
+            <StackPanel Grid.Column="1" Orientation="Vertical">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Позиция по X:" Margin="20,0,0,0" />
+                    <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBoxSmall}"
                          Text="{Binding Path=PositionX}" />
-                <TextBlock Text="Позиция по Y:" Margin="20,0,0,0"/>
-                <TextBox Style="{StaticResource TextBoxSmall}"
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Позиция по Y:" Margin="20,0,0,0"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource TextBoxSmall}"
                          Text="{Binding Path=PositionY}" />
-                <TextBlock Text="Высота:" Margin="20,0,0,0"/>
-                <TextBox Style="{StaticResource TextBoxSmall}"
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Высота:" Margin="20,0,0,0"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBoxSmall}"
                          Text="{Binding Path=Height}" />
-                <TextBlock Text="Ширина:" Margin="20,0,0,0"/>
-                <TextBox Style="{StaticResource TextBoxSmall}"
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Ширина:" Margin="20,0,0,0"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource TextBoxSmall}"
                          Text="{Binding Path=Width}" />
+                </Grid>
+               
             </StackPanel>
 
-            <StackPanel Grid.Row="2" Orientation="Horizontal">
-                <TextBlock  Text="Фигура:" Margin="20,0,0,0" />
-                <ComboBox     SelectedValuePath="." 
+            <StackPanel Grid.Column="2" Orientation="Vertical">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0"  Text="Фигура:" Margin="20,0,0,0" />
+                    <ComboBox Grid.Row="0" Grid.Column="1"    SelectedValuePath="." 
                               SelectedItem="{Binding Path=Figure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
                               ItemsSource="{Binding Path=FigureLookup}" DisplayMemberPath="." />
-                
-                <TextBlock  Text="Цвет фона:" Margin="20,0,0,0" />
-                <!--<ColorPicker />-->
 
-                <TextBlock  Text="Цвет границы:" Margin="20,0,0,0" />
+                    <TextBlock Grid.Row="1" Grid.Column="0"  Text="Цвет фона:" Margin="20,0,0,0" />
+                    <xctk:ColorPicker Grid.Row="1" Grid.Column="1" DisplayColorAndName = "True" Margin="20,0,0,0"
+                                  ShowStandardColors="True"
+                                  SelectedColor="{Binding SelectedColorBackground}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Цвет границы:" Margin="20,0,0,0" />
+                    <xctk:ColorPicker Grid.Row="2" Grid.Column="1" DisplayColorAndName = "True" Margin="20,0,0,0"
+                                  ShowStandardColors="True"
+                                  SelectedColor="{Binding SelectedColorBorder}"/>
+
+                </Grid>
+                
+                
+                
+            </StackPanel>
+            <StackPanel Grid.Column="3" Orientation="Vertical">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Шаблон текста:" Margin="20,0,0,0" />
+                    <ComboBox  Grid.Column="1" Grid.Row="0"  SelectedValuePath="." 
+                              SelectedItem="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
+                              ItemsSource="{Binding Path=TextSamplesLookup}" DisplayMemberPath="." />
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Текст:" Margin="20,0,0,0" />
+                    <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource TextBoxSmall}"
+                         Text="{Binding Path=Value}" 
+                             x:Name="txtText"/>
+                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Шрифт:" Margin="20,0,0,0" />
+                    <ComboBox  Grid.Column="1" Grid.Row="2"  SelectedValuePath="." 
+                              SelectedItem="{Binding Path=Font, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
+                              ItemsSource="{Binding Path=FontLookup}" DisplayMemberPath="." />
+                    <TextBlock Grid.Column="0" Grid.Row="3" Text="Стиль шрифта:" Margin="20,0,0,0" />
+                    <ComboBox  Grid.Column="1" Grid.Row="3"  SelectedValuePath="." 
+                              SelectedItem="{Binding Path=FontStyle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
+                              ItemsSource="{Binding Path=FontStyleLookup}" DisplayMemberPath="." />
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Цвет шрифта:" Margin="20,0,0,0" />
+                    <xctk:ColorPicker Grid.Row="4" Grid.Column="1" DisplayColorAndName = "True" Margin="20,0,0,0"
+                                  ShowStandardColors="True"
+                                  SelectedColor="{Binding SelectedColorBorder}"/>
+
+                </Grid>
                 
             </StackPanel>
 

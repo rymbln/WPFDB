@@ -1108,5 +1108,27 @@ namespace WPFDB.Common
         {
             return 465;
         }
+
+        public Badge DefaultBadgeElement
+        {
+            get
+            {
+                var obj = DataManager.Instance.CreateObject<Badge>();
+                obj.Id = GuidComb.Generate();
+                obj.PositionX = 0;
+                obj.PositionY = 0;
+                obj.Width = 100;
+                obj.Height = 50;
+                obj.Value = "---";
+                obj.BackgroundColor = 0;
+                obj.Figure = "";
+                obj.Font = "Default";
+                obj.FontColor = 0;
+                obj.FontSize = 10;
+                obj.ForegroundColor = 0;
+                obj.Name = "Name";
+                return obj;
+            }
+        }
     }
 }

@@ -35,18 +35,18 @@ namespace WPFDB.ViewModel
             AllPersons = new ObservableCollection<Person>();
             AllPersonsDB = new ObservableCollection<Person>();
             AllPersons.CollectionChanged += AllPersonsCollectionChanged;
-    
-      
+
+
 
             ConferenceLookup = new ObservableCollection<Conference>(DataManager.Instance.GetAllConferences());
             ConferenceFilter = DefaultManager.Instance.DefaultConference;
             RefreshPersons();
-           AddPersonCommand = new DelegateCommand((o) => AddPerson());
-           DeletePersonCommand = new DelegateCommand((o) => DeleteCurrentPerson());
-           RefreshCommand = new DelegateCommand((o) => RefreshPersons());
-           OpenPersonCommand = new DelegateCommand((o) => OpenPerson());
-            ToogleConferenceFilterCommand = new DelegateCommand(o=> ToggleConferenceFilter());
-        
+            AddPersonCommand = new DelegateCommand((o) => AddPerson());
+            DeletePersonCommand = new DelegateCommand((o) => DeleteCurrentPerson());
+            RefreshCommand = new DelegateCommand((o) => RefreshPersons());
+            OpenPersonCommand = new DelegateCommand((o) => OpenPerson());
+            ToogleConferenceFilterCommand = new DelegateCommand(o => ToggleConferenceFilter());
+
         }
 
         public ICommand AddPersonCommand { get; private set; }
@@ -55,12 +55,12 @@ namespace WPFDB.ViewModel
         public ICommand OpenPersonCommand { get; private set; }
         public ICommand ApplyFiltersCommand { get; private set; }
         public ICommand ToogleConferenceFilterCommand { get; private set; }
-        
+
 
 
         public ObservableCollection<Person> AllPersons { get; private set; }
         public ObservableCollection<Person> AllPersonsDB { get; private set; }
-        public ObservableCollection<Conference>  ConferenceLookup { get; private set; }
+        public ObservableCollection<Conference> ConferenceLookup { get; private set; }
 
         private void ToggleConferenceFilter()
         {
@@ -86,7 +86,7 @@ namespace WPFDB.ViewModel
             get
             {
                 return isFilterConference;
-                
+
             }
             set
             {
@@ -126,7 +126,7 @@ namespace WPFDB.ViewModel
                 OnPropertyChanged("CurrentPersonVM");
             }
         }
-       
+
         private void AddPerson()
         {
             Person p = DefaultManager.Instance.DefaultPerson;
@@ -141,7 +141,7 @@ namespace WPFDB.ViewModel
             DataManager.Instance.RemovePerson(CurrentPerson);
             AllPersons.Remove(CurrentPerson);
             OnPropertyChanged("AllPersons");
-         //   CurrentPerson = null;
+            //   CurrentPerson = null;
 
         }
 

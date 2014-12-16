@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ConferenceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ConferenceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Abstracts">
           <Key>
             <PropertyRef Name="Id" />
@@ -65,25 +65,13 @@
           <Property Name="DateUpdate" Type="datetime" />
           <Property Name="User" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="BadgeElementTypes">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="SourceId" Type="int" Nullable="false" />
-          <Property Name="DateAdd" Type="datetime" />
-          <Property Name="DateUpdate" Type="datetime" />
-          <Property Name="User" Type="nvarchar(max)" />
-        </EntityType>
         <EntityType Name="Badges">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="BadgeTypeId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="BadgeElementTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PositionX" Type="int" Nullable="false" />
           <Property Name="PositionY" Type="int" Nullable="false" />
           <Property Name="Width" Type="int" Nullable="false" />
@@ -92,6 +80,7 @@
           <Property Name="ForegroundColor" Type="int" Nullable="false" />
           <Property Name="BackgroundColor" Type="int" Nullable="false" />
           <Property Name="Font" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FontStyle" Type="nvarchar(max)" />
           <Property Name="FontColor" Type="int" Nullable="false" />
           <Property Name="FontSize" Type="int" Nullable="false" />
           <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
@@ -105,11 +94,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="RankId" Type="uniqueidentifier" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Width" Type="int" />
-          <Property Name="Height" Type="int" />
+          <Property Name="Width" Type="int" Nullable="false" />
+          <Property Name="Height" Type="int" Nullable="false" />
           <Property Name="SourceId" Type="int" Nullable="false" />
           <Property Name="DateAdd" Type="datetime" />
           <Property Name="DateUpdate" Type="datetime" />
@@ -407,20 +395,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Badges_BadgeElementTypes">
-          <End Role="BadgeElementTypes" Type="Self.BadgeElementTypes" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Badges" Type="Self.Badges" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BadgeElementTypes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Badges">
-              <PropertyRef Name="BadgeElementTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Badges_BadgeTypes">
           <End Role="BadgeTypes" Type="Self.BadgeTypes" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -432,18 +406,6 @@
             </Principal>
             <Dependent Role="Badges">
               <PropertyRef Name="BadgeTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BadgeTypes_Ranks">
-          <End Role="Ranks" Type="Self.Ranks" Multiplicity="0..1" />
-          <End Role="BadgeTypes" Type="Self.BadgeTypes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ranks">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BadgeTypes">
-              <PropertyRef Name="RankId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -722,7 +684,6 @@
           <EntitySet Name="AbstractStatuses" EntityType="Self.AbstractStatuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AbstractWorks" EntityType="Self.AbstractWorks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BadgeElementTypes" EntityType="Self.BadgeElementTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Badges" EntityType="Self.Badges" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BadgeTypes" EntityType="Self.BadgeTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
@@ -753,17 +714,9 @@
             <End Role="AbstractStatuses" EntitySet="AbstractStatuses" />
             <End Role="AbstractWorks" EntitySet="AbstractWorks" />
           </AssociationSet>
-          <AssociationSet Name="FK_Badges_BadgeElementTypes" Association="Self.FK_Badges_BadgeElementTypes">
-            <End Role="BadgeElementTypes" EntitySet="BadgeElementTypes" />
-            <End Role="Badges" EntitySet="Badges" />
-          </AssociationSet>
           <AssociationSet Name="FK_Badges_BadgeTypes" Association="Self.FK_Badges_BadgeTypes">
             <End Role="BadgeTypes" EntitySet="BadgeTypes" />
             <End Role="Badges" EntitySet="Badges" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BadgeTypes_Ranks" Association="Self.FK_BadgeTypes_Ranks">
-            <End Role="Ranks" EntitySet="Ranks" />
-            <End Role="BadgeTypes" EntitySet="BadgeTypes" />
           </AssociationSet>
           <AssociationSet Name="FK_CompanyPersonConferenceDetail" Association="Self.FK_CompanyPersonConferenceDetail">
             <End Role="Companies" EntitySet="Companies" />
@@ -978,21 +931,12 @@
             <End Role="OrderStatus" EntitySet="OrderStatuses" />
             <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
           </AssociationSet>
-          <EntitySet Name="BadgeElementTypes" EntityType="ConferenceModel.BadgeElementType" />
-          <EntitySet Name="Badges" EntityType="ConferenceModel.Badge" />
           <EntitySet Name="BadgeTypes" EntityType="ConferenceModel.BadgeType" />
           <EntitySet Name="sysdiagrams" EntityType="ConferenceModel.sysdiagram" />
-          <AssociationSet Name="FK_Badges_BadgeElementTypes" Association="ConferenceModel.FK_Badges_BadgeElementTypes">
-            <End Role="BadgeElementType" EntitySet="BadgeElementTypes" />
-            <End Role="Badge" EntitySet="Badges" />
-          </AssociationSet>
+          <EntitySet Name="Badges" EntityType="ConferenceModel.Badge" />
           <AssociationSet Name="FK_Badges_BadgeTypes" Association="ConferenceModel.FK_Badges_BadgeTypes">
             <End Role="BadgeType" EntitySet="BadgeTypes" />
             <End Role="Badge" EntitySet="Badges" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BadgeTypes_Ranks" Association="ConferenceModel.FK_BadgeTypes_Ranks">
-            <End Role="Rank" EntitySet="Ranks" />
-            <End Role="BadgeType" EntitySet="BadgeTypes" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Person">
@@ -1195,7 +1139,6 @@
           <Property Type="DateTime" Name="DateUpdate" Nullable="true" Precision="3" />
           <Property Type="String" Name="User" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="PersonConferences_Detail" Relationship="ConferenceModel.FK_RankPersonConferenceDetail" FromRole="Rank" ToRole="PersonConferences_Detail" />
-          <NavigationProperty Name="BadgeTypes" Relationship="ConferenceModel.FK_BadgeTypes_Ranks" FromRole="Rank" ToRole="BadgeType" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -1656,18 +1599,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="BadgeElementType">
+        <EntityType Name="BadgeType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Width" Type="Int32" Nullable="false" />
+          <Property Name="Height" Type="Int32" Nullable="false" />
           <Property Name="SourceId" Type="Int32" Nullable="false" />
           <Property Name="DateAdd" Type="DateTime" Precision="3" />
           <Property Name="DateUpdate" Type="DateTime" Precision="3" />
           <Property Name="User" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Badges" Relationship="ConferenceModel.FK_Badges_BadgeElementTypes" FromRole="BadgeElementType" ToRole="Badge" />
+          <NavigationProperty Name="Badges" Relationship="ConferenceModel.FK_Badges_BadgeTypes" FromRole="BadgeType" ToRole="Badge" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Badge">
           <Key>
@@ -1675,7 +1630,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="BadgeTypeId" Type="Guid" Nullable="false" />
-          <Property Name="BadgeElementTypeId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PositionX" Type="Int32" Nullable="false" />
           <Property Name="PositionY" Type="Int32" Nullable="false" />
           <Property Name="Width" Type="Int32" Nullable="false" />
@@ -1691,50 +1646,9 @@
           <Property Name="DateAdd" Type="DateTime" Precision="3" />
           <Property Name="DateUpdate" Type="DateTime" Precision="3" />
           <Property Name="User" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="BadgeElementType" Relationship="ConferenceModel.FK_Badges_BadgeElementTypes" FromRole="Badge" ToRole="BadgeElementType" />
           <NavigationProperty Name="BadgeType" Relationship="ConferenceModel.FK_Badges_BadgeTypes" FromRole="Badge" ToRole="BadgeType" />
+          <Property Name="FontStyle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="BadgeType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Width" Type="Int32" />
-          <Property Name="Height" Type="Int32" />
-          <Property Name="SourceId" Type="Int32" Nullable="false" />
-          <Property Name="DateAdd" Type="DateTime" Precision="3" />
-          <Property Name="DateUpdate" Type="DateTime" Precision="3" />
-          <Property Name="User" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Badges" Relationship="ConferenceModel.FK_Badges_BadgeTypes" FromRole="BadgeType" ToRole="Badge" />
-          <Property Name="RankId" Type="Guid" />
-          <NavigationProperty Name="Rank" Relationship="ConferenceModel.FK_BadgeTypes_Ranks" FromRole="BadgeType" ToRole="Rank" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <Association Name="FK_Badges_BadgeElementTypes">
-          <End Type="ConferenceModel.BadgeElementType" Role="BadgeElementType" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="ConferenceModel.Badge" Role="Badge" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BadgeElementType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Badge">
-              <PropertyRef Name="BadgeElementTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Badges_BadgeTypes">
           <End Type="ConferenceModel.BadgeType" Role="BadgeType" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1746,18 +1660,6 @@
             </Principal>
             <Dependent Role="Badge">
               <PropertyRef Name="BadgeTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BadgeTypes_Ranks">
-          <End Type="ConferenceModel.Rank" Role="Rank" Multiplicity="0..1" />
-          <End Type="ConferenceModel.BadgeType" Role="BadgeType" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rank">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BadgeType">
-              <PropertyRef Name="RankId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2108,47 +2010,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BadgeElementTypes">
-      <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.BadgeElementType)">
-        <MappingFragment StoreEntitySet="BadgeElementTypes">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
-          <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
-          <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
-          <ScalarProperty Name="User" ColumnName="User" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Badges">
-      <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.Badge)">
-        <MappingFragment StoreEntitySet="Badges">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="BadgeTypeId" ColumnName="BadgeTypeId" />
-          <ScalarProperty Name="BadgeElementTypeId" ColumnName="BadgeElementTypeId" />
-          <ScalarProperty Name="PositionX" ColumnName="PositionX" />
-          <ScalarProperty Name="PositionY" ColumnName="PositionY" />
-          <ScalarProperty Name="Width" ColumnName="Width" />
-          <ScalarProperty Name="Height" ColumnName="Height" />
-          <ScalarProperty Name="Figure" ColumnName="Figure" />
-          <ScalarProperty Name="ForegroundColor" ColumnName="ForegroundColor" />
-          <ScalarProperty Name="BackgroundColor" ColumnName="BackgroundColor" />
-          <ScalarProperty Name="Font" ColumnName="Font" />
-          <ScalarProperty Name="FontColor" ColumnName="FontColor" />
-          <ScalarProperty Name="FontSize" ColumnName="FontSize" />
-          <ScalarProperty Name="Value" ColumnName="Value" />
-          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
-          <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
-          <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
-          <ScalarProperty Name="User" ColumnName="User" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="BadgeTypes">
       <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.BadgeType)">
         <MappingFragment StoreEntitySet="BadgeTypes">
-          <ScalarProperty Name="RankId" ColumnName="RankId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Code" ColumnName="Code" />
@@ -2172,6 +2036,31 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+          <EntitySetMapping Name="Badges">
+            <EntityTypeMapping TypeName="ConferenceModel.Badge">
+              <MappingFragment StoreEntitySet="Badges">
+                <ScalarProperty Name="FontStyle" ColumnName="FontStyle" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
+                <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
+                <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="FontSize" ColumnName="FontSize" />
+                <ScalarProperty Name="FontColor" ColumnName="FontColor" />
+                <ScalarProperty Name="Font" ColumnName="Font" />
+                <ScalarProperty Name="BackgroundColor" ColumnName="BackgroundColor" />
+                <ScalarProperty Name="ForegroundColor" ColumnName="ForegroundColor" />
+                <ScalarProperty Name="Figure" ColumnName="Figure" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="PositionY" ColumnName="PositionY" />
+                <ScalarProperty Name="PositionX" ColumnName="PositionX" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BadgeTypeId" ColumnName="BadgeTypeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
