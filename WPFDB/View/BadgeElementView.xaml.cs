@@ -24,5 +24,10 @@ namespace WPFDB.View
         {
             InitializeComponent();
         }
+
+        private void TextBox_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+
+        }
     }
 }

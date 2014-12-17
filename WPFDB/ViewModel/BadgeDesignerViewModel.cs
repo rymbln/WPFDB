@@ -5,28 +5,33 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
 using WPFDB.Common;
 using WPFDB.Model;
 using WPFDB.ViewModel.Helpers;
 
 namespace WPFDB.ViewModel
 {
-    public class BadgeDesignerViewModel: ViewModelBase
+    public class BadgeDesignerViewModel : ViewModelBase
     {
 
 
         //private BadgeType currentBadge { get; set; }
         private BadgeViewModel currentBadge { get; set; }
         private BadgeElementViewModel currentBadgeElement { get; set; }
-
+        private Canvas canvasView { get; set; }
 
         public ObservableCollection<BadgeViewModel> BadgeCollection { get; private set; }
         public ObservableCollection<BadgeElementViewModel> BadgeElementCollection { get; private set; }
 
+
         public ICommand SaveCommand { get; private set; }
         public ICommand AddBadgeElementCommand { get; private set; }
         public ICommand RemoveBadgeElementCommand { get; private set; }
+        public ICommand DrawBadgeCommand { get; private set; }
 
 
         public BadgeDesignerViewModel()
@@ -37,7 +42,7 @@ namespace WPFDB.ViewModel
             SaveCommand = new DelegateCommand(o => Save());
             AddBadgeElementCommand = new DelegateCommand(o => AddBadgeElement(), o => CurrentBadge != null);
             RemoveBadgeElementCommand = new DelegateCommand(o => RemoveBadgeElement(), o => CurrentBadgeElement != null);
-
+            DrawBadgeCommand = new DelegateCommand(o => DrawBadge());
             RefreshBadges();
 
         }
@@ -68,6 +73,14 @@ namespace WPFDB.ViewModel
             }
         }
 
+        private void DrawBadge()
+        {
+            CanvasView = new Canvas();
+            CanvasView.Width = CurrentBadge.Width;
+            CanvasView.Height = CurrentBadge.Height;
+
+
+        }
 
         private void Save()
         {
@@ -77,7 +90,7 @@ namespace WPFDB.ViewModel
         public void RefreshBadges()
         {
             OnPropertyChanged("BadgeCollection");
-           // CurrentBadge = BadgeCollection.Count > 0 ? BadgeCollection[0] : null;
+            // CurrentBadge = BadgeCollection.Count > 0 ? BadgeCollection[0] : null;
         }
 
         public BadgeViewModel CurrentBadge
@@ -92,7 +105,7 @@ namespace WPFDB.ViewModel
                 BadgeElementCollection = new ObservableCollection<BadgeElementViewModel>(currentBadge.Model.Badges.Select(o => new BadgeElementViewModel(o)).ToList());
                 OnPropertyChanged("CurrentBadge");
                 OnPropertyChanged("BadgeElementCollection");
-             
+
             }
         }
 
@@ -105,8 +118,18 @@ namespace WPFDB.ViewModel
                 OnPropertyChanged("CurrentBadgeElement");
             }
         }
-     
-      
-      
+
+        public Canvas CanvasView
+        {
+            get { return canvasView; }
+            set
+            {
+                canvasView = value;
+                OnPropertyChanged("CanvasView");
+            }
+        }
+
+
+
     }
 }

@@ -466,22 +466,6 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<BadgeType> BadgeTypes
-        {
-            get
-            {
-                if ((_BadgeTypes == null))
-                {
-                    _BadgeTypes = base.CreateObjectSet<BadgeType>("BadgeTypes");
-                }
-                return _BadgeTypes;
-            }
-        }
-        private ObjectSet<BadgeType> _BadgeTypes;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<sysdiagram> sysdiagrams
         {
             get
@@ -494,6 +478,22 @@ namespace WPFDB.Model
             }
         }
         private ObjectSet<sysdiagram> _sysdiagrams;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<BadgeType> BadgeTypes
+        {
+            get
+            {
+                if ((_BadgeTypes == null))
+                {
+                    _BadgeTypes = base.CreateObjectSet<BadgeType>("BadgeTypes");
+                }
+                return _BadgeTypes;
+            }
+        }
+        private ObjectSet<BadgeType> _BadgeTypes;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -700,19 +700,19 @@ namespace WPFDB.Model
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the BadgeTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToBadgeTypes(BadgeType badgeType)
-        {
-            base.AddObject("BadgeTypes", badgeType);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTosysdiagrams(sysdiagram sysdiagram)
         {
             base.AddObject("sysdiagrams", sysdiagram);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the BadgeTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToBadgeTypes(BadgeType badgeType)
+        {
+            base.AddObject("BadgeTypes", badgeType);
         }
     
         /// <summary>
@@ -2171,10 +2171,17 @@ namespace WPFDB.Model
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="badgeTypeId">Initial value of the BadgeTypeId property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="positionX">Initial value of the PositionX property.</param>
-        /// <param name="positionY">Initial value of the PositionY property.</param>
+        /// <param name="positionX1">Initial value of the PositionX1 property.</param>
+        /// <param name="positionY1">Initial value of the PositionY1 property.</param>
+        /// <param name="positionX2">Initial value of the PositionX2 property.</param>
+        /// <param name="positionY2">Initial value of the PositionY2 property.</param>
+        /// <param name="positionX3">Initial value of the PositionX3 property.</param>
+        /// <param name="positionY3">Initial value of the PositionY3 property.</param>
+        /// <param name="positionX4">Initial value of the PositionX4 property.</param>
+        /// <param name="positionY4">Initial value of the PositionY4 property.</param>
         /// <param name="width">Initial value of the Width property.</param>
         /// <param name="height">Initial value of the Height property.</param>
+        /// <param name="roundCorner">Initial value of the RoundCorner property.</param>
         /// <param name="foregroundColor">Initial value of the ForegroundColor property.</param>
         /// <param name="backgroundColor">Initial value of the BackgroundColor property.</param>
         /// <param name="font">Initial value of the Font property.</param>
@@ -2182,16 +2189,23 @@ namespace WPFDB.Model
         /// <param name="fontSize">Initial value of the FontSize property.</param>
         /// <param name="value">Initial value of the Value property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
-        public static Badge CreateBadge(global::System.Guid id, global::System.Guid badgeTypeId, global::System.String name, global::System.Int32 positionX, global::System.Int32 positionY, global::System.Int32 width, global::System.Int32 height, global::System.Int32 foregroundColor, global::System.Int32 backgroundColor, global::System.String font, global::System.Int32 fontColor, global::System.Int32 fontSize, global::System.String value, global::System.Int32 sourceId)
+        public static Badge CreateBadge(global::System.Guid id, global::System.Guid badgeTypeId, global::System.String name, global::System.Int32 positionX1, global::System.Int32 positionY1, global::System.Int32 positionX2, global::System.Int32 positionY2, global::System.Int32 positionX3, global::System.Int32 positionY3, global::System.Int32 positionX4, global::System.Int32 positionY4, global::System.Int32 width, global::System.Int32 height, global::System.Int32 roundCorner, global::System.String foregroundColor, global::System.String backgroundColor, global::System.String font, global::System.String fontColor, global::System.Int32 fontSize, global::System.String value, global::System.Int32 sourceId)
         {
             Badge badge = new Badge();
             badge.Id = id;
             badge.BadgeTypeId = badgeTypeId;
             badge.Name = name;
-            badge.PositionX = positionX;
-            badge.PositionY = positionY;
+            badge.PositionX1 = positionX1;
+            badge.PositionY1 = positionY1;
+            badge.PositionX2 = positionX2;
+            badge.PositionY2 = positionY2;
+            badge.PositionX3 = positionX3;
+            badge.PositionY3 = positionY3;
+            badge.PositionX4 = positionX4;
+            badge.PositionY4 = positionY4;
             badge.Width = width;
             badge.Height = height;
+            badge.RoundCorner = roundCorner;
             badge.ForegroundColor = foregroundColor;
             badge.BackgroundColor = backgroundColor;
             badge.Font = font;
@@ -2286,48 +2300,192 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 PositionX
+        public global::System.Int32 PositionX1
         {
             get
             {
-                return _PositionX;
+                return _PositionX1;
             }
             set
             {
-                OnPositionXChanging(value);
-                ReportPropertyChanging("PositionX");
-                _PositionX = StructuralObject.SetValidValue(value, "PositionX");
-                ReportPropertyChanged("PositionX");
-                OnPositionXChanged();
+                OnPositionX1Changing(value);
+                ReportPropertyChanging("PositionX1");
+                _PositionX1 = StructuralObject.SetValidValue(value, "PositionX1");
+                ReportPropertyChanged("PositionX1");
+                OnPositionX1Changed();
             }
         }
-        private global::System.Int32 _PositionX;
-        partial void OnPositionXChanging(global::System.Int32 value);
-        partial void OnPositionXChanged();
+        private global::System.Int32 _PositionX1;
+        partial void OnPositionX1Changing(global::System.Int32 value);
+        partial void OnPositionX1Changed();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 PositionY
+        public global::System.Int32 PositionY1
         {
             get
             {
-                return _PositionY;
+                return _PositionY1;
             }
             set
             {
-                OnPositionYChanging(value);
-                ReportPropertyChanging("PositionY");
-                _PositionY = StructuralObject.SetValidValue(value, "PositionY");
-                ReportPropertyChanged("PositionY");
-                OnPositionYChanged();
+                OnPositionY1Changing(value);
+                ReportPropertyChanging("PositionY1");
+                _PositionY1 = StructuralObject.SetValidValue(value, "PositionY1");
+                ReportPropertyChanged("PositionY1");
+                OnPositionY1Changed();
             }
         }
-        private global::System.Int32 _PositionY;
-        partial void OnPositionYChanging(global::System.Int32 value);
-        partial void OnPositionYChanged();
+        private global::System.Int32 _PositionY1;
+        partial void OnPositionY1Changing(global::System.Int32 value);
+        partial void OnPositionY1Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PositionX2
+        {
+            get
+            {
+                return _PositionX2;
+            }
+            set
+            {
+                OnPositionX2Changing(value);
+                ReportPropertyChanging("PositionX2");
+                _PositionX2 = StructuralObject.SetValidValue(value, "PositionX2");
+                ReportPropertyChanged("PositionX2");
+                OnPositionX2Changed();
+            }
+        }
+        private global::System.Int32 _PositionX2;
+        partial void OnPositionX2Changing(global::System.Int32 value);
+        partial void OnPositionX2Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PositionY2
+        {
+            get
+            {
+                return _PositionY2;
+            }
+            set
+            {
+                OnPositionY2Changing(value);
+                ReportPropertyChanging("PositionY2");
+                _PositionY2 = StructuralObject.SetValidValue(value, "PositionY2");
+                ReportPropertyChanged("PositionY2");
+                OnPositionY2Changed();
+            }
+        }
+        private global::System.Int32 _PositionY2;
+        partial void OnPositionY2Changing(global::System.Int32 value);
+        partial void OnPositionY2Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PositionX3
+        {
+            get
+            {
+                return _PositionX3;
+            }
+            set
+            {
+                OnPositionX3Changing(value);
+                ReportPropertyChanging("PositionX3");
+                _PositionX3 = StructuralObject.SetValidValue(value, "PositionX3");
+                ReportPropertyChanged("PositionX3");
+                OnPositionX3Changed();
+            }
+        }
+        private global::System.Int32 _PositionX3;
+        partial void OnPositionX3Changing(global::System.Int32 value);
+        partial void OnPositionX3Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PositionY3
+        {
+            get
+            {
+                return _PositionY3;
+            }
+            set
+            {
+                OnPositionY3Changing(value);
+                ReportPropertyChanging("PositionY3");
+                _PositionY3 = StructuralObject.SetValidValue(value, "PositionY3");
+                ReportPropertyChanged("PositionY3");
+                OnPositionY3Changed();
+            }
+        }
+        private global::System.Int32 _PositionY3;
+        partial void OnPositionY3Changing(global::System.Int32 value);
+        partial void OnPositionY3Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PositionX4
+        {
+            get
+            {
+                return _PositionX4;
+            }
+            set
+            {
+                OnPositionX4Changing(value);
+                ReportPropertyChanging("PositionX4");
+                _PositionX4 = StructuralObject.SetValidValue(value, "PositionX4");
+                ReportPropertyChanged("PositionX4");
+                OnPositionX4Changed();
+            }
+        }
+        private global::System.Int32 _PositionX4;
+        partial void OnPositionX4Changing(global::System.Int32 value);
+        partial void OnPositionX4Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PositionY4
+        {
+            get
+            {
+                return _PositionY4;
+            }
+            set
+            {
+                OnPositionY4Changing(value);
+                ReportPropertyChanging("PositionY4");
+                _PositionY4 = StructuralObject.SetValidValue(value, "PositionY4");
+                ReportPropertyChanged("PositionY4");
+                OnPositionY4Changed();
+            }
+        }
+        private global::System.Int32 _PositionY4;
+        partial void OnPositionY4Changing(global::System.Int32 value);
+        partial void OnPositionY4Changed();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2380,33 +2538,33 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Figure
+        public global::System.Int32 RoundCorner
         {
             get
             {
-                return _Figure;
+                return _RoundCorner;
             }
             set
             {
-                OnFigureChanging(value);
-                ReportPropertyChanging("Figure");
-                _Figure = StructuralObject.SetValidValue(value, true, "Figure");
-                ReportPropertyChanged("Figure");
-                OnFigureChanged();
+                OnRoundCornerChanging(value);
+                ReportPropertyChanging("RoundCorner");
+                _RoundCorner = StructuralObject.SetValidValue(value, "RoundCorner");
+                ReportPropertyChanged("RoundCorner");
+                OnRoundCornerChanged();
             }
         }
-        private global::System.String _Figure;
-        partial void OnFigureChanging(global::System.String value);
-        partial void OnFigureChanged();
+        private global::System.Int32 _RoundCorner;
+        partial void OnRoundCornerChanging(global::System.Int32 value);
+        partial void OnRoundCornerChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 ForegroundColor
+        public global::System.String ForegroundColor
         {
             get
             {
@@ -2416,13 +2574,13 @@ namespace WPFDB.Model
             {
                 OnForegroundColorChanging(value);
                 ReportPropertyChanging("ForegroundColor");
-                _ForegroundColor = StructuralObject.SetValidValue(value, "ForegroundColor");
+                _ForegroundColor = StructuralObject.SetValidValue(value, false, "ForegroundColor");
                 ReportPropertyChanged("ForegroundColor");
                 OnForegroundColorChanged();
             }
         }
-        private global::System.Int32 _ForegroundColor;
-        partial void OnForegroundColorChanging(global::System.Int32 value);
+        private global::System.String _ForegroundColor;
+        partial void OnForegroundColorChanging(global::System.String value);
         partial void OnForegroundColorChanged();
     
         /// <summary>
@@ -2430,7 +2588,7 @@ namespace WPFDB.Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 BackgroundColor
+        public global::System.String BackgroundColor
         {
             get
             {
@@ -2440,13 +2598,13 @@ namespace WPFDB.Model
             {
                 OnBackgroundColorChanging(value);
                 ReportPropertyChanging("BackgroundColor");
-                _BackgroundColor = StructuralObject.SetValidValue(value, "BackgroundColor");
+                _BackgroundColor = StructuralObject.SetValidValue(value, false, "BackgroundColor");
                 ReportPropertyChanged("BackgroundColor");
                 OnBackgroundColorChanged();
             }
         }
-        private global::System.Int32 _BackgroundColor;
-        partial void OnBackgroundColorChanging(global::System.Int32 value);
+        private global::System.String _BackgroundColor;
+        partial void OnBackgroundColorChanging(global::System.String value);
         partial void OnBackgroundColorChanged();
     
         /// <summary>
@@ -2476,9 +2634,33 @@ namespace WPFDB.Model
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FontStyle
+        {
+            get
+            {
+                return _FontStyle;
+            }
+            set
+            {
+                OnFontStyleChanging(value);
+                ReportPropertyChanging("FontStyle");
+                _FontStyle = StructuralObject.SetValidValue(value, true, "FontStyle");
+                ReportPropertyChanged("FontStyle");
+                OnFontStyleChanged();
+            }
+        }
+        private global::System.String _FontStyle;
+        partial void OnFontStyleChanging(global::System.String value);
+        partial void OnFontStyleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 FontColor
+        public global::System.String FontColor
         {
             get
             {
@@ -2488,13 +2670,13 @@ namespace WPFDB.Model
             {
                 OnFontColorChanging(value);
                 ReportPropertyChanging("FontColor");
-                _FontColor = StructuralObject.SetValidValue(value, "FontColor");
+                _FontColor = StructuralObject.SetValidValue(value, false, "FontColor");
                 ReportPropertyChanged("FontColor");
                 OnFontColorChanged();
             }
         }
-        private global::System.Int32 _FontColor;
-        partial void OnFontColorChanging(global::System.Int32 value);
+        private global::System.String _FontColor;
+        partial void OnFontColorChanging(global::System.String value);
         partial void OnFontColorChanged();
     
         /// <summary>
@@ -2640,30 +2822,6 @@ namespace WPFDB.Model
         private global::System.String _User;
         partial void OnUserChanging(global::System.String value);
         partial void OnUserChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String FontStyle
-        {
-            get
-            {
-                return _FontStyle;
-            }
-            set
-            {
-                OnFontStyleChanging(value);
-                ReportPropertyChanging("FontStyle");
-                _FontStyle = StructuralObject.SetValidValue(value, true, "FontStyle");
-                ReportPropertyChanged("FontStyle");
-                OnFontStyleChanged();
-            }
-        }
-        private global::System.String _FontStyle;
-        partial void OnFontStyleChanging(global::System.String value);
-        partial void OnFontStyleChanged();
 
         #endregion
 

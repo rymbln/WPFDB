@@ -1115,17 +1115,23 @@ namespace WPFDB.Common
             {
                 var obj = DataManager.Instance.CreateObject<Badge>();
                 obj.Id = GuidComb.Generate();
-                obj.PositionX = 0;
-                obj.PositionY = 0;
+                obj.PositionX1 = 0;
+                obj.PositionX2 = 0;
+                obj.PositionX3 = 0;
+                obj.PositionX4 = 0;
+                obj.PositionY1 = 0;
+                obj.PositionY2 = 0;
+                obj.PositionY3= 0;
+                obj.PositionY4 = 0;
                 obj.Width = 100;
                 obj.Height = 50;
                 obj.Value = "---";
-                obj.BackgroundColor = 0;
-                obj.Figure = "";
+                obj.BackgroundColor = "#FFFFFF";
+                
                 obj.Font = "Default";
-                obj.FontColor = 0;
+                obj.FontColor = "#FFFFFF";
                 obj.FontSize = 10;
-                obj.ForegroundColor = 0;
+                obj.ForegroundColor = "#FFFFFF";
                 obj.Name = "Name";
                 return obj;
             }

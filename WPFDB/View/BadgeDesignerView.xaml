@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:WPFDB.ViewModel"
         xmlns:view="clr-namespace:WPFDB.View"
+        xmlns:rcp="clr-namespace:WPFDB.Common"
         Title="BadgeDesignerView" Height="600" Width="1024">
     <Window.Resources>
 
@@ -10,7 +11,7 @@
             <view:BadgeElementView/>
         </DataTemplate>
 
-  
+
     </Window.Resources>
     <DockPanel>
         <ToolBar DockPanel.Dock="Top">
@@ -43,10 +44,10 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <HeaderedContentControl Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Style="{StaticResource SubDisplayArea}" Margin="2">
+            <HeaderedContentControl Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SubDisplayArea}" Margin="2">
                 <HeaderedContentControl.Header>
                     Объекты на бейдже
                 </HeaderedContentControl.Header>
@@ -77,7 +78,49 @@
                     <DataGridTextColumn Header="Ширина" Width="*"  Binding="{Binding Path=Width}" />
                 </DataGrid.Columns>
             </DataGrid>
-    
+            <Viewbox   Grid.Row="0" Grid.Column="1" Stretch="Fill" >
+                <ListBox ItemsSource="{Binding BadgeElementCollection}" x:Name="lst" Height="500" Width="500"
+                     Background="Transparent">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas IsItemsHost="True"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="FocusVisualStyle">
+                                <Setter.Value>
+                                    <Style TargetType="Control">
+                                        <Setter Property="Opacity" Value="0"/>
+                                    </Style>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Grid>
+                                            <Polygon Points="{Binding PointsList}"
+                                                Stretch="Uniform"
+                                                Fill="{Binding ColorFill}"
+                                                Stroke="{Binding ColorStroke}"
+                                                Width="{Binding Width}"
+                                                Height="{Binding Height}"/>
+                                                <!--ArcRoundness="{Binding RoundCorner}" 
+                                                IsClosed="True"/>-->
+                                            <TextBlock Text="{Binding Value}" 
+                                                       FontFamily="{Binding FontFamily}"
+                                                       FontSize="{Binding FontSize}"
+                                                       FontStyle="{Binding FontStyle}"
+                                                       FontWeight="{Binding FontWeight}"
+                                                       Foreground="{Binding ColorFontForeground}"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </Viewbox>
         </Grid>
     </DockPanel>
 </Window>

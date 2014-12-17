@@ -7,9 +7,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media;
 using WPFDB.Common;
 using WPFDB.Model;
-using WPFDB.View.Common;
 using WPFDB.ViewModel.Helpers;
 
 namespace WPFDB.ViewModel
@@ -49,14 +49,7 @@ namespace WPFDB.ViewModel
             }
         }
 
-        public List<string> FigureLookup
-        {
-            get
-            {
-                string[] figure = { "Прямоугольник", "Прямоугольник скругленный", "Эллипс", "Треугольник" };
-                return figure.ToList();
-            }
-        }
+    
         public List<string> TextSamplesLookup
         {
             get
@@ -89,11 +82,6 @@ namespace WPFDB.ViewModel
             get { return this.Model.Name; }
             set { this.Model.Name = value; this.OnPropertyChanged("Name"); }
         }
-        public string Figure
-        {
-            get { return this.Model.Figure; }
-            set { this.Model.Figure = value; this.OnPropertyChanged("Figure"); }
-        }
         public string Font
         {
             get { return this.Model.Font; }
@@ -109,37 +97,77 @@ namespace WPFDB.ViewModel
             get { return this.Model.Value; }
             set { this.Model.Value = value; this.OnPropertyChanged("Value"); }
         }
-        public int PositionX
+        public int PositionX1
         {
-            get { return Model.PositionX; }
-            set { Model.PositionX = value; OnPropertyChanged("PositionX"); }
+            get { return Model.PositionX1; }
+            set { Model.PositionX1 = value; OnPropertyChanged("PositionX1"); }
         }
-        public int PositionY
+        public int PositionX2
         {
-            get { return Model.PositionY; }
-            set { Model.PositionY = value; OnPropertyChanged("PositionY"); }
+            get { return Model.PositionX2; }
+            set { Model.PositionX2 = value; OnPropertyChanged("PositionX2"); }
+        }
+        public int PositionX3
+        {
+            get { return Model.PositionX3; }
+            set { Model.PositionX3 = value; OnPropertyChanged("PositionX3"); }
+        }
+        public int PositionX4
+        {
+            get { return Model.PositionX4; }
+            set { Model.PositionX4 = value; OnPropertyChanged("PositionX4"); }
+        }
+        public int PositionY1
+        {
+            get { return Model.PositionY1; }
+            set { Model.PositionY1 = value; OnPropertyChanged("PositionY1"); }
+        }
+        public int PositionY2
+        {
+            get { return Model.PositionY2; }
+            set { Model.PositionY2 = value; OnPropertyChanged("PositionY2"); }
+        }
+        public int PositionY3
+        {
+            get { return Model.PositionY3; }
+            set { Model.PositionY3 = value; OnPropertyChanged("PositionY3"); }
+        }
+        public int PositionY4
+        {
+            get { return Model.PositionY4; }
+            set { Model.PositionY4 = value; OnPropertyChanged("PositionY4"); }
         }
         public int Width
         {
-            get { return this.Model.Width; }
-            set { this.Model.Width = value; this.OnPropertyChanged("Width"); }
+            get { return Model.Width; }
+            set { Model.Width = value;
+            OnPropertyChanged("Width");
+            }
         }
         public int Height
         {
-            get { return this.Model.Height; }
-            set { this.Model.Height = value; this.OnPropertyChanged("Height"); }
+            get { return Model.Height;}
+            set { Model.Height = value;
+            OnPropertyChanged("Height");
+            }
         }
-        public int ForegroundColor
+        public int RoundCorner
+        {
+            get { return Model.RoundCorner; }
+            set { Model.RoundCorner = value; OnPropertyChanged("RoundCorner"); }
+        }
+        public string ForegroundColor
         {
             get { return this.Model.ForegroundColor; }
             set { this.Model.ForegroundColor = value; this.OnPropertyChanged("ForegroundColor"); }
         }
-        public int BackgroundColor
+        public string BackgroundColor
         {
             get { return this.Model.BackgroundColor ; }
             set { this.Model.BackgroundColor = value; this.OnPropertyChanged("BackgroundColor"); }
         }
-        public int FontColor
+       
+        public string FontColor
         {
             get { return this.Model.FontColor ; }
             set { this.Model.FontColor = value; this.OnPropertyChanged("FontColor"); }
@@ -156,7 +184,22 @@ namespace WPFDB.ViewModel
                 return Font + "|" + this.FontStyle + "|" + FontSize;
             }
         }
-
+        public string PointsList
+        {
+            get { return String.Format("{0},{1} {2},{3} {4},{5} {6},{7}",PositionX1,PositionY1,PositionX2, PositionY2, PositionX3, PositionY3, PositionX4, PositionY4); }
+        }
+        public Color ColorFontForeground
+        {
+            get { return (Color)ColorConverter.ConvertFromString(FontColor); }
+        }
+        public Color ColorFill
+        {
+            get { return (Color)ColorConverter.ConvertFromString(BackgroundColor); }
+        }
+        public Color ColorStroke
+        {
+            get { return (Color)ColorConverter.ConvertFromString(ForegroundColor); }
+        }
 
 
     }

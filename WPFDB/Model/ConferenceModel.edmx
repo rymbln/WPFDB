@@ -72,16 +72,22 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="BadgeTypeId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="PositionX" Type="int" Nullable="false" />
-          <Property Name="PositionY" Type="int" Nullable="false" />
+          <Property Name="PositionX1" Type="int" Nullable="false" />
+          <Property Name="PositionY1" Type="int" Nullable="false" />
+          <Property Name="PositionX2" Type="int" Nullable="false" />
+          <Property Name="PositionY2" Type="int" Nullable="false" />
+          <Property Name="PositionX3" Type="int" Nullable="false" />
+          <Property Name="PositionY3" Type="int" Nullable="false" />
+          <Property Name="PositionX4" Type="int" Nullable="false" />
+          <Property Name="PositionY4" Type="int" Nullable="false" />
           <Property Name="Width" Type="int" Nullable="false" />
           <Property Name="Height" Type="int" Nullable="false" />
-          <Property Name="Figure" Type="nvarchar(max)" />
-          <Property Name="ForegroundColor" Type="int" Nullable="false" />
-          <Property Name="BackgroundColor" Type="int" Nullable="false" />
+          <Property Name="RoundCorner" Type="int" Nullable="false" />
+          <Property Name="ForegroundColor" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BackgroundColor" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Font" Type="nvarchar(max)" Nullable="false" />
           <Property Name="FontStyle" Type="nvarchar(max)" />
-          <Property Name="FontColor" Type="int" Nullable="false" />
+          <Property Name="FontColor" Type="nvarchar(max)" Nullable="false" />
           <Property Name="FontSize" Type="int" Nullable="false" />
           <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
           <Property Name="SourceId" Type="int" Nullable="false" />
@@ -931,8 +937,8 @@
             <End Role="OrderStatus" EntitySet="OrderStatuses" />
             <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
           </AssociationSet>
-          <EntitySet Name="BadgeTypes" EntityType="ConferenceModel.BadgeType" />
           <EntitySet Name="sysdiagrams" EntityType="ConferenceModel.sysdiagram" />
+          <EntitySet Name="BadgeTypes" EntityType="ConferenceModel.BadgeType" />
           <EntitySet Name="Badges" EntityType="ConferenceModel.Badge" />
           <AssociationSet Name="FK_Badges_BadgeTypes" Association="ConferenceModel.FK_Badges_BadgeTypes">
             <End Role="BadgeType" EntitySet="BadgeTypes" />
@@ -1599,6 +1605,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="BadgeType">
           <Key>
             <PropertyRef Name="Id" />
@@ -1614,16 +1630,6 @@
           <Property Name="User" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Badges" Relationship="ConferenceModel.FK_Badges_BadgeTypes" FromRole="BadgeType" ToRole="Badge" />
         </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="Badge">
           <Key>
             <PropertyRef Name="Id" />
@@ -1631,15 +1637,22 @@
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="BadgeTypeId" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PositionX" Type="Int32" Nullable="false" />
-          <Property Name="PositionY" Type="Int32" Nullable="false" />
+          <Property Name="PositionX1" Type="Int32" Nullable="false" />
+          <Property Name="PositionY1" Type="Int32" Nullable="false" />
+          <Property Name="PositionX2" Type="Int32" Nullable="false" />
+          <Property Name="PositionY2" Type="Int32" Nullable="false" />
+          <Property Name="PositionX3" Type="Int32" Nullable="false" />
+          <Property Name="PositionY3" Type="Int32" Nullable="false" />
+          <Property Name="PositionX4" Type="Int32" Nullable="false" />
+          <Property Name="PositionY4" Type="Int32" Nullable="false" />
           <Property Name="Width" Type="Int32" Nullable="false" />
           <Property Name="Height" Type="Int32" Nullable="false" />
-          <Property Name="Figure" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ForegroundColor" Type="Int32" Nullable="false" />
-          <Property Name="BackgroundColor" Type="Int32" Nullable="false" />
+          <Property Name="RoundCorner" Type="Int32" Nullable="false" />
+          <Property Name="ForegroundColor" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BackgroundColor" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Font" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="FontColor" Type="Int32" Nullable="false" />
+          <Property Name="FontStyle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FontColor" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FontSize" Type="Int32" Nullable="false" />
           <Property Name="Value" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SourceId" Type="Int32" Nullable="false" />
@@ -1647,7 +1660,6 @@
           <Property Name="DateUpdate" Type="DateTime" Precision="3" />
           <Property Name="User" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BadgeType" Relationship="ConferenceModel.FK_Badges_BadgeTypes" FromRole="Badge" ToRole="BadgeType" />
-          <Property Name="FontStyle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Badges_BadgeTypes">
           <End Type="ConferenceModel.BadgeType" Role="BadgeType" Multiplicity="1">
@@ -2010,21 +2022,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BadgeTypes">
-      <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.BadgeType)">
-        <MappingFragment StoreEntitySet="BadgeTypes">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Width" ColumnName="Width" />
-          <ScalarProperty Name="Height" ColumnName="Height" />
-          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
-          <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
-          <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
-          <ScalarProperty Name="User" ColumnName="User" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
       <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.sysdiagram)">
         <MappingFragment StoreEntitySet="sysdiagrams">
@@ -2036,10 +2033,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+          <EntitySetMapping Name="BadgeTypes">
+            <EntityTypeMapping TypeName="ConferenceModel.BadgeType">
+              <MappingFragment StoreEntitySet="BadgeTypes">
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
+                <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
+                <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Badges">
             <EntityTypeMapping TypeName="ConferenceModel.Badge">
               <MappingFragment StoreEntitySet="Badges">
-                <ScalarProperty Name="FontStyle" ColumnName="FontStyle" />
                 <ScalarProperty Name="User" ColumnName="User" />
                 <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
                 <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
@@ -2047,14 +2058,21 @@
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="FontSize" ColumnName="FontSize" />
                 <ScalarProperty Name="FontColor" ColumnName="FontColor" />
+                <ScalarProperty Name="FontStyle" ColumnName="FontStyle" />
                 <ScalarProperty Name="Font" ColumnName="Font" />
                 <ScalarProperty Name="BackgroundColor" ColumnName="BackgroundColor" />
                 <ScalarProperty Name="ForegroundColor" ColumnName="ForegroundColor" />
-                <ScalarProperty Name="Figure" ColumnName="Figure" />
+                <ScalarProperty Name="RoundCorner" ColumnName="RoundCorner" />
                 <ScalarProperty Name="Height" ColumnName="Height" />
                 <ScalarProperty Name="Width" ColumnName="Width" />
-                <ScalarProperty Name="PositionY" ColumnName="PositionY" />
-                <ScalarProperty Name="PositionX" ColumnName="PositionX" />
+                <ScalarProperty Name="PositionY4" ColumnName="PositionY4" />
+                <ScalarProperty Name="PositionX4" ColumnName="PositionX4" />
+                <ScalarProperty Name="PositionY3" ColumnName="PositionY3" />
+                <ScalarProperty Name="PositionX3" ColumnName="PositionX3" />
+                <ScalarProperty Name="PositionY2" ColumnName="PositionY2" />
+                <ScalarProperty Name="PositionX2" ColumnName="PositionX2" />
+                <ScalarProperty Name="PositionY1" ColumnName="PositionY1" />
+                <ScalarProperty Name="PositionX1" ColumnName="PositionX1" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="BadgeTypeId" ColumnName="BadgeTypeId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

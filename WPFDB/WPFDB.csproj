@@ -88,15 +88,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\Authentification.cs" />
-    <Compile Include="Common\AvailableColors.cs" />
     <Compile Include="Common\DefaultManager.cs" />
     <Compile Include="Common\EmailManager.cs" />
-    <Compile Include="Common\FontColor.cs" />
-    <Compile Include="Common\FontInfo.cs" />
     <Compile Include="Common\GuidComb.cs" />
     <Compile Include="Common\DataManager.cs" />
     <Compile Include="Common\ImportManager.cs" />
     <Compile Include="Common\LogManager.cs" />
+    <Compile Include="Common\RoundedCornersPolygon.cs" />
     <Compile Include="Common\WordManager.cs" />
     <Compile Include="Model\Abstract.cs" />
     <Compile Include="Model\IConferenceContext.cs" />
@@ -117,7 +115,6 @@
     <Compile Include="ViewModel\BadgeDesignerViewModel.cs" />
     <Compile Include="ViewModel\BadgeElementViewModel.cs" />
     <Compile Include="ViewModel\BadgeViewModel.cs" />
-    <Compile Include="ViewModel\Common\ColorPickerViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\ContactTypeViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\ContactTypeWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\CurrentPersonViewModel.cs" />
@@ -168,15 +165,6 @@
     </Compile>
     <Compile Include="View\BadgeElementView.xaml.cs">
       <DependentUpon>BadgeElementView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Common\ColorFontChooser.xaml.cs">
-      <DependentUpon>ColorFontChooser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Common\ColorFontDialog.xaml.cs">
-      <DependentUpon>ColorFontDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Common\ColorPicker.xaml.cs">
-      <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ImportWorkspaceView.xaml.cs">
       <DependentUpon>ImportWorkspaceView.xaml</DependentUpon>
@@ -299,18 +287,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BadgeElementView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Common\ColorFontChooser.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Common\ColorFontDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Common\ColorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -543,7 +519,10 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModel\Common\" />
+    <Folder Include="View\Common\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
