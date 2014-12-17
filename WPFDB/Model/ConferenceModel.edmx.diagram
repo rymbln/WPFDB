@@ -55,7 +55,7 @@
         <AssociationConnector Association="ConferenceModel.OrderStatusPersonConferences_Payment" />
         <EntityTypeShape EntityType="ConferenceModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="ConferenceModel.BadgeType" Width="1.5" PointX="17.375" PointY="2" />
-        <EntityTypeShape EntityType="ConferenceModel.Badge" Width="1.5" PointX="19.625" PointY="10.25" />
+        <EntityTypeShape EntityType="ConferenceModel.Badge" Width="1.5" PointX="19.625" PointY="1" />
         <AssociationConnector Association="ConferenceModel.FK_Badges_BadgeTypes" />
         </Diagram>
     </edmx:Diagrams>

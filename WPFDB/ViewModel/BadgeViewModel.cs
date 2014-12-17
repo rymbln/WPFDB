@@ -68,6 +68,6 @@ namespace WPFDB.ViewModel
             set { this.Model.Height = value; this.OnPropertyChanged("Height"); }
         }
       
-        
+      
     }
 }

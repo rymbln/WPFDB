@@ -75,11 +75,10 @@ namespace WPFDB.ViewModel
 
         private void DrawBadge()
         {
-            CanvasView = new Canvas();
-            CanvasView.Width = CurrentBadge.Width;
-            CanvasView.Height = CurrentBadge.Height;
-
-
+            
+            var obj = BadgeElementCollection;
+            BadgeElementCollection = new ObservableCollection<BadgeElementViewModel>(obj);
+            OnPropertyChanged("BadgeElementCollection");
         }
 
         private void Save()

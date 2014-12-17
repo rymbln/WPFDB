@@ -2173,12 +2173,6 @@ namespace WPFDB.Model
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="positionX1">Initial value of the PositionX1 property.</param>
         /// <param name="positionY1">Initial value of the PositionY1 property.</param>
-        /// <param name="positionX2">Initial value of the PositionX2 property.</param>
-        /// <param name="positionY2">Initial value of the PositionY2 property.</param>
-        /// <param name="positionX3">Initial value of the PositionX3 property.</param>
-        /// <param name="positionY3">Initial value of the PositionY3 property.</param>
-        /// <param name="positionX4">Initial value of the PositionX4 property.</param>
-        /// <param name="positionY4">Initial value of the PositionY4 property.</param>
         /// <param name="width">Initial value of the Width property.</param>
         /// <param name="height">Initial value of the Height property.</param>
         /// <param name="roundCorner">Initial value of the RoundCorner property.</param>
@@ -2189,7 +2183,7 @@ namespace WPFDB.Model
         /// <param name="fontSize">Initial value of the FontSize property.</param>
         /// <param name="value">Initial value of the Value property.</param>
         /// <param name="sourceId">Initial value of the SourceId property.</param>
-        public static Badge CreateBadge(global::System.Guid id, global::System.Guid badgeTypeId, global::System.String name, global::System.Int32 positionX1, global::System.Int32 positionY1, global::System.Int32 positionX2, global::System.Int32 positionY2, global::System.Int32 positionX3, global::System.Int32 positionY3, global::System.Int32 positionX4, global::System.Int32 positionY4, global::System.Int32 width, global::System.Int32 height, global::System.Int32 roundCorner, global::System.String foregroundColor, global::System.String backgroundColor, global::System.String font, global::System.String fontColor, global::System.Int32 fontSize, global::System.String value, global::System.Int32 sourceId)
+        public static Badge CreateBadge(global::System.Guid id, global::System.Guid badgeTypeId, global::System.String name, global::System.Int32 positionX1, global::System.Int32 positionY1, global::System.Int32 width, global::System.Int32 height, global::System.Int32 roundCorner, global::System.String foregroundColor, global::System.String backgroundColor, global::System.String font, global::System.String fontColor, global::System.Int32 fontSize, global::System.String value, global::System.Int32 sourceId)
         {
             Badge badge = new Badge();
             badge.Id = id;
@@ -2197,12 +2191,6 @@ namespace WPFDB.Model
             badge.Name = name;
             badge.PositionX1 = positionX1;
             badge.PositionY1 = positionY1;
-            badge.PositionX2 = positionX2;
-            badge.PositionY2 = positionY2;
-            badge.PositionX3 = positionX3;
-            badge.PositionY3 = positionY3;
-            badge.PositionX4 = positionX4;
-            badge.PositionY4 = positionY4;
             badge.Width = width;
             badge.Height = height;
             badge.RoundCorner = roundCorner;
@@ -2342,150 +2330,6 @@ namespace WPFDB.Model
         private global::System.Int32 _PositionY1;
         partial void OnPositionY1Changing(global::System.Int32 value);
         partial void OnPositionY1Changed();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 PositionX2
-        {
-            get
-            {
-                return _PositionX2;
-            }
-            set
-            {
-                OnPositionX2Changing(value);
-                ReportPropertyChanging("PositionX2");
-                _PositionX2 = StructuralObject.SetValidValue(value, "PositionX2");
-                ReportPropertyChanged("PositionX2");
-                OnPositionX2Changed();
-            }
-        }
-        private global::System.Int32 _PositionX2;
-        partial void OnPositionX2Changing(global::System.Int32 value);
-        partial void OnPositionX2Changed();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 PositionY2
-        {
-            get
-            {
-                return _PositionY2;
-            }
-            set
-            {
-                OnPositionY2Changing(value);
-                ReportPropertyChanging("PositionY2");
-                _PositionY2 = StructuralObject.SetValidValue(value, "PositionY2");
-                ReportPropertyChanged("PositionY2");
-                OnPositionY2Changed();
-            }
-        }
-        private global::System.Int32 _PositionY2;
-        partial void OnPositionY2Changing(global::System.Int32 value);
-        partial void OnPositionY2Changed();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 PositionX3
-        {
-            get
-            {
-                return _PositionX3;
-            }
-            set
-            {
-                OnPositionX3Changing(value);
-                ReportPropertyChanging("PositionX3");
-                _PositionX3 = StructuralObject.SetValidValue(value, "PositionX3");
-                ReportPropertyChanged("PositionX3");
-                OnPositionX3Changed();
-            }
-        }
-        private global::System.Int32 _PositionX3;
-        partial void OnPositionX3Changing(global::System.Int32 value);
-        partial void OnPositionX3Changed();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 PositionY3
-        {
-            get
-            {
-                return _PositionY3;
-            }
-            set
-            {
-                OnPositionY3Changing(value);
-                ReportPropertyChanging("PositionY3");
-                _PositionY3 = StructuralObject.SetValidValue(value, "PositionY3");
-                ReportPropertyChanged("PositionY3");
-                OnPositionY3Changed();
-            }
-        }
-        private global::System.Int32 _PositionY3;
-        partial void OnPositionY3Changing(global::System.Int32 value);
-        partial void OnPositionY3Changed();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 PositionX4
-        {
-            get
-            {
-                return _PositionX4;
-            }
-            set
-            {
-                OnPositionX4Changing(value);
-                ReportPropertyChanging("PositionX4");
-                _PositionX4 = StructuralObject.SetValidValue(value, "PositionX4");
-                ReportPropertyChanged("PositionX4");
-                OnPositionX4Changed();
-            }
-        }
-        private global::System.Int32 _PositionX4;
-        partial void OnPositionX4Changing(global::System.Int32 value);
-        partial void OnPositionX4Changed();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 PositionY4
-        {
-            get
-            {
-                return _PositionY4;
-            }
-            set
-            {
-                OnPositionY4Changing(value);
-                ReportPropertyChanging("PositionY4");
-                _PositionY4 = StructuralObject.SetValidValue(value, "PositionY4");
-                ReportPropertyChanged("PositionY4");
-                OnPositionY4Changed();
-            }
-        }
-        private global::System.Int32 _PositionY4;
-        partial void OnPositionY4Changing(global::System.Int32 value);
-        partial void OnPositionY4Changed();
     
         /// <summary>
         /// No Metadata Documentation available.

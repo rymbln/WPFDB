@@ -8,9 +8,11 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Drawing.Text;
 using WPFDB.Common;
 using WPFDB.Model;
 using WPFDB.ViewModel.Helpers;
+using System.Drawing;
 
 namespace WPFDB.ViewModel
 {
@@ -35,8 +37,22 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                string[] figure = { "Arial", "Times New Roman", "Tahoma", "Verdana" };
-                return figure.ToList();
+                string familyName;
+                string familyList = "";
+                System.Drawing.FontFamily[] fontFamilies;
+
+                InstalledFontCollection installedFontCollection = new InstalledFontCollection();
+
+                // Get the array of FontFamily objects.
+                fontFamilies = installedFontCollection.Families;
+
+                var fonts = new List<string>();
+                int count = fontFamilies.Length;
+                for (int j = 0; j < count; ++j)
+                {
+                    fonts.Add(fontFamilies[j].Name);
+                }
+                return fonts;
             }
         }
 
@@ -48,6 +64,8 @@ namespace WPFDB.ViewModel
                 return figure.ToList();
             }
         }
+      
+
 
     
         public List<string> TextSamplesLookup
@@ -102,41 +120,13 @@ namespace WPFDB.ViewModel
             get { return Model.PositionX1; }
             set { Model.PositionX1 = value; OnPropertyChanged("PositionX1"); }
         }
-        public int PositionX2
-        {
-            get { return Model.PositionX2; }
-            set { Model.PositionX2 = value; OnPropertyChanged("PositionX2"); }
-        }
-        public int PositionX3
-        {
-            get { return Model.PositionX3; }
-            set { Model.PositionX3 = value; OnPropertyChanged("PositionX3"); }
-        }
-        public int PositionX4
-        {
-            get { return Model.PositionX4; }
-            set { Model.PositionX4 = value; OnPropertyChanged("PositionX4"); }
-        }
+     
         public int PositionY1
         {
             get { return Model.PositionY1; }
             set { Model.PositionY1 = value; OnPropertyChanged("PositionY1"); }
         }
-        public int PositionY2
-        {
-            get { return Model.PositionY2; }
-            set { Model.PositionY2 = value; OnPropertyChanged("PositionY2"); }
-        }
-        public int PositionY3
-        {
-            get { return Model.PositionY3; }
-            set { Model.PositionY3 = value; OnPropertyChanged("PositionY3"); }
-        }
-        public int PositionY4
-        {
-            get { return Model.PositionY4; }
-            set { Model.PositionY4 = value; OnPropertyChanged("PositionY4"); }
-        }
+    
         public int Width
         {
             get { return Model.Width; }
@@ -184,23 +174,9 @@ namespace WPFDB.ViewModel
                 return Font + "|" + this.FontStyle + "|" + FontSize;
             }
         }
-        public string PointsList
+           public string MarginValue
         {
-            get { return String.Format("{0},{1} {2},{3} {4},{5} {6},{7}",PositionX1,PositionY1,PositionX2, PositionY2, PositionX3, PositionY3, PositionX4, PositionY4); }
+            get { return String.Format("{0},{1},0,0", PositionX1, PositionY1); }
         }
-        public Color ColorFontForeground
-        {
-            get { return (Color)ColorConverter.ConvertFromString(FontColor); }
-        }
-        public Color ColorFill
-        {
-            get { return (Color)ColorConverter.ConvertFromString(BackgroundColor); }
-        }
-        public Color ColorStroke
-        {
-            get { return (Color)ColorConverter.ConvertFromString(ForegroundColor); }
-        }
-
-
     }
 }

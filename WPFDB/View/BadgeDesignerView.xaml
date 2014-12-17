@@ -78,8 +78,10 @@
                     <DataGridTextColumn Header="Ширина" Width="*"  Binding="{Binding Path=Width}" />
                 </DataGrid.Columns>
             </DataGrid>
-            <Viewbox   Grid.Row="0" Grid.Column="1" Stretch="Fill" >
-                <ListBox ItemsSource="{Binding BadgeElementCollection}" x:Name="lst" Height="500" Width="500"
+            <Viewbox   Grid.Row="0" Grid.Column="1" Stretch="Uniform" >
+
+                <ListBox ItemsSource="{Binding Path=BadgeElementCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                             Width="{Binding CurrentBadge.Width}" Height="{Binding CurrentBadge.Height}"
                      Background="Transparent">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -99,20 +101,27 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="ListBoxItem">
                                         <Grid>
-                                            <Polygon Points="{Binding PointsList}"
-                                                Stretch="Uniform"
-                                                Fill="{Binding ColorFill}"
-                                                Stroke="{Binding ColorStroke}"
+                                            <Rectangle VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                         Margin="{Binding MarginValue}"
+                                                
+                                                Fill="{Binding BackgroundColor}"
+                                                Stroke="{Binding ForegroundColor}"
                                                 Width="{Binding Width}"
                                                 Height="{Binding Height}"/>
-                                                <!--ArcRoundness="{Binding RoundCorner}" 
-                                                IsClosed="True"/>-->
-                                            <TextBlock Text="{Binding Value}" 
+
+                                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                                 Margin="{Binding MarginValue}"
+                                                           Width="{Binding Width}"
+                                                Height="{Binding Height}"
+                                                       TextAlignment="Center"
+                                                       Text="{Binding Value}" 
                                                        FontFamily="{Binding FontFamily}"
                                                        FontSize="{Binding FontSize}"
                                                        FontStyle="{Binding FontStyle}"
-                                                       FontWeight="{Binding FontWeight}"
-                                                       Foreground="{Binding ColorFontForeground}"/>
+                                                       FontWeight="{Binding FontStyle}"
+                                                       
+                                                     Background="Transparent"
+                                                       Foreground="{Binding FontColor}"/>
                                         </Grid>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -120,6 +129,7 @@
                         </Style>
                     </ListBox.ItemContainerStyle>
                 </ListBox>
+
             </Viewbox>
         </Grid>
     </DockPanel>

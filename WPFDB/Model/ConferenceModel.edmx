@@ -74,12 +74,6 @@
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PositionX1" Type="int" Nullable="false" />
           <Property Name="PositionY1" Type="int" Nullable="false" />
-          <Property Name="PositionX2" Type="int" Nullable="false" />
-          <Property Name="PositionY2" Type="int" Nullable="false" />
-          <Property Name="PositionX3" Type="int" Nullable="false" />
-          <Property Name="PositionY3" Type="int" Nullable="false" />
-          <Property Name="PositionX4" Type="int" Nullable="false" />
-          <Property Name="PositionY4" Type="int" Nullable="false" />
           <Property Name="Width" Type="int" Nullable="false" />
           <Property Name="Height" Type="int" Nullable="false" />
           <Property Name="RoundCorner" Type="int" Nullable="false" />
@@ -1639,12 +1633,6 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PositionX1" Type="Int32" Nullable="false" />
           <Property Name="PositionY1" Type="Int32" Nullable="false" />
-          <Property Name="PositionX2" Type="Int32" Nullable="false" />
-          <Property Name="PositionY2" Type="Int32" Nullable="false" />
-          <Property Name="PositionX3" Type="Int32" Nullable="false" />
-          <Property Name="PositionY3" Type="Int32" Nullable="false" />
-          <Property Name="PositionX4" Type="Int32" Nullable="false" />
-          <Property Name="PositionY4" Type="Int32" Nullable="false" />
           <Property Name="Width" Type="Int32" Nullable="false" />
           <Property Name="Height" Type="Int32" Nullable="false" />
           <Property Name="RoundCorner" Type="Int32" Nullable="false" />
@@ -2065,12 +2053,6 @@
                 <ScalarProperty Name="RoundCorner" ColumnName="RoundCorner" />
                 <ScalarProperty Name="Height" ColumnName="Height" />
                 <ScalarProperty Name="Width" ColumnName="Width" />
-                <ScalarProperty Name="PositionY4" ColumnName="PositionY4" />
-                <ScalarProperty Name="PositionX4" ColumnName="PositionX4" />
-                <ScalarProperty Name="PositionY3" ColumnName="PositionY3" />
-                <ScalarProperty Name="PositionX3" ColumnName="PositionX3" />
-                <ScalarProperty Name="PositionY2" ColumnName="PositionY2" />
-                <ScalarProperty Name="PositionX2" ColumnName="PositionX2" />
                 <ScalarProperty Name="PositionY1" ColumnName="PositionY1" />
                 <ScalarProperty Name="PositionX1" ColumnName="PositionX1" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
