@@ -1133,5 +1133,17 @@ namespace WPFDB.Common
                 return obj;
             }
         }
+
+        public BadgeType DefaultBadge
+        {
+            get
+            {
+                var obj = DataManager.Instance.CreateObject<BadgeType>();
+                obj.Name = "---";
+                obj.Width = 100;
+                obj.Height = 100;
+                return obj;
+            }
+        }
     }
 }

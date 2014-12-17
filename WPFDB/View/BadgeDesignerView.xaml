@@ -25,10 +25,7 @@
                 <AccessText Text="Remove"/>
             </Button>
             <Separator/>
-            <Button Command="{Binding RefreshCommand}">
-                <AccessText Text="Refresh"/>
-            </Button>
-            <Separator/>
+        
             <Button Command="{Binding DrawBadgeCommand}">
                 <AccessText Text="Draw"/>
             </Button>

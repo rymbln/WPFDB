@@ -1277,5 +1277,23 @@ namespace WPFDB.Common
             }
             this.underlyingContext.Badges.DeleteObject(badge);
         }
+
+        public void AddBadge(BadgeType element)
+        {
+            this.underlyingContext.BadgeTypes.AddObject(element);
+            Save();
+        }
+
+
+
+        public void RemoveBadge(BadgeType badgeType)
+        {
+            if (badgeType == null)
+            {
+                throw new ArgumentException("badgeType");
+            }
+            this.underlyingContext.BadgeTypes.DeleteObject(badgeType);
+            Save();
+        }
     }
 }

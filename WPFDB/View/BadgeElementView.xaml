@@ -9,10 +9,10 @@
     <Border Style="{StaticResource DetailBorder}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="25*"/>
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Vertical">
@@ -37,14 +37,14 @@
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Позиция по X1,Y1:" Margin="20,0,0,0" />
                     <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBoxSmall}"
-                         Text="{Binding Path=PositionX1}" />
+                         Text="{Binding Path=PositionX1}" MouseWheel="TextBox_MouseWheel"/>
                     <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource TextBoxSmall}"
-                         Text="{Binding Path=PositionY1}" />
+                         Text="{Binding Path=PositionY1}" MouseWheel="TextBox_MouseWheel"/>
                     <TextBlock Grid.Row="4" Grid.Column="0" Text="Высота/Ширина:" Margin="20,0,0,0"/>
                     <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource TextBoxSmall}"
-                         Text="{Binding Path=Height}"/> 
+                         Text="{Binding Path=Height}" MouseWheel="TextBox_MouseWheel"/> 
                     <TextBox Grid.Row="4" Grid.Column="2" Style="{StaticResource TextBoxSmall}"
-                         Text="{Binding Path=Width}" />
+                         Text="{Binding Path=Width}" MouseWheel="TextBox_MouseWheel"/>
                 </Grid>
 
             </StackPanel>
@@ -57,7 +57,7 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
@@ -111,7 +111,7 @@
                 
                     <TextBlock Grid.Column="0" Grid.Row="5" Text="Размер текста:" Margin="20,0,0,0" />
                     <TextBox Grid.Column="1" Grid.Row="5" Style="{StaticResource TextBoxSmall}"
-                         Text="{Binding Path=FontSize}" 
+                         Text="{Binding Path=FontSize}" MouseWheel="TextBox_MouseWheel"
                              />
                 </Grid>
 

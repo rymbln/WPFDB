@@ -31,6 +31,8 @@ namespace WPFDB.ViewModel
         public ICommand SaveCommand { get; private set; }
         public ICommand AddBadgeElementCommand { get; private set; }
         public ICommand RemoveBadgeElementCommand { get; private set; }
+        public ICommand AddBadgeCommand { get; private set; }
+        public ICommand RemoveBadgeCommand { get; private set; }
         public ICommand DrawBadgeCommand { get; private set; }
 
 
@@ -40,11 +42,31 @@ namespace WPFDB.ViewModel
 
 
             SaveCommand = new DelegateCommand(o => Save());
+            AddBadgeCommand = new DelegateCommand(o => AddBadge());
+            RemoveBadgeCommand = new DelegateCommand(o => RemoveBadge(), o => CurrentBadge != null);
             AddBadgeElementCommand = new DelegateCommand(o => AddBadgeElement(), o => CurrentBadge != null);
             RemoveBadgeElementCommand = new DelegateCommand(o => RemoveBadgeElement(), o => CurrentBadgeElement != null);
             DrawBadgeCommand = new DelegateCommand(o => DrawBadge());
             RefreshBadges();
 
+        }
+
+        private void AddBadge()
+        {
+            var element = DefaultManager.Instance.DefaultBadge;
+            DataManager.Instance.AddBadge(element);
+
+            var vm = new BadgeViewModel(element);
+            BadgeCollection.Add(vm);
+            OnPropertyChanged("BadgeCollection");
+            CurrentBadge = vm;
+        }
+
+        private void RemoveBadge()
+        {
+            DataManager.Instance.RemoveBadge(CurrentBadge.Model);
+            BadgeCollection.Remove(CurrentBadge);
+            OnPropertyChanged("CurrentBadge");
         }
 
         private void AddBadgeElement()
@@ -76,8 +98,8 @@ namespace WPFDB.ViewModel
         private void DrawBadge()
         {
             
-            var obj = BadgeElementCollection;
-            BadgeElementCollection = new ObservableCollection<BadgeElementViewModel>(obj);
+       //     var obj = BadgeElementCollection;
+      //      BadgeElementCollection = new ObservableCollection<BadgeElementViewModel>(obj);
             OnPropertyChanged("BadgeElementCollection");
         }
 

@@ -118,13 +118,18 @@ namespace WPFDB.ViewModel
         public int PositionX1
         {
             get { return Model.PositionX1; }
-            set { Model.PositionX1 = value; OnPropertyChanged("PositionX1"); }
+            set { Model.PositionX1 = value; OnPropertyChanged("PositionX1");
+            OnPropertyChanged("MarginValue");
+            }
         }
      
         public int PositionY1
         {
             get { return Model.PositionY1; }
-            set { Model.PositionY1 = value; OnPropertyChanged("PositionY1"); }
+            set { Model.PositionY1 = value; 
+                OnPropertyChanged("PositionY1");
+                OnPropertyChanged("MarginValue");
+            }
         }
     
         public int Width
@@ -132,6 +137,7 @@ namespace WPFDB.ViewModel
             get { return Model.Width; }
             set { Model.Width = value;
             OnPropertyChanged("Width");
+            OnPropertyChanged("MarginValue");
             }
         }
         public int Height
@@ -139,6 +145,7 @@ namespace WPFDB.ViewModel
             get { return Model.Height;}
             set { Model.Height = value;
             OnPropertyChanged("Height");
+            OnPropertyChanged("MarginValue");
             }
         }
         public int RoundCorner
@@ -176,7 +183,10 @@ namespace WPFDB.ViewModel
         }
            public string MarginValue
         {
-            get { return String.Format("{0},{1},0,0", PositionX1, PositionY1); }
+            get
+            {
+                OnPropertyChanged("BadgeElementCollection"); 
+                return String.Format("{0},{1},0,0", PositionX1, PositionY1); }
         }
     }
 }

@@ -27,7 +27,17 @@ namespace WPFDB.View
 
         private void TextBox_MouseWheel(object sender, MouseWheelEventArgs e)
         {
+            var txt = sender as TextBox;
 
+            if (txt == null)
+                return;
+
+            int txtvalue;
+            if (int.TryParse(txt.Text, out txtvalue))
+            {
+                txt.Text = (txtvalue + e.Delta / 120).ToString();
+      
+            }
         }
     }
 }
