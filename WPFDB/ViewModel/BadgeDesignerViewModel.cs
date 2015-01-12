@@ -34,6 +34,7 @@ namespace WPFDB.ViewModel
         public ICommand AddBadgeCommand { get; private set; }
         public ICommand RemoveBadgeCommand { get; private set; }
         public ICommand DrawBadgeCommand { get; private set; }
+        public ICommand PrintBadgeCommand { get; private set; }
 
 
         public BadgeDesignerViewModel()
@@ -47,8 +48,14 @@ namespace WPFDB.ViewModel
             AddBadgeElementCommand = new DelegateCommand(o => AddBadgeElement(), o => CurrentBadge != null);
             RemoveBadgeElementCommand = new DelegateCommand(o => RemoveBadgeElement(), o => CurrentBadgeElement != null);
             DrawBadgeCommand = new DelegateCommand(o => DrawBadge());
+            PrintBadgeCommand = new DelegateCommand(o => PrintBadge(), o => CurrentBadge != null);
             RefreshBadges();
 
+        }
+
+        private void PrintBadge()
+        {
+            PdfManager.Main(CurrentBadge);
         }
 
         private void AddBadge()

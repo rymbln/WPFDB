@@ -40,11 +40,14 @@
                          Text="{Binding Path=PositionX1}" MouseWheel="TextBox_MouseWheel"/>
                     <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource TextBoxSmall}"
                          Text="{Binding Path=PositionY1}" MouseWheel="TextBox_MouseWheel"/>
-                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Высота/Ширина:" Margin="20,0,0,0"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource TextBoxSmall}"
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Высота/Ширина:" Margin="20,0,0,0"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource TextBoxSmall}"
                          Text="{Binding Path=Height}" MouseWheel="TextBox_MouseWheel"/> 
-                    <TextBox Grid.Row="4" Grid.Column="2" Style="{StaticResource TextBoxSmall}"
+                    <TextBox Grid.Row="1" Grid.Column="2" Style="{StaticResource TextBoxSmall}"
                          Text="{Binding Path=Width}" MouseWheel="TextBox_MouseWheel"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Толщина границы:" Margin="20,0,0,0"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource TextBoxSmall}"
+                         Text="{Binding Path=BorderWidth}" MouseWheel="TextBox_MouseWheel"/>
                 </Grid>
 
             </StackPanel>

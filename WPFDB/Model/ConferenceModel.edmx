@@ -76,6 +76,7 @@
           <Property Name="PositionY1" Type="int" Nullable="false" />
           <Property Name="Width" Type="int" Nullable="false" />
           <Property Name="Height" Type="int" Nullable="false" />
+          <Property Name="BorderWidth" Type="int" />
           <Property Name="RoundCorner" Type="int" Nullable="false" />
           <Property Name="ForegroundColor" Type="nvarchar(max)" Nullable="false" />
           <Property Name="BackgroundColor" Type="nvarchar(max)" Nullable="false" />
@@ -1648,6 +1649,7 @@
           <Property Name="DateUpdate" Type="DateTime" Precision="3" />
           <Property Name="User" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BadgeType" Relationship="ConferenceModel.FK_Badges_BadgeTypes" FromRole="Badge" ToRole="BadgeType" />
+          <Property Name="BorderWidth" Type="Int32" />
         </EntityType>
         <Association Name="FK_Badges_BadgeTypes">
           <End Type="ConferenceModel.BadgeType" Role="BadgeType" Multiplicity="1">
@@ -2039,6 +2041,7 @@
           <EntitySetMapping Name="Badges">
             <EntityTypeMapping TypeName="ConferenceModel.Badge">
               <MappingFragment StoreEntitySet="Badges">
+                <ScalarProperty Name="BorderWidth" ColumnName="BorderWidth" />
                 <ScalarProperty Name="User" ColumnName="User" />
                 <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
                 <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
