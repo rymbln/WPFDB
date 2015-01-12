@@ -1,4 +1,5 @@
 ﻿using MigraDoc.DocumentObjectModel;
+using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System;
@@ -7,16 +8,23 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPFDB.Model;
 using WPFDB.ViewModel;
 
 namespace WPFDB.Common
 {
+    public enum PdfMode
+    {
+        BADGE, ORDER
+
+    }
+
     public static class PdfManager
     {
 
-       
 
-        public static void BeginBox(XGraphics gfx, int number, string title, 
+
+        public static void BeginBox(XGraphics gfx, int number, string title,
             double borderWidth, double borderHeight,
             XColor shadowColor, XColor backColor, XColor backColor2,
             XPen borderPen)
@@ -28,7 +36,7 @@ namespace WPFDB.Common
             rect.Y = 40 + ((number - 1) / 2) * (200 - 5);
             rect.Inflate(-10, -10);
             XRect rect2 = rect;
-            rect2.Offset(borderWidth,borderHeight);
+            rect2.Offset(borderWidth, borderHeight);
             gfx.DrawRoundedRectangle(new XSolidBrush(shadowColor), rect2, new XSize(dEllipse + 8, dEllipse + 8));
             XLinearGradientBrush brush = new XLinearGradientBrush(rect, backColor, backColor2, XLinearGradientMode.Vertical);
             gfx.DrawRoundedRectangle(borderPen, brush, rect, new XSize(dEllipse, dEllipse));
@@ -54,8 +62,8 @@ namespace WPFDB.Common
         private static void DrawRoundedRectangle(XGraphics gfx, int number)
         {
 
-       //     BeginBox(gfx, number, "DrawRoundedRectangle",3,5,
-                
+            //     BeginBox(gfx, number, "DrawRoundedRectangle",3,5,
+
             XPen pen = new XPen(XColors.RoyalBlue, Math.PI);
             gfx.DrawRoundedRectangle(pen, 10, 0, 100, 60, 30, 20);
             gfx.DrawRoundedRectangle(XBrushes.Orange, 130, 0, 100, 60, 30, 20);
@@ -65,27 +73,19 @@ namespace WPFDB.Common
             EndBox(gfx);
         }
 
-        private static void DrawRectangle(XGraphics gfx, int number)
+        private static void DrawRectangle(XGraphics gfx,
+            XColor backColor, XColor borderColor,
+            XPen borderPen,
+            int width, int height,
+            int x, int y)
         {
-            var shadowColor = new XColor{ R = 25, G = 25, B = 25};
-            var backColor = new XColor{ R = 50, G = 50, B = 50};
-            var backColor2 = new XColor{ R = 150, G = 150, B = 150};
-            var borderPen = new XPen(XColor.FromArgb(2568), 2);
-            BeginBox(gfx, number, "DrawRectangle",10,20,shadowColor, backColor, backColor2, borderPen);
 
-            XPen pen = new XPen(XColors.Navy, Math.PI);
-
-            gfx.DrawRectangle(pen, 10, 0, 100, 60);
-            gfx.DrawRectangle(XBrushes.DarkOrange, 130, 0, 100, 60);
-            gfx.DrawRectangle(pen, XBrushes.DarkOrange, 10, 80, 100, 60);
-            gfx.DrawRectangle(pen, XBrushes.DarkOrange, 150, 80, 60, 60);
-
-            EndBox(gfx);
+            gfx.DrawRectangle(borderPen, x, y, width, height);
         }
 
-         public static void DrawEllipse(XGraphics gfx, int number)
+        public static void DrawEllipse(XGraphics gfx, int number)
         {
-   //         BeginBox(gfx, number, "DrawEllipse");
+            //         BeginBox(gfx, number, "DrawEllipse");
 
             XPen pen = new XPen(XColors.DarkBlue, 2.5);
 
@@ -98,32 +98,43 @@ namespace WPFDB.Common
         }
 
 
-        private static void DrawText(XGraphics gfx, int number)
+        private static void DrawText(XGraphics gfx, string text, string font, string style, double size, string color, int width, int height, int x, int y)
         {
-     //       BeginBox(gfx, number, "Text Styles");
-
-            const string facename = "Times New Roman";
-
-            //XPdfFontOptions options = new XPdfFontOptions(PdfFontEncoding.Unicode, PdfFontEmbedding.Always);
             XPdfFontOptions options = new XPdfFontOptions(PdfFontEncoding.WinAnsi, PdfFontEmbedding.Default);
-
-            XFont fontRegular = new XFont(facename, 20, XFontStyle.Regular, options);
-            XFont fontBold = new XFont(facename, 20, XFontStyle.Bold, options);
-            XFont fontItalic = new XFont(facename, 20, XFontStyle.Italic, options);
-            XFont fontBoldItalic = new XFont(facename, 20, XFontStyle.BoldItalic, options);
-
-            // The default alignment is baseline left (that differs from GDI+)
-            gfx.DrawString("Times (regular)", fontRegular, XBrushes.DarkSlateGray, 0, 30);
-            gfx.DrawString("Times (bold)", fontBold, XBrushes.DarkSlateGray, 0, 65);
-            gfx.DrawString("Times (italic)", fontItalic, XBrushes.DarkSlateGray, 0, 100);
-            gfx.DrawString("Times (bold italic)", fontBoldItalic, XBrushes.DarkSlateGray, 0, 135);
-
-            EndBox(gfx);
+            XFont fontStyle = null;
+            switch (style)
+            {
+                case "Bold":
+                    fontStyle = new XFont(font, size, XFontStyle.Bold, options);
+                    break;
+                case "Italic":
+                    fontStyle = new XFont(font, size, XFontStyle.Italic, options);
+                    break;
+                case "Regular":
+                    fontStyle = new XFont(font, size, XFontStyle.Regular, options);
+                    break;
+                case "Underline":
+                    fontStyle = new XFont(font, size, XFontStyle.Underline, options);
+                    break;
+                case "Strikeout":
+                    fontStyle = new XFont(font, size, XFontStyle.Strikeout, options);
+                    break;
+                case "BoldItalic":
+                    fontStyle = new XFont(font, size, XFontStyle.BoldItalic, options);
+                    break;
+                default:
+                    break;
+            }
+            System.Drawing.Color fontColor = ConverterManager.HexToColorConverter(color);
+            XBrush fontBrush = new XSolidBrush(new XColor { R = fontColor.R, G = fontColor.G, B = fontColor.B });
+            XRect fontRect = new XRect(x, y, width, height);
+            XStringFormat fontFormat = new XStringFormat { Alignment = XStringAlignment.Center };
+            gfx.DrawString(text, fontStyle, fontBrush, fontRect, fontFormat);
         }
 
         private static void DrawTextAlignment(XGraphics gfx, int number)
         {
-    //        BeginBox(gfx, number, "Text Alignment");
+            //        BeginBox(gfx, number, "Text Alignment");
             XRect rect = new XRect(0, 0, 250, 140);
 
             XFont font = new XFont("Verdana", 10);
@@ -188,40 +199,85 @@ namespace WPFDB.Common
 
 
 
-        private static void DrawBadge(BadgeViewModel obj)
+        private static string DrawBadge(BadgeType obj, Person person)
         {
-
+            string filename;
             // Create a temporary file
-            string filename = String.Format("{0}_tempfile.pdf", Guid.NewGuid().ToString("D").ToUpper());
+
             var s_document = new PdfDocument();
-            s_document.Info.Title = "PDFsharp XGraphic Sample";
-            s_document.Info.Author = "Stefan Lange";
-            s_document.Info.Subject = "Created with code snippets that show the use of graphical functions";
-            s_document.Info.Keywords = "PDFsharp, XGraphics";
+            if (person != null)
+            {
+                 filename = String.Format("{0}_{1}_{2}.pdf", person.Id, person.FullName, DefaultManager.Instance.CurrentDateTimeShortString);
+                 s_document.Info.Title = person.FullName;
+            } else
+            {
+                 filename = String.Format("{0}.pdf",  DefaultManager.Instance.CurrentDateTimeShortString);
+                 s_document.Info.Title = "IACMAC";
+            }
+                       
+            s_document.Info.Author = "IACMAC";
+            s_document.Info.Subject = "IACMAC Conference Badge";
 
             // Create  pages
             var page = s_document.AddPage();
 
-            
+            PageSize[] pageSizes = (PageSize[])Enum.GetValues(typeof(PageSize));
+            foreach (PageSize pageSize in pageSizes)
+            {
+                if (pageSize == PageSize.Undefined)
+                    continue;
+                page.Width = obj.Width;
+                page.Height = obj.Height;
+                page.Orientation = PageOrientation.Portrait;
+            }
+
             XGraphics gfx = XGraphics.FromPdfPage(page);
 
-        
 
-            DrawRectangle(gfx, 1);
-         //   DrawRoundedRectangle(gfx, 2);
-          //  DrawEllipse(gfx, 3);
-        
+            foreach (var badge in obj.Badges.ToList())
+            {
+                DrawBadgeElement(badge, gfx);
+            }
+
+            //   DrawRoundedRectangle(gfx, 2);
+            //  DrawEllipse(gfx, 3);
+
 
             // Save the s_document...
             s_document.Save(filename);
             // ...and start a viewer
-            Process.Start(filename);
+            return filename;
 
         }
 
-        public static  void Main(BadgeViewModel obj)
+        private static void DrawBadgeElement(Badge badge, XGraphics gfx)
         {
-            DrawBadge(obj);
+            var color = ConverterManager.HexToColorConverter(badge.ForegroundColor);
+            XColor borderColor = new XColor { R = color.R, G = color.G, B = color.B };
+            color = ConverterManager.HexToColorConverter(badge.BackgroundColor);
+            XColor backColor = new XColor { R = color.R, G = color.G, B = color.B };
+            color = ConverterManager.HexToColorConverter(badge.FontColor);
+            XColor fontColor = new XColor { R = color.R, G = color.G, B = color.B };
+            XPen pen = new XPen(borderColor, double.Parse(badge.BorderWidth.ToString()));
+
+
+            DrawRectangle(gfx, backColor, borderColor, pen, badge.Width, badge.Height, badge.PositionX1, badge.PositionY1);
+            DrawText(gfx, badge.Value, badge.Font, badge.FontStyle, badge.FontSize, badge.FontColor, badge.Width, badge.Height, badge.PositionX1, badge.PositionY1);
+        }
+
+        public static string Generate(PdfMode mode, BadgeType obj, Person person)
+        {
+            switch (mode)
+            {
+                case PdfMode.BADGE:
+                    return DrawBadge(obj, person);
+
+                case PdfMode.ORDER:
+                    return "";
+                default:
+                    return "";
+            }
+
         }
 
 

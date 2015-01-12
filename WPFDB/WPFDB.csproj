@@ -104,6 +104,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\Authentification.cs" />
+    <Compile Include="Common\CommonManager.cs" />
+    <Compile Include="Common\ConverterManager.cs" />
     <Compile Include="Common\DefaultManager.cs" />
     <Compile Include="Common\EmailManager.cs" />
     <Compile Include="Common\GuidComb.cs" />

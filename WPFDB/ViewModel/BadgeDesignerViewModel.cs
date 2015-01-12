@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,7 +56,7 @@ namespace WPFDB.ViewModel
 
         private void PrintBadge()
         {
-            PdfManager.Main(CurrentBadge);
+           Process.Start( PdfManager.Generate(PdfMode.BADGE, CurrentBadge.Model, null));
         }
 
         private void AddBadge()

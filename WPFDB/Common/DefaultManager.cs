@@ -17,7 +17,9 @@ namespace WPFDB.Common
             get { return instance ?? (instance = new DefaultManager()); }
         }
 
-
+        public string CurrentDate { get { return DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString(); } }
+        public string CurrentDateTimeShortString { get { return DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + "_" + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond; } }
+ 
 
         public string MailServer
         {
