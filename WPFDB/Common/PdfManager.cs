@@ -236,6 +236,16 @@ namespace WPFDB.Common
 
             foreach (var badge in obj.Badges.ToList())
             {
+                if (person != null)
+                {
+                    badge.Value.Replace("$F$", person.FirstName);
+                    badge.Value.Replace("$FI$", person.FirstName + " " + person.SecondName);
+                    badge.Value.Replace("$FIO$", person.FirstName + " " + person.SecondName + " " + person.ThirdName);
+                    badge.Value.Replace("$POST$", person.Post);
+                    badge.Value.Replace("$CITY$", person.Addresses.Select(o => o.CityName).FirstOrDefault());
+                    badge.Value.Replace("$COUNTRY$", person.Addresses.Select(o => o.CountryName).FirstOrDefault());
+                    badge.Value.Replace("$COMPANY$", person.);
+                }
                 DrawBadgeElement(badge, gfx);
             }
 

@@ -60,7 +60,14 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                string[] figure = { "Bold", "Italic","BoldItalic", "Regular","Strikeout", "Underline" };
+                string[] figure = { 
+                                      "Bold", 
+                                      "Italic",
+                                      "BoldItalic", 
+                                      "Regular",
+                                      "Strikeout", 
+                                      "Underline" 
+                                  };
                 return figure.ToList();
             }
         }
@@ -72,7 +79,14 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                string[] textes = { "$F$", "$FI$", "$FIO$", "$POST$", "$CITY$", "$COUNTRY$", "$COMPANY$" };
+                string[] textes = { 
+                                      "$F$", 
+                                      "$FI$", 
+                                      "$FIO$", 
+                                      "$POST$", 
+                                      "$CITY$", 
+                                      "$COUNTRY$", 
+                                      "$COMPANY$" };
                 return textes.ToList();
             }
         }
