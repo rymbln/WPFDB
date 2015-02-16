@@ -145,7 +145,16 @@ namespace WPFDB.ViewModel
                 OnPropertyChanged("MarginValue");
             }
         }
-    
+        public int? BorderWidth
+        {
+            get { return Model.BorderWidth  ; }
+            set
+            {
+                Model.BorderWidth = value;
+                OnPropertyChanged("BorderWidth");
+                OnPropertyChanged("MarginValue");
+            }
+        }
         public int Width
         {
             get { return Model.Width; }

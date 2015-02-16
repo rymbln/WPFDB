@@ -244,7 +244,7 @@ namespace WPFDB.Common
                     badge.Value.Replace("$POST$", person.Post);
                     badge.Value.Replace("$CITY$", person.Addresses.Select(o => o.CityName).FirstOrDefault());
                     badge.Value.Replace("$COUNTRY$", person.Addresses.Select(o => o.CountryName).FirstOrDefault());
-                    badge.Value.Replace("$COMPANY$", person.);
+                    //badge.Value.Replace("$COMPANY$", person);
                 }
                 DrawBadgeElement(badge, gfx);
             }

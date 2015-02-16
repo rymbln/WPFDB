@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/24/2014 15:21:06
--- Generated from EDMX file: C:\Users\Rymbln\Documents\GitHub\WPFDB\WPFDB\Model\ConferenceModel.edmx
+-- Date Created: 01/23/2015 13:02:28
+-- Generated from EDMX file: C:\Users\Inspiron\Documents\GitHub\WPFDB\WPFDB\Model\ConferenceModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -22,9 +22,6 @@ IF OBJECT_ID(N'[dbo].[FK_AbstractAbstractWork]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_AbstractStatusAbstractWork]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AbstractWorks] DROP CONSTRAINT [FK_AbstractStatusAbstractWork];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Badges_BadgeElementTypes]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Badges] DROP CONSTRAINT [FK_Badges_BadgeElementTypes];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Badges_BadgeTypes]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Badges] DROP CONSTRAINT [FK_Badges_BadgeTypes];
@@ -111,9 +108,6 @@ IF OBJECT_ID(N'[dbo].[AbstractWorks]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Addresses]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Addresses];
-GO
-IF OBJECT_ID(N'[dbo].[BadgeElementTypes]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[BadgeElementTypes];
 GO
 IF OBJECT_ID(N'[dbo].[Badges]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Badges];
@@ -504,11 +498,23 @@ CREATE TABLE [dbo].[AbstractStatuses] (
 );
 GO
 
--- Creating table 'BadgeElementTypes'
-CREATE TABLE [dbo].[BadgeElementTypes] (
+-- Creating table 'sysdiagrams'
+CREATE TABLE [dbo].[sysdiagrams] (
+    [name] nvarchar(128)  NOT NULL,
+    [principal_id] int  NOT NULL,
+    [diagram_id] int IDENTITY(1,1) NOT NULL,
+    [version] int  NULL,
+    [definition] varbinary(max)  NULL
+);
+GO
+
+-- Creating table 'BadgeTypes'
+CREATE TABLE [dbo].[BadgeTypes] (
     [Id] uniqueidentifier  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Code] nvarchar(max)  NOT NULL,
+    [Width] int  NOT NULL,
+    [Height] int  NOT NULL,
     [SourceId] int  NOT NULL,
     [DateAdd] datetime  NULL,
     [DateUpdate] datetime  NULL,
@@ -520,46 +526,24 @@ GO
 CREATE TABLE [dbo].[Badges] (
     [Id] uniqueidentifier  NOT NULL,
     [BadgeTypeId] uniqueidentifier  NOT NULL,
-    [BadgeElementTypeId] uniqueidentifier  NOT NULL,
-    [PositionX] int  NOT NULL,
-    [PositionY] int  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [PositionX1] int  NOT NULL,
+    [PositionY1] int  NOT NULL,
     [Width] int  NOT NULL,
     [Height] int  NOT NULL,
-    [Figure] nvarchar(max)  NULL,
-    [ForegroundColor] int  NOT NULL,
-    [BackgroundColor] int  NOT NULL,
+    [RoundCorner] int  NOT NULL,
+    [ForegroundColor] nvarchar(max)  NOT NULL,
+    [BackgroundColor] nvarchar(max)  NOT NULL,
     [Font] nvarchar(max)  NOT NULL,
-    [FontColor] int  NOT NULL,
+    [FontStyle] nvarchar(max)  NULL,
+    [FontColor] nvarchar(max)  NOT NULL,
     [FontSize] int  NOT NULL,
     [Value] nvarchar(max)  NOT NULL,
     [SourceId] int  NOT NULL,
     [DateAdd] datetime  NULL,
     [DateUpdate] datetime  NULL,
-    [User] nvarchar(max)  NULL
-);
-GO
-
--- Creating table 'BadgeTypes'
-CREATE TABLE [dbo].[BadgeTypes] (
-    [Id] uniqueidentifier  NOT NULL,
-    [Name] nvarchar(max)  NOT NULL,
-    [Code] nvarchar(max)  NOT NULL,
-    [Width] int  NULL,
-    [Height] int  NULL,
-    [SourceId] int  NOT NULL,
-    [DateAdd] datetime  NULL,
-    [DateUpdate] datetime  NULL,
-    [User] nvarchar(max)  NULL
-);
-GO
-
--- Creating table 'sysdiagrams'
-CREATE TABLE [dbo].[sysdiagrams] (
-    [name] nvarchar(128)  NOT NULL,
-    [principal_id] int  NOT NULL,
-    [diagram_id] int IDENTITY(1,1) NOT NULL,
-    [version] int  NULL,
-    [definition] varbinary(max)  NULL
+    [User] nvarchar(max)  NULL,
+    [BorderWidth] int  NULL
 );
 GO
 
@@ -705,16 +689,10 @@ ADD CONSTRAINT [PK_AbstractStatuses]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'BadgeElementTypes'
-ALTER TABLE [dbo].[BadgeElementTypes]
-ADD CONSTRAINT [PK_BadgeElementTypes]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
--- Creating primary key on [Id] in table 'Badges'
-ALTER TABLE [dbo].[Badges]
-ADD CONSTRAINT [PK_Badges]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+-- Creating primary key on [diagram_id] in table 'sysdiagrams'
+ALTER TABLE [dbo].[sysdiagrams]
+ADD CONSTRAINT [PK_sysdiagrams]
+    PRIMARY KEY CLUSTERED ([diagram_id] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'BadgeTypes'
@@ -723,10 +701,10 @@ ADD CONSTRAINT [PK_BadgeTypes]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [diagram_id] in table 'sysdiagrams'
-ALTER TABLE [dbo].[sysdiagrams]
-ADD CONSTRAINT [PK_sysdiagrams]
-    PRIMARY KEY CLUSTERED ([diagram_id] ASC);
+-- Creating primary key on [Id] in table 'Badges'
+ALTER TABLE [dbo].[Badges]
+ADD CONSTRAINT [PK_Badges]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -740,6 +718,7 @@ ADD CONSTRAINT [FK_ScienceDegreePerson]
     REFERENCES [dbo].[ScienceDegrees]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ScienceDegreePerson'
 CREATE INDEX [IX_FK_ScienceDegreePerson]
@@ -754,6 +733,7 @@ ADD CONSTRAINT [FK_ScienceStatusPerson]
     REFERENCES [dbo].[ScienceStatuses]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ScienceStatusPerson'
 CREATE INDEX [IX_FK_ScienceStatusPerson]
@@ -768,6 +748,7 @@ ADD CONSTRAINT [FK_SexPerson]
     REFERENCES [dbo].[Sexes]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_SexPerson'
 CREATE INDEX [IX_FK_SexPerson]
@@ -782,6 +763,7 @@ ADD CONSTRAINT [FK_SpecialityPerson]
     REFERENCES [dbo].[Specialities]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_SpecialityPerson'
 CREATE INDEX [IX_FK_SpecialityPerson]
@@ -796,6 +778,7 @@ ADD CONSTRAINT [FK_PersonPersonConference]
     REFERENCES [dbo].[Persons]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PersonPersonConference'
 CREATE INDEX [IX_FK_PersonPersonConference]
@@ -810,6 +793,7 @@ ADD CONSTRAINT [FK_ConferencePersonConference]
     REFERENCES [dbo].[Conferences]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ConferencePersonConference'
 CREATE INDEX [IX_FK_ConferencePersonConference]
@@ -824,6 +808,7 @@ ADD CONSTRAINT [FK_CompanyPersonConferenceDetail]
     REFERENCES [dbo].[Companies]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_CompanyPersonConferenceDetail'
 CREATE INDEX [IX_FK_CompanyPersonConferenceDetail]
@@ -838,6 +823,7 @@ ADD CONSTRAINT [FK_CompanyPersonConferenceMoney]
     REFERENCES [dbo].[Companies]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_CompanyPersonConferenceMoney'
 CREATE INDEX [IX_FK_CompanyPersonConferenceMoney]
@@ -852,6 +838,7 @@ ADD CONSTRAINT [FK_PaymentTypePersonConferenceMoney]
     REFERENCES [dbo].[PaymentTypes]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PaymentTypePersonConferenceMoney'
 CREATE INDEX [IX_FK_PaymentTypePersonConferenceMoney]
@@ -884,6 +871,7 @@ ADD CONSTRAINT [FK_RankPersonConferenceDetail]
     REFERENCES [dbo].[Ranks]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_RankPersonConferenceDetail'
 CREATE INDEX [IX_FK_RankPersonConferenceDetail]
@@ -907,6 +895,7 @@ ADD CONSTRAINT [FK_ContactTypeEmail]
     REFERENCES [dbo].[ContactTypes]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ContactTypeEmail'
 CREATE INDEX [IX_FK_ContactTypeEmail]
@@ -921,6 +910,7 @@ ADD CONSTRAINT [FK_ContactTypePhone]
     REFERENCES [dbo].[ContactTypes]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ContactTypePhone'
 CREATE INDEX [IX_FK_ContactTypePhone]
@@ -935,6 +925,7 @@ ADD CONSTRAINT [FK_ContactTypeAddress]
     REFERENCES [dbo].[ContactTypes]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ContactTypeAddress'
 CREATE INDEX [IX_FK_ContactTypeAddress]
@@ -949,6 +940,7 @@ ADD CONSTRAINT [FK_PersonAddress]
     REFERENCES [dbo].[Persons]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PersonAddress'
 CREATE INDEX [IX_FK_PersonAddress]
@@ -963,6 +955,7 @@ ADD CONSTRAINT [FK_PersonEmail]
     REFERENCES [dbo].[Persons]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PersonEmail'
 CREATE INDEX [IX_FK_PersonEmail]
@@ -977,6 +970,7 @@ ADD CONSTRAINT [FK_PersonPhone]
     REFERENCES [dbo].[Persons]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PersonPhone'
 CREATE INDEX [IX_FK_PersonPhone]
@@ -991,6 +985,7 @@ ADD CONSTRAINT [FK_PersonConferenceAbstract]
     REFERENCES [dbo].[PersonConferences]
         ([PersonConferenceId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PersonConferenceAbstract'
 CREATE INDEX [IX_FK_PersonConferenceAbstract]
@@ -1005,6 +1000,7 @@ ADD CONSTRAINT [FK_AbstractAbstractWork]
     REFERENCES [dbo].[Abstracts]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_AbstractAbstractWork'
 CREATE INDEX [IX_FK_AbstractAbstractWork]
@@ -1019,6 +1015,7 @@ ADD CONSTRAINT [FK_AbstractStatusAbstractWork]
     REFERENCES [dbo].[AbstractStatuses]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_AbstractStatusAbstractWork'
 CREATE INDEX [IX_FK_AbstractStatusAbstractWork]
@@ -1033,6 +1030,7 @@ ADD CONSTRAINT [FK_UserAbstractWork]
     REFERENCES [dbo].[Users]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_UserAbstractWork'
 CREATE INDEX [IX_FK_UserAbstractWork]
@@ -1047,25 +1045,12 @@ ADD CONSTRAINT [FK_OrderStatusPersonConferences_Payment]
     REFERENCES [dbo].[OrderStatuses]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_OrderStatusPersonConferences_Payment'
 CREATE INDEX [IX_FK_OrderStatusPersonConferences_Payment]
 ON [dbo].[PersonConferences_Payment]
     ([OrderStatusId]);
-GO
-
--- Creating foreign key on [BadgeElementTypeId] in table 'Badges'
-ALTER TABLE [dbo].[Badges]
-ADD CONSTRAINT [FK_Badges_BadgeElementTypes]
-    FOREIGN KEY ([BadgeElementTypeId])
-    REFERENCES [dbo].[BadgeElementTypes]
-        ([Id])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_Badges_BadgeElementTypes'
-CREATE INDEX [IX_FK_Badges_BadgeElementTypes]
-ON [dbo].[Badges]
-    ([BadgeElementTypeId]);
 GO
 
 -- Creating foreign key on [BadgeTypeId] in table 'Badges'
@@ -1075,6 +1060,7 @@ ADD CONSTRAINT [FK_Badges_BadgeTypes]
     REFERENCES [dbo].[BadgeTypes]
         ([Id])
     ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_Badges_BadgeTypes'
 CREATE INDEX [IX_FK_Badges_BadgeTypes]

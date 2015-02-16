@@ -44,87 +44,15 @@ namespace WPFDB.Common
             try
             {
                 ImportUsers();
-                if (backgroundWorker != null)
-                {
-                    if (backgroundWorker.CancellationPending)
-                    {
-                        // Возврат без какой-либо дополнительной работы
-                        return 0;
-                    }
-
-                    if (backgroundWorker.WorkerReportsProgress)
-                    {
-                        //float progress = ((float)(i + 1)) / list.Length * 100;
-                        backgroundWorker.ReportProgress(10);
-                        //(int)Math.Round(progress));
-                    }
-                }
                 ImportSexes();
-                if (backgroundWorker != null)
-                {
-                    if (backgroundWorker.CancellationPending)
-                    {
-                        // Возврат без какой-либо дополнительной работы
-                        return 0;
-                    }
-
-                    if (backgroundWorker.WorkerReportsProgress)
-                    {
-                        //float progress = ((float)(i + 1)) / list.Length * 100;
-                        backgroundWorker.ReportProgress(20);
-                        //(int)Math.Round(progress));
-                    }
-                }
                 ImportScienceDegrees();
-                if (backgroundWorker != null)
-                {
-                    if (backgroundWorker.CancellationPending)
-                    {
-                        // Возврат без какой-либо дополнительной работы
-                        return 0;
-                    }
-
-                    if (backgroundWorker.WorkerReportsProgress)
-                    {
-                        //float progress = ((float)(i + 1)) / list.Length * 100;
-                        backgroundWorker.ReportProgress(30);
-                        //(int)Math.Round(progress));
-                    }
-                }
                 ImportScienceStatuses();
-                if (backgroundWorker != null)
-                {
-                    if (backgroundWorker.CancellationPending)
-                    {
-                        // Возврат без какой-либо дополнительной работы
-                        return 0;
-                    }
-
-                    if (backgroundWorker.WorkerReportsProgress)
-                    {
-                        //float progress = ((float)(i + 1)) / list.Length * 100;
-                        backgroundWorker.ReportProgress(40);
-                        //(int)Math.Round(progress));
-                    }
-                }
                 ImportSpecialities();
                 ImportRanks();
-
-           
                 ImportPaymentTypes();
-
                 ImportConferenceTypes();
-
                 ImportCompanies();
-
                 ImportAbstractStatuses();
-
-                if (backgroundWorker != null && backgroundWorker.WorkerReportsProgress)
-                {
-                    backgroundWorker.ReportProgress(100);
-                }
-
-                res = 1;
             }
             catch (Exception ex)
             {
@@ -160,7 +88,7 @@ namespace WPFDB.Common
                           ",[ABSTRACT_RESPONSIBLE_PERSON_ID]" +//2
                           ",[ABSTRACT_STATUS_ID]" +//3
                           ",[IS_SEND_STATE_BY_EMAIL] " +//4
-                          ",[DATE_ADD]"+//5
+                          ",[DATE_ADD]" +//5
                           "FROM [Conference].[dbo].[EXP_ABSTRACT_WORKS]";
                 var cmd = new SqlCommand(sql, conn);
                 if (conn.State.ToString() == "Closed")
@@ -290,7 +218,7 @@ namespace WPFDB.Common
                 var rdr = cmd.ExecuteReader();
                 if (rdr.HasRows)
                 {
-                    PersonConferences_Payment obj ;
+                    PersonConferences_Payment obj;
 
                     while (rdr.Read())
                     {
@@ -330,7 +258,7 @@ namespace WPFDB.Common
         public int ImportPersonConferenceDetail()
         {
             var res = 0;
-    //        personConferenceDetailCount = 0;
+            //        personConferenceDetailCount = 0;
             try
             {
                 var sql = "SELECT " +
@@ -371,7 +299,7 @@ namespace WPFDB.Common
                         obj.IsAutoreg = DataManager.Instance.GetBoolLogicBySourceId(rdr.GetInt32(10));
                         obj.IsNeedBadge = DataManager.Instance.GetBoolLogicBySourceId(rdr.GetInt32(11));
                         obj.SourceId = rdr.GetInt32(0);
-                        
+
                         DataManager.Instance.AddPersonConferenceDetail(obj);
 
                         res++;
@@ -430,7 +358,7 @@ namespace WPFDB.Common
 
 
 
-                        personConferenceCount++;
+                        res++;
                     }
                 }
                 rdr.Close();
@@ -441,6 +369,7 @@ namespace WPFDB.Common
             {
 
                 LogManager.Write(ex);
+                MessageBox.Show(res.ToString());
             }
 
             return res;
@@ -562,8 +491,16 @@ namespace WPFDB.Common
                 var rdr = cmd.ExecuteReader();
                 if (rdr.HasRows)
                 {
-                    User obj ;
-
+                    User obj;
+                    obj = DataManager.Instance.CreateObject<User>();
+                    obj.Id = GuidComb.Generate();
+                    obj.Password = "---";
+                    obj.Email = "---";
+                    obj.Name = "---";
+                    obj.FullName = "---";
+                    obj.SourceId = 0;
+                    obj.Role += "---";
+                    DataManager.Instance.AddUser(obj);
                     while (rdr.Read())
                     {
                         obj = DataManager.Instance.CreateObject<User>();
@@ -607,7 +544,12 @@ namespace WPFDB.Common
                 if (rdr.HasRows)
                 {
                     Speciality obj;
-
+                    obj = DataManager.Instance.CreateObject<Speciality>();
+                    obj.Id = GuidComb.Generate();
+                    obj.Code = "---";
+                    obj.Name = "---";
+                    obj.SourceId = 0;
+                    DataManager.Instance.AddSpeciality(obj);
                     while (rdr.Read())
                     {
                         obj = DataManager.Instance.CreateObject<Speciality>();
@@ -734,7 +676,12 @@ namespace WPFDB.Common
                 if (rdr.HasRows)
                 {
                     ScienceStatus obj;
-
+                    obj = DataManager.Instance.CreateObject<ScienceStatus>();
+                    obj.Id = GuidComb.Generate();
+                    obj.Code = "---";
+                    obj.Name = "---";
+                    obj.SourceId = 0;
+                    DataManager.Instance.AddScienceStatus(obj);
                     while (rdr.Read())
                     {
                         obj = DataManager.Instance.CreateObject<ScienceStatus>();
@@ -775,7 +722,12 @@ namespace WPFDB.Common
                 if (rdr.HasRows)
                 {
                     ScienceDegree obj;
-                 
+                    obj = DataManager.Instance.CreateObject<ScienceDegree>();
+                    obj.Id = GuidComb.Generate();
+                    obj.Code = "---";
+                    obj.Name = "---";
+                    obj.SourceId = 0;
+                    DataManager.Instance.AddScienceDegree(obj);
                     while (rdr.Read())
                     {
                         obj = DataManager.Instance.CreateObject<ScienceDegree>();
@@ -815,8 +767,13 @@ namespace WPFDB.Common
                 var rdr = cmd.ExecuteReader();
                 if (rdr.HasRows)
                 {
-                    Rank obj ;
-                    
+                    Rank obj;
+                    obj = DataManager.Instance.CreateObject<Rank>();
+                    obj.Id = GuidComb.Generate();
+                    obj.Code = "---";
+                    obj.Name = "---";
+                    obj.SourceId = 0;
+                    DataManager.Instance.AddRank(obj);
                     while (rdr.Read())
                     {
                         obj = DataManager.Instance.CreateObject<Rank>();
@@ -857,7 +814,12 @@ namespace WPFDB.Common
                 if (rdr.HasRows)
                 {
                     PaymentType obj;
-
+                    obj = DataManager.Instance.CreateObject<PaymentType>();
+                    obj.Id = GuidComb.Generate();
+                    obj.Code = "---";
+                    obj.Name = "---";
+                    obj.SourceId = 0;
+                    DataManager.Instance.AddPaymentType(obj);
                     while (rdr.Read())
                     {
                         obj = DataManager.Instance.CreateObject<PaymentType>();
@@ -881,7 +843,7 @@ namespace WPFDB.Common
             return res;
         }
 
-     
+
 
         public int ImportCompanies()
         {
@@ -901,7 +863,12 @@ namespace WPFDB.Common
                 {
                     Company obj;
 
-
+                    obj = DataManager.Instance.CreateObject<Company>();
+                    obj.Id = GuidComb.Generate();
+                    obj.Code = "---";
+                    obj.Name = "---";
+                    obj.SourceId = 0;
+                    DataManager.Instance.AddCompany(obj);
                     while (rdr.Read())
                     {
                         obj = DataManager.Instance.CreateObject<Company>();
@@ -1060,7 +1027,7 @@ namespace WPFDB.Common
                     {
                         obj = DataManager.Instance.CreateObject<Email>();
                         obj.Id = GuidComb.Generate();
-                      obj.SourceId = rdr.GetInt32(0);
+                        obj.SourceId = rdr.GetInt32(0);
                         obj.ContactTypeId = DataManager.Instance.GetContactTypeBySourceId(0).Id;
                         obj.Name = rdr.GetString(2);
                         obj.PersonId = DataManager.Instance.GetPersonBySourceId(rdr.GetInt32(1)).Id;
@@ -1099,7 +1066,12 @@ namespace WPFDB.Common
                 if (rdr.HasRows)
                 {
                     AbstractStatus obj;
-
+                    obj = DataManager.Instance.CreateObject<AbstractStatus>();
+                    obj.Id = GuidComb.Generate();
+                    obj.Code = "---";
+                    obj.Name = "---";
+                    obj.SourceId = 0;
+                    DataManager.Instance.AddAbstractStatus(obj);
                     while (rdr.Read())
                     {
                         obj = DataManager.Instance.CreateObject<AbstractStatus>();
@@ -1147,7 +1119,12 @@ namespace WPFDB.Common
                 if (rdr.HasRows)
                 {
                     Conference obj;
-                    
+                    obj = DataManager.Instance.CreateObject<Conference>();
+                    obj.Id = GuidComb.Generate();
+                    obj.Code = "---";
+                    obj.Name = "---";
+                    obj.SourceId = 0;
+                    DataManager.Instance.AddConference(obj);
                     while (rdr.Read())
                     {
                         obj = DataManager.Instance.CreateObject<Conference>();

@@ -44,7 +44,7 @@ namespace WPFDB.View
             int res;
  //res = ImportManager.Instance.ImportContactTypes();
             //MessageBox.Show(res + " ContactTypes");
-
+            ImportManager.Instance.ImportSexes();
             res = ImportManager.Instance.ImportSpecialities();
             MessageBox.Show(res + "Specialities");
             res = ImportManager.Instance.ImportRanks();
@@ -157,6 +157,8 @@ namespace WPFDB.View
 
             res = ImportManager.Instance.ImportUsers();
             MessageBox.Show(res + " Users");
+
+            ImportManager.Instance.ImportSexes();
         }
 
         private void btnIMportPersonConferences_Click(object sender, RoutedEventArgs e)

@@ -767,54 +767,68 @@ namespace WPFDB.Common
         {
             get
             {
-                var defConf = DataManager.Instance.GetPropertyValue("ACTIVE_CONFERENCE");
-                if (defConf == null)
+                try
                 {
-                    var newProp = DataManager.Instance.CreateObject<Propertie>();
-                    newProp.Id = GuidComb.Generate();
-                    newProp.Name = "ACTIVE_CONFERENCE";
-                    var conf = DataManager.Instance.GetConferenceBySourceId(0);
-                    newProp.ValueGuid = conf.Id;
-                    newProp.ValueString = conf.Name;
-                    newProp.ValueDate = DateTime.Now;
-                    newProp.ValueInt = conf.SourceId;
-                    newProp.ValueDecimal = 1;
-                    newProp.ValueLogic = true;
-                    DataManager.Instance.AddPropertie(newProp);
+                    var defConf = DataManager.Instance.GetPropertyValue("ACTIVE_CONFERENCE");
+                    if (defConf == null)
+                    {
+                        var newProp = DataManager.Instance.CreateObject<Propertie>();
+                        newProp.Id = GuidComb.Generate();
+                        newProp.Name = "ACTIVE_CONFERENCE";
+                        var conf = DataManager.Instance.GetConferenceBySourceId(0);
+                        newProp.ValueGuid = conf.Id;
+                        newProp.ValueString = conf.Name;
+                        newProp.ValueDate = DateTime.Now;
+                        newProp.ValueInt = conf.SourceId;
+                        newProp.ValueDecimal = 1;
+                        newProp.ValueLogic = true;
+                        DataManager.Instance.AddPropertie(newProp);
+                    }
+                    defConf = DataManager.Instance.GetPropertyValue("ACTIVE_CONFERENCE");
+                    var obj = DataManager.Instance.GetConferenceById(defConf.ValueGuid);
+                    if (obj == null)
+                    {
+                        obj = DataManager.Instance.GetConferenceByName(defConf.ValueString);
+                    }
+                    return obj;
                 }
-                defConf = DataManager.Instance.GetPropertyValue("ACTIVE_CONFERENCE");
-                var obj = DataManager.Instance.GetConferenceById(defConf.ValueGuid);
-                if (obj == null)
+                catch (Exception ex)
                 {
-                    obj = DataManager.Instance.GetConferenceByName(defConf.ValueString);
+                    return null;
                 }
-                return obj;
             }
             set
             {
-                var defConf = DataManager.Instance.GetPropertyValue("ACTIVE_CONFERENCE");
-                if (defConf == null)
+                try
                 {
-                    var newProp = DataManager.Instance.CreateObject<Propertie>();
-                    newProp.Id = GuidComb.Generate();
-                    newProp.Name = "ACTIVE_CONFERENCE";
-                    newProp.ValueGuid = value.Id;
-                    newProp.ValueString = value.Name;
-                    newProp.ValueDate = DateTime.Now;
-                    newProp.ValueInt = value.SourceId;
-                    newProp.ValueDecimal = 1;
-                    newProp.ValueLogic = true;
-                    DataManager.Instance.AddPropertie(newProp);
+                    var defConf = DataManager.Instance.GetPropertyValue("ACTIVE_CONFERENCE");
+                    if (defConf == null)
+                    {
+                        var newProp = DataManager.Instance.CreateObject<Propertie>();
+                        newProp.Id = GuidComb.Generate();
+                        newProp.Name = "ACTIVE_CONFERENCE";
+                        newProp.ValueGuid = value.Id;
+                        newProp.ValueString = value.Name;
+                        newProp.ValueDate = DateTime.Now;
+                        newProp.ValueInt = value.SourceId;
+                        newProp.ValueDecimal = 1;
+                        newProp.ValueLogic = true;
+                        DataManager.Instance.AddPropertie(newProp);
+                    }
+                    else
+                    {
+                        defConf.ValueGuid = value.Id;
+                        defConf.ValueString = value.Name;
+                        defConf.ValueDate = DateTime.Now;
+                        defConf.ValueInt = value.SourceId;
+                        defConf.ValueDecimal = 1;
+                        defConf.ValueLogic = true;
+                        DataManager.Instance.Save();
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    defConf.ValueGuid = value.Id;
-                    defConf.ValueString = value.Name;
-                    defConf.ValueDate = DateTime.Now;
-                    defConf.ValueInt = value.SourceId;
-                    defConf.ValueDecimal = 1;
-                    defConf.ValueLogic = true;
-                    DataManager.Instance.Save();
+
                 }
             }
         }

@@ -105,7 +105,8 @@ namespace WPFDB.ViewModel
         }
         public string ACTIVE_CONFERENCE
         {
-            get { return "Текущая конференция: " + DefaultManager.Instance.DefaultConference.Name; }
+            get { return "Текущая конференция: " 
+                + DefaultManager.Instance.DefaultConference.Name; }
 
         }
         public string IsConferenceMode

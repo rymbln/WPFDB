@@ -210,22 +210,29 @@ namespace WPFDB.ViewModel
 
         private void FilterAbstracts()
         {
-            if (isFilterConference)
+            try
             {
-                AllAbstractsDB = new ObservableCollection<Abstract>(
-                    DataManager.Instance.GetAllAbstractsForConference(ConferenceFilter.Id));
-                AllAbstracts = new ObservableCollection<Abstract>(
-                    AllAbstractsDB.Where(o => o.ToFilterString.ToUpper().Contains(filterText.ToUpper())));
-            }
-            else
-            {
-                AllAbstracts =
-                    new ObservableCollection<Abstract>(
+                if (isFilterConference)
+                {
+                    AllAbstractsDB = new ObservableCollection<Abstract>(
+                        DataManager.Instance.GetAllAbstractsForConference(ConferenceFilter.Id));
+                    AllAbstracts = new ObservableCollection<Abstract>(
                         AllAbstractsDB.Where(o => o.ToFilterString.ToUpper().Contains(filterText.ToUpper())));
+                }
+                else
+                {
+                    AllAbstracts =
+                        new ObservableCollection<Abstract>(
+                            AllAbstractsDB.Where(o => o.ToFilterString.ToUpper().Contains(filterText.ToUpper())));
+
+                }
+                this.OnPropertyChanged("AllAbstracts");
+                this.CurrentAbstract = AllAbstracts.Count > 0 ? AllAbstracts[0] : null;
+            } 
+            catch (Exception ex)
+            {
 
             }
-            this.OnPropertyChanged("AllAbstracts");
-            this.CurrentAbstract = AllAbstracts.Count > 0 ? AllAbstracts[0] : null;
         }
 
         private void OpenAbstract()
