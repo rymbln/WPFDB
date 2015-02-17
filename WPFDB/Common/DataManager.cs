@@ -369,8 +369,8 @@ namespace WPFDB.Common
             obj.DateUpdate = DateTime.Now;
             var currentUser = Authentification.GetCurrentUser();
             obj.User = currentUser == null ? "-" : currentUser.Name;
-            var sourceId = underlyingContext.Abstracts.Select(o => o.SourceId).Max();
-            obj.SourceId = ++sourceId;
+            //var sourceId = underlyingContext.Abstracts.Select(o => o.SourceId).Max();
+            //obj.SourceId = ++sourceId;
             underlyingContext.Abstracts.AddObject(obj);
             Save();
         }
@@ -766,6 +766,7 @@ namespace WPFDB.Common
             AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "H", Name = "Домашний", SourceId = 1});
             AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "W", Name = "Рабочий", SourceId = 2 });
             AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "O", Name = "Другой", SourceId = 3});
+            AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "EX", Name = "Прочее", SourceId = 4 });
             Save();
 
             AddOrderStatus(new OrderStatus { Id = GuidComb.Generate(), Code = "-", Name = "-", SourceId = 0});
@@ -1158,6 +1159,7 @@ namespace WPFDB.Common
             var personConference =
                 underlyingContext.PersonConferences.FirstOrDefault(o => o.PersonConferenceId == obj.PersonConferenceId);
             personConference.PersonConferences_Detail = obj;
+            underlyingContext.PersonConferences.Attach(personConference);
             Save();
         }
 
@@ -1166,6 +1168,7 @@ namespace WPFDB.Common
             var personConference =
                 underlyingContext.PersonConferences.FirstOrDefault(o => o.PersonConferenceId == obj.PersonConferenceId);
             personConference.PersonConferences_Payment = obj;
+            underlyingContext.PersonConferences.Attach(personConference);
             Save();
         }
 
