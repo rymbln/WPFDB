@@ -658,11 +658,30 @@ namespace WPFDB.ViewModel
             set
             {
                 currentPersonConference = value ?? AllPersonConferences.LastOrDefault();
+                // Если человек никогда не был на конференциях
+                if (currentPersonConference == null)
+                {
+                    var pc = new PersonConference();
+                    pc.PersonConferenceId = GuidComb.Generate();
+                    pc.PersonId = Model.Id;
+                    pc.ConferenceId = DefaultManager.Instance.DefaultConference.Id;
+                    DataManager.Instance.AddPersonConference(pc);
+                    currentPersonConference = pc;
+                }
 
-                AllAbstracts = new ObservableCollection<Abstract>(DataManager.Instance.GetAbstractsByPersonConferenceID(currentPersonConference.PersonConferenceId));
+                var abstracts = new ObservableCollection<Abstract>(DataManager.Instance.GetAbstractsByPersonConferenceID(currentPersonConference.PersonConferenceId));
+                if (abstracts.Count > 0)
+                {
+                    AllAbstracts = abstracts;
+                }
+                else
+                {
+                    AllAbstracts = new ObservableCollection<Abstract>();
+                }
                 CurrentAbstract = AllAbstracts.FirstOrDefault();
 
                 OnPropertyChanged("CurrentPersonConferences");
+                OnPropertyChanged("AllPersonConferences");
                 OnPropertyChanged("AllAbstracts");
                 OnPropertyChanged("CurrentAbstract");
                 OnPropertyChanged("Rank");
