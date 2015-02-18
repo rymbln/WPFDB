@@ -32,6 +32,7 @@
     <EntitySet Name="sysdiagrams" EntityType="ConferenceModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="BadgeTypes" EntityType="ConferenceModel.Store.BadgeTypes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Badges" EntityType="ConferenceModel.Store.Badges" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BadgesDefaults" EntityType="ConferenceModel.Store.BadgesDefaults" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ScienceDegreePerson" Association="ConferenceModel.Store.FK_ScienceDegreePerson">
       <End Role="ScienceDegrees" EntitySet="ScienceDegrees" />
       <End Role="Persons" EntitySet="Persons" />
@@ -131,6 +132,14 @@
     <AssociationSet Name="FK_Badges_BadgeTypes" Association="ConferenceModel.Store.FK_Badges_BadgeTypes">
       <End Role="BadgeType" EntitySet="BadgeTypes" />
       <End Role="Badge" EntitySet="Badges" />
+    </AssociationSet>
+    <AssociationSet Name="BadgeTypeBadgesDefault" Association="ConferenceModel.Store.BadgeTypeBadgesDefault">
+      <End Role="BadgeType" EntitySet="BadgeTypes" />
+      <End Role="BadgesDefault" EntitySet="BadgesDefaults" />
+    </AssociationSet>
+    <AssociationSet Name="RankBadgesDefault" Association="ConferenceModel.Store.RankBadgesDefault">
+      <End Role="Rank" EntitySet="Ranks" />
+      <End Role="BadgesDefault" EntitySet="BadgesDefaults" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Persons">
@@ -500,6 +509,14 @@
     <Property Name="User" Type="nvarchar(max)" Nullable="true" />
     <Property Name="BorderWidth" Type="int" Nullable="true" />
   </EntityType>
+  <EntityType Name="BadgesDefaults">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BadgeTypeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RankId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
   <Association Name="FK_ScienceDegreePerson">
     <End Role="ScienceDegrees" Type="ConferenceModel.Store.ScienceDegrees" Multiplicity="1" />
     <End Role="Persons" Type="ConferenceModel.Store.Persons" Multiplicity="*" />
@@ -808,6 +825,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="BadgeTypeBadgesDefault">
+    <End Role="BadgeType" Type="ConferenceModel.Store.BadgeTypes" Multiplicity="1" />
+    <End Role="BadgesDefault" Type="ConferenceModel.Store.BadgesDefaults" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BadgeType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BadgesDefault">
+        <PropertyRef Name="BadgeTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RankBadgesDefault">
+    <End Role="Rank" Type="ConferenceModel.Store.Ranks" Multiplicity="1" />
+    <End Role="BadgesDefault" Type="ConferenceModel.Store.BadgesDefaults" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rank">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BadgesDefault">
+        <PropertyRef Name="RankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -938,6 +979,15 @@
           <AssociationSet Name="FK_Badges_BadgeTypes" Association="ConferenceModel.FK_Badges_BadgeTypes">
             <End Role="BadgeType" EntitySet="BadgeTypes" />
             <End Role="Badge" EntitySet="Badges" />
+          </AssociationSet>
+          <EntitySet Name="BadgesDefaults" EntityType="ConferenceModel.BadgesDefault" />
+          <AssociationSet Name="BadgeTypeBadgesDefault" Association="ConferenceModel.BadgeTypeBadgesDefault">
+            <End Role="BadgeType" EntitySet="BadgeTypes" />
+            <End Role="BadgesDefault" EntitySet="BadgesDefaults" />
+          </AssociationSet>
+          <AssociationSet Name="RankBadgesDefault" Association="ConferenceModel.RankBadgesDefault">
+            <End Role="Rank" EntitySet="Ranks" />
+            <End Role="BadgesDefault" EntitySet="BadgesDefaults" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Person">
@@ -1140,6 +1190,7 @@
           <Property Type="DateTime" Name="DateUpdate" Nullable="true" Precision="3" />
           <Property Type="String" Name="User" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="PersonConferences_Detail" Relationship="ConferenceModel.FK_RankPersonConferenceDetail" FromRole="Rank" ToRole="PersonConferences_Detail" />
+          <NavigationProperty Name="BadgesDefaults" Relationship="ConferenceModel.RankBadgesDefault" FromRole="Rank" ToRole="BadgesDefault" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -1624,6 +1675,7 @@
           <Property Name="DateUpdate" Type="DateTime" Precision="3" />
           <Property Name="User" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Badges" Relationship="ConferenceModel.FK_Badges_BadgeTypes" FromRole="BadgeType" ToRole="Badge" />
+          <NavigationProperty Name="BadgesDefaults" Relationship="ConferenceModel.BadgeTypeBadgesDefault" FromRole="BadgeType" ToRole="BadgesDefault" />
         </EntityType>
         <EntityType Name="Badge">
           <Key>
@@ -1662,6 +1714,40 @@
             </Principal>
             <Dependent Role="Badge">
               <PropertyRef Name="BadgeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BadgesDefault">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="BadgeType" Relationship="ConferenceModel.BadgeTypeBadgesDefault" FromRole="BadgesDefault" ToRole="BadgeType" />
+          <Property Name="BadgeTypeId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Rank" Relationship="ConferenceModel.RankBadgesDefault" FromRole="BadgesDefault" ToRole="Rank" />
+          <Property Name="RankId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <Association Name="BadgeTypeBadgesDefault">
+          <End Type="ConferenceModel.BadgeType" Role="BadgeType" Multiplicity="1" />
+          <End Type="ConferenceModel.BadgesDefault" Role="BadgesDefault" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BadgeType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BadgesDefault">
+              <PropertyRef Name="BadgeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RankBadgesDefault">
+          <End Type="ConferenceModel.Rank" Role="Rank" Multiplicity="1" />
+          <End Type="ConferenceModel.BadgesDefault" Role="BadgesDefault" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BadgesDefault">
+              <PropertyRef Name="RankId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2061,6 +2147,15 @@
           <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
           <ScalarProperty Name="User" ColumnName="User" />
           <ScalarProperty Name="BorderWidth" ColumnName="BorderWidth" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BadgesDefaults">
+      <EntityTypeMapping TypeName="IsTypeOf(ConferenceModel.BadgesDefault)">
+        <MappingFragment StoreEntitySet="BadgesDefaults">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BadgeTypeId" ColumnName="BadgeTypeId" />
+          <ScalarProperty Name="RankId" ColumnName="RankId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

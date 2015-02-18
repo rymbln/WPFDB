@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/23/2015 13:02:28
+-- Date Created: 02/18/2015 14:04:54
 -- Generated from EDMX file: C:\Users\Inspiron\Documents\GitHub\WPFDB\WPFDB\Model\ConferenceModel.edmx
 -- --------------------------------------------------
 
@@ -17,66 +17,6 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_AbstractAbstractWork]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AbstractWorks] DROP CONSTRAINT [FK_AbstractAbstractWork];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AbstractStatusAbstractWork]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AbstractWorks] DROP CONSTRAINT [FK_AbstractStatusAbstractWork];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Badges_BadgeTypes]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Badges] DROP CONSTRAINT [FK_Badges_BadgeTypes];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CompanyPersonConferenceDetail]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences_Detail] DROP CONSTRAINT [FK_CompanyPersonConferenceDetail];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CompanyPersonConferenceMoney]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_CompanyPersonConferenceMoney];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ConferencePersonConference]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences] DROP CONSTRAINT [FK_ConferencePersonConference];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ContactTypeAddress]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Addresses] DROP CONSTRAINT [FK_ContactTypeAddress];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ContactTypeEmail]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Emails] DROP CONSTRAINT [FK_ContactTypeEmail];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ContactTypePhone]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Phones] DROP CONSTRAINT [FK_ContactTypePhone];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Detail_inherits_PersonConference]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences_Detail] DROP CONSTRAINT [FK_Detail_inherits_PersonConference];
-GO
-IF OBJECT_ID(N'[dbo].[FK_OrderStatusPersonConferences_Payment]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_OrderStatusPersonConferences_Payment];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Payment_inherits_PersonConference]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_Payment_inherits_PersonConference];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PaymentTypePersonConferenceMoney]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_PaymentTypePersonConferenceMoney];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PersonAddress]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Addresses] DROP CONSTRAINT [FK_PersonAddress];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PersonConferenceAbstract]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Abstracts] DROP CONSTRAINT [FK_PersonConferenceAbstract];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PersonEmail]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Emails] DROP CONSTRAINT [FK_PersonEmail];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PersonIacmac]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Iacmacs] DROP CONSTRAINT [FK_PersonIacmac];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PersonPersonConference]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences] DROP CONSTRAINT [FK_PersonPersonConference];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PersonPhone]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Phones] DROP CONSTRAINT [FK_PersonPhone];
-GO
-IF OBJECT_ID(N'[dbo].[FK_RankPersonConferenceDetail]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonConferences_Detail] DROP CONSTRAINT [FK_RankPersonConferenceDetail];
-GO
 IF OBJECT_ID(N'[dbo].[FK_ScienceDegreePerson]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Persons] DROP CONSTRAINT [FK_ScienceDegreePerson];
 GO
@@ -89,73 +29,76 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_SpecialityPerson]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Persons] DROP CONSTRAINT [FK_SpecialityPerson];
 GO
+IF OBJECT_ID(N'[dbo].[FK_PersonPersonConference]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonConferences] DROP CONSTRAINT [FK_PersonPersonConference];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ConferencePersonConference]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonConferences] DROP CONSTRAINT [FK_ConferencePersonConference];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CompanyPersonConferenceDetail]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonConferences_Detail] DROP CONSTRAINT [FK_CompanyPersonConferenceDetail];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CompanyPersonConferenceMoney]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_CompanyPersonConferenceMoney];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentTypePersonConferenceMoney]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_PaymentTypePersonConferenceMoney];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Detail_inherits_PersonConference]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonConferences_Detail] DROP CONSTRAINT [FK_Detail_inherits_PersonConference];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Payment_inherits_PersonConference]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_Payment_inherits_PersonConference];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RankPersonConferenceDetail]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonConferences_Detail] DROP CONSTRAINT [FK_RankPersonConferenceDetail];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PersonIacmac]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Iacmacs] DROP CONSTRAINT [FK_PersonIacmac];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContactTypeEmail]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Emails] DROP CONSTRAINT [FK_ContactTypeEmail];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContactTypePhone]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Phones] DROP CONSTRAINT [FK_ContactTypePhone];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ContactTypeAddress]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Addresses] DROP CONSTRAINT [FK_ContactTypeAddress];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PersonAddress]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Addresses] DROP CONSTRAINT [FK_PersonAddress];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PersonEmail]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Emails] DROP CONSTRAINT [FK_PersonEmail];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PersonPhone]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Phones] DROP CONSTRAINT [FK_PersonPhone];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PersonConferenceAbstract]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Abstracts] DROP CONSTRAINT [FK_PersonConferenceAbstract];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AbstractAbstractWork]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AbstractWorks] DROP CONSTRAINT [FK_AbstractAbstractWork];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AbstractStatusAbstractWork]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AbstractWorks] DROP CONSTRAINT [FK_AbstractStatusAbstractWork];
+GO
 IF OBJECT_ID(N'[dbo].[FK_UserAbstractWork]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AbstractWorks] DROP CONSTRAINT [FK_UserAbstractWork];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OrderStatusPersonConferences_Payment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonConferences_Payment] DROP CONSTRAINT [FK_OrderStatusPersonConferences_Payment];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Badges_BadgeTypes]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Badges] DROP CONSTRAINT [FK_Badges_BadgeTypes];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Abstracts]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Abstracts];
-GO
-IF OBJECT_ID(N'[dbo].[AbstractStatuses]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AbstractStatuses];
-GO
-IF OBJECT_ID(N'[dbo].[AbstractWorks]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AbstractWorks];
-GO
-IF OBJECT_ID(N'[dbo].[Addresses]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Addresses];
-GO
-IF OBJECT_ID(N'[dbo].[Badges]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Badges];
-GO
-IF OBJECT_ID(N'[dbo].[BadgeTypes]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[BadgeTypes];
-GO
-IF OBJECT_ID(N'[dbo].[Companies]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Companies];
-GO
-IF OBJECT_ID(N'[dbo].[Conferences]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Conferences];
-GO
-IF OBJECT_ID(N'[dbo].[ContactTypes]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ContactTypes];
-GO
-IF OBJECT_ID(N'[dbo].[Emails]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Emails];
-GO
-IF OBJECT_ID(N'[dbo].[Iacmacs]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Iacmacs];
-GO
-IF OBJECT_ID(N'[dbo].[OrderStatuses]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[OrderStatuses];
-GO
-IF OBJECT_ID(N'[dbo].[PaymentTypes]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PaymentTypes];
-GO
-IF OBJECT_ID(N'[dbo].[PersonConferences]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PersonConferences];
-GO
-IF OBJECT_ID(N'[dbo].[PersonConferences_Detail]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PersonConferences_Detail];
-GO
-IF OBJECT_ID(N'[dbo].[PersonConferences_Payment]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PersonConferences_Payment];
-GO
 IF OBJECT_ID(N'[dbo].[Persons]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Persons];
-GO
-IF OBJECT_ID(N'[dbo].[Phones]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Phones];
-GO
-IF OBJECT_ID(N'[dbo].[Properties]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Properties];
-GO
-IF OBJECT_ID(N'[dbo].[Ranks]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Ranks];
 GO
 IF OBJECT_ID(N'[dbo].[ScienceDegrees]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ScienceDegrees];
@@ -169,11 +112,68 @@ GO
 IF OBJECT_ID(N'[dbo].[Specialities]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Specialities];
 GO
+IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Users];
+GO
+IF OBJECT_ID(N'[dbo].[Properties]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Properties];
+GO
+IF OBJECT_ID(N'[dbo].[Conferences]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Conferences];
+GO
+IF OBJECT_ID(N'[dbo].[PersonConferences]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PersonConferences];
+GO
+IF OBJECT_ID(N'[dbo].[Ranks]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Ranks];
+GO
+IF OBJECT_ID(N'[dbo].[Companies]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Companies];
+GO
+IF OBJECT_ID(N'[dbo].[PaymentTypes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PaymentTypes];
+GO
+IF OBJECT_ID(N'[dbo].[PersonConferences_Detail]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PersonConferences_Detail];
+GO
+IF OBJECT_ID(N'[dbo].[PersonConferences_Payment]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PersonConferences_Payment];
+GO
+IF OBJECT_ID(N'[dbo].[Iacmacs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Iacmacs];
+GO
+IF OBJECT_ID(N'[dbo].[OrderStatuses]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OrderStatuses];
+GO
+IF OBJECT_ID(N'[dbo].[ContactTypes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ContactTypes];
+GO
+IF OBJECT_ID(N'[dbo].[Emails]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Emails];
+GO
+IF OBJECT_ID(N'[dbo].[Phones]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Phones];
+GO
+IF OBJECT_ID(N'[dbo].[Addresses]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Addresses];
+GO
+IF OBJECT_ID(N'[dbo].[Abstracts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Abstracts];
+GO
+IF OBJECT_ID(N'[dbo].[AbstractWorks]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AbstractWorks];
+GO
+IF OBJECT_ID(N'[dbo].[AbstractStatuses]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AbstractStatuses];
+GO
 IF OBJECT_ID(N'[dbo].[sysdiagrams]', 'U') IS NOT NULL
     DROP TABLE [dbo].[sysdiagrams];
 GO
-IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Users];
+IF OBJECT_ID(N'[dbo].[BadgeTypes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[BadgeTypes];
+GO
+IF OBJECT_ID(N'[dbo].[Badges]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Badges];
 GO
 
 -- --------------------------------------------------
@@ -547,6 +547,14 @@ CREATE TABLE [dbo].[Badges] (
 );
 GO
 
+-- Creating table 'BadgesDefaults'
+CREATE TABLE [dbo].[BadgesDefaults] (
+    [Id] uniqueidentifier  NOT NULL,
+    [BadgeTypeId] uniqueidentifier  NOT NULL,
+    [RankId] uniqueidentifier  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -704,6 +712,12 @@ GO
 -- Creating primary key on [Id] in table 'Badges'
 ALTER TABLE [dbo].[Badges]
 ADD CONSTRAINT [PK_Badges]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'BadgesDefaults'
+ALTER TABLE [dbo].[BadgesDefaults]
+ADD CONSTRAINT [PK_BadgesDefaults]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -1066,6 +1080,36 @@ GO
 CREATE INDEX [IX_FK_Badges_BadgeTypes]
 ON [dbo].[Badges]
     ([BadgeTypeId]);
+GO
+
+-- Creating foreign key on [BadgeTypeId] in table 'BadgesDefaults'
+ALTER TABLE [dbo].[BadgesDefaults]
+ADD CONSTRAINT [FK_BadgeTypeBadgesDefault]
+    FOREIGN KEY ([BadgeTypeId])
+    REFERENCES [dbo].[BadgeTypes]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_BadgeTypeBadgesDefault'
+CREATE INDEX [IX_FK_BadgeTypeBadgesDefault]
+ON [dbo].[BadgesDefaults]
+    ([BadgeTypeId]);
+GO
+
+-- Creating foreign key on [RankId] in table 'BadgesDefaults'
+ALTER TABLE [dbo].[BadgesDefaults]
+ADD CONSTRAINT [FK_RankBadgesDefault]
+    FOREIGN KEY ([RankId])
+    REFERENCES [dbo].[Ranks]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RankBadgesDefault'
+CREATE INDEX [IX_FK_RankBadgesDefault]
+ON [dbo].[BadgesDefaults]
+    ([RankId]);
 GO
 
 -- --------------------------------------------------

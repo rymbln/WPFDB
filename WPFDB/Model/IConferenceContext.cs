@@ -55,6 +55,8 @@ namespace WPFDB.Data
 
         ObjectSet<BadgeType> BadgeTypes { get; }
 
+        ObjectSet<BadgesDefault> BadgesDefaults { get; }
+
      //   ObjectSet<BadgeElementType> BadgeElementTypes { get; }
 
         //ObjectSet<PersonConferences_Detail> PersonConferenceDetails { get; }

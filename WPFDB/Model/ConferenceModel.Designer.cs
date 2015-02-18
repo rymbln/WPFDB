@@ -44,6 +44,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("ConferenceModel", "UserAbstractWork", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.User), "AbstractWork", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.AbstractWork), true)]
 [assembly: EdmRelationshipAttribute("ConferenceModel", "OrderStatusPersonConferences_Payment", "OrderStatus", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.OrderStatus), "PersonConferences_Payment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.PersonConferences_Payment), true)]
 [assembly: EdmRelationshipAttribute("ConferenceModel", "FK_Badges_BadgeTypes", "BadgeType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.BadgeType), "Badge", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.Badge), true)]
+[assembly: EdmRelationshipAttribute("ConferenceModel", "BadgeTypeBadgesDefault", "BadgeType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.BadgeType), "BadgesDefault", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.BadgesDefault), true)]
+[assembly: EdmRelationshipAttribute("ConferenceModel", "RankBadgesDefault", "Rank", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WPFDB.Model.Rank), "BadgesDefault", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WPFDB.Model.BadgesDefault), true)]
 
 #endregion
 
@@ -510,6 +512,22 @@ namespace WPFDB.Model
             }
         }
         private ObjectSet<Badge> _Badges;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<BadgesDefault> BadgesDefaults
+        {
+            get
+            {
+                if ((_BadgesDefaults == null))
+                {
+                    _BadgesDefaults = base.CreateObjectSet<BadgesDefault>("BadgesDefaults");
+                }
+                return _BadgesDefaults;
+            }
+        }
+        private ObjectSet<BadgesDefault> _BadgesDefaults;
 
         #endregion
 
@@ -721,6 +739,14 @@ namespace WPFDB.Model
         public void AddToBadges(Badge badge)
         {
             base.AddObject("Badges", badge);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the BadgesDefaults EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToBadgesDefaults(BadgesDefault badgesDefault)
+        {
+            base.AddObject("BadgesDefaults", badgesDefault);
         }
 
         #endregion
@@ -2740,6 +2766,194 @@ namespace WPFDB.Model
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ConferenceModel", Name="BadgesDefault")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class BadgesDefault : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new BadgesDefault object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="badgeTypeId">Initial value of the BadgeTypeId property.</param>
+        /// <param name="rankId">Initial value of the RankId property.</param>
+        public static BadgesDefault CreateBadgesDefault(global::System.Guid id, global::System.Guid badgeTypeId, global::System.Guid rankId)
+        {
+            BadgesDefault badgesDefault = new BadgesDefault();
+            badgesDefault.Id = id;
+            badgesDefault.BadgeTypeId = badgeTypeId;
+            badgesDefault.RankId = rankId;
+            return badgesDefault;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _Id;
+        partial void OnIdChanging(global::System.Guid value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid BadgeTypeId
+        {
+            get
+            {
+                return _BadgeTypeId;
+            }
+            set
+            {
+                OnBadgeTypeIdChanging(value);
+                ReportPropertyChanging("BadgeTypeId");
+                _BadgeTypeId = StructuralObject.SetValidValue(value, "BadgeTypeId");
+                ReportPropertyChanged("BadgeTypeId");
+                OnBadgeTypeIdChanged();
+            }
+        }
+        private global::System.Guid _BadgeTypeId;
+        partial void OnBadgeTypeIdChanging(global::System.Guid value);
+        partial void OnBadgeTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid RankId
+        {
+            get
+            {
+                return _RankId;
+            }
+            set
+            {
+                OnRankIdChanging(value);
+                ReportPropertyChanging("RankId");
+                _RankId = StructuralObject.SetValidValue(value, "RankId");
+                ReportPropertyChanged("RankId");
+                OnRankIdChanged();
+            }
+        }
+        private global::System.Guid _RankId;
+        partial void OnRankIdChanging(global::System.Guid value);
+        partial void OnRankIdChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "BadgeTypeBadgesDefault", "BadgeType")]
+        public BadgeType BadgeType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BadgeType>("ConferenceModel.BadgeTypeBadgesDefault", "BadgeType").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BadgeType>("ConferenceModel.BadgeTypeBadgesDefault", "BadgeType").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<BadgeType> BadgeTypeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BadgeType>("ConferenceModel.BadgeTypeBadgesDefault", "BadgeType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<BadgeType>("ConferenceModel.BadgeTypeBadgesDefault", "BadgeType", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "RankBadgesDefault", "Rank")]
+        public Rank Rank
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Rank>("ConferenceModel.RankBadgesDefault", "Rank").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Rank>("ConferenceModel.RankBadgesDefault", "Rank").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Rank> RankReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Rank>("ConferenceModel.RankBadgesDefault", "Rank");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Rank>("ConferenceModel.RankBadgesDefault", "Rank", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="ConferenceModel", Name="BadgeType")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -3013,6 +3227,28 @@ namespace WPFDB.Model
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Badge>("ConferenceModel.FK_Badges_BadgeTypes", "Badge", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "BadgeTypeBadgesDefault", "BadgesDefault")]
+        public EntityCollection<BadgesDefault> BadgesDefaults
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<BadgesDefault>("ConferenceModel.BadgeTypeBadgesDefault", "BadgesDefault");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<BadgesDefault>("ConferenceModel.BadgeTypeBadgesDefault", "BadgesDefault", value);
                 }
             }
         }
@@ -7745,6 +7981,28 @@ namespace WPFDB.Model
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonConferences_Detail>("ConferenceModel.FK_RankPersonConferenceDetail", "PersonConferences_Detail", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ConferenceModel", "RankBadgesDefault", "BadgesDefault")]
+        public EntityCollection<BadgesDefault> BadgesDefaults
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<BadgesDefault>("ConferenceModel.RankBadgesDefault", "BadgesDefault");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<BadgesDefault>("ConferenceModel.RankBadgesDefault", "BadgesDefault", value);
                 }
             }
         }

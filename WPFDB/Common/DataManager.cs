@@ -1298,5 +1298,34 @@ namespace WPFDB.Common
             this.underlyingContext.BadgeTypes.DeleteObject(badgeType);
             Save();
         }
+
+        public IEnumerable<BadgesDefault> GetAllBadgesDefaults()
+        {
+            return underlyingContext.BadgesDefaults.OrderBy(b => b.Rank.Name);
+        }
+
+        public void AddBadgesDefault(BadgesDefault obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("bdgesdefault");
+            }
+          //  obj.DateAdd = DateTime.Now;
+           // obj.DateUpdate = DateTime.Now;
+           // var currentUser = Authentification.GetCurrentUser();
+           // obj.User = currentUser == null ? "-" : currentUser.Name;
+            this.CheckEntityDoesNotBelongToUnitOfWork(obj);
+            this.underlyingContext.BadgesDefaults.AddObject(obj);
+            Save();
+        }
+
+        public  void DeleteBadgesDefault(BadgesDefault BadgeDefaultSelected)
+        {
+            if (BadgeDefaultSelected == null)
+            {
+                throw new ArgumentNullException("BadgeDefaultSelected");
+            }
+            this.underlyingContext.BadgesDefaults.DeleteObject(BadgeDefaultSelected);
+        }
     }
 }

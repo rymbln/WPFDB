@@ -123,6 +123,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConferenceModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\ListBoxBadgeDefault.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\PersonConference.cs" />
     <Compile Include="Validation\Helpers\ExcludeChar.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="ViewModel\AddressViewModel.cs" />
     <Compile Include="ViewModel\BadgeDesignerViewModel.cs" />
     <Compile Include="ViewModel\BadgeElementViewModel.cs" />
+    <Compile Include="ViewModel\BadgeSettingsViewModel.cs" />
     <Compile Include="ViewModel\BadgeViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\ContactTypeViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\ContactTypeWorkspaceViewModel.cs" />
@@ -184,6 +186,9 @@
     </Compile>
     <Compile Include="View\BadgeElementView.xaml.cs">
       <DependentUpon>BadgeElementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BadgeSettingsView.xaml.cs">
+      <DependentUpon>BadgeSettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ImportWorkspaceView.xaml.cs">
       <DependentUpon>ImportWorkspaceView.xaml</DependentUpon>
@@ -306,6 +311,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BadgeElementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BadgeSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

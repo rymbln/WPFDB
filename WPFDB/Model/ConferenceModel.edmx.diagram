@@ -18,7 +18,7 @@
         <EntityTypeShape EntityType="ConferenceModel.User" Width="2.75" PointX="19.125" PointY="18" />
         <EntityTypeShape EntityType="ConferenceModel.Propertie" Width="2.5" PointX="4.125" PointY="1.25" />
         <EntityTypeShape EntityType="ConferenceModel.PersonConference" Width="2.375" PointX="8.25" PointY="11.75" />
-        <EntityTypeShape EntityType="ConferenceModel.Rank" Width="1.5" PointX="14.625" PointY="15.5" />
+        <EntityTypeShape EntityType="ConferenceModel.Rank" Width="1.5" PointX="16.375" PointY="14.125" />
         <EntityTypeShape EntityType="ConferenceModel.Company" Width="2.5" PointX="15" PointY="10.5" />
         <EntityTypeShape EntityType="ConferenceModel.PaymentType" Width="2.25" PointX="14.625" PointY="4.625" />
         <AssociationConnector Association="ConferenceModel.PersonPersonConference" />
@@ -54,9 +54,12 @@
         <AssociationConnector Association="ConferenceModel.UserAbstractWork" />
         <AssociationConnector Association="ConferenceModel.OrderStatusPersonConferences_Payment" />
         <EntityTypeShape EntityType="ConferenceModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ConferenceModel.BadgeType" Width="1.5" PointX="17.375" PointY="2" />
-        <EntityTypeShape EntityType="ConferenceModel.Badge" Width="1.5" PointX="19.625" PointY="1" />
+        <EntityTypeShape EntityType="ConferenceModel.BadgeType" Width="1.5" PointX="21.25" PointY="13.875" />
+        <EntityTypeShape EntityType="ConferenceModel.Badge" Width="1.5" PointX="23.5" PointY="12.875" />
         <AssociationConnector Association="ConferenceModel.FK_Badges_BadgeTypes" />
+        <EntityTypeShape EntityType="ConferenceModel.BadgesDefault" Width="1.5" PointX="18.875" PointY="14.5" />
+        <AssociationConnector Association="ConferenceModel.BadgeTypeBadgesDefault" />
+        <AssociationConnector Association="ConferenceModel.RankBadgesDefault" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
