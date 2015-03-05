@@ -528,6 +528,22 @@ namespace WPFDB.Model
             }
         }
         private ObjectSet<BadgesDefault> _BadgesDefaults;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Printer> Printers
+        {
+            get
+            {
+                if ((_Printers == null))
+                {
+                    _Printers = base.CreateObjectSet<Printer>("Printers");
+                }
+                return _Printers;
+            }
+        }
+        private ObjectSet<Printer> _Printers;
 
         #endregion
 
@@ -747,6 +763,14 @@ namespace WPFDB.Model
         public void AddToBadgesDefaults(BadgesDefault badgesDefault)
         {
             base.AddObject("BadgesDefaults", badgesDefault);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Printers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPrinters(Printer printer)
+        {
+            base.AddObject("Printers", printer);
         }
 
         #endregion
@@ -7514,6 +7538,134 @@ namespace WPFDB.Model
                 }
             }
         }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ConferenceModel", Name="Printer")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Printer : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Printer object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        public static Printer CreatePrinter(global::System.Guid id)
+        {
+            Printer printer = new Printer();
+            printer.Id = id;
+            return printer;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _Id;
+        partial void OnIdChanging(global::System.Guid value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ComputerName
+        {
+            get
+            {
+                return _ComputerName;
+            }
+            set
+            {
+                OnComputerNameChanging(value);
+                ReportPropertyChanging("ComputerName");
+                _ComputerName = StructuralObject.SetValidValue(value, true, "ComputerName");
+                ReportPropertyChanged("ComputerName");
+                OnComputerNameChanged();
+            }
+        }
+        private global::System.String _ComputerName;
+        partial void OnComputerNameChanging(global::System.String value);
+        partial void OnComputerNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String DocumentName
+        {
+            get
+            {
+                return _DocumentName;
+            }
+            set
+            {
+                OnDocumentNameChanging(value);
+                ReportPropertyChanging("DocumentName");
+                _DocumentName = StructuralObject.SetValidValue(value, true, "DocumentName");
+                ReportPropertyChanged("DocumentName");
+                OnDocumentNameChanged();
+            }
+        }
+        private global::System.String _DocumentName;
+        partial void OnDocumentNameChanging(global::System.String value);
+        partial void OnDocumentNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PrinterName
+        {
+            get
+            {
+                return _PrinterName;
+            }
+            set
+            {
+                OnPrinterNameChanging(value);
+                ReportPropertyChanging("PrinterName");
+                _PrinterName = StructuralObject.SetValidValue(value, true, "PrinterName");
+                ReportPropertyChanged("PrinterName");
+                OnPrinterNameChanged();
+            }
+        }
+        private global::System.String _PrinterName;
+        partial void OnPrinterNameChanging(global::System.String value);
+        partial void OnPrinterNameChanged();
 
         #endregion
 

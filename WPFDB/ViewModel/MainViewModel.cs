@@ -39,6 +39,7 @@ namespace WPFDB.ViewModel
             OpenSettingsCommand = new DelegateCommand(o => OpenSettings());
             OpenBadgeDesignerCommand = new DelegateCommand(o => OpenBadgeDesigner());
             OpenBadgeDefaultsCommand = new DelegateCommand(o => OpenBadgeDefaults());
+            OpenPrintersCommand = new DelegateCommand(o => OpenPrinters());
         }
 
         private void OpenBadgeDesigner()
@@ -58,6 +59,7 @@ namespace WPFDB.ViewModel
         public ICommand EraseDataCommand { get; private set; }
         public ICommand OpenBadgeDesignerCommand { get; private set; }
         public ICommand OpenBadgeDefaultsCommand { get; private set; }
+        public ICommand OpenPrintersCommand { get; private set; }
 
         /// <summary>
         /// Gets the workspace for managing departments of the company
@@ -112,10 +114,20 @@ namespace WPFDB.ViewModel
             BadgeSettingsView v = new BadgeSettingsView { DataContext = vm };
             v.Show();
         }
+
+        private void OpenPrinters()
+        {
+            PrintersViewModel vm = new PrintersViewModel();
+            PrintersView v = new PrintersView { DataContext = vm };
+            v.Show();
+        }
         public string ACTIVE_CONFERENCE
         {
-            get { return "Текущая конференция: " 
-                + DefaultManager.Instance.DefaultConference.Name; }
+            get
+            {
+                return "Текущая конференция: "
+                    + DefaultManager.Instance.DefaultConference.Name;
+            }
 
         }
         public string IsConferenceMode

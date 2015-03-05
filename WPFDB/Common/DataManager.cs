@@ -1350,5 +1350,34 @@ namespace WPFDB.Common
         {
             return this.underlyingContext.BadgeTypes.Where(b => b.Name == name).FirstOrDefault();
         }
+
+        public IEnumerable<Printer> GetPrinters()
+        {
+            return underlyingContext.Printers;
+        }
+
+        public void RemovePrinter(Printer obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("printer");
+            }
+
+            this.CheckEntityBelongsToUnitOfWork(obj);
+
+            this.underlyingContext.Printers.DeleteObject(obj);
+            Save();
+        }
+
+        public Printer AddPrinter(Printer obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("Printer");
+            }
+            this.underlyingContext.Printers.AddObject(obj);
+            Save();
+            return obj;
+        }
     }
 }

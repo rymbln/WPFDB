@@ -19,7 +19,27 @@ namespace WPFDB.Common
 
         public string CurrentDate { get { return DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString(); } }
         public string CurrentDateTimeShortString { get { return DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + "_" + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond; } }
- 
+        public string ComputerName { get { return System.Environment.MachineName; } }
+
+
+        public List<string> GetDocumentNames()
+        {
+            var lst = new List<string>();
+            lst.Add("BADGE");
+            lst.Add("REPORT");
+            return lst;
+        }
+
+        public List<string> GetPrinterNames()
+        {
+            var lst = new List<string>();
+            foreach (string printer in System.Drawing.Printing.PrinterSettings.InstalledPrinters)
+            {
+                lst.Add(printer);
+            }
+            return lst;
+        }
+
 
         public string MailServer
         {

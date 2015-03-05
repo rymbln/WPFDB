@@ -4,852 +4,862 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ConferenceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="ConferenceModelStoreContainer">
-    <EntitySet Name="Persons" EntityType="ConferenceModel.Store.Persons" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ScienceDegrees" EntityType="ConferenceModel.Store.ScienceDegrees" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ScienceStatuses" EntityType="ConferenceModel.Store.ScienceStatuses" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Sexes" EntityType="ConferenceModel.Store.Sexes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Specialities" EntityType="ConferenceModel.Store.Specialities" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Users" EntityType="ConferenceModel.Store.Users" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Properties" EntityType="ConferenceModel.Store.Properties" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Conferences" EntityType="ConferenceModel.Store.Conferences" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PersonConferences" EntityType="ConferenceModel.Store.PersonConferences" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Ranks" EntityType="ConferenceModel.Store.Ranks" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Companies" EntityType="ConferenceModel.Store.Companies" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PaymentTypes" EntityType="ConferenceModel.Store.PaymentTypes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PersonConferences_Detail" EntityType="ConferenceModel.Store.PersonConferences_Detail" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PersonConferences_Payment" EntityType="ConferenceModel.Store.PersonConferences_Payment" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Iacmacs" EntityType="ConferenceModel.Store.Iacmacs" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="OrderStatuses" EntityType="ConferenceModel.Store.OrderStatuses" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ContactTypes" EntityType="ConferenceModel.Store.ContactTypes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Emails" EntityType="ConferenceModel.Store.Emails" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Phones" EntityType="ConferenceModel.Store.Phones" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Addresses" EntityType="ConferenceModel.Store.Addresses" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Abstracts" EntityType="ConferenceModel.Store.Abstracts" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="AbstractWorks" EntityType="ConferenceModel.Store.AbstractWorks" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="AbstractStatuses" EntityType="ConferenceModel.Store.AbstractStatuses" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="sysdiagrams" EntityType="ConferenceModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="BadgeTypes" EntityType="ConferenceModel.Store.BadgeTypes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Badges" EntityType="ConferenceModel.Store.Badges" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="BadgesDefaults" EntityType="ConferenceModel.Store.BadgesDefaults" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_ScienceDegreePerson" Association="ConferenceModel.Store.FK_ScienceDegreePerson">
-      <End Role="ScienceDegrees" EntitySet="ScienceDegrees" />
-      <End Role="Persons" EntitySet="Persons" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ScienceStatusPerson" Association="ConferenceModel.Store.FK_ScienceStatusPerson">
-      <End Role="ScienceStatuses" EntitySet="ScienceStatuses" />
-      <End Role="Persons" EntitySet="Persons" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SexPerson" Association="ConferenceModel.Store.FK_SexPerson">
-      <End Role="Sexes" EntitySet="Sexes" />
-      <End Role="Persons" EntitySet="Persons" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SpecialityPerson" Association="ConferenceModel.Store.FK_SpecialityPerson">
-      <End Role="Specialities" EntitySet="Specialities" />
-      <End Role="Persons" EntitySet="Persons" />
-    </AssociationSet>
-    <AssociationSet Name="PersonPersonConference" Association="ConferenceModel.Store.PersonPersonConference">
-      <End Role="Person" EntitySet="Persons" />
-      <End Role="PersonConference" EntitySet="PersonConferences" />
-    </AssociationSet>
-    <AssociationSet Name="ConferencePersonConference" Association="ConferenceModel.Store.ConferencePersonConference">
-      <End Role="Conference" EntitySet="Conferences" />
-      <End Role="PersonConference" EntitySet="PersonConferences" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CompanyPersonConferenceDetail" Association="ConferenceModel.Store.FK_CompanyPersonConferenceDetail">
-      <End Role="Company" EntitySet="Companies" />
-      <End Role="PersonConferences_Detail" EntitySet="PersonConferences_Detail" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CompanyPersonConferenceMoney" Association="ConferenceModel.Store.FK_CompanyPersonConferenceMoney">
-      <End Role="Company" EntitySet="Companies" />
-      <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PaymentTypePersonConferenceMoney" Association="ConferenceModel.Store.FK_PaymentTypePersonConferenceMoney">
-      <End Role="PaymentType" EntitySet="PaymentTypes" />
-      <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Detail_inherits_PersonConference" Association="ConferenceModel.Store.FK_Detail_inherits_PersonConference">
-      <End Role="PersonConference" EntitySet="PersonConferences" />
-      <End Role="PersonConferences_Detail" EntitySet="PersonConferences_Detail" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Payment_inherits_PersonConference" Association="ConferenceModel.Store.FK_Payment_inherits_PersonConference">
-      <End Role="PersonConference" EntitySet="PersonConferences" />
-      <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
-    </AssociationSet>
-    <AssociationSet Name="FK_RankPersonConferenceDetail" Association="ConferenceModel.Store.FK_RankPersonConferenceDetail">
-      <End Role="Rank" EntitySet="Ranks" />
-      <End Role="PersonConferences_Detail" EntitySet="PersonConferences_Detail" />
-    </AssociationSet>
-    <AssociationSet Name="PersonIacmac" Association="ConferenceModel.Store.PersonIacmac">
-      <End Role="Person" EntitySet="Persons" />
-      <End Role="Iacmac" EntitySet="Iacmacs" />
-    </AssociationSet>
-    <AssociationSet Name="ContactTypeEmail" Association="ConferenceModel.Store.ContactTypeEmail">
-      <End Role="ContactType" EntitySet="ContactTypes" />
-      <End Role="Email" EntitySet="Emails" />
-    </AssociationSet>
-    <AssociationSet Name="ContactTypePhone" Association="ConferenceModel.Store.ContactTypePhone">
-      <End Role="ContactType" EntitySet="ContactTypes" />
-      <End Role="Phone" EntitySet="Phones" />
-    </AssociationSet>
-    <AssociationSet Name="ContactTypeAddress" Association="ConferenceModel.Store.ContactTypeAddress">
-      <End Role="ContactType" EntitySet="ContactTypes" />
-      <End Role="Address" EntitySet="Addresses" />
-    </AssociationSet>
-    <AssociationSet Name="PersonAddress" Association="ConferenceModel.Store.PersonAddress">
-      <End Role="Person" EntitySet="Persons" />
-      <End Role="Address" EntitySet="Addresses" />
-    </AssociationSet>
-    <AssociationSet Name="PersonEmail" Association="ConferenceModel.Store.PersonEmail">
-      <End Role="Person" EntitySet="Persons" />
-      <End Role="Email" EntitySet="Emails" />
-    </AssociationSet>
-    <AssociationSet Name="PersonPhone" Association="ConferenceModel.Store.PersonPhone">
-      <End Role="Person" EntitySet="Persons" />
-      <End Role="Phone" EntitySet="Phones" />
-    </AssociationSet>
-    <AssociationSet Name="PersonConferenceAbstract" Association="ConferenceModel.Store.PersonConferenceAbstract">
-      <End Role="PersonConference" EntitySet="PersonConferences" />
-      <End Role="Abstract" EntitySet="Abstracts" />
-    </AssociationSet>
-    <AssociationSet Name="AbstractAbstractWork" Association="ConferenceModel.Store.AbstractAbstractWork">
-      <End Role="Abstract" EntitySet="Abstracts" />
-      <End Role="AbstractWork" EntitySet="AbstractWorks" />
-    </AssociationSet>
-    <AssociationSet Name="AbstractStatusAbstractWork" Association="ConferenceModel.Store.AbstractStatusAbstractWork">
-      <End Role="AbstractStatus" EntitySet="AbstractStatuses" />
-      <End Role="AbstractWork" EntitySet="AbstractWorks" />
-    </AssociationSet>
-    <AssociationSet Name="UserAbstractWork" Association="ConferenceModel.Store.UserAbstractWork">
-      <End Role="User" EntitySet="Users" />
-      <End Role="AbstractWork" EntitySet="AbstractWorks" />
-    </AssociationSet>
-    <AssociationSet Name="OrderStatusPersonConferences_Payment" Association="ConferenceModel.Store.OrderStatusPersonConferences_Payment">
-      <End Role="OrderStatus" EntitySet="OrderStatuses" />
-      <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Badges_BadgeTypes" Association="ConferenceModel.Store.FK_Badges_BadgeTypes">
-      <End Role="BadgeType" EntitySet="BadgeTypes" />
-      <End Role="Badge" EntitySet="Badges" />
-    </AssociationSet>
-    <AssociationSet Name="BadgeTypeBadgesDefault" Association="ConferenceModel.Store.BadgeTypeBadgesDefault">
-      <End Role="BadgeType" EntitySet="BadgeTypes" />
-      <End Role="BadgesDefault" EntitySet="BadgesDefaults" />
-    </AssociationSet>
-    <AssociationSet Name="RankBadgesDefault" Association="ConferenceModel.Store.RankBadgesDefault">
-      <End Role="Rank" EntitySet="Ranks" />
-      <End Role="BadgesDefault" EntitySet="BadgesDefaults" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Persons">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SecondName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ThirdName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SexId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="BirthDate" Type="datetime" Nullable="true" />
-    <Property Name="WorkPlace" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Post" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="SpecialityId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ScienceDegreeId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ScienceStatusId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="ScienceDegrees">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="ScienceStatuses">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Sexes">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Specialities">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Users">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Role" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="true" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User1" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Properties">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ValueString" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ValueLogic" Type="bit" Nullable="false" />
-    <Property Name="ValueDate" Type="datetime" Nullable="false" />
-    <Property Name="ValueInt" Type="int" Nullable="false" />
-    <Property Name="ValueDecimal" Type="decimal" Nullable="false" Precision="18" Scale="0" />
-    <Property Name="ValueGuid" Type="uniqueidentifier" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Conferences">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="PersonConferences">
-    <Key>
-      <PropertyRef Name="PersonConferenceId" />
-    </Key>
-    <Property Name="PersonConferenceId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ConferenceId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="SourceId" Type="int" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Ranks">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Companies">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="PaymentTypes">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="PersonConferences_Detail">
-    <Key>
-      <PropertyRef Name="PersonConferenceId" />
-    </Key>
-    <Property Name="PersonConferenceId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="RankId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="CompanyId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="IsBadge" Type="bit" Nullable="false" />
-    <Property Name="IsArrive" Type="bit" Nullable="false" />
-    <Property Name="DateArrive" Type="datetime" Nullable="true" />
-    <Property Name="IsAbstract" Type="bit" Nullable="false" />
-    <Property Name="IsNeedBadge" Type="bit" Nullable="false" />
-    <Property Name="IsAutoreg" Type="bit" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="PersonConferences_Payment">
-    <Key>
-      <PropertyRef Name="PersonConferenceId" />
-    </Key>
-    <Property Name="PaymentTypeId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="CompanyId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="PaymentDocument" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="PaymentDate" Type="datetime" Nullable="true" />
-    <Property Name="Money" Type="decimal" Nullable="false" Precision="18" Scale="0" />
-    <Property Name="IsComplect" Type="bit" Nullable="false" />
-    <Property Name="OrderNumber" Type="int" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="PersonConferenceId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="OrderStatusId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Iacmacs">
-    <Key>
-      <PropertyRef Name="PersonId" />
-    </Key>
-    <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Code" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Number" Type="int" Nullable="false" />
-    <Property Name="IsMember" Type="bit" Nullable="false" />
-    <Property Name="DateRegistration" Type="datetime" Nullable="true" />
-    <Property Name="IsCardCreate" Type="bit" Nullable="false" />
-    <Property Name="IsCardSent" Type="bit" Nullable="false" />
-    <Property Name="IsForm" Type="bit" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="OrderStatuses">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="ContactTypes">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Emails">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ContactTypeId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Phones">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ContactTypeId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Number" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Addresses">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ContactTypeId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ZipCode" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="CountryName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="RegionName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="CityName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="StreetHouseName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Abstracts">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="PersonConferenceId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="OtherAuthors" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Link" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="AbstractWorks">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="AbstractId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="AbstractStatusId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="AbstractResponsiblePersonId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="IsSentByEmail" Type="bit" Nullable="false" />
-    <Property Name="DateWork" Type="datetime" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="ReviewerId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="AbstractStatuses">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" Nullable="true" />
-    <Property Name="definition" Type="varbinary(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="BadgeTypes">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Width" Type="int" Nullable="false" />
-    <Property Name="Height" Type="int" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Badges">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="BadgeTypeId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PositionX1" Type="int" Nullable="false" />
-    <Property Name="PositionY1" Type="int" Nullable="false" />
-    <Property Name="Width" Type="int" Nullable="false" />
-    <Property Name="Height" Type="int" Nullable="false" />
-    <Property Name="RoundCorner" Type="int" Nullable="false" />
-    <Property Name="ForegroundColor" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BackgroundColor" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Font" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="FontStyle" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="FontColor" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="FontSize" Type="int" Nullable="false" />
-    <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SourceId" Type="int" Nullable="false" />
-    <Property Name="DateAdd" Type="datetime" Nullable="true" />
-    <Property Name="DateUpdate" Type="datetime" Nullable="true" />
-    <Property Name="User" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="BorderWidth" Type="int" Nullable="true" />
-  </EntityType>
-  <EntityType Name="BadgesDefaults">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="BadgeTypeId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="RankId" Type="uniqueidentifier" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_ScienceDegreePerson">
-    <End Role="ScienceDegrees" Type="ConferenceModel.Store.ScienceDegrees" Multiplicity="1" />
-    <End Role="Persons" Type="ConferenceModel.Store.Persons" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ScienceDegrees">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Persons">
-        <PropertyRef Name="ScienceDegreeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ScienceStatusPerson">
-    <End Role="ScienceStatuses" Type="ConferenceModel.Store.ScienceStatuses" Multiplicity="1" />
-    <End Role="Persons" Type="ConferenceModel.Store.Persons" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ScienceStatuses">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Persons">
-        <PropertyRef Name="ScienceStatusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SexPerson">
-    <End Role="Sexes" Type="ConferenceModel.Store.Sexes" Multiplicity="1" />
-    <End Role="Persons" Type="ConferenceModel.Store.Persons" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Sexes">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Persons">
-        <PropertyRef Name="SexId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SpecialityPerson">
-    <End Role="Specialities" Type="ConferenceModel.Store.Specialities" Multiplicity="1" />
-    <End Role="Persons" Type="ConferenceModel.Store.Persons" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Specialities">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Persons">
-        <PropertyRef Name="SpecialityId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PersonPersonConference">
-    <End Role="Person" Type="ConferenceModel.Store.Persons" Multiplicity="1" />
-    <End Role="PersonConference" Type="ConferenceModel.Store.PersonConferences" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Person">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PersonConference">
-        <PropertyRef Name="PersonId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ConferencePersonConference">
-    <End Role="Conference" Type="ConferenceModel.Store.Conferences" Multiplicity="1" />
-    <End Role="PersonConference" Type="ConferenceModel.Store.PersonConferences" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Conference">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PersonConference">
-        <PropertyRef Name="ConferenceId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CompanyPersonConferenceDetail">
-    <End Role="Company" Type="ConferenceModel.Store.Companies" Multiplicity="1" />
-    <End Role="PersonConferences_Detail" Type="ConferenceModel.Store.PersonConferences_Detail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Company">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PersonConferences_Detail">
-        <PropertyRef Name="CompanyId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CompanyPersonConferenceMoney">
-    <End Role="Company" Type="ConferenceModel.Store.Companies" Multiplicity="1" />
-    <End Role="PersonConferences_Payment" Type="ConferenceModel.Store.PersonConferences_Payment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Company">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PersonConferences_Payment">
-        <PropertyRef Name="CompanyId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PaymentTypePersonConferenceMoney">
-    <End Role="PaymentType" Type="ConferenceModel.Store.PaymentTypes" Multiplicity="1" />
-    <End Role="PersonConferences_Payment" Type="ConferenceModel.Store.PersonConferences_Payment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PaymentType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PersonConferences_Payment">
-        <PropertyRef Name="PaymentTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Detail_inherits_PersonConference">
-    <End Role="PersonConference" Type="ConferenceModel.Store.PersonConferences" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="PersonConferences_Detail" Type="ConferenceModel.Store.PersonConferences_Detail" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="PersonConference">
-        <PropertyRef Name="PersonConferenceId" />
-      </Principal>
-      <Dependent Role="PersonConferences_Detail">
-        <PropertyRef Name="PersonConferenceId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Payment_inherits_PersonConference">
-    <End Role="PersonConference" Type="ConferenceModel.Store.PersonConferences" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="PersonConferences_Payment" Type="ConferenceModel.Store.PersonConferences_Payment" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="PersonConference">
-        <PropertyRef Name="PersonConferenceId" />
-      </Principal>
-      <Dependent Role="PersonConferences_Payment">
-        <PropertyRef Name="PersonConferenceId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_RankPersonConferenceDetail">
-    <End Role="Rank" Type="ConferenceModel.Store.Ranks" Multiplicity="1" />
-    <End Role="PersonConferences_Detail" Type="ConferenceModel.Store.PersonConferences_Detail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Rank">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PersonConferences_Detail">
-        <PropertyRef Name="RankId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PersonIacmac">
-    <End Role="Person" Type="ConferenceModel.Store.Persons" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Iacmac" Type="ConferenceModel.Store.Iacmacs" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Person">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Iacmac">
-        <PropertyRef Name="PersonId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ContactTypeEmail">
-    <End Role="ContactType" Type="ConferenceModel.Store.ContactTypes" Multiplicity="1" />
-    <End Role="Email" Type="ConferenceModel.Store.Emails" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ContactType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Email">
-        <PropertyRef Name="ContactTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ContactTypePhone">
-    <End Role="ContactType" Type="ConferenceModel.Store.ContactTypes" Multiplicity="1" />
-    <End Role="Phone" Type="ConferenceModel.Store.Phones" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ContactType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Phone">
-        <PropertyRef Name="ContactTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ContactTypeAddress">
-    <End Role="ContactType" Type="ConferenceModel.Store.ContactTypes" Multiplicity="1" />
-    <End Role="Address" Type="ConferenceModel.Store.Addresses" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ContactType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Address">
-        <PropertyRef Name="ContactTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PersonAddress">
-    <End Role="Person" Type="ConferenceModel.Store.Persons" Multiplicity="1" />
-    <End Role="Address" Type="ConferenceModel.Store.Addresses" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Person">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Address">
-        <PropertyRef Name="PersonId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PersonEmail">
-    <End Role="Person" Type="ConferenceModel.Store.Persons" Multiplicity="1" />
-    <End Role="Email" Type="ConferenceModel.Store.Emails" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Person">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Email">
-        <PropertyRef Name="PersonId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PersonPhone">
-    <End Role="Person" Type="ConferenceModel.Store.Persons" Multiplicity="1" />
-    <End Role="Phone" Type="ConferenceModel.Store.Phones" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Person">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Phone">
-        <PropertyRef Name="PersonId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PersonConferenceAbstract">
-    <End Role="PersonConference" Type="ConferenceModel.Store.PersonConferences" Multiplicity="1" />
-    <End Role="Abstract" Type="ConferenceModel.Store.Abstracts" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PersonConference">
-        <PropertyRef Name="PersonConferenceId" />
-      </Principal>
-      <Dependent Role="Abstract">
-        <PropertyRef Name="PersonConferenceId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="AbstractAbstractWork">
-    <End Role="Abstract" Type="ConferenceModel.Store.Abstracts" Multiplicity="1" />
-    <End Role="AbstractWork" Type="ConferenceModel.Store.AbstractWorks" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Abstract">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AbstractWork">
-        <PropertyRef Name="AbstractId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="AbstractStatusAbstractWork">
-    <End Role="AbstractStatus" Type="ConferenceModel.Store.AbstractStatuses" Multiplicity="1" />
-    <End Role="AbstractWork" Type="ConferenceModel.Store.AbstractWorks" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AbstractStatus">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AbstractWork">
-        <PropertyRef Name="AbstractStatusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="UserAbstractWork">
-    <End Role="User" Type="ConferenceModel.Store.Users" Multiplicity="1" />
-    <End Role="AbstractWork" Type="ConferenceModel.Store.AbstractWorks" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AbstractWork">
-        <PropertyRef Name="ReviewerId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="OrderStatusPersonConferences_Payment">
-    <End Role="OrderStatus" Type="ConferenceModel.Store.OrderStatuses" Multiplicity="1" />
-    <End Role="PersonConferences_Payment" Type="ConferenceModel.Store.PersonConferences_Payment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OrderStatus">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PersonConferences_Payment">
-        <PropertyRef Name="OrderStatusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Badges_BadgeTypes">
-    <End Role="BadgeType" Type="ConferenceModel.Store.BadgeTypes" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Badge" Type="ConferenceModel.Store.Badges" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BadgeType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Badge">
-        <PropertyRef Name="BadgeTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="BadgeTypeBadgesDefault">
-    <End Role="BadgeType" Type="ConferenceModel.Store.BadgeTypes" Multiplicity="1" />
-    <End Role="BadgesDefault" Type="ConferenceModel.Store.BadgesDefaults" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BadgeType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="BadgesDefault">
-        <PropertyRef Name="BadgeTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="RankBadgesDefault">
-    <End Role="Rank" Type="ConferenceModel.Store.Ranks" Multiplicity="1" />
-    <End Role="BadgesDefault" Type="ConferenceModel.Store.BadgesDefaults" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Rank">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="BadgesDefault">
-        <PropertyRef Name="RankId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-</Schema></edmx:StorageModels>
+    <Schema Namespace="ConferenceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Abstracts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PersonConferenceId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OtherAuthors" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Link" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AbstractStatuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AbstractWorks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AbstractId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AbstractStatusId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AbstractResponsiblePersonId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsSentByEmail" Type="bit" Nullable="false" />
+          <Property Name="DateWork" Type="datetime" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="ReviewerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Addresses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ContactTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ZipCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CountryName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RegionName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StreetHouseName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Badges">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BadgeTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PositionX1" Type="int" Nullable="false" />
+          <Property Name="PositionY1" Type="int" Nullable="false" />
+          <Property Name="Width" Type="int" Nullable="false" />
+          <Property Name="Height" Type="int" Nullable="false" />
+          <Property Name="RoundCorner" Type="int" Nullable="false" />
+          <Property Name="ForegroundColor" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BackgroundColor" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Font" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FontStyle" Type="nvarchar(max)" />
+          <Property Name="FontColor" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FontSize" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+          <Property Name="BorderWidth" Type="int" />
+        </EntityType>
+        <EntityType Name="BadgesDefaults">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BadgeTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RankId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BadgeTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Width" Type="int" Nullable="false" />
+          <Property Name="Height" Type="int" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Conferences">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ContactTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Emails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ContactTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Iacmacs">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="IsMember" Type="bit" Nullable="false" />
+          <Property Name="DateRegistration" Type="datetime" />
+          <Property Name="IsCardCreate" Type="bit" Nullable="false" />
+          <Property Name="IsCardSent" Type="bit" Nullable="false" />
+          <Property Name="IsForm" Type="bit" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="OrderStatuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PaymentTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PersonConferences">
+          <Key>
+            <PropertyRef Name="PersonConferenceId" />
+          </Key>
+          <Property Name="PersonConferenceId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ConferenceId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+          <Property Name="SourceId" Type="int" />
+        </EntityType>
+        <EntityType Name="PersonConferences_Detail">
+          <Key>
+            <PropertyRef Name="PersonConferenceId" />
+          </Key>
+          <Property Name="PersonConferenceId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RankId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CompanyId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsBadge" Type="bit" Nullable="false" />
+          <Property Name="IsArrive" Type="bit" Nullable="false" />
+          <Property Name="DateArrive" Type="datetime" />
+          <Property Name="IsAbstract" Type="bit" Nullable="false" />
+          <Property Name="IsNeedBadge" Type="bit" Nullable="false" />
+          <Property Name="IsAutoreg" Type="bit" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PersonConferences_Payment">
+          <Key>
+            <PropertyRef Name="PersonConferenceId" />
+          </Key>
+          <Property Name="PaymentTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CompanyId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PaymentDocument" Type="nvarchar(max)" />
+          <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IsComplect" Type="bit" Nullable="false" />
+          <Property Name="OrderNumber" Type="int" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="PersonConferenceId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderStatusId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SecondName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ThirdName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SexId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="WorkPlace" Type="nvarchar(max)" />
+          <Property Name="Post" Type="nvarchar(max)" />
+          <Property Name="SpecialityId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ScienceDegreeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ScienceStatusId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Phones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ContactTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Number" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Printers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ComputerName" Type="nvarchar(max)" />
+          <Property Name="DocumentName" Type="nvarchar(max)" />
+          <Property Name="PrinterName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Properties">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ValueString" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ValueLogic" Type="bit" Nullable="false" />
+          <Property Name="ValueDate" Type="datetime" Nullable="false" />
+          <Property Name="ValueInt" Type="int" Nullable="false" />
+          <Property Name="ValueDecimal" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ValueGuid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ranks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ScienceDegrees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ScienceStatuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Sexes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Specialities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Role" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SourceId" Type="int" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="DateUpdate" Type="datetime" />
+          <Property Name="User1" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_AbstractAbstractWork">
+          <End Role="Abstracts" Type="Self.Abstracts" Multiplicity="1" />
+          <End Role="AbstractWorks" Type="Self.AbstractWorks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Abstracts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AbstractWorks">
+              <PropertyRef Name="AbstractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AbstractStatusAbstractWork">
+          <End Role="AbstractStatuses" Type="Self.AbstractStatuses" Multiplicity="1" />
+          <End Role="AbstractWorks" Type="Self.AbstractWorks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AbstractStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AbstractWorks">
+              <PropertyRef Name="AbstractStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Badges_BadgeTypes">
+          <End Role="BadgeTypes" Type="Self.BadgeTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Badges" Type="Self.Badges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BadgeTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Badges">
+              <PropertyRef Name="BadgeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BadgeTypeBadgesDefault">
+          <End Role="BadgeTypes" Type="Self.BadgeTypes" Multiplicity="1" />
+          <End Role="BadgesDefaults" Type="Self.BadgesDefaults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BadgeTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BadgesDefaults">
+              <PropertyRef Name="BadgeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyPersonConferenceDetail">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
+          <End Role="PersonConferences_Detail" Type="Self.PersonConferences_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonConferences_Detail">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyPersonConferenceMoney">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
+          <End Role="PersonConferences_Payment" Type="Self.PersonConferences_Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonConferences_Payment">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConferencePersonConference">
+          <End Role="Conferences" Type="Self.Conferences" Multiplicity="1" />
+          <End Role="PersonConferences" Type="Self.PersonConferences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conferences">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonConferences">
+              <PropertyRef Name="ConferenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactTypeAddress">
+          <End Role="ContactTypes" Type="Self.ContactTypes" Multiplicity="1" />
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Addresses">
+              <PropertyRef Name="ContactTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactTypeEmail">
+          <End Role="ContactTypes" Type="Self.ContactTypes" Multiplicity="1" />
+          <End Role="Emails" Type="Self.Emails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Emails">
+              <PropertyRef Name="ContactTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactTypePhone">
+          <End Role="ContactTypes" Type="Self.ContactTypes" Multiplicity="1" />
+          <End Role="Phones" Type="Self.Phones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Phones">
+              <PropertyRef Name="ContactTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detail_inherits_PersonConference">
+          <End Role="PersonConferences" Type="Self.PersonConferences" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PersonConferences_Detail" Type="Self.PersonConferences_Detail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PersonConferences">
+              <PropertyRef Name="PersonConferenceId" />
+            </Principal>
+            <Dependent Role="PersonConferences_Detail">
+              <PropertyRef Name="PersonConferenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderStatusPersonConferences_Payment">
+          <End Role="OrderStatuses" Type="Self.OrderStatuses" Multiplicity="1" />
+          <End Role="PersonConferences_Payment" Type="Self.PersonConferences_Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonConferences_Payment">
+              <PropertyRef Name="OrderStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_inherits_PersonConference">
+          <End Role="PersonConferences" Type="Self.PersonConferences" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PersonConferences_Payment" Type="Self.PersonConferences_Payment" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PersonConferences">
+              <PropertyRef Name="PersonConferenceId" />
+            </Principal>
+            <Dependent Role="PersonConferences_Payment">
+              <PropertyRef Name="PersonConferenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentTypePersonConferenceMoney">
+          <End Role="PaymentTypes" Type="Self.PaymentTypes" Multiplicity="1" />
+          <End Role="PersonConferences_Payment" Type="Self.PersonConferences_Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonConferences_Payment">
+              <PropertyRef Name="PaymentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonAddress">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Addresses">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonConferenceAbstract">
+          <End Role="PersonConferences" Type="Self.PersonConferences" Multiplicity="1" />
+          <End Role="Abstracts" Type="Self.Abstracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonConferences">
+              <PropertyRef Name="PersonConferenceId" />
+            </Principal>
+            <Dependent Role="Abstracts">
+              <PropertyRef Name="PersonConferenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonEmail">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
+          <End Role="Emails" Type="Self.Emails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Emails">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonIacmac">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Iacmacs" Type="Self.Iacmacs" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Iacmacs">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonPersonConference">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
+          <End Role="PersonConferences" Type="Self.PersonConferences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonConferences">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonPhone">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
+          <End Role="Phones" Type="Self.Phones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Phones">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RankBadgesDefault">
+          <End Role="Ranks" Type="Self.Ranks" Multiplicity="1" />
+          <End Role="BadgesDefaults" Type="Self.BadgesDefaults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ranks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BadgesDefaults">
+              <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RankPersonConferenceDetail">
+          <End Role="Ranks" Type="Self.Ranks" Multiplicity="1" />
+          <End Role="PersonConferences_Detail" Type="Self.PersonConferences_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ranks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonConferences_Detail">
+              <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScienceDegreePerson">
+          <End Role="ScienceDegrees" Type="Self.ScienceDegrees" Multiplicity="1" />
+          <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScienceDegrees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="ScienceDegreeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScienceStatusPerson">
+          <End Role="ScienceStatuses" Type="Self.ScienceStatuses" Multiplicity="1" />
+          <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScienceStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="ScienceStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SexPerson">
+          <End Role="Sexes" Type="Self.Sexes" Multiplicity="1" />
+          <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="SexId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpecialityPerson">
+          <End Role="Specialities" Type="Self.Specialities" Multiplicity="1" />
+          <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="SpecialityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAbstractWork">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AbstractWorks" Type="Self.AbstractWorks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AbstractWorks">
+              <PropertyRef Name="ReviewerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ConferenceModelStoreContainer">
+          <EntitySet Name="Abstracts" EntityType="Self.Abstracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AbstractStatuses" EntityType="Self.AbstractStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AbstractWorks" EntityType="Self.AbstractWorks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Badges" EntityType="Self.Badges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BadgesDefaults" EntityType="Self.BadgesDefaults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BadgeTypes" EntityType="Self.BadgeTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Conferences" EntityType="Self.Conferences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactTypes" EntityType="Self.ContactTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Emails" EntityType="Self.Emails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Iacmacs" EntityType="Self.Iacmacs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatuses" EntityType="Self.OrderStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonConferences" EntityType="Self.PersonConferences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonConferences_Detail" EntityType="Self.PersonConferences_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonConferences_Payment" EntityType="Self.PersonConferences_Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persons" EntityType="Self.Persons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phones" EntityType="Self.Phones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Printers" EntityType="Self.Printers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Properties" EntityType="Self.Properties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ranks" EntityType="Self.Ranks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScienceDegrees" EntityType="Self.ScienceDegrees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScienceStatuses" EntityType="Self.ScienceStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sexes" EntityType="Self.Sexes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specialities" EntityType="Self.Specialities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AbstractAbstractWork" Association="Self.FK_AbstractAbstractWork">
+            <End Role="Abstracts" EntitySet="Abstracts" />
+            <End Role="AbstractWorks" EntitySet="AbstractWorks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AbstractStatusAbstractWork" Association="Self.FK_AbstractStatusAbstractWork">
+            <End Role="AbstractStatuses" EntitySet="AbstractStatuses" />
+            <End Role="AbstractWorks" EntitySet="AbstractWorks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Badges_BadgeTypes" Association="Self.FK_Badges_BadgeTypes">
+            <End Role="BadgeTypes" EntitySet="BadgeTypes" />
+            <End Role="Badges" EntitySet="Badges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BadgeTypeBadgesDefault" Association="Self.FK_BadgeTypeBadgesDefault">
+            <End Role="BadgeTypes" EntitySet="BadgeTypes" />
+            <End Role="BadgesDefaults" EntitySet="BadgesDefaults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyPersonConferenceDetail" Association="Self.FK_CompanyPersonConferenceDetail">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="PersonConferences_Detail" EntitySet="PersonConferences_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyPersonConferenceMoney" Association="Self.FK_CompanyPersonConferenceMoney">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConferencePersonConference" Association="Self.FK_ConferencePersonConference">
+            <End Role="Conferences" EntitySet="Conferences" />
+            <End Role="PersonConferences" EntitySet="PersonConferences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactTypeAddress" Association="Self.FK_ContactTypeAddress">
+            <End Role="ContactTypes" EntitySet="ContactTypes" />
+            <End Role="Addresses" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactTypeEmail" Association="Self.FK_ContactTypeEmail">
+            <End Role="ContactTypes" EntitySet="ContactTypes" />
+            <End Role="Emails" EntitySet="Emails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactTypePhone" Association="Self.FK_ContactTypePhone">
+            <End Role="ContactTypes" EntitySet="ContactTypes" />
+            <End Role="Phones" EntitySet="Phones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detail_inherits_PersonConference" Association="Self.FK_Detail_inherits_PersonConference">
+            <End Role="PersonConferences" EntitySet="PersonConferences" />
+            <End Role="PersonConferences_Detail" EntitySet="PersonConferences_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderStatusPersonConferences_Payment" Association="Self.FK_OrderStatusPersonConferences_Payment">
+            <End Role="OrderStatuses" EntitySet="OrderStatuses" />
+            <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_inherits_PersonConference" Association="Self.FK_Payment_inherits_PersonConference">
+            <End Role="PersonConferences" EntitySet="PersonConferences" />
+            <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentTypePersonConferenceMoney" Association="Self.FK_PaymentTypePersonConferenceMoney">
+            <End Role="PaymentTypes" EntitySet="PaymentTypes" />
+            <End Role="PersonConferences_Payment" EntitySet="PersonConferences_Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonAddress" Association="Self.FK_PersonAddress">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Addresses" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonConferenceAbstract" Association="Self.FK_PersonConferenceAbstract">
+            <End Role="PersonConferences" EntitySet="PersonConferences" />
+            <End Role="Abstracts" EntitySet="Abstracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonEmail" Association="Self.FK_PersonEmail">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Emails" EntitySet="Emails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonIacmac" Association="Self.FK_PersonIacmac">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Iacmacs" EntitySet="Iacmacs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonPersonConference" Association="Self.FK_PersonPersonConference">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="PersonConferences" EntitySet="PersonConferences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonPhone" Association="Self.FK_PersonPhone">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Phones" EntitySet="Phones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RankBadgesDefault" Association="Self.FK_RankBadgesDefault">
+            <End Role="Ranks" EntitySet="Ranks" />
+            <End Role="BadgesDefaults" EntitySet="BadgesDefaults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RankPersonConferenceDetail" Association="Self.FK_RankPersonConferenceDetail">
+            <End Role="Ranks" EntitySet="Ranks" />
+            <End Role="PersonConferences_Detail" EntitySet="PersonConferences_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScienceDegreePerson" Association="Self.FK_ScienceDegreePerson">
+            <End Role="ScienceDegrees" EntitySet="ScienceDegrees" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScienceStatusPerson" Association="Self.FK_ScienceStatusPerson">
+            <End Role="ScienceStatuses" EntitySet="ScienceStatuses" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SexPerson" Association="Self.FK_SexPerson">
+            <End Role="Sexes" EntitySet="Sexes" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpecialityPerson" Association="Self.FK_SpecialityPerson">
+            <End Role="Specialities" EntitySet="Specialities" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAbstractWork" Association="Self.FK_UserAbstractWork">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AbstractWorks" EntitySet="AbstractWorks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ConferenceModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -989,6 +999,7 @@
             <End Role="Rank" EntitySet="Ranks" />
             <End Role="BadgesDefault" EntitySet="BadgesDefaults" />
           </AssociationSet>
+          <EntitySet Name="Printers" EntityType="ConferenceModel.Printer" />
           </EntityContainer>
         <EntityType Name="Person">
           <Key>
@@ -1751,6 +1762,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Printer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ComputerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PrinterName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2159,6 +2179,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+          <EntitySetMapping Name="Printers">
+            <EntityTypeMapping TypeName="ConferenceModel.Printer">
+              <MappingFragment StoreEntitySet="Printers">
+                <ScalarProperty Name="PrinterName" ColumnName="PrinterName" />
+                <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
+                <ScalarProperty Name="ComputerName" ColumnName="ComputerName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

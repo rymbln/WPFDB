@@ -55,6 +55,7 @@
                 <MenuItem Command="{Binding EraseDataCommand}" Header="Erase Data"/>
                 <MenuItem Command="{Binding OpenBadgeDesignerCommand}" Header="Badge Designer"/>
                 <MenuItem Command="{Binding OpenBadgeDefaultsCommand}" Header="Бэйджи по умолчанию"/>
+                <MenuItem Command="{Binding OpenPrintersCommand}" Header="Принтеры"/>
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.HelpMenu}">
                 <MenuItem Command="{Binding AboutCommand}" Header="{x:Static p:Resources.AboutMenu}"

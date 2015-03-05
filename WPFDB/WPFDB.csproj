@@ -171,6 +171,7 @@
     <Compile Include="ViewModel\Knowalls\UserViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\UserWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\PhoneViewModel.cs" />
+    <Compile Include="ViewModel\PrintersViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="View\AbstractView.xaml.cs">
       <DependentUpon>AbstractView.xaml</DependentUpon>
@@ -282,6 +283,9 @@
     </Compile>
     <Compile Include="View\PhoneView.xaml.cs">
       <DependentUpon>PhoneView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PrintersView.xaml.cs">
+      <DependentUpon>PrintersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -451,6 +455,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PhoneView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PrintersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
