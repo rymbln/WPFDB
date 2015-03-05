@@ -1156,6 +1156,76 @@ namespace WPFDB.Common
         {
             get
             {
+                try
+                {
+                    var def = DataManager.Instance.GetPropertyValue("DEFAULT_BADGE");
+                    if (def == null)
+                    {
+                        var newProp = DataManager.Instance.CreateObject<Propertie>();
+                        newProp.Id = GuidComb.Generate();
+                        newProp.Name = "DEFAULT_BADGE";
+                        var conf = DataManager.Instance.GetAllBadges().First();
+                        newProp.ValueGuid = conf.Id;
+                        newProp.ValueString = conf.Name;
+                        newProp.ValueDate = DateTime.Now;
+                        newProp.ValueInt = conf.SourceId;
+                        newProp.ValueDecimal = 1;
+                        newProp.ValueLogic = true;
+                        DataManager.Instance.AddPropertie(newProp);
+                    }
+                    def = DataManager.Instance.GetPropertyValue("DEFAULT_BADGE");
+                    var obj = DataManager.Instance.GetBadgeByID(def.ValueGuid);
+                    if (obj == null)
+                    {
+                        obj = DataManager.Instance.GetBadgeByName(def.ValueString);
+                    }
+                    return obj;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                try
+                {
+                    var def = DataManager.Instance.GetPropertyValue("DEFAULT_BADGE");
+                    if (def == null)
+                    {
+                        var newProp = DataManager.Instance.CreateObject<Propertie>();
+                        newProp.Id = GuidComb.Generate();
+                        newProp.Name = "DEFAULT_BADGE";
+                        newProp.ValueGuid = value.Id;
+                        newProp.ValueString = value.Name;
+                        newProp.ValueDate = DateTime.Now;
+                        newProp.ValueInt = value.SourceId;
+                        newProp.ValueDecimal = 1;
+                        newProp.ValueLogic = true;
+                        DataManager.Instance.AddPropertie(newProp);
+                    }
+                    else
+                    {
+                        def.ValueGuid = value.Id;
+                        def.ValueString = value.Name;
+                        def.ValueDate = DateTime.Now;
+                        def.ValueInt = value.SourceId;
+                        def.ValueDecimal = 1;
+                        def.ValueLogic = true;
+                        DataManager.Instance.Save();
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+        }
+
+        public BadgeType EmptyBadge
+        {
+            get
+            {
                 var obj = DataManager.Instance.CreateObject<BadgeType>();
                 obj.Name = "---";
                 obj.Width = 100;
@@ -1163,5 +1233,7 @@ namespace WPFDB.Common
                 return obj;
             }
         }
+
+       
     }
 }

@@ -24,7 +24,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -109,11 +110,16 @@
             <TextBox  Text="{Binding Path=AbstractFilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
             <Button Command="{Binding Path=SelectFolderCommand}" Content="Выбрать папку"   />
             </StackPanel>
-            
-            
+
+                <TextBlock  Grid.Column="0" Grid.Row="13" Text="Бейдж по умолчанию" />
+                <ComboBox Grid.Column="1" Grid.Row="13"  
+                      SelectedValuePath="." 
+                      SelectedItem="{Binding Path=DEFAULT_BADGE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
+                      ItemsSource="{Binding Path=BadgeLookup}" 
+                      DisplayMemberPath="Name"  />
 
 
-        </Grid>
+            </Grid>
         </ScrollViewer>
     </DockPanel>
 </Window>

@@ -17,10 +17,12 @@ namespace WPFDB.ViewModel
        public SettingsViewModel()
        {
            ConferenceLookup = new ObservableCollection<Conference>(DataManager.Instance.GetAllConferences());
+           BadgeLookup = new ObservableCollection<BadgeType>(DataManager.Instance.GetAllBadges());
            SelectFolderCommand = new DelegateCommand(o => SelectFolder());
        }
 
        public ObservableCollection<Conference> ConferenceLookup { get; private set; }
+       public ObservableCollection<BadgeType> BadgeLookup { get; private set; }
 
        public Conference ACTIVE_CONFERENCE
        {
@@ -29,6 +31,15 @@ namespace WPFDB.ViewModel
            {
                DefaultManager.Instance.DefaultConference = value;
                OnPropertyChanged("ACTIVE_CONFERENCE");
+           }
+       }
+       public BadgeType DEFAULT_BADGE
+       {
+           get { return DefaultManager.Instance.DefaultBadge; }
+           set
+           {
+               DefaultManager.Instance.DefaultBadge = value;
+               OnPropertyChanged("DEFAULT_BADGE");
            }
        }
        public bool IsConferenceMode

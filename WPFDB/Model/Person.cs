@@ -17,6 +17,38 @@ namespace WPFDB.Model
         {
             get { return this.FirstName + " " + SecondName.Substring(0, 1) + "." + ThirdName.Substring(0, 1) + "."; }
         }
+        public string CityName {
+            get
+            {
+                var lst = this.Addresses.Select(a => new { Name = a.CityName, Date = a.DateUpdate }).ToList();
+                if (lst.Count >0)
+                {
+                    var str =  lst.OrderByDescending(a => a.Date).FirstOrDefault();
+                    return str == null ? "" : str.Name; 
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+        public string CountryName
+        {
+            get
+            {
+                var lst = this.Addresses.Select(a => new { Name = a.CountryName, Date = a.DateUpdate }).ToList();
+                if (lst.Count > 0)
+                {
+                    var str = lst.OrderByDescending(a => a.Date).FirstOrDefault();
+                    return str == null ? "" : str.Name;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+        public string CompanyName { get; set; }
         public string ToString
         {
             get

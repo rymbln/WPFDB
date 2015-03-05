@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -879,7 +880,10 @@ namespace WPFDB.ViewModel
 
         public void PrintBadge()
         {
-
+            var person = Model;
+            person.CompanyName = CurrentPersonConference.PersonConferences_Detail.Company.Name == null ? "" : CurrentPersonConference.PersonConferences_Detail.Company.Name; 
+            var badge = DataManager.Instance.GetBadgeForRank(CurrentPersonConference.PersonConferences_Detail.Rank);
+            Process.Start(PdfManager.Generate(PdfMode.BADGE, badge, person));
         }
 
         public void PrintOrder()

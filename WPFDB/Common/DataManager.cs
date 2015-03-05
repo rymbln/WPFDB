@@ -1327,5 +1327,28 @@ namespace WPFDB.Common
             }
             this.underlyingContext.BadgesDefaults.DeleteObject(BadgeDefaultSelected);
         }
+
+        public BadgeType GetBadgeForRank(Rank rank)
+        {
+            var obj = DefaultManager.Instance.DefaultBadge;
+            if (rank != null)
+            {
+                var b = underlyingContext.BadgesDefaults.Where(bd => bd.RankId == rank.Id).FirstOrDefault();
+                if (b != null)
+                {
+                    obj = underlyingContext.BadgeTypes.Where(o => o.Id == b.Id).FirstOrDefault();
+                }
+            }
+            return obj;
+        }
+
+        public  BadgeType GetBadgeByID(Guid guid)
+        {
+            return this.underlyingContext.BadgeTypes.Where(b => b.Id == guid).FirstOrDefault();
+        }
+        public BadgeType GetBadgeByName(string name)
+        {
+            return this.underlyingContext.BadgeTypes.Where(b => b.Name == name).FirstOrDefault();
+        }
     }
 }

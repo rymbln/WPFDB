@@ -100,7 +100,7 @@ namespace WPFDB.Common
 
         private static void DrawText(XGraphics gfx, string text, string font, string style, double size, string color, int width, int height, int x, int y)
         {
-            XPdfFontOptions options = new XPdfFontOptions(PdfFontEncoding.WinAnsi, PdfFontEmbedding.Default);
+            XPdfFontOptions options = new XPdfFontOptions(PdfFontEncoding.Unicode, PdfFontEmbedding.Default);
             XFont fontStyle = null;
             switch (style)
             {
@@ -238,12 +238,12 @@ namespace WPFDB.Common
             {
                 if (person != null)
                 {
-                    badge.Value.Replace("$F$", person.FirstName);
-                    badge.Value.Replace("$FI$", person.FirstName + " " + person.SecondName);
-                    badge.Value.Replace("$FIO$", person.FirstName + " " + person.SecondName + " " + person.ThirdName);
-                    badge.Value.Replace("$POST$", person.Post);
-                    badge.Value.Replace("$CITY$", person.Addresses.Select(o => o.CityName).FirstOrDefault());
-                    badge.Value.Replace("$COUNTRY$", person.Addresses.Select(o => o.CountryName).FirstOrDefault());
+                       badge.Value = badge.Value.Replace("$F$", person.FirstName);
+                       badge.Value = badge.Value.Replace("$FI$", person.FirstName + " " + person.SecondName);
+                       badge.Value = badge.Value.Replace("$FIO$", person.FirstName + " " + person.SecondName + " " + person.ThirdName);
+                       badge.Value = badge.Value.Replace("$POST$", person.Post);
+                       badge.Value = badge.Value.Replace("$CITY$", person.Addresses.Select(o => o.CityName).FirstOrDefault());
+                       badge.Value = badge.Value.Replace("$COUNTRY$", person.Addresses.Select(o => o.CountryName).FirstOrDefault());
                     //badge.Value.Replace("$COMPANY$", person);
                 }
                 DrawBadgeElement(badge, gfx);
