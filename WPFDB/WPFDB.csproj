@@ -112,7 +112,8 @@
     <Compile Include="Common\DataManager.cs" />
     <Compile Include="Common\ImportManager.cs" />
     <Compile Include="Common\LogManager.cs" />
-    <Compile Include="Common\PdfManager.cs" />
+    <Compile Include="Common\DocumentManager.cs" />
+    <Compile Include="Common\PrintManager.cs" />
     <Compile Include="Common\RoundedCornersPolygon.cs" />
     <Compile Include="Common\WordManager.cs" />
     <Compile Include="Model\Abstract.cs" />

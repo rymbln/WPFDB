@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,8 +58,11 @@ namespace WPFDB.ViewModel
 
         private void PrintBadge()
         {
-           Process.Start( PdfManager.Generate(PdfMode.BADGE, CurrentBadge.Model, null));
+             var str = DocumentManager.Generate(DocumentType.BADGE, CurrentBadge.Model, null);
+          Process.Start(str);
         }
+
+       
 
         private void AddBadge()
         {
@@ -105,9 +110,9 @@ namespace WPFDB.ViewModel
 
         private void DrawBadge()
         {
-            
-       //     var obj = BadgeElementCollection;
-      //      BadgeElementCollection = new ObservableCollection<BadgeElementViewModel>(obj);
+
+            //     var obj = BadgeElementCollection;
+            //      BadgeElementCollection = new ObservableCollection<BadgeElementViewModel>(obj);
             OnPropertyChanged("BadgeElementCollection");
         }
 

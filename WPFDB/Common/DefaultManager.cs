@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,14 @@ namespace WPFDB.Common
             return lst;
         }
 
+        public string Printer
+        {
+            get
+            {
+                PrinterSettings settings = new PrinterSettings();
+                return settings.PrinterName;
+            }
+        }
 
         public string MailServer
         {
@@ -1006,7 +1015,7 @@ namespace WPFDB.Common
             {
                 var p = DataManager.Instance.CreateObject<Person>();
                 p.Id = GuidComb.Generate();
-              //  p.BirthDate = Convert.ToDateTime("01/01/1900");
+                //  p.BirthDate = Convert.ToDateTime("01/01/1900");
                 p.FirstName = "---";
                 p.SecondName = "---";
                 p.ThirdName = "---";
@@ -1018,13 +1027,13 @@ namespace WPFDB.Common
                 DataManager.Instance.AddPerson(p);
                 DataManager.Instance.Save();
 
-          //      var pc = DataManager.Instance.CreateObject<PersonConference>();
-           //     pc.PersonConferenceId = GuidComb.Generate();
-              //  pc.PersonId = p.Id;
-               // pc.Conference = DefaultConference;
+                //      var pc = DataManager.Instance.CreateObject<PersonConference>();
+                //     pc.PersonConferenceId = GuidComb.Generate();
+                //  pc.PersonId = p.Id;
+                // pc.Conference = DefaultConference;
 
-             //   pc.PersonConferences_Payment = DefaultPersonConferencePayment(pc.PersonConferenceId);
-             //   pc.PersonConferences_Detail = DefaultPersonConferenceDetail(pc.PersonConferenceId);
+                //   pc.PersonConferences_Payment = DefaultPersonConferencePayment(pc.PersonConferenceId);
+                //   pc.PersonConferences_Detail = DefaultPersonConferenceDetail(pc.PersonConferenceId);
 
                 DataManager.Instance.AddPersonConference(p, DefaultConference);
                 DataManager.Instance.Save();
@@ -1032,7 +1041,7 @@ namespace WPFDB.Common
             }
         }
 
-        
+
 
 
 
@@ -1154,14 +1163,14 @@ namespace WPFDB.Common
                 var obj = DataManager.Instance.CreateObject<Badge>();
                 obj.Id = GuidComb.Generate();
                 obj.PositionX1 = 0;
-           
+
                 obj.PositionY1 = 0;
 
                 obj.Width = 100;
                 obj.Height = 50;
                 obj.Value = "";
                 obj.BackgroundColor = "#FFFFFF";
-                
+
                 obj.Font = "Arial";
                 obj.FontStyle = "Regular";
                 obj.FontColor = "#FFFFFF";
@@ -1254,6 +1263,6 @@ namespace WPFDB.Common
             }
         }
 
-       
+
     }
 }

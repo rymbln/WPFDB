@@ -883,7 +883,7 @@ namespace WPFDB.ViewModel
             var person = Model;
             person.CompanyName = CurrentPersonConference.PersonConferences_Detail.Company.Name == null ? "" : CurrentPersonConference.PersonConferences_Detail.Company.Name; 
             var badge = DataManager.Instance.GetBadgeForRank(CurrentPersonConference.PersonConferences_Detail.Rank);
-            Process.Start(PdfManager.Generate(PdfMode.BADGE, badge, person));
+            PrintManager.Print(DocumentManager.Generate(DocumentType.BADGE, badge, person),DocumentType.BADGE);
         }
 
         public void PrintOrder()

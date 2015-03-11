@@ -5,6 +5,8 @@ using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,13 +15,13 @@ using WPFDB.ViewModel;
 
 namespace WPFDB.Common
 {
-    public enum PdfMode
+    public enum DocumentType
     {
         BADGE, ORDER
 
     }
 
-    public static class PdfManager
+    public static class DocumentManager
     {
 
 
@@ -198,10 +200,101 @@ namespace WPFDB.Common
         }
 
 
+        private static string DrawBadgeToPicture(BadgeType obj, Person person)
+        {
+            String filename;
+            // Create a temporary file
+            var bmp = new Bitmap(obj.Width, obj.Height);
+            var gfx = Graphics.FromImage(bmp);
+            gfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+            if (person != null)
+            {
+                filename = String.Format("{0}_{1}_{2}.png", person.Id, person.FullName, DefaultManager.Instance.CurrentDateTimeShortString);
+            }
+            else
+            {
+                filename = String.Format("{0}.png", DefaultManager.Instance.CurrentDateTimeShortString);
+            }
+            filename = DefaultManager.Instance.AbstractFilePath + @"\" + filename;
+
+            foreach (var badge in obj.Badges.ToList())
+            {
+                if (person != null)
+                {
+                    badge.Value = badge.Value.Replace("$F$", person.FirstName);
+                    badge.Value = badge.Value.Replace("$FI$", person.FirstName + " " + person.SecondName);
+                    badge.Value = badge.Value.Replace("$FIO$", person.FirstName + " " + person.SecondName + " " + person.ThirdName);
+                    badge.Value = badge.Value.Replace("$POST$", person.Post);
+                    badge.Value = badge.Value.Replace("$CITY$", person.Addresses.Select(o => o.CityName).FirstOrDefault());
+                    badge.Value = badge.Value.Replace("$COUNTRY$", person.Addresses.Select(o => o.CountryName).FirstOrDefault());
+                }
+                else
+                {
+                    badge.Value = badge.Value.Replace("$F$", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+                    badge.Value = badge.Value.Replace("$FI$", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+                    badge.Value = badge.Value.Replace("$FIO$", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+                    badge.Value = badge.Value.Replace("$POST$", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+                    badge.Value = badge.Value.Replace("$CITY$", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+                    badge.Value = badge.Value.Replace("$COUNTRY$", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+                }
+                var color = ConverterManager.HexToColorConverter(badge.ForegroundColor);
+                var borderColor = System.Drawing.Color.FromArgb(color.R, color.G, color.B);
+                color = ConverterManager.HexToColorConverter(badge.BackgroundColor);
+                var backColor = System.Drawing.Color.FromArgb(color.R, color.G, color.B);
+                color = ConverterManager.HexToColorConverter(badge.FontColor);
+                var fontColor = System.Drawing.Color.FromArgb(color.R, color.G, color.B);
+
+                var brush = new SolidBrush(backColor);
+                var pen = new System.Drawing.Pen(borderColor, float.Parse(badge.BorderWidth.ToString()));
+                var rectangle = new Rectangle(badge.PositionX1, badge.PositionY1, badge.Width, badge.Height);
+
+                gfx.FillRectangle(brush, rectangle);
+                gfx.DrawRectangle(pen, rectangle);
+
+                System.Drawing.Font font = null;
+                switch (badge.FontStyle)
+                {
+                    case "Bold":
+                        font = new System.Drawing.Font(badge.Font, (float)badge.FontSize, FontStyle.Bold);
+                        break;
+                    case "Italic":
+                        font = new System.Drawing.Font(badge.Font, (float)badge.FontSize, FontStyle.Italic);
+                        break;
+                    case "Regular":
+                        font = new System.Drawing.Font(badge.Font, (float)badge.FontSize, FontStyle.Regular);
+                        break;
+                    case "Underline":
+                        font = new System.Drawing.Font(badge.Font, (float)badge.FontSize, FontStyle.Underline);
+                        break;
+                    case "Strikeout":
+                        font = new System.Drawing.Font(badge.Font, (float)badge.FontSize, FontStyle.Strikeout);
+                        break;
+                    case "BoldItalic":
+                        font = new System.Drawing.Font(badge.Font, (float)badge.FontSize, FontStyle.Bold | FontStyle.Italic);
+                        break;
+                    default:
+                        break;
+                }
+                var rect = new RectangleF(badge.PositionX1, badge.PositionY1, badge.Width, badge.Height);
+                brush = new SolidBrush(fontColor);
+                var sf = new StringFormat();
+                sf.Alignment = StringAlignment.Center;
+                sf.Trimming = StringTrimming.Word;
+                gfx.DrawString(badge.Value, font, brush, rect, sf);
+
+            }
+
+            gfx.Flush();
+
+            bmp.Save(filename, ImageFormat.Png);
+            return filename;
+
+        }
+        
 
         private static string DrawBadge(BadgeType obj, Person person)
         {
-            string filename;
+            String filename;
             // Create a temporary file
 
             var s_document = new PdfDocument();
@@ -214,7 +307,7 @@ namespace WPFDB.Common
                  filename = String.Format("{0}.pdf",  DefaultManager.Instance.CurrentDateTimeShortString);
                  s_document.Info.Title = "IACMAC";
             }
-                       
+            filename = DefaultManager.Instance.AbstractFilePath + @"\" + filename;           
             s_document.Info.Author = "IACMAC";
             s_document.Info.Subject = "IACMAC Conference Badge";
 
@@ -275,14 +368,14 @@ namespace WPFDB.Common
             DrawText(gfx, badge.Value, badge.Font, badge.FontStyle, badge.FontSize, badge.FontColor, badge.Width, badge.Height, badge.PositionX1, badge.PositionY1);
         }
 
-        public static string Generate(PdfMode mode, BadgeType obj, Person person)
+        public static string Generate(DocumentType mode, BadgeType obj, Person person)
         {
             switch (mode)
             {
-                case PdfMode.BADGE:
-                    return DrawBadge(obj, person);
+                case DocumentType.BADGE:
+                    return DrawBadgeToPicture(obj, person);
 
-                case PdfMode.ORDER:
+                case DocumentType.ORDER:
                     return "";
                 default:
                     return "";

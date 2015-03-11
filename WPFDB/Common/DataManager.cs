@@ -1379,5 +1379,20 @@ namespace WPFDB.Common
             Save();
             return obj;
         }
+
+        public string GetPrinter(string docType)
+        {
+            var obj = underlyingContext.Printers
+                .Where(o => o.ComputerName == DefaultManager.Instance.ComputerName
+                && o.DocumentName == docType).FirstOrDefault();
+            if (obj != null)
+            {
+                return obj.PrinterName;
+            }
+            else
+            {
+                return DefaultManager.Instance.Printer;
+            }
+        }
     }
 }
