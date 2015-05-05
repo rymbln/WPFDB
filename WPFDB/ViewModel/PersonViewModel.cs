@@ -880,10 +880,8 @@ namespace WPFDB.ViewModel
 
         public void PrintBadge()
         {
-            var person = Model;
-            person.CompanyName = CurrentPersonConference.PersonConferences_Detail.Company.Name == null ? "" : CurrentPersonConference.PersonConferences_Detail.Company.Name; 
             var badge = DataManager.Instance.GetBadgeForRank(CurrentPersonConference.PersonConferences_Detail.Rank);
-            PrintManager.Print(DocumentManager.Generate(DocumentType.BADGE, badge, person),DocumentType.BADGE);
+            PrintManager.Print(DocumentManager.Generate(DocumentType.BADGE, badge, new ListBoxPrintBadge(CurrentPersonConference)), DocumentType.BADGE);
         }
 
         public void PrintOrder()

@@ -1,0 +1,80 @@
+﻿<Window x:Class="WPFDB.View.PrintBadgesView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Печать бейджей" MinHeight="240" MinWidth="320" Width="640" Height="480">
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
+            <Button Content="Печать" Command="{Binding PrintCommand}"/>
+            <Separator/>
+            <Button Content="Выделить все" Command="{Binding SelectAllCommand}"/>
+            <Button Content="Снять выделение" Command="{Binding SelectNoneCommand}"/>
+        </ToolBar>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Конференция"/>
+            <ComboBox Grid.Column="1" Grid.Row="0" 
+                      HorizontalAlignment="Stretch" Margin="3"
+                      SelectedValuePath="Id" DisplayMemberPath="Name"
+                      ItemsSource="{Binding Path=ConferenceLookup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                      
+                      SelectedItem="{Binding Path=ConferenceSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Форма участия"/>
+            <ComboBox Grid.Column="1" Grid.Row="1" 
+                      HorizontalAlignment="Stretch" Margin="3"
+                      SelectedValuePath="Id" DisplayMemberPath="Name"
+                      ItemsSource="{Binding Path=RankLookup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                      
+                      SelectedItem="{Binding Path=RankSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Вид бэйджа"/>
+            <ComboBox Grid.Column="1" Grid.Row="2" 
+                      HorizontalAlignment="Stretch" Margin="3"
+                      SelectedValuePath="Id" DisplayMemberPath="Name"
+                      ItemsSource="{Binding Path=BadgeLookup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                      
+                      SelectedItem="{Binding Path=BadgeSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="Напечатан"/>
+            <ComboBox Grid.Column="1" Grid.Row="3" 
+                      HorizontalAlignment="Stretch" Margin="3"
+                      SelectedValuePath="Id" DisplayMemberPath="Name"
+                      ItemsSource="{Binding Path=PrintedLookup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                      
+                      SelectedItem="{Binding Path=PrintedSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            
+            <TextBlock Grid.Column="0" Grid.Row="4" Text="Оплата"/>
+            <ComboBox Grid.Column="1" Grid.Row="4" 
+                      HorizontalAlignment="Stretch" Margin="3"
+                      SelectedValuePath="Id" DisplayMemberPath="Name"
+                      ItemsSource="{Binding Path=PaidLookup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                      
+                      SelectedItem="{Binding Path=PaidSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+        <DataGrid 
+                       ItemsSource="{Binding PrintCollection,  UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                              AutoGenerateColumns="False" IsReadOnly="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="30">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsSelected,  UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Фамилия" Width="Auto" IsReadOnly="True" Binding="{Binding Path=F,  UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+                <DataGridTextColumn Header="ИО" Width="Auto" IsReadOnly="True" Binding="{Binding Path=IO,  UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+                <DataGridTextColumn Header="Страна" Width="Auto" IsReadOnly="True" Binding="{Binding Path=Country,  UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+                <DataGridTextColumn Header="Город" Width="Auto" IsReadOnly="True" Binding="{Binding Path=City,  UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+                <DataGridTextColumn Header="Компания" Width="Auto" IsReadOnly="True" Binding="{Binding Path=Company,  UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+                
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</Window>

@@ -48,7 +48,7 @@ namespace WPFDB.Model
                 }
             }
         }
-        public string CompanyName { get; set; }
+       // public string CompanyName { get; set; }
         public string ToString
         {
             get

@@ -40,6 +40,15 @@ namespace WPFDB.ViewModel
             OpenBadgeDesignerCommand = new DelegateCommand(o => OpenBadgeDesigner());
             OpenBadgeDefaultsCommand = new DelegateCommand(o => OpenBadgeDefaults());
             OpenPrintersCommand = new DelegateCommand(o => OpenPrinters());
+            OpenPrintBadgesCommand = new DelegateCommand(o => OpenPrintBadges());
+
+        }
+
+        private void OpenPrintBadges()
+        {
+            var vm = new PrintBadgesViewModel();
+            var v = new PrintBadgesView { DataContext = vm };
+            v.Show();
         }
 
         private void OpenBadgeDesigner()
@@ -60,6 +69,7 @@ namespace WPFDB.ViewModel
         public ICommand OpenBadgeDesignerCommand { get; private set; }
         public ICommand OpenBadgeDefaultsCommand { get; private set; }
         public ICommand OpenPrintersCommand { get; private set; }
+        public ICommand OpenPrintBadgesCommand { get; private set; }
 
         /// <summary>
         /// Gets the workspace for managing departments of the company

@@ -200,7 +200,7 @@ namespace WPFDB.Common
         }
 
 
-        private static string DrawBadgeToPicture(BadgeType obj, Person person)
+        private static string DrawBadgeToPicture(BadgeType obj, ListBoxPrintBadge person)
         {
             String filename;
             // Create a temporary file
@@ -209,7 +209,7 @@ namespace WPFDB.Common
             gfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
             if (person != null)
             {
-                filename = String.Format("{0}_{1}_{2}.png", person.Id, person.FullName, DefaultManager.Instance.CurrentDateTimeShortString);
+                filename = String.Format("{0}_{1}_{2}.png", person.Id, person.F+person.IO, DefaultManager.Instance.CurrentDateTimeShortString);
             }
             else
             {
@@ -221,19 +221,17 @@ namespace WPFDB.Common
             {
                 if (person != null)
                 {
-                    badge.Value = badge.Value.Replace("$F$", person.FirstName);
-                    badge.Value = badge.Value.Replace("$FI$", person.FirstName + " " + person.SecondName);
-                    badge.Value = badge.Value.Replace("$FIO$", person.FirstName + " " + person.SecondName + " " + person.ThirdName);
-                    badge.Value = badge.Value.Replace("$POST$", person.Post);
-                    badge.Value = badge.Value.Replace("$CITY$", person.Addresses.Select(o => o.CityName).FirstOrDefault());
-                    badge.Value = badge.Value.Replace("$COUNTRY$", person.Addresses.Select(o => o.CountryName).FirstOrDefault());
+                    badge.Value = badge.Value.Replace("$F$", person.F);
+                    badge.Value = badge.Value.Replace("$IO$", person.IO);
+                    badge.Value = badge.Value.Replace("$COMPANY$", person.Company);
+                    badge.Value = badge.Value.Replace("$CITY$", person.City);
+                    badge.Value = badge.Value.Replace("$COUNTRY$", person.Country);
                 }
                 else
                 {
                     badge.Value = badge.Value.Replace("$F$", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-                    badge.Value = badge.Value.Replace("$FI$", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-                    badge.Value = badge.Value.Replace("$FIO$", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-                    badge.Value = badge.Value.Replace("$POST$", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+                    badge.Value = badge.Value.Replace("$IO$", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+                    badge.Value = badge.Value.Replace("$COMPANY$", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
                     badge.Value = badge.Value.Replace("$CITY$", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
                     badge.Value = badge.Value.Replace("$COUNTRY$", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
                 }
@@ -368,7 +366,7 @@ namespace WPFDB.Common
             DrawText(gfx, badge.Value, badge.Font, badge.FontStyle, badge.FontSize, badge.FontColor, badge.Width, badge.Height, badge.PositionX1, badge.PositionY1);
         }
 
-        public static string Generate(DocumentType mode, BadgeType obj, Person person)
+        public static string Generate(DocumentType mode, BadgeType obj, ListBoxPrintBadge person)
         {
             switch (mode)
             {

@@ -124,7 +124,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConferenceModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\ItemGuidName.cs" />
+    <Compile Include="Model\ItemIntName.cs" />
     <Compile Include="Model\ListBoxBadgeDefault.cs" />
+    <Compile Include="Model\ListBoxPrintBadge.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\PersonConference.cs" />
     <Compile Include="Validation\Helpers\ExcludeChar.cs" />
@@ -172,6 +175,7 @@
     <Compile Include="ViewModel\Knowalls\UserViewModel.cs" />
     <Compile Include="ViewModel\Knowalls\UserWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\PhoneViewModel.cs" />
+    <Compile Include="ViewModel\PrintBadgesViewModel.cs" />
     <Compile Include="ViewModel\PrintersViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="View\AbstractView.xaml.cs">
@@ -284,6 +288,9 @@
     </Compile>
     <Compile Include="View\PhoneView.xaml.cs">
       <DependentUpon>PhoneView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PrintBadgesView.xaml.cs">
+      <DependentUpon>PrintBadgesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PrintersView.xaml.cs">
       <DependentUpon>PrintersView.xaml</DependentUpon>
@@ -456,6 +463,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PhoneView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PrintBadgesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

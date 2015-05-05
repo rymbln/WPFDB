@@ -22,7 +22,14 @@ namespace WPFDB.Common
         public string CurrentDateTimeShortString { get { return DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + "_" + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond; } }
         public string ComputerName { get { return System.Environment.MachineName; } }
 
-
+        public List<ItemIntName> GetLogicLookup()
+        {
+            var lst = new List<ItemIntName>();
+         //   lst.Add(new ItemIntName(-1,"---"));
+            lst.Add(new ItemIntName(1, "Да"));
+            lst.Add(new ItemIntName(0, "Нет"));
+            return lst;
+        }
         public List<string> GetDocumentNames()
         {
             var lst = new List<string>();

@@ -48,6 +48,9 @@
                 <MenuItem Command="ApplicationCommands.SelectAll" Header="{x:Static p:Resources.SelectAllMenu}"
                           InputGestureText="{x:Static p:Resources.ControlA}"/>
             </MenuItem>
+            <MenuItem Header="Конференция">
+                <MenuItem Command="{Binding OpenPrintBadgesCommand}" Header="Пакетная печать бейджей"/>
+            </MenuItem>
             <MenuItem Header="{x:Static p:Resources.ToolsMenu}">
                 <MenuItem Command="{Binding OpenKnowallsCommand}" Header="{x:Static p:Resources.KnowallMenu}"/>
                 <MenuItem Command="{Binding OpenSettingsCommand}" Header="{x:Static p:Resources.SettingsMenu}"/>
