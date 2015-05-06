@@ -115,6 +115,7 @@
     <Compile Include="Common\DocumentManager.cs" />
     <Compile Include="Common\PrintManager.cs" />
     <Compile Include="Common\RoundedCornersPolygon.cs" />
+    <Compile Include="Common\RusNumber.cs" />
     <Compile Include="Common\WordManager.cs" />
     <Compile Include="Model\Abstract.cs" />
     <Compile Include="Model\IConferenceContext.cs" />
@@ -501,6 +502,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ConferenceModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Files\prix_kass_order.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Model\ConferenceModel.edmx.diagram">
       <DependentUpon>ConferenceModel.edmx</DependentUpon>
     </None>

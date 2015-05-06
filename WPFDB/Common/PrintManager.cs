@@ -29,10 +29,30 @@ namespace WPFDB.Common
             }
 
         }
-       
+        private static void PrintWord(string address)
+        {
+
+          //  var doc = new Document();
+
+            var pd = new PrintDocument();
+            pd.DocumentName = address;
+            
+            pd.PrinterSettings.PrinterName = GetPrinter(DocumentType.ORDER);
+            pd.Print();
+
+            //ProcessStartInfo info = new ProcessStartInfo(address);
+
+            //info.Verb = "Print";
+
+            //info.CreateNoWindow = true;
+
+            //info.WindowStyle = ProcessWindowStyle.Hidden;
+
+            //Process.Start(info);
+        }
         private static void PrintImage(string address, DocumentType docType)
         {
-             photo = System.Drawing.Image.FromFile(address);
+            photo = System.Drawing.Image.FromFile(address);
             var pd = new PrintDocument();
             pd.DocumentName = address;
             pd.PrintPage += pd_PrintPage;
@@ -41,8 +61,8 @@ namespace WPFDB.Common
             PaperSize paperSize = new PaperSize("Conference Badge", photo.Width, photo.Height);
             paperSize.RawKind = (int)PaperKind.Custom;
 
-            pd.PrintPage += (sender, args) => 
-                Console.Out.WriteLine("Printable Area for printer {0} = {1}", 
+            pd.PrintPage += (sender, args) =>
+                Console.Out.WriteLine("Printable Area for printer {0} = {1}",
                 args.PageSettings.PrinterSettings.PrinterName, args.PageSettings.PrintableArea);
 
             pd.DefaultPageSettings.PaperSize = paperSize;
@@ -51,11 +71,11 @@ namespace WPFDB.Common
 
             Console.Out.WriteLine("My paper size: " + pd.DefaultPageSettings.PaperSize);
             pd.Print();
-                   }
+        }
 
         static void pd_PrintPage(object sender, PrintPageEventArgs e)
         {
-            e.Graphics.DrawImage(photo, 0,0);
+            e.Graphics.DrawImage(photo, 0, 0);
         }
 
         public static void Print(string address, DocumentType docType)
@@ -67,6 +87,7 @@ namespace WPFDB.Common
                     PrintImage(address, docType);
                     break;
                 case DocumentType.ORDER:
+                  //  PrintWord(address);
                     break;
                 default:
                     break;

@@ -28,7 +28,81 @@ namespace WPFDB.Common
             }
             return (obj as Word.Application);
         }
+        private static void FindAndReplace(Word.Application WordApp, object findText, object replaceWithText)
+        {
+            object matchCase = true;
+            object matchWholeWord = true;
+            object matchWildCards = false;
+            object matchSoundsLike = false;
+            object nmathcAllWordForms = false;
+            object forward = true;
+            object format = false;
+            object matchKashida = false;
+            object matchDiacritics = false;
+            object matchAlefHamza = false;
+            object matchControl = false;
+            object read_only = false;
+            object visible = true;
+            object replace = 2;
+            object wrap = 1;
 
+            WordApp.Selection.Find.Execute(ref findText,
+                ref matchCase, ref matchWholeWord,
+                ref matchWildCards, ref matchSoundsLike,
+                ref nmathcAllWordForms, ref forward,
+                ref wrap, ref format, ref replaceWithText,
+                ref replace, ref matchKashida,
+                ref matchDiacritics, ref matchAlefHamza,
+                ref matchControl);
+        }
+
+        public static string OrderToWord(PersonConference person)
+        {
+            try
+            {
+                object missing = System.Reflection.Missing.Value;
+                object readOnly = false;
+                object isVisible = false;
+                object filename = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "Files\\prix_kass_order.doc";
+                object saveAs = @"C:\Orders\Order_" + person.PersonConferences_Payment.OrderNumber + "_" + person.Person.FullName + ".doc";
+                var objWord = CreateWordObj();
+
+                objWord.Visible = false;
+
+                var doc = objWord.Documents.Open(ref filename, ref missing, ref readOnly,
+                    ref missing, ref missing, ref missing,
+                    ref missing, ref missing, ref missing, ref missing, ref missing,
+                    ref isVisible, ref missing, ref missing, ref missing, ref missing);
+
+                doc.Activate();
+                FindAndReplace(objWord, "$Order$", person.PersonConferences_Payment.OrderNumber.ToString());
+                FindAndReplace(objWord, "$Total$", person.PersonConferences_Payment.Money.ToString());
+                FindAndReplace(objWord, "$FullName$", person.Person.FullName);
+                FindAndReplace(objWord, "$F$", person.Person.FirstName);
+                FindAndReplace(objWord, "$IO$", person.Person.SecondName + " " + person.Person.ThirdName);
+                FindAndReplace(objWord, "$TotalStr$", RusCurrency.Str((double)person.PersonConferences_Payment.Money));
+
+                doc.SaveAs(ref saveAs, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing);
+                var printerName = DataManager.Instance.GetPrinter("ORDER");
+                if (string.IsNullOrEmpty(printerName))
+                {
+                    doc.PrintOut();
+                }
+                else
+                {
+                    objWord.ActivePrinter = printerName;
+                    doc.PrintOut();
+                }
+                objWord.Quit();
+                return saveAs.ToString();
+            }
+            catch (Exception ex)
+            {
+                LogManager.Write(ex);
+                MessageBox.Show(ex.Message);
+                return ex.Message;
+            }
+        }
         public static string AbstractToWord(Abstract abs)
         {
             object missing = System.Reflection.Missing.Value;
@@ -87,19 +161,19 @@ namespace WPFDB.Common
                     headerRange.Font.Size = 10;
                     headerRange.Text = DefaultManager.Instance.DefaultConference.Name + "\r\n" + DateTime.Now;
                 }
-             
+
                 object styleHeading1 = Word.WdBuiltinStyle.wdStyleHeading1;
                 object styleHeading2 = Word.WdBuiltinStyle.wdStyleHeading2;
                 object styleNormal = Word.WdBuiltinStyle.wdStyleNormal;
 
                 //Add paragraph with Heading 1 style
                 Word.Paragraph para1 = doc.Content.Paragraphs.Add();
-                
+
                 para1.Range.set_Style(ref styleHeading1);
                 para1.Range.Text = "Тезис " + abs.SourceId;
                 para1.Range.InsertParagraphAfter();
 
-                
+
                 Word.Paragraph para2 = doc.Content.Paragraphs.Add();
                 para2.Range.set_Style(ref styleHeading2);
                 para2.set_Style(ref styleHeading2);
@@ -111,7 +185,7 @@ namespace WPFDB.Common
                 para3.Range.Text = abs.Author.FullName;
                 para3.Range.InsertParagraphAfter();
 
-                Word.Paragraph para4= doc.Content.Paragraphs.Add();
+                Word.Paragraph para4 = doc.Content.Paragraphs.Add();
                 para4.Range.set_Style(ref styleHeading2);
                 para4.set_Style(ref styleHeading2);
                 para4.Range.Text = "Место работы автора";
@@ -162,7 +236,7 @@ namespace WPFDB.Common
                 objWord.Quit();
                 objWord = null;
                 obj = null;
-        //        MessageBox.Show("Document created successfully !");
+                //        MessageBox.Show("Document created successfully !");
 
 
                 return filePath + "\\" + filename;

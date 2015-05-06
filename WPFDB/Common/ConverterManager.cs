@@ -23,5 +23,7 @@ namespace WPFDB.Common
         {
             return System.Drawing.ColorTranslator.FromHtml(hex);
         }
+
+       
      }
 }

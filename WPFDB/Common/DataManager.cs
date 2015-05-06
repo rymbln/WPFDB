@@ -1419,10 +1419,23 @@ namespace WPFDB.Common
             {
                 var printed = false;
                 if (PrintedSelected.Id == 1) { printed = true; }
-                return context.PersonConferences.Where(c =>
+
+                if (PaidSelected.Id == 1)
+                {
+                    return context.PersonConferences.Where(c =>
                     c.ConferenceId == ConferenceSelected.Id
                     && c.PersonConferences_Detail.RankId == RankSelected.Id
-                    && c.PersonConferences_Detail.IsBadge == printed).ToList();
+                    && c.PersonConferences_Detail.IsBadge == printed
+                    && c.PersonConferences_Payment.Money > 0).ToList();
+                }
+                else
+                {
+                    return context.PersonConferences.Where(c =>
+                    c.ConferenceId == ConferenceSelected.Id
+                    && c.PersonConferences_Detail.RankId == RankSelected.Id
+                    && c.PersonConferences_Detail.IsBadge == printed
+                    && c.PersonConferences_Payment.Money == 0).ToList();
+                }
             }
             else
             {
@@ -1435,6 +1448,20 @@ namespace WPFDB.Common
             personConference.PersonConferences_Detail.IsBadge = true;
             context.PersonConferences.Attach(personConference);
             context.Save();
+        }
+
+        public int GetOrderNumber(PersonConference CurrentPersonConference)
+        {
+            var orderNumber = 0;
+            var on = context.PersonConferences
+                .Where(p => p.ConferenceId == CurrentPersonConference.ConferenceId)
+                .Select(o => o.PersonConferences_Payment.OrderNumber).Max();
+            if (on > 0)
+            {
+                orderNumber = on;
+            }
+            orderNumber++;
+            return orderNumber;
         }
     }
 }

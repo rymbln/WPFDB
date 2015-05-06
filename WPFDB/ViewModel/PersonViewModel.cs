@@ -886,7 +886,12 @@ namespace WPFDB.ViewModel
 
         public void PrintOrder()
         {
-
+            if (OrderNumber == 0 || OrderNumber == null)
+            {
+                OrderNumber = DataManager.Instance.GetOrderNumber(CurrentPersonConference);
+            }
+            var filepath = WordManager.OrderToWord(CurrentPersonConference);
+         //   PrintManager.Print(filepath, DocumentType.ORDER);
         }
 
         public string AbstractOtherAuthors
