@@ -34,9 +34,9 @@
         <DockPanel>
             <ToolBarTray DockPanel.Dock="Top">
                 <ToolBar>
-                    <Button Command="{Binding SaveCommand}" Content="Save" ToolTip="{x:Static p:Resources.Save}"/>
+                    <!--<Button Command="{Binding SaveCommand}" Content="Save" ToolTip="{x:Static p:Resources.Save}"/>
                     <Button Command="{Binding CancelCommand}" Content="Cancel" ToolTip="{x:Static p:Resources.Save}"/>
-                    <Separator/>
+                    <Separator/>-->
                     <Button Command="ApplicationCommands.Undo" Content="{StaticResource UndoImage}" ToolTip="{x:Static p:Resources.Undo}"/>
                     <Button Command="ApplicationCommands.Redo" Content="{StaticResource RedoImage}" ToolTip="{x:Static p:Resources.Redo}"/>
                     <Button Command="ApplicationCommands.Cut" Content="{StaticResource CutImage}" ToolTip="{x:Static p:Resources.Cut}"/>
@@ -57,7 +57,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -67,19 +67,24 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Label Grid.Column="0" Grid.Row="0" Content="Фамилия:"  />
-                        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  />
+                        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
 
                         <Label Grid.Column="0" Grid.Row="1" Content="Имя:" />
-                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=SecondName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  />
+                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=SecondName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
 
                         <Label Grid.Column="0" Grid.Row="2" Content="Отчество:" />
-                        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=ThirdName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  />
+                        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=ThirdName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
 
                         <Label Grid.Column="0" Grid.Row="3" Content="Пол:" />
-                        <ComboBox Grid.Column="1" Grid.Row="3"  SelectedValuePath="." SelectedItem="{Binding Path=Sex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=SexLookup}" DisplayMemberPath="Name" />
+                        <ComboBox Grid.Column="1" Grid.Row="3"  
+                                  HorizontalAlignment="Stretch"
+                                  SelectedValuePath="." 
+                                  SelectedItem="{Binding Path=Sex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                  ItemsSource="{Binding Path=SexLookup}" 
+                                  DisplayMemberPath="Name" />
 
                         <Label Grid.Column="0" Grid.Row="4" Content="Дата рождения:" />
-                        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  />
+                        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
 
                     </Grid>
                 </HeaderedContentControl>
@@ -90,7 +95,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -99,22 +104,37 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Label Grid.Column="0" Grid.Row="0" Content="Workplace:" />
+                        <Label Grid.Column="0" Grid.Row="0" Content="Место работы:" />
                         <TextBox Grid.Column="1" Grid.Row="0" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
-                         Text="{Binding Path=WorkPlace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  />
+                         Text="{Binding Path=WorkPlace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
 
-                        <Label Grid.Column="0" Grid.Row="1" Content="Post:" />
+                        <Label Grid.Column="0" Grid.Row="1" Content="Должность:" />
                         <TextBox Grid.Column="1" Grid.Row="1" TextWrapping="Wrap"
-                         Text="{Binding Path=Post, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  />
+                         Text="{Binding Path=Post, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
 
-                        <Label Grid.Column="0" Grid.Row="2" Content="Speciality:" />
-                        <ComboBox Grid.Column="1" Grid.Row="2"  SelectedValuePath="." SelectedItem="{Binding Path=Speciality, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=SpecialityLookup}" DisplayMemberPath="Name"  />
+                        <Label Grid.Column="0" Grid.Row="2" Content="Специальность:" />
+                        <ComboBox Grid.Column="1" Grid.Row="2"  
+                                  HorizontalAlignment="Stretch"
+                                  SelectedValuePath="." 
+                                  SelectedItem="{Binding Path=Speciality, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                  ItemsSource="{Binding Path=SpecialityLookup}" 
+                                  DisplayMemberPath="Name"  />
 
-                        <Label Grid.Column="0" Grid.Row="3" Content="ScienceDegree:" />
-                        <ComboBox Grid.Column="1" Grid.Row="3"  SelectedValuePath="." SelectedItem="{Binding Path=ScienceDegree, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=ScienceDegreeLookup}" DisplayMemberPath="Name" />
+                        <Label Grid.Column="0" Grid.Row="3" Content="Научная степень:" />
+                        <ComboBox Grid.Column="1" Grid.Row="3"  
+                                  HorizontalAlignment="Stretch"
+                                  SelectedValuePath="." 
+                                  SelectedItem="{Binding Path=ScienceDegree, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                  ItemsSource="{Binding Path=ScienceDegreeLookup}" 
+                                  DisplayMemberPath="Name" />
 
-                        <Label Grid.Column="0" Grid.Row="4" Content="ScienceStatus:" />
-                        <ComboBox Grid.Column="1" Grid.Row="4"  SelectedValuePath="." SelectedItem="{Binding Path=ScienceStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" ItemsSource="{Binding Path=ScienceStatusLookup}" DisplayMemberPath="Name" />
+                        <Label Grid.Column="0" Grid.Row="4" Content="Научное звание:" />
+                        <ComboBox Grid.Column="1" Grid.Row="4" 
+                                  HorizontalAlignment="Stretch"
+                                  SelectedValuePath="." 
+                                  SelectedItem="{Binding Path=ScienceStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                  ItemsSource="{Binding Path=ScienceStatusLookup}" 
+                                  DisplayMemberPath="Name" />
 
                     </Grid>
                 </HeaderedContentControl>
@@ -125,9 +145,9 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -135,23 +155,24 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Label Grid.Column="0" Grid.Row="0" Content="Iacmac Member:" />
-                        <CheckBox Grid.Column="1" Grid.Row="0" IsChecked="{Binding Path=IsMember, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+                        <Label Grid.Column="0" Grid.Row="2" Content="Член МАКМАХ:" />
+                        <CheckBox Grid.Column="1" Grid.Row="2" IsChecked="{Binding Path=IsMember, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                        <Label Grid.Column="0" Grid.Row="1" Content="IsForm:" />
-                        <CheckBox Grid.Column="1" Grid.Row="1" IsChecked="{Binding Path=IsForm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+                        <Label Grid.Column="0" Grid.Row="3" Content="Заявление:" />
+                        <CheckBox Grid.Column="1" Grid.Row="3" IsChecked="{Binding Path=IsForm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                        <Label Grid.Column="0" Grid.Row="2" Content="IsCardCreate:"/>
-                        <CheckBox Grid.Column="1" Grid.Row="2" IsChecked="{Binding Path=IsCardCreate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" />
+                        <Label Grid.Column="2" Grid.Row="2" Content="Карта сделана:"/>
+                        <CheckBox Grid.Column="3" Grid.Row="2" IsChecked="{Binding Path=IsCardCreate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                        <Label Grid.Column="0" Grid.Row="3" Content="IsCardSend:"  />
-                        <CheckBox Grid.Column="1" Grid.Row="3" IsChecked="{Binding Path=IsCardSend, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+                        <Label Grid.Column="2" Grid.Row="3" Content="Карта выслана:"  />
+                        <CheckBox Grid.Column="3" Grid.Row="3" IsChecked="{Binding Path=IsCardSend, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                        <Label Grid.Column="2" Grid.Row="0" Content="Code:"  />
-                        <TextBox Grid.Column="3" Grid.Row="0"  Text="{Binding Path=Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+                        <Label Grid.Column="0" Grid.Row="0" Content="Номер МАКМАХ:"  />
+                        <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"  
+                                 Text="{Binding Path=Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                        <Label Grid.Column="2" Grid.Row="1" Content="Date registration:" />
-                        <TextBox Grid.Column="3" Grid.Row="1"  Text="{Binding Path=DateRegistration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  />
+                        <Label Grid.Column="0" Grid.Row="1" Content="Дата регистрации:" />
+                        <TextBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Text="{Binding Path=DateRegistration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
 
                     </Grid>
                 </HeaderedContentControl>
@@ -168,14 +189,14 @@
                         </Grid.ColumnDefinitions>
                         <HeaderedContentControl Grid.Column="0"  Style="{StaticResource SubDisplayArea}" Margin="2">
                             <HeaderedContentControl.Header>
-                                Addresses
+                                Почтовые адреса
                             </HeaderedContentControl.Header>
                             <ScrollViewer>
                                 <StackPanel Orientation="Vertical">
                                     <ToolBar>
-                                        <Button Command="{Binding AddAddressCommand}" Content="Add Address"></Button>
+                                        <Button Command="{Binding AddAddressCommand}" Content="Добавить"></Button>
                                         <Separator/>
-                                        <Button Command="{Binding DeleteAddressCommand}" Content="Delete Address"></Button>
+                                        <Button Command="{Binding DeleteAddressCommand}" Content="Удалить"></Button>
                                     </ToolBar>
 
 
@@ -193,9 +214,9 @@
                             <ScrollViewer>
                                 <StackPanel Orientation="Vertical">
                                     <ToolBar>
-                                        <Button Command="{Binding AddEmailCommand}" Content="Add Email"></Button>
+                                        <Button Command="{Binding AddEmailCommand}" Content="Добавить"></Button>
                                         <Separator/>
-                                        <Button Command="{Binding DeleteEmailCommand}" Content="Delete Email"></Button>
+                                        <Button Command="{Binding DeleteEmailCommand}" Content="Удалить"></Button>
                                     </ToolBar>
 
                                     <ListBox BorderThickness="0" 
@@ -207,14 +228,14 @@
                         </HeaderedContentControl>
                         <HeaderedContentControl Grid.Column="2" Style="{StaticResource SubDisplayArea}" Margin="2">
                             <HeaderedContentControl.Header>
-                                Phones
+                                Телефоны
                             </HeaderedContentControl.Header>
                             <ScrollViewer>
                                 <StackPanel Orientation="Vertical">
                                     <ToolBar>
-                                        <Button Command="{Binding AddPhoneCommand}" Content="Add Phone"></Button>
+                                        <Button Command="{Binding AddPhoneCommand}" Content="Добавить"></Button>
                                         <Separator/>
-                                        <Button Command="{Binding DeletePhoneCommand}" Content="Delete Phone"></Button>
+                                        <Button Command="{Binding DeletePhoneCommand}" Content="Удалить"></Button>
                                     </ToolBar>
 
                                     <ListBox BorderThickness="0" 
@@ -228,23 +249,23 @@
                     </Grid>
                 </TabItem>
                 <TabItem>
-                    <TabItem.Header>Участия в конференциях</TabItem.Header>
+                    <TabItem.Header>Конференции</TabItem.Header>
                     <DockPanel>
                         <ToolBarTray DockPanel.Dock="Top">
                             <ToolBar>
-                                <Button Command="{Binding SaveCommand}" Content="Save" ToolTip="{x:Static p:Resources.Save}"/>
+                                <!--<Button Command="{Binding SaveCommand}" Content="Save" ToolTip="{x:Static p:Resources.Save}"/>
                                 <Separator/>
                                 <Button Command="{Binding CancelCommand}" Content="Cancel" ToolTip="{x:Static p:Resources.Save}"/>
+                                <Separator/>-->
+                                <Button Command="{Binding AddPersonConferenceCommand}" Content="Добавить конференцию" ToolTip="{x:Static p:Resources.Save}"/>
                                 <Separator/>
-                                <Button Command="{Binding AddPersonConferenceCommand}" Content="Add Conference" ToolTip="{x:Static p:Resources.Save}"/>
+                                <Button Command="{Binding RemovePersonConferenceCommand}" Content="Удалить конференцию" ToolTip="{x:Static p:Resources.Save}"/>
                                 <Separator/>
-                                <Button Command="{Binding RemovePersonConferenceCommand}" Content="Remove Conference" ToolTip="{x:Static p:Resources.Save}"/>
+                                <Button Command="{Binding EditPersonConferenceCommand}" Content="Изменить конференцию" ToolTip="{x:Static p:Resources.Save}"/>
                                 <Separator/>
-                                <Button Command="{Binding EditPersonConferenceCommand}" Content="Edit PersonConference" ToolTip="{x:Static p:Resources.Save}"/>
+                                <Button Command="{Binding PrintBadgeCommand}" Content="Печать бейджа" ToolTip="{x:Static p:Resources.Save}" HorizontalAlignment="Right"/>
                                 <Separator/>
-                                <Button Command="{Binding PrintBadgeCommand}" Content="Print Badge" ToolTip="{x:Static p:Resources.Save}"/>
-                                <Separator/>
-                                <Button Command="{Binding PrintOrderCommand}" Content="Print Order" ToolTip="{x:Static p:Resources.Save}"/>
+                                <Button Command="{Binding PrintOrderCommand}" Content="Печать ордера" ToolTip="{x:Static p:Resources.Save}" HorizontalAlignment="Right"/>
                                 <Separator/>
                             </ToolBar>
                         </ToolBarTray>
@@ -257,7 +278,7 @@
 
                             <HeaderedContentControl Grid.Column="0" Grid.Row="0" Style="{StaticResource SubDisplayArea}" Margin="2">
                                 <HeaderedContentControl.Header>
-                                    Person in Conferences
+                                    Участие в конференциях
                                 </HeaderedContentControl.Header>
                                 <ScrollViewer>
                                     <HeaderedContentControl>
@@ -271,12 +292,12 @@
 
                             <HeaderedContentControl  Style="{StaticResource SubDisplayArea}" Grid.Column="1" Margin="2">
                                 <HeaderedContentControl.Header>
-                                    Registration
+                                    Регистрация
                                 </HeaderedContentControl.Header>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
 
                                     <Grid.RowDefinitions>
@@ -290,46 +311,48 @@
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
 
-                                    <Label Grid.Column="0" Grid.Row="0" Content="Rank:"  />
+                                    <Label Grid.Column="0" Grid.Row="0" Content="Статус:"  />
                                     <ComboBox Grid.Column="1" Grid.Row="0" 
+                                              HorizontalAlignment="Stretch"
                                               SelectedValuePath="." 
-                                              SelectedItem="{Binding Path=Rank, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
+                                              SelectedItem="{Binding Path=Rank, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                               ItemsSource="{Binding Path=RankLookup}" 
                                               DisplayMemberPath="Name" />
 
-                                    <Label Grid.Column="0" Grid.Row="1" Content="Company:" />
+                                    <Label Grid.Column="0" Grid.Row="1" Content="Компания:" />
                                     <ComboBox Grid.Column="1" Grid.Row="1" 
                                               SelectedValuePath="." 
-                                              SelectedItem="{Binding Path=Company, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
+                                              HorizontalAlignment="Stretch"
+                                              SelectedItem="{Binding Path=Company, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                               ItemsSource="{Binding Path=CompanyLookup}" 
                                               DisplayMemberPath="Name" />
 
-                                    <Label Grid.Column="0" Grid.Row="2" Content="Is Arrive:" />
+                                    <Label Grid.Column="0" Grid.Row="2" Content="Прибыл:" />
                                     <CheckBox Grid.Column="1" Grid.Row="2" 
                                               IsChecked="{Binding Path=IsArrive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                               />
 
-                                    <Label Grid.Column="0" Grid.Row="3" Content="Date Arrive:" />
+                                    <Label Grid.Column="0" Grid.Row="3" Content="Дата прибытия:" />
                                     <TextBox Grid.Column="1" Grid.Row="3" 
-                                                Text="{Binding Path=DateArrive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
+                                                Text="{Binding Path=DateArrive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                                 />
 
-                                    <Label Grid.Column="0" Grid.Row="4" Content="Is Need Badge:" />
+                                    <Label Grid.Column="0" Grid.Row="4" Content="Нужен бейдж:" />
                                     <CheckBox Grid.Column="1" Grid.Row="4" 
                                               IsChecked="{Binding Path=IsNeedBadge, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                               />
 
-                                    <Label Grid.Column="0" Grid.Row="5" Content="Is Badge:" />
+                                    <Label Grid.Column="0" Grid.Row="5" Content="Бейдж напечатан:" />
                                     <CheckBox Grid.Column="1" Grid.Row="5" 
                                               IsChecked="{Binding Path=IsBadge, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                               />
 
-                                    <Label Grid.Column="0" Grid.Row="6" Content="Is Abstract:" />
+                                    <Label Grid.Column="0" Grid.Row="6" Content="Тезисы:" />
                                     <CheckBox Grid.Column="1" Grid.Row="6" 
                                               IsChecked="{Binding Path=IsAbstract, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                                />
 
-                                    <Label Grid.Column="0" Grid.Row="7" Content="Is Autoreg:" />
+                                    <Label Grid.Column="0" Grid.Row="7" Content="Авторегистрация:" />
                                     <CheckBox Grid.Column="1" Grid.Row="7" 
                                               IsChecked="{Binding Path=IsAutoreg, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                                />
@@ -339,12 +362,12 @@
 
                             <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="2" Margin="2">
                                 <HeaderedContentControl.Header>
-                                    Payment
+                                    Оплата
                                 </HeaderedContentControl.Header>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
 
                                     <Grid.RowDefinitions>
@@ -361,50 +384,53 @@
 
                                     </Grid.RowDefinitions>
 
-                                    <Label Grid.Column="0" Grid.Row="0" Content="PaymentType:"  />
+                                    <Label Grid.Column="0" Grid.Row="0" Content="Оплата:"  />
                                     <ComboBox Grid.Column="1" Grid.Row="0" 
+                                              HorizontalAlignment="Stretch"
                                               SelectedValuePath="." 
-                                              SelectedItem="{Binding Path=PaymentType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
+                                              SelectedItem="{Binding Path=PaymentType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                               ItemsSource="{Binding Path=PaymentTypeLookup}" 
                                               DisplayMemberPath="Name" />
 
-                                    <Label Grid.Column="0" Grid.Row="1" Content="Company:" />
+                                    <Label Grid.Column="0" Grid.Row="1" Content="Компания:" />
                                     <ComboBox Grid.Column="1" Grid.Row="1" 
+                                              HorizontalAlignment="Stretch"
                                               SelectedValuePath="." 
-                                              SelectedItem="{Binding Path=Payment_Company, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
+                                              SelectedItem="{Binding Path=Payment_Company, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                               ItemsSource="{Binding Path=CompanyLookup}" 
                                               DisplayMemberPath="Name" />
 
-                                    <Label Grid.Column="0" Grid.Row="2" Content="Payment Document:" />
+                                    <Label Grid.Column="0" Grid.Row="2" Content="Документ:" />
                                     <TextBox Grid.Column="1" Grid.Row="2" 
-                                             Text="{Binding Path=PaymentDocument, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                                             Text="{Binding Path=PaymentDocument, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                              />
                                     <Label Grid.Column="0" Grid.Row="3" Content="Дата платежа:" />
                                     <TextBox Grid.Column="1" Grid.Row="3" 
-                                                Text="{Binding Path=PaymentDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
+                                                Text="{Binding Path=PaymentDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                                 />
 
 
-                                    <Label Grid.Column="0" Grid.Row="4" Content="Money:" />
+                                    <Label Grid.Column="0" Grid.Row="4" Content="Сумма:" />
                                     <TextBox Grid.Column="1" Grid.Row="4" 
-                                             Text="{Binding Path=Money, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                                             Text="{Binding Path=Money, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                              />
 
-                                    <Label Grid.Column="0" Grid.Row="5" Content="Is Complect:" />
+                                    <Label Grid.Column="0" Grid.Row="5" Content="Выдан комплект:" />
                                     <CheckBox Grid.Column="1" Grid.Row="5" 
                                               IsChecked="{Binding Path=IsComplect, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                               />
 
-                                    <Label Grid.Column="0" Grid.Row="6" Content="Order Status:" />
+                                    <Label Grid.Column="0" Grid.Row="6" Content="Статус ордера:" />
                                     <ComboBox Grid.Column="1" Grid.Row="6" 
+                                              HorizontalAlignment="Stretch"
                                               SelectedValuePath="." 
-                                              SelectedItem="{Binding Path=OrderStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
+                                              SelectedItem="{Binding Path=OrderStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                               ItemsSource="{Binding Path=OrderStatusLookup}" 
                                               DisplayMemberPath="Name" />
 
-                                    <Label Grid.Column="0" Grid.Row="7" Content="Order Number:" />
+                                    <Label Grid.Column="0" Grid.Row="7" Content="Номер ордера:" />
                                     <TextBox Grid.Column="1" Grid.Row="7" 
-                                             Text="{Binding Path=OrderNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                                             Text="{Binding Path=OrderNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                              />
                                 </Grid>
                             </HeaderedContentControl>
@@ -412,23 +438,23 @@
                     </DockPanel>
                 </TabItem>
                 <TabItem>
-                    <TabItem.Header>Abstracts</TabItem.Header>
+                    <TabItem.Header>Тезисы</TabItem.Header>
                     <DockPanel>
                         <ToolBarTray DockPanel.Dock="Top">
                             <ToolBar>
-                                <Button Command="{Binding SaveCommand}" Content="Save" ToolTip="{x:Static p:Resources.Save}"/>
+                                <!--<Button Command="{Binding SaveCommand}" Content="Save" ToolTip="{x:Static p:Resources.Save}"/>
                                 <Separator/>
                                 <Button Command="{Binding CancelCommand}" Content="Cancel" ToolTip="{x:Static p:Resources.Save}"/>
+                                <Separator/>-->
+                                <Button Command="{Binding AddPersonConferenceCommand}" Content="Добавить конференцию" ToolTip="{x:Static p:Resources.Save}"/>
                                 <Separator/>
-                                <Button Command="{Binding AddPersonConferenceCommand}" Content="Add Conference" ToolTip="{x:Static p:Resources.Save}"/>
+                                <Button Command="{Binding RemovePersonConferenceCommand}" Content="Удалить конференцию" ToolTip="{x:Static p:Resources.Save}"/>
                                 <Separator/>
-                                <Button Command="{Binding RemovePersonConferenceCommand}" Content="Remove Conference" ToolTip="{x:Static p:Resources.Save}"/>
+                                <Button Command="{Binding EditPersonConferenceCommand}" Content="Изменить конференцию" ToolTip="{x:Static p:Resources.Save}"/>
                                 <Separator/>
-                                <Button Command="{Binding EditPersonConferenceCommand}" Content="Edit PersonConference" ToolTip="{x:Static p:Resources.Save}"/>
+                                <Button Command="{Binding AddAbstractCommand}" Content="Добавить тезис" ToolTip="{x:Static p:Resources.Save}"/>
                                 <Separator/>
-                                <Button Command="{Binding AddAbstractCommand}" Content="Add Abstract" ToolTip="{x:Static p:Resources.Save}"/>
-                                <Separator/>
-                                <Button Command="{Binding RemoveAbstractCommand}" Content="Remove Abstract" ToolTip="{x:Static p:Resources.Save}"/>
+                                <Button Command="{Binding RemoveAbstractCommand}" Content="Удалить тезис" ToolTip="{x:Static p:Resources.Save}"/>
                                 <Separator/>
                             </ToolBar>
                         </ToolBarTray>
@@ -478,22 +504,22 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                  <Label Grid.Row="0" Content="Other Authors:" />
+                                  <Label Grid.Row="0" Content="Другие авторы:" />
                                     <TextBox  Grid.Row="1" Style="{StaticResource TextBoxLarge}"
-                                             Text="{Binding Path=AbstractOtherAuthors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                                             Text="{Binding Path=AbstractOtherAuthors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             />
-                                    <Label Grid.Row="2" Content="Name:" />
+                                    <Label Grid.Row="2" Content="Название:" />
                                     <TextBox  Grid.Row="3" Style="{StaticResource TextBoxLarge}"
-                                             Text="{Binding Path=AbstractName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                                             Text="{Binding Path=AbstractName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   />
-                                    <Label Grid.Row="4" Content="Text:" />
+                                    <Label Grid.Row="4" Content="Текст:" />
                                     <TextBox  Grid.Row="5" Style="{StaticResource TextBoxLarge}"
                                               MaxHeight="150"
-                                                 Text="{Binding Path=AbstractText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                                                 Text="{Binding Path=AbstractText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                        />
-                                    <Label Grid.Row="6" Content="Link:" />
+                                    <Label Grid.Row="6" Content="Ссылка:" />
                                     <TextBox  Grid.Row="7" Style="{StaticResource TextBoxLarge}"
-                                             Text="{Binding Path=AbstractLink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"
+                                             Text="{Binding Path=AbstractLink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             />
                                 </Grid>
                             </HeaderedContentControl>

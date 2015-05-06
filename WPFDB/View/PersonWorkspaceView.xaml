@@ -17,7 +17,7 @@
             </Button>
             <Separator/>
             <Button Command="{Binding OpenPersonCommand}">
-                <AccessText Text="Open"/>
+                <AccessText Text="Открыть"/>
             </Button>
             <Separator/>
             <Button Command="{Binding DeletePersonCommand}">
@@ -28,7 +28,7 @@
                 <AccessText Text="{x:Static p:Resources.RefreshMenu}"/>
             </Button>
             <Separator/>
-                <TextBlock Text="Filter"/>
+                <TextBlock Text="Фильтр:"/>
             <TextBox x:Name="searchBox" Width="150" BorderBrush="LightGray" BorderThickness="1" 
                          Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" />
             <ToggleButton 
@@ -53,9 +53,9 @@
                               ItemsSource="{Binding Path=AllPersons}" 
                               AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="First Name" Width="*"  Binding="{Binding Path=FirstName}" />
-                    <DataGridTextColumn Header="Second Name" Width="*" Binding="{Binding Path=SecondName}" />
-                    <DataGridTextColumn Header="Third Name" Width="*" Binding="{Binding Path=ThirdName}" />
+                    <DataGridTextColumn Header="Фамилия" Width="*"  Binding="{Binding Path=FirstName}" />
+                    <DataGridTextColumn Header="Имя" Width="*" Binding="{Binding Path=SecondName}" />
+                    <DataGridTextColumn Header="Отчество" Width="*" Binding="{Binding Path=ThirdName}" />
                     <DataGridTextColumn Header="Номер МАКМАХ" Width="*" Binding="{Binding Path=Iacmac.Code}" />
                 </DataGrid.Columns>
 

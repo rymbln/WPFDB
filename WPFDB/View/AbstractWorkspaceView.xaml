@@ -12,7 +12,7 @@
         <ToolBar DockPanel.Dock="Top">
 
             <Button Command="{Binding OpenAbstractCommand}">
-                <AccessText Text="Open"/>
+                <AccessText Text="Открыть"/>
             </Button>
             <Separator/>
             <Button Command="{Binding DeleteAbstractCommand}">
@@ -24,7 +24,7 @@
             </Button>
             <Separator/>
             <Button Command="{Binding ApplyFilterCommand}">
-                <AccessText Text="Filter"/>
+                <AccessText Text="Поиск:"/>
             </Button>
             <TextBox x:Name="searchBox" Width="150" BorderBrush="LightGray" BorderThickness="1" 
                          Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" />

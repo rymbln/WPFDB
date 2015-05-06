@@ -121,7 +121,7 @@
     <value>_About...</value>
   </data>
   <data name="AddMenu" xml:space="preserve">
-    <value>_Add</value>
+    <value>Добавить</value>
   </data>
   <data name="AddressBook" xml:space="preserve">
     <value>Address book</value>
@@ -181,7 +181,7 @@
     <value>Database: {0}</value>
   </data>
   <data name="DataMenu" xml:space="preserve">
-    <value>_Data</value>
+    <value>Данные</value>
   </data>
   <data name="Del" xml:space="preserve">
     <value>Del</value>
@@ -268,13 +268,13 @@
     <value>_Redo</value>
   </data>
   <data name="RemoveMenu" xml:space="preserve">
-    <value>_Remove</value>
+    <value>Удалить</value>
   </data>
   <data name="Reporting" xml:space="preserve">
     <value>Reporting</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Сохранить</value>
   </data>
   <data name="SaveMenu" xml:space="preserve">
     <value>_Save</value>
@@ -318,9 +318,9 @@
     <value>Settings</value>
   </data>
   <data name="ToolsMenu" xml:space="preserve">
-    <value>Tools</value>
+    <value>Инструменты</value>
   </data>
   <data name="RefreshMenu" xml:space="preserve">
-    <value>Refresh</value>
+    <value>Обновить</value>
   </data>
 </root>
