@@ -10,16 +10,17 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" Text="Email:" />
-                <TextBox Grid.Column="1" Text="{Binding Path=Name}" 
+                <TextBox Grid.Column="1" Text="{Binding Path=Name}" HorizontalAlignment="Stretch"
                          />
                 <TextBlock Grid.Column="2" Text="Тип:" />
-                <ComboBox Grid.Column="3" Width="60" Style="{StaticResource ComboBoxSmall}" 
+                <ComboBox Grid.Column="3" Width="60" 
+                          HorizontalAlignment="Stretch"
                           ItemsSource="{Binding Path=ContactTypeLookup}" 
                           SelectedValue="{Binding Path=ContactType}" 
                           SelectedValuePath="." 

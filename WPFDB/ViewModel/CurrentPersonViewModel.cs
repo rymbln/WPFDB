@@ -8,15 +8,103 @@ using WPFDB.Model;
 
 namespace WPFDB.ViewModel
 {
-    public class CurrentPersonViewModel: ViewModelBase
+    public class CurrentPersonViewModel : ViewModelBase
     {
 
         public Person Model { get; private set; }
-
+        public PersonConference ActualConference { get; private set; }
 
         public CurrentPersonViewModel(Person person)
         {
             this.Model = person;
+            ActualConference = Model.PersonConferences.Where(p => p.ConferenceId == DefaultManager.Instance.DefaultConference.Id).FirstOrDefault();
+
+        }
+        public string Rank
+        {
+            get { return ActualConference == null ? "" : ActualConference.PersonConferences_Detail.Rank.Name; }
+        }
+        public string IsArrive
+        {
+            get
+            {
+                if (ActualConference == null)
+                {
+                    return "";
+                }
+                else
+                {
+                    return ActualConference.PersonConferences_Detail.IsArrive ? "Да" : "Нет";
+                }
+            }
+        }
+        public DateTime? DateArrive
+        {
+            get { return ActualConference == null ? null : ActualConference.PersonConferences_Detail.DateArrive; }
+        }
+
+        public string IsBadge
+        {
+            get
+            {
+                if (ActualConference == null)
+                {
+                    return "";
+                }
+                else
+                {
+                    return ActualConference.PersonConferences_Detail.IsBadge ? "Да" : "Нет";
+                }
+            }
+        }
+
+        public string ArriveCompany
+        {
+            get
+            {
+                return ActualConference == null ? "" : ActualConference.PersonConferences_Detail.Company.Name;
+            }
+        }
+
+        public string PaymentType
+        {
+            get { return ActualConference == null ? "" : ActualConference.PersonConferences_Payment.PaymentType.Name; }
+        }
+        public DateTime? PaymentDate
+        {
+            get { return ActualConference == null ? null : ActualConference.PersonConferences_Payment.PaymentDate; }
+        }
+        public string PaymentDocument
+        {
+            get
+            {
+
+                if (ActualConference == null)
+                {
+                    return "";
+
+                }
+                else
+                {
+                    var str = ActualConference.PersonConferences_Payment.PaymentDocument;
+
+                    if (ActualConference.PersonConferences_Payment.OrderNumber > 0)
+                    {
+                        str = str + string.Format(" (Ордер № {0})", ActualConference.PersonConferences_Payment.OrderNumber);
+                    }
+                    return str;
+                }
+            }
+        }
+
+        public string PaymentCompany
+        {
+            get { return ActualConference == null ? "" : ActualConference.PersonConferences_Payment.Company.Name; }
+        }
+
+        public string Money
+        {
+            get { return ActualConference == null ? "" : ActualConference.PersonConferences_Payment.Money.ToString(); }
         }
 
         public ScienceDegree ScienceDegree
@@ -106,7 +194,7 @@ namespace WPFDB.ViewModel
                 this.OnPropertyChanged("BirthDate");
             }
         }
-      
+
         public string IsMemberName
         {
             get
@@ -121,7 +209,7 @@ namespace WPFDB.ViewModel
                 };
             }
         }
-      
+
         public string IsCardCreateName
         {
             get
@@ -144,12 +232,12 @@ namespace WPFDB.ViewModel
         {
             get { return this.Model.FullNameInitials; }
         }
-      
+
         public string WorkplacePostName
         {
             get { return this.Model.WorkPlace + " (" + this.Model.Post + ")"; }
         }
-      
+
         public string IsCardSentName
         {
             get
@@ -166,7 +254,7 @@ namespace WPFDB.ViewModel
 
 
         }
-      
+
         public string IsFormName
         {
             get
@@ -221,7 +309,7 @@ namespace WPFDB.ViewModel
             }
         }
 
-     
+
         public List<string> PhonesList
         {
             get
@@ -264,6 +352,6 @@ namespace WPFDB.ViewModel
             }
         }
 
-      
+
     }
 }

@@ -65,7 +65,7 @@
                           InputGestureText="{x:Static p:Resources.F1}"/>
             </MenuItem>
         </Menu>
-        <ToolBarTray DockPanel.Dock="Top">
+        <!--<ToolBarTray DockPanel.Dock="Top">
             <ToolBar>
                 <Button Command="{Binding SaveCommand}" Content="{StaticResource SaveImage}" ToolTip="{x:Static p:Resources.Save}"/>
                 <Separator/>
@@ -76,7 +76,7 @@
                 <Button Command="ApplicationCommands.Paste" Content="{StaticResource PasteImage}" ToolTip="{x:Static p:Resources.Paste}"/>
                  </ToolBar>
                
-        </ToolBarTray>
+        </ToolBarTray>-->
 
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem Content="{Binding Path=ACTIVE_CONFERENCE,  UpdateSourceTrigger=PropertyChanged}" />

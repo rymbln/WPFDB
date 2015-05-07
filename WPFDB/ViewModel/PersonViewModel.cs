@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,7 +39,7 @@ namespace WPFDB.ViewModel
             PaymentTypeLookup = new ObservableCollection<PaymentType>(DataManager.Instance.GetAllPaymentTypes());
             CompanyLookup = new ObservableCollection<Company>(DataManager.Instance.GetAllCompanies());
             RankLookup = new ObservableCollection<Rank>(DataManager.Instance.GetAllRanks());
-            
+
 
 
             PersonEmails = new ObservableCollection<EmailViewModel>();
@@ -138,12 +139,12 @@ namespace WPFDB.ViewModel
                 CurrentPersonConference =
                     AllPersonConferences.SingleOrDefault(o => o.Conference == DefaultManager.Instance.DefaultConference);
             }
-            
 
-        AllAbstracts = new ObservableCollection<Abstract>(DataManager.Instance.GetAbstractsByPersonConferenceID(CurrentPersonConference.PersonConferenceId));
+
+            AllAbstracts = new ObservableCollection<Abstract>(DataManager.Instance.GetAbstractsByPersonConferenceID(CurrentPersonConference.PersonConferenceId));
 
             CurrentAbstract = AllAbstracts.FirstOrDefault();
-         
+
 
             PrintBadgeCommand = new DelegateCommand(o => PrintBadge());
             PrintOrderCommand = new DelegateCommand(o => PrintOrder());
@@ -207,7 +208,7 @@ namespace WPFDB.ViewModel
         public ObservableCollection<PersonConference> AllPersonConferences { get; private set; }
         public ObservableCollection<ConferenceViewModel> AllConferences { get; private set; }
 
-        public ObservableCollection<Abstract>  AllAbstracts { get; private set; }
+        public ObservableCollection<Abstract> AllAbstracts { get; private set; }
 
 
         public string CurrentPersonConferenceName
@@ -298,17 +299,23 @@ namespace WPFDB.ViewModel
                 OnPropertyChanged("ThirdName");
             }
         }
-        public DateTime? BirthDate
+        public string BirthDate
         {
             get
             {
-                return Model.BirthDate;
+                return String.Format("{0:dd-MM-yyyy}", Model.BirthDate);
             }
 
             set
             {
-                Model.BirthDate = value;
-                OnPropertyChanged("BirthDate");
+                DateTime dt;
+                if (DateTime.TryParseExact(value.ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture,
+                            DateTimeStyles.None, out dt))
+                {
+                    Model.BirthDate = dt;
+                    DataManager.Instance.Save();
+                    OnPropertyChanged("BirthDate");
+                }
             }
         }
         public string WorkPlace
@@ -485,19 +492,29 @@ namespace WPFDB.ViewModel
                 };
             }
         }
-        public DateTime? DateRegistration
+      
+
+        public string DateRegistration
         {
             get
             {
-                return Model.Iacmac.DateRegistration;
+                return String.Format("{0:dd-MM-yyyy}", Model.Iacmac.DateRegistration);
             }
 
             set
             {
-                Model.Iacmac.DateRegistration = value;
-                OnPropertyChanged("DateRegistration");
+                DateTime dt;
+                if (DateTime.TryParseExact(value.ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture,
+                            DateTimeStyles.None, out dt))
+                {
+                    Model.Iacmac.DateRegistration = dt;
+                    DataManager.Instance.Save();
+                    OnPropertyChanged("DateRegistration");
+                }
             }
         }
+
+
         public int Number
         {
             get
@@ -637,7 +654,7 @@ namespace WPFDB.ViewModel
             CurrentAbstract = AllAbstracts.LastOrDefault();
             OnPropertyChanged("CurrentAbstract");
             OnPropertyChanged("AllAbstracts");
-            
+
         }
 
         private void DeleteAbstract()
@@ -717,11 +734,28 @@ namespace WPFDB.ViewModel
                 OnPropertyChanged("PaymentDocument");
             }
         }
-        public DateTime? PaymentDate
+       
+
+        public string PaymentDate
         {
-            get { return CurrentPersonConference.PersonConferences_Payment.PaymentDate ?? DateTime.Now; }
-            set { CurrentPersonConference.PersonConferences_Payment.PaymentDate = value; OnPropertyChanged("PaymentDate"); }
+            get
+            {
+                return String.Format("{0:dd-MM-yyyy HH:mm}", CurrentPersonConference.PersonConferences_Payment.PaymentDate);
+            }
+
+            set
+            {
+                DateTime dt;
+                if (DateTime.TryParseExact(value.ToString(), "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture,
+                            DateTimeStyles.None, out dt))
+                {
+                    CurrentPersonConference.PersonConferences_Payment.PaymentDate = dt;
+                    DataManager.Instance.Save();
+                    OnPropertyChanged("PaymentDate");
+                }
+            }
         }
+
         public Decimal Money
         {
             get { return CurrentPersonConference.PersonConferences_Payment.Money; }
@@ -756,7 +790,8 @@ namespace WPFDB.ViewModel
         }
         public OrderStatus OrderStatus
         {
-            get {
+            get
+            {
                 return CurrentPersonConference.PersonConferences_Payment.OrderStatus ??
                        (CurrentPersonConference.PersonConferences_Payment.OrderStatus =
                            DefaultManager.Instance.DefaultOrderStatus);
@@ -798,15 +833,36 @@ namespace WPFDB.ViewModel
             }
         }
 
-        public DateTime? DateArrive
+        //public DateTime? DateArrive
+        //{
+        //    get { return CurrentPersonConference.PersonConferences_Detail.DateArrive; }
+        //    set
+        //    {
+        //        CurrentPersonConference.PersonConferences_Detail.DateArrive = value;
+        //        OnPropertyChanged("DateArrive");
+        //    }
+        //}
+
+        public string DateArrive
         {
-            get { return CurrentPersonConference.PersonConferences_Detail.DateArrive; }
+            get
+            {
+                return String.Format("{0:dd-MM-yyyy HH:mm}", CurrentPersonConference.PersonConferences_Detail.DateArrive);
+            }
+
             set
             {
-                CurrentPersonConference.PersonConferences_Detail.DateArrive = value;
-                OnPropertyChanged("DateArrive");
+                DateTime dt;
+                if (DateTime.TryParseExact(value.ToString(), "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture,
+                            DateTimeStyles.None, out dt))
+                {
+                    CurrentPersonConference.PersonConferences_Detail.DateArrive = dt;
+                    DataManager.Instance.Save();
+                    OnPropertyChanged("DateArrive");
+                }
             }
         }
+
 
         public bool IsNeedBadge
         {
@@ -847,7 +903,8 @@ namespace WPFDB.ViewModel
 
         public PaymentType PaymentType
         {
-            get {
+            get
+            {
                 return CurrentPersonConference.PersonConferences_Payment.PaymentType ??
                        (CurrentPersonConference.PersonConferences_Payment.PaymentType =
                            DefaultManager.Instance.DefaultPaymentType);
@@ -870,11 +927,11 @@ namespace WPFDB.ViewModel
 
         public void RemoveCurrentPersonConference()
         {
-            
+
             DataManager.Instance.RemovePersonConference(CurrentPersonConference);
-     
+
             AllPersonConferences.Remove(CurrentPersonConference);
-      //      CurrentPersonConference = AllPersonConferences.FirstOrDefault();
+            //      CurrentPersonConference = AllPersonConferences.FirstOrDefault();
             //OnPropertyChanged("AllPersonConferences");
         }
 
@@ -891,7 +948,7 @@ namespace WPFDB.ViewModel
                 OrderNumber = DataManager.Instance.GetOrderNumber(CurrentPersonConference);
             }
             var filepath = WordManager.OrderToWord(CurrentPersonConference);
-         //   PrintManager.Print(filepath, DocumentType.ORDER);
+            //   PrintManager.Print(filepath, DocumentType.ORDER);
         }
 
         public string AbstractOtherAuthors
@@ -906,7 +963,7 @@ namespace WPFDB.ViewModel
                 {
                     return null;
                 }
-           
+
             }
             set
             {

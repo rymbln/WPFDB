@@ -54,9 +54,9 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="80*"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition MinWidth="200" MaxWidth="700"/>
+                <ColumnDefinition Width="20*" MinWidth="200" MaxWidth="700"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -70,15 +70,15 @@
                               AutoGenerateColumns="False" IsReadOnly="True"
                              >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="#" Width="*"  Binding="{Binding Path=SourceId}" />
-                        <DataGridTextColumn Header="Автор" Width="*"  Binding="{Binding Path=AuthorName}" />
+                        <DataGridTextColumn Header="#" Width="Auto"  Binding="{Binding Path=SourceId}" />
+                        <DataGridTextColumn Header="Автор" Width="Auto"  Binding="{Binding Path=AuthorName}" />
                         <DataGridTextColumn Header="Другие авторы" Width="*" Binding="{Binding Path=OtherAuthorsShort}" />
                         <DataGridTextColumn Header="Тема" Width="*" Binding="{Binding Path=NameShort}" />
                         <DataGridTextColumn Header="Email Автора" Width="*" Binding="{Binding Path=AuthorEmail}" />
-                        <DataGridTextColumn Header="Рецензент" Width="*" Binding="{Binding Path=Reviewer.Name}" />
+                        <DataGridTextColumn Header="Рецензент" Width="Auto" Binding="{Binding Path=Reviewer.Name}" />
                         <DataGridTextColumn Header="Дней в работе" Width="*" Binding="{Binding Path=DaysInWork}" />
-                        <DataGridTextColumn Header="Последнее состояние" Width="*" Binding="{Binding Path=LastState}" />
-                        <DataGridTextColumn Header="Дата состояния" Width="*" Binding="{Binding Path=LastStateDate}" />
+                        <DataGridTextColumn Header="Последнее состояние" Width="Auto" Binding="{Binding Path=LastState}" />
+                        <DataGridTextColumn Header="Дата состояния" Width="Auto" Binding="{Binding Path=LastStateDate, StringFormat={}{0:dd-MM-yyyy} {0:HH:mm}}" />
                     </DataGrid.Columns>
                 </DataGrid>
                 <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center"  />
@@ -90,7 +90,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Статус" Width="*"  Binding="{Binding Path=AbstractStatus.Name}" />
                         <DataGridTextColumn Header="Рецензент" Width="*" Binding="{Binding Path=Reviewer.Name}" />
-                        <DataGridTextColumn Header="Дата" Width="*" Binding="{Binding Path=DateWork}" />
+                        <DataGridTextColumn Header="Дата" Width="*" Binding="{Binding Path=DateWork, StringFormat={}{0:dd-MM-yyyy} {0:HH:mm}}" />
 
                     </DataGrid.Columns>
                 </DataGrid>

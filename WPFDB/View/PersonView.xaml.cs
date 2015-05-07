@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPFDB.Common;
 
 namespace WPFDB.View
 {
@@ -22,6 +23,11 @@ namespace WPFDB.View
         public PersonFormView()
         {
             InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DataManager.Instance.Save();
         }
     }
 }

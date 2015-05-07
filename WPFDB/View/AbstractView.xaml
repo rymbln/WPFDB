@@ -113,7 +113,7 @@
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Style="{StaticResource LabelLeft}"
                            Content="Ссылка на документ:" />
-                        <TextBox  Grid.Column="1" Style="{StaticResource TextBoxLarge}"
+                        <TextBox  Grid.Column="1" Style="{StaticResource TextBoxLarge}" HorizontalAlignment="Stretch"
                              Text="{Binding Path=Link, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
    
                     </Grid>
@@ -165,7 +165,7 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Дата" IsReadOnly="True"  Binding="{Binding Path=DateWork, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True}" />
+                            <DataGridTextColumn Header="Дата" IsReadOnly="True" Width="Auto" Binding="{Binding Path=DateWork,StringFormat={}{0:dd-MM-yyyy} {0:HH:mm}, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True}" />
                             <DataGridTextColumn Header="Послано подтверждение" IsReadOnly="True"  Binding="{Binding Path=IsSentByEmailName, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True}" />
                                </DataGrid.Columns>
                     </DataGrid>

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace WPFDB.ViewModel
 {
     using System.ComponentModel;
+    using WPFDB.Common;
 
     /// <summary>
     /// Abstract base to consolidate common functionality of all ViewModels
@@ -23,6 +24,7 @@ namespace WPFDB.ViewModel
         protected void OnPropertyChanged(string propertyName)
         {
             this.OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
+            DataManager.Instance.Save();
         }
 
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
