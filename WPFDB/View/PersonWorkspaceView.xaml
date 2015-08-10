@@ -284,7 +284,7 @@
                         <ListView Name="ListViewPhones"  ItemsSource="{Binding Path=CurrentPersonVM.PhonesList}"></ListView>
                     </HeaderedContentControl>
                     <HeaderedContentControl Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"
-                                Style="{StaticResource SubDisplayArea}" >
+                                Style="{StaticResource SubDisplayAreaExpandable}" >
                         <HeaderedContentControl.Header>
                             Адреса
                         </HeaderedContentControl.Header>

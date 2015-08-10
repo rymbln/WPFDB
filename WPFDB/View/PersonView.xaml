@@ -33,7 +33,7 @@
     </Window.InputBindings>
     <ScrollViewer>
         <DockPanel>
-            <ToolBarTray DockPanel.Dock="Top">
+            <!--<ToolBarTray DockPanel.Dock="Top">
                 <ToolBar>
                     <Button Command="{Binding SaveCommand}" Content="Save" ToolTip="{x:Static p:Resources.Save}"/>
                     <Button Command="{Binding CancelCommand}" Content="Cancel" ToolTip="{x:Static p:Resources.Save}"/>
@@ -44,7 +44,7 @@
                     <Button Command="ApplicationCommands.Copy" Content="{StaticResource CopyImage}" ToolTip="{x:Static p:Resources.Copy}"/>
                     <Button Command="ApplicationCommands.Paste" Content="{StaticResource PasteImage}" ToolTip="{x:Static p:Resources.Paste}"/>
                 </ToolBar>
-            </ToolBarTray>
+            </ToolBarTray>-->
             <Grid DockPanel.Dock="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

@@ -118,6 +118,7 @@ namespace WPFDB.ViewModel
                     newPersConf.PersonConferences_Detail =
                         DefaultManager.Instance.DefaultPersonConferenceDetail(newPersConf.PersonConferenceId);
                     newPersConf.PersonConferences_Detail.IsArrive = true;
+                    newPersConf.PersonConferences_Detail.RankId = DefaultManager.Instance.DefaultRank.Id;
                     newPersConf.PersonConferences_Detail.DateArrive = DateTime.Now;
                     newPersConf.PersonConferences_Payment =
                         DefaultManager.Instance.DefaultPersonConferencePayment(newPersConf.PersonConferenceId);
