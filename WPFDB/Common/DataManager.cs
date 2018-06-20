@@ -62,7 +62,7 @@ namespace WPFDB.Common
 
         public IEnumerable<Person> GetAllPersonForConference(Guid conf)
         {
-            return context.PersonConferences.Where(o => o.Conference.Id == conf).Include(o=>o.Person).Select(o=>o.Person);
+            return context.PersonConferences.Where(o => o.Conference.Id == conf).Include(o => o.Person).Select(o => o.Person);
 
         }
 
@@ -76,7 +76,7 @@ namespace WPFDB.Common
         }
         public List<ItemGuidName> GetAllConferencesItem()
         {
-            return context.Conferences.OrderBy(r => r.DateAdd).Select(o => new ItemGuidName { Id = o.Id, Name = o.Name }).ToList();;
+            return context.Conferences.OrderBy(r => r.DateAdd).Select(o => new ItemGuidName { Id = o.Id, Name = o.Name }).ToList(); ;
         }
         public IEnumerable<Sex> GetAllSexes()
         {
@@ -389,16 +389,36 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("conference");
             }
-            var personConference = CreateObject<PersonConference>();
-            personConference.PersonConferenceId = GuidComb.Generate();
-            personConference.PersonId = person.Id;
-            personConference.ConferenceId = conference.Id;
-            context.PersonConferences.AddObject(personConference);
-            Save();
-            personConference.PersonConferences_Detail = DefaultManager.Instance.DefaultPersonConferenceDetail(personConference.PersonConferenceId);
-            personConference.PersonConferences_Payment = DefaultManager.Instance.DefaultPersonConferencePayment(personConference.PersonConferenceId);
-            Save();
+
+            // Проверяем, есть ли уже такая конференция у человека
+            var personConference = context.PersonConferences.Where(o => o.Person.Id.Equals(person.Id) && o.Conference.Id.Equals(conference.Id)).FirstOrDefault();
+            if (personConference == null)
+            {
+                // Если находимся в режиме конференции - надо задать участие в текущей конференции
+                //if (DefaultManager.Instance.ConferenceMode)
+                //{
+                    personConference = CreateObject<PersonConference>();
+                    personConference.PersonConferenceId = GuidComb.Generate();
+                    personConference.PersonId = person.Id;
+                    personConference.ConferenceId = conference.Id;
+                    context.PersonConferences.AddObject(personConference);
+                    Save();
+                    // Если находимся в режиме регистрации - надо предзаполнить данные прибытия и оплаты
+                    if (!DefaultManager.Instance.RegistrationMode)
+                    {
+                        personConference.PersonConferences_Detail = DefaultManager.Instance.DefaultPersonConferenceDetail(personConference.PersonConferenceId);
+                        personConference.PersonConferences_Payment = DefaultManager.Instance.DefaultPersonConferencePayment(personConference.PersonConferenceId);
+                    }
+                    else
+                    {
+                        personConference.PersonConferences_Detail = DefaultManager.Instance.DefaultPersonConferenceDetailRegistration(personConference.PersonConferenceId);
+                        personConference.PersonConferences_Payment = DefaultManager.Instance.DefaultPersonConferencePaymentRegistration(personConference.PersonConferenceId);
+                    }
+                    Save();
+                //}
+            }
             return personConference;
+
         }
 
         public void AddPersonConference(PersonConference obj)
@@ -507,6 +527,18 @@ namespace WPFDB.Common
             this.context.Conferences.DeleteObject(obj);
             Save();
         }
+
+        public List<GeoBase> FindCityGeo(string city)
+        {
+            var list = new List<GeoBase>();
+
+            list = context.GeoBases.Where(o => 
+                o.CityName.ToUpper().Contains(city.ToUpper()) && 
+                    (
+                    o.CityTypeFull.Equals("Город") || o.CityTypeFull.Equals("Поселок городского типа") || o.CityTypeFull.Equals("Станица") || o.CityTypeFull.Equals("Станция"))).ToList();
+
+            return list;
+        }
         public void RemovePerson(Person obj)
         {
             if (obj == null)
@@ -543,7 +575,7 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("personConference");
             }
-          
+
             foreach (var item in obj.Abstracts.ToList())
             {
                 RemoveAbstract(item);
@@ -755,10 +787,10 @@ namespace WPFDB.Common
         {
             AddUser(new User { Id = GuidComb.Generate(), Name = "user", FullName = "user", Password = "user", Email = "user@example.com", Role = "user" });
             AddUser(new User { Id = GuidComb.Generate(), Name = "admin", FullName = "user", Password = "admin", Email = "admin@example.com", Role = "admin" });
-            AddUser(new User { Id = GuidComb.Generate(), Name = "111", FullName = "user",  Password = "111", Email = "111@example.com", Role = "user" });
+            AddUser(new User { Id = GuidComb.Generate(), Name = "111", FullName = "user", Password = "111", Email = "111@example.com", Role = "user" });
             Save();
 
-            AddAbstractStatus(new AbstractStatus { Id = GuidComb.Generate(), Code = "-", Name = "-", SourceId = 0});
+            AddAbstractStatus(new AbstractStatus { Id = GuidComb.Generate(), Code = "-", Name = "-", SourceId = 0 });
             //AddAbstractStatus(new AbstractStatus { Id = GuidComb.Generate(), Code = "I", Name = "In work" });
             //AddAbstractStatus(new AbstractStatus { Id = GuidComb.Generate(), Code = "RV", Name = "Revision" });
             //AddAbstractStatus(new AbstractStatus { Id = GuidComb.Generate(), Code = "A", Name = "Accepted" });
@@ -766,23 +798,23 @@ namespace WPFDB.Common
             //AddAbstractStatus(new AbstractStatus { Id = GuidComb.Generate(), Code = "R2", Name = "Rejected Twice" });
             Save();
 
-            AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "-", Name = "-" , SourceId = 0});
-            AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "H", Name = "Домашний", SourceId = 1});
+            AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "-", Name = "-", SourceId = 0 });
+            AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "H", Name = "Домашний", SourceId = 1 });
             AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "W", Name = "Рабочий", SourceId = 2 });
-            AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "O", Name = "Другой", SourceId = 3});
+            AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "O", Name = "Другой", SourceId = 3 });
             AddContactType(new ContactType { Id = GuidComb.Generate(), Code = "EX", Name = "Прочее", SourceId = 4 });
             Save();
 
-            AddOrderStatus(new OrderStatus { Id = GuidComb.Generate(), Code = "-", Name = "-", SourceId = 0});
-            AddOrderStatus(new OrderStatus { Id = GuidComb.Generate(), Code = "О", Name = "Оплачен", SourceId = 1});
-            AddOrderStatus(new OrderStatus { Id = GuidComb.Generate(), Code = "В", Name = "Возврат" , SourceId = 2});
+            AddOrderStatus(new OrderStatus { Id = GuidComb.Generate(), Code = "-", Name = "-", SourceId = 0 });
+            AddOrderStatus(new OrderStatus { Id = GuidComb.Generate(), Code = "О", Name = "Оплачен", SourceId = 1 });
+            AddOrderStatus(new OrderStatus { Id = GuidComb.Generate(), Code = "В", Name = "Возврат", SourceId = 2 });
             Save();
 
-            AddConference(new Conference { Id = GuidComb.Generate(), Code = "-", Name = "-" , SourceId = 0});
+            AddConference(new Conference { Id = GuidComb.Generate(), Code = "-", Name = "-", SourceId = 0 });
             //AddConference(new Conference { Id = GuidComb.Generate(), Code = "", Name = "Conference 1" });
             //AddConference(new Conference { Id = GuidComb.Generate(), Code = "", Name = "Conference 2" });
             Save();
-            AddScienceDegree(new ScienceDegree { Id = GuidComb.Generate(), Code = "-", Name = "-" , SourceId = 0});
+            AddScienceDegree(new ScienceDegree { Id = GuidComb.Generate(), Code = "-", Name = "-", SourceId = 0 });
             //AddScienceDegree(new ScienceDegree { Id = GuidComb.Generate(), Code = "", Name = "Science Degree 1" });
             //AddScienceDegree(new ScienceDegree { Id = GuidComb.Generate(), Code = "", Name = "Science Degree 2" });
             Save();
@@ -790,24 +822,24 @@ namespace WPFDB.Common
             //AddScienceStatus(new ScienceStatus { Id = GuidComb.Generate(), Code = "", Name = "Science Status 1" });
             //AddScienceStatus(new ScienceStatus { Id = GuidComb.Generate(), Code = "", Name = "Science Status 2" });
             Save();
-            AddSex(new Sex { Id = GuidComb.Generate(), Code = "-", Name = "-", SourceId = 0});
-            AddSex(new Sex { Id = GuidComb.Generate(), Code = "М", Name = "Мужской" , SourceId = 1});
-            AddSex(new Sex { Id = GuidComb.Generate(), Code = "Ж", Name = "Женский", SourceId = 2});
+            AddSex(new Sex { Id = GuidComb.Generate(), Code = "-", Name = "-", SourceId = 0 });
+            AddSex(new Sex { Id = GuidComb.Generate(), Code = "М", Name = "Мужской", SourceId = 1 });
+            AddSex(new Sex { Id = GuidComb.Generate(), Code = "Ж", Name = "Женский", SourceId = 2 });
             Save();
-            AddSpeciality(new Speciality { Id = GuidComb.Generate(), Code = "-", Name = "-" , SourceId = 0});
+            AddSpeciality(new Speciality { Id = GuidComb.Generate(), Code = "-", Name = "-", SourceId = 0 });
             //AddSpeciality(new Speciality { Id = GuidComb.Generate(), Code = "", Name = "Speciality 1" });
             //AddSpeciality(new Speciality { Id = GuidComb.Generate(), Code = "", Name = "Speciality 2" });
             Save();
 
-            AddRank(new Rank { Id = GuidComb.Generate(), Code = "-", Name = "-", SourceId = 0});
+            AddRank(new Rank { Id = GuidComb.Generate(), Code = "-", Name = "-", SourceId = 0 });
             ////AddRank(new Rank { Id = GuidComb.Generate(), Code = "", Name = "Rank 1" });
             //AddRank(new Rank { Id = GuidComb.Generate(), Code = "", Name = "Rank 2" });
             Save();
-            AddCompany(new Company { Id = GuidComb.Generate(), Code = "-", Name = "-", SourceId = 0});
+            AddCompany(new Company { Id = GuidComb.Generate(), Code = "-", Name = "-", SourceId = 0 });
             //AddCompany(new Company { Id = GuidComb.Generate(), Code = "", Name = "Company 1" });
             //AddCompany(new Company { Id = GuidComb.Generate(), Code = "", Name = "Company 2" });
             Save();
-            AddPaymentType(new PaymentType { Id = GuidComb.Generate(), Code = "-", Name = "-", SourceId = 0});
+            AddPaymentType(new PaymentType { Id = GuidComb.Generate(), Code = "-", Name = "-", SourceId = 0 });
             //AddPaymentType(new PaymentType { Id = GuidComb.Generate(), Code = "", Name = "Payment type 1" });
             //AddPaymentType(new PaymentType { Id = GuidComb.Generate(), Code = "", Name = "Payment type 2" });
             Save();
@@ -822,8 +854,8 @@ namespace WPFDB.Common
         public PersonConference GetPersonConference(Person person, Conference conference)
         {
             return
-                this.context.PersonConferences.SingleOrDefault(
-                    o => o.PersonId == person.Id & o.ConferenceId == conference.Id);
+                this.context.PersonConferences.Where(
+                    o => o.PersonId == person.Id & o.ConferenceId == conference.Id).FirstOrDefault();
         }
 
         public PersonConference GetPersonConferenceByID(string id)
@@ -867,8 +899,8 @@ namespace WPFDB.Common
 
             email.PersonId = person.Id;
 
-    //        this.CheckEntityBelongsToUnitOfWork(email);
-    //        this.CheckEntityBelongsToUnitOfWork(person);
+            //        this.CheckEntityBelongsToUnitOfWork(email);
+            //        this.CheckEntityBelongsToUnitOfWork(person);
 
             this.context.Emails.AddObject(email);
             person.Emails.Add(email);
@@ -908,8 +940,8 @@ namespace WPFDB.Common
                 throw new ArgumentNullException("address");
             }
             address.PersonId = person.Id;
-    //        this.CheckEntityBelongsToUnitOfWork(address);
-    //        this.CheckEntityBelongsToUnitOfWork(person);
+            //        this.CheckEntityBelongsToUnitOfWork(address);
+            //        this.CheckEntityBelongsToUnitOfWork(person);
 
             this.context.Addresses.AddObject(address);
             person.Addresses.Add(address);
@@ -949,8 +981,8 @@ namespace WPFDB.Common
                 throw new ArgumentNullException("phone");
             }
             phone.PersonId = person.Id;
-    //        this.CheckEntityBelongsToUnitOfWork(phone);
-      //      this.CheckEntityBelongsToUnitOfWork(person);
+            //        this.CheckEntityBelongsToUnitOfWork(phone);
+            //      this.CheckEntityBelongsToUnitOfWork(person);
 
             this.context.Phones.AddObject(phone);
             person.Phones.Add(phone);
@@ -1127,7 +1159,7 @@ namespace WPFDB.Common
         public Conference GetConferenceBySourceId(int id)
         {
             return context.Conferences.FirstOrDefault(o => o.SourceId == id);
-            
+
         }
 
         public Conference GetConferenceById(Guid id)
@@ -1219,8 +1251,8 @@ namespace WPFDB.Common
         {
             return context.PersonConferences
                 .Where(o => o.PersonId == guid)
-         //       .Include(o => o.PersonConferences_Detail)
-                
+                //       .Include(o => o.PersonConferences_Detail)
+
                 .ToList();
         }
 
@@ -1228,13 +1260,13 @@ namespace WPFDB.Common
         {
             return context.PersonConferences
                 .Where(o => o.PersonId == id && o.PersonConferences_Detail.IsArrive == true)
-           //     .Include(o => o.PersonConferences_Detail)
+                //     .Include(o => o.PersonConferences_Detail)
                 .ToList();
         }
 
 
 
-        public  List<Abstract> GetAbstractsByPersonConferenceID(Guid id)
+        public List<Abstract> GetAbstractsByPersonConferenceID(Guid id)
         {
             return context.Abstracts.Where(o => o.PersonConferenceId == id).OrderBy(o => o.DateAdd).ToList();
         }
@@ -1254,7 +1286,7 @@ namespace WPFDB.Common
 
         public List<Abstract> GetAbstractsForPosterSession()
         {
-            
+
             var lst = context.Abstracts.Where(o => o.PersonConference.ConferenceId == DefaultManager.Instance.DefaultConference.Id).ToList();
             return lst.Where(abs => abs.LastState == "Принят").ToList();
         }
@@ -1264,9 +1296,9 @@ namespace WPFDB.Common
             return context.Abstracts.Where(o => o.PersonConference.ConferenceId == guid).ToList();
         }
 
-        public  IEnumerable<BadgeType> GetAllBadges()
+        public IEnumerable<BadgeType> GetAllBadges()
         {
-            return context.BadgeTypes.OrderBy(o=>o.Name);
+            return context.BadgeTypes.OrderBy(o => o.Name);
         }
 
         public void AddElementToBadge(BadgeType badgeType, Badge element)
@@ -1314,16 +1346,16 @@ namespace WPFDB.Common
             {
                 throw new ArgumentNullException("bdgesdefault");
             }
-          //  obj.DateAdd = DateTime.Now;
-           // obj.DateUpdate = DateTime.Now;
-           // var currentUser = Authentification.GetCurrentUser();
-           // obj.User = currentUser == null ? "-" : currentUser.Name;
+            //  obj.DateAdd = DateTime.Now;
+            // obj.DateUpdate = DateTime.Now;
+            // var currentUser = Authentification.GetCurrentUser();
+            // obj.User = currentUser == null ? "-" : currentUser.Name;
             this.CheckEntityDoesNotBelongToUnitOfWork(obj);
             this.context.BadgesDefaults.AddObject(obj);
             Save();
         }
 
-        public  void DeleteBadgesDefault(BadgesDefault BadgeDefaultSelected)
+        public void DeleteBadgesDefault(BadgesDefault BadgeDefaultSelected)
         {
             if (BadgeDefaultSelected == null)
             {
@@ -1346,7 +1378,7 @@ namespace WPFDB.Common
             return obj;
         }
 
-        public  BadgeType GetBadgeByID(Guid guid)
+        public BadgeType GetBadgeByID(Guid guid)
         {
             return this.context.BadgeTypes.Where(b => b.Id == guid).FirstOrDefault();
         }
@@ -1403,12 +1435,12 @@ namespace WPFDB.Common
 
         public List<ItemGuidName> GetAllRanksItem()
         {
-            return context.Ranks.OrderBy(r=>r.Name).Select(o => new ItemGuidName { Id = o.Id, Name = o.Name }).ToList();
+            return context.Ranks.OrderBy(r => r.Name).Select(o => new ItemGuidName { Id = o.Id, Name = o.Name }).ToList();
         }
 
         public List<ItemGuidName> GetAllBadgesItem()
         {
-            return context.BadgeTypes.OrderBy(r=>r.Name).Select(o => new ItemGuidName { Id = o.Id, Name = o.Name }).ToList();
+            return context.BadgeTypes.OrderBy(r => r.Name).Select(o => new ItemGuidName { Id = o.Id, Name = o.Name }).ToList();
         }
 
 

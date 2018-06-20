@@ -41,8 +41,15 @@
                 SelectedItem="{Binding Path=ConferenceFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
                 ItemsSource="{Binding Path=ConferenceLookup}" 
                 DisplayMemberPath="Name"  />
-
-
+        </ToolBar>
+        <ToolBar DockPanel.Dock="Top">
+            <Button Content="РЕГИСТРАЦИЯ" Command="{Binding SetArriveCommand}"/>
+            <Separator/>
+            <Button Content="ВЫДАТЬ КАРТУ" Command="{Binding SetCardCommand}"/>
+            <Separator/>
+            <Button Content="ОПЛАТА 1200" Command="{Binding SetPayment1200Command}"/>
+            <Button Content="ОПЛАТА 1000" Command="{Binding SetPayment1000Command}"/>
+            <Button Content="ОПЛАТА 600" Command="{Binding SetPayment600Command}"/>
         </ToolBar>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -198,7 +205,7 @@
                 Text="Номер:" HorizontalAlignment="Right" />
                             <TextBox Grid.Row="6" Grid.Column="1"  
                 Text="{Binding Path=CurrentPersonVM.Number, Mode=OneWay}"  Style="{StaticResource TextBoxLarge}"/>
-                            <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Content="ВЫДАТЬ" Command="{Binding SetCardCommand}"/>
+                            <!--<Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Content="ВЫДАТЬ" Command="{Binding SetCardCommand}"/>-->
 
                         </Grid>
                     </HeaderedContentControl>
@@ -236,7 +243,7 @@
                             <TextBox Grid.Row="3" Grid.Column="1"   TextWrapping="Wrap"                Text="{Binding Path=CurrentPersonVM.IsBadge, Mode=OneWay}"                                      Style="{StaticResource TextBoxLarge}"                                     />
                             <TextBlock Grid.Row="4" Grid.Column="0"                Text="Компания:" HorizontalAlignment="Right" />
                             <TextBox Grid.Row="4" Grid.Column="1"   TextWrapping="Wrap"                Text="{Binding Path=CurrentPersonVM.ArriveCompany, Mode=OneWay}"                                       Style="{StaticResource TextBoxLarge}"                                     />
-                            <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Content="РЕГИСТРАЦИЯ" Command="{Binding SetArriveCommand}"/>
+                            <!--<Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Content="РЕГИСТРАЦИЯ" Command="{Binding SetArriveCommand}"/>-->
                         </Grid>
                     </HeaderedContentControl>
                     <HeaderedContentControl Grid.Column="1" Grid.Row="1"
@@ -271,8 +278,14 @@
                             <TextBlock Grid.Row="3" Grid.Column="0"                Text="Компания-спонсор:" HorizontalAlignment="Right" />
                             <TextBox Grid.Row="3" Grid.Column="1"   TextWrapping="Wrap"                Text="{Binding Path=CurrentPersonVM.PaymentCompany, Mode=OneWay}" Style="{StaticResource TextBoxLarge}"                                     />
                             <TextBlock Grid.Row="4" Grid.Column="0" Text="Сумма:" HorizontalAlignment="Right" />
-                            <TextBox Grid.Row="4" Grid.Column="1"                                             Text="{Binding Path=CurrentPersonVM.Money,  Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Content="ОПЛАТА" Command="{Binding SetPaymentCommand}"/>
+                            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=CurrentPersonVM.Money,  Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <!--<StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+                                <Button  Margin="5" Content="ОПЛАТА 1200" Command="{Binding SetPaymentCommand}"/>
+                                <Button  Margin="5" Content="ОПЛАТА 1000" Command="{Binding SetPaymentCommand}"/>
+                                <Button  Margin="5" Content="ОПЛАТА 600" Command="{Binding SetPaymentCommand}"/>
+                                
+                            </StackPanel>-->
+                            
                         </Grid>
                     </HeaderedContentControl>
 
@@ -284,7 +297,7 @@
                         <ListView Name="ListViewPhones"  ItemsSource="{Binding Path=CurrentPersonVM.PhonesList}"></ListView>
                     </HeaderedContentControl>
                     <HeaderedContentControl Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"
-                                Style="{StaticResource SubDisplayAreaExpandable}" >
+                                Style="{StaticResource SubDisplayArea}" >
                         <HeaderedContentControl.Header>
                             Адреса
                         </HeaderedContentControl.Header>

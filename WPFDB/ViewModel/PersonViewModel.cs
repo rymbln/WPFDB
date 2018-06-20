@@ -39,12 +39,15 @@ namespace WPFDB.ViewModel
             PaymentTypeLookup = new ObservableCollection<PaymentType>(DataManager.Instance.GetAllPaymentTypes());
             CompanyLookup = new ObservableCollection<Company>(DataManager.Instance.GetAllCompanies());
             RankLookup = new ObservableCollection<Rank>(DataManager.Instance.GetAllRanks());
-
+            AvailableConferencesCollection = new ObservableCollection<Conference>(DataManager.Instance.GetAllConferences());
 
 
             PersonEmails = new ObservableCollection<EmailViewModel>();
             PersonAddresses = new ObservableCollection<AddressViewModel>();
             PersonPhones = new ObservableCollection<PhoneViewModel>();
+
+            ConferenceForInsert = DefaultManager.Instance.DefaultConference;
+
             if (Model.Emails.Count > 0)
             {
                 foreach (var email in Model.Emails)
@@ -86,53 +89,10 @@ namespace WPFDB.ViewModel
             }
             AllConferences.CollectionChanged += AllConferences_CollectionChanged;
 
-            // Проверяем режим работы конференция
             if (DefaultManager.Instance.ConferenceMode)
             {
-                var defConf = DefaultManager.Instance.DefaultConference;
-                var persConf = DataManager.Instance.GetPersonConference(Model, defConf);
-                if (persConf == null)
-                {
-                    var newPersConf = DataManager.Instance.CreateObject<PersonConference>();
-                    newPersConf.PersonConferenceId = GuidComb.Generate();
-                    newPersConf.PersonId = Model.Id;
-                    newPersConf.ConferenceId = defConf.Id;
-                    newPersConf.PersonConferences_Detail =
-                        DefaultManager.Instance.DefaultPersonConferenceDetail(newPersConf.PersonConferenceId);
-                    newPersConf.PersonConferences_Payment =
-                        DefaultManager.Instance.DefaultPersonConferencePayment(newPersConf.PersonConferenceId);
-                    DataManager.Instance.AddPersonConference(newPersConf);
-                }
+                DataManager.Instance.AddPersonConference(person, DefaultManager.Instance.DefaultConference);
             }
-            // Проверяем режим работы регистрация
-            if (DefaultManager.Instance.RegistrationMode)
-            {
-                var defConf = DefaultManager.Instance.DefaultConference;
-                var persConf = DataManager.Instance.GetPersonConference(Model, defConf);
-                if (persConf == null)
-                {
-                    var newPersConf = DataManager.Instance.CreateObject<PersonConference>();
-                    newPersConf.PersonConferenceId = GuidComb.Generate();
-                    newPersConf.PersonId = Model.Id;
-                    newPersConf.ConferenceId = defConf.Id;
-                    newPersConf.PersonConferences_Detail =
-                        DefaultManager.Instance.DefaultPersonConferenceDetail(newPersConf.PersonConferenceId);
-                    newPersConf.PersonConferences_Detail.IsArrive = true;
-                    newPersConf.PersonConferences_Detail.RankId = DefaultManager.Instance.DefaultRank.Id;
-                    newPersConf.PersonConferences_Detail.DateArrive = DateTime.Now;
-                    newPersConf.PersonConferences_Payment =
-                        DefaultManager.Instance.DefaultPersonConferencePayment(newPersConf.PersonConferenceId);
-                    DataManager.Instance.AddPersonConference(newPersConf);
-                }
-                else
-                {
-                    persConf.PersonConferences_Detail.IsArrive = true;
-                    persConf.PersonConferences_Detail.DateArrive = DateTime.Now;
-                    DataManager.Instance.Save();
-                }
-            }
-
-
             AllPersonConferences = new ObservableCollection<PersonConference>(DataManager.Instance.GetPersonConferencesForPerson(Model));
             CurrentPersonConference = AllPersonConferences.Count > 0 ? AllPersonConferences[0] : null;
             if (DefaultManager.Instance.ConferenceMode || DefaultManager.Instance.RegistrationMode)
@@ -202,6 +162,8 @@ namespace WPFDB.ViewModel
         public ObservableCollection<OrderStatus> OrderStatusLookup { get; private set; }
         public ObservableCollection<Rank> RankLookup { get; private set; }
 
+        public ObservableCollection<Conference> AvailableConferencesCollection { get; private set; }
+
         public ObservableCollection<EmailViewModel> PersonEmails { get; private set; }
         public ObservableCollection<AddressViewModel> PersonAddresses { get; private set; }
         public ObservableCollection<PhoneViewModel> PersonPhones { get; private set; }
@@ -236,6 +198,20 @@ namespace WPFDB.ViewModel
             {
                 Model.ScienceStatus = value;
                 OnPropertyChanged("ScienceStatus");
+            }
+        }
+
+        private Conference conferenceForInsert;
+        public Conference ConferenceForInsert
+        {
+            get
+            {
+                return conferenceForInsert;
+            }
+            set
+            {
+                conferenceForInsert = value;
+                OnPropertyChanged("ConferenceForInsert");
             }
         }
 
@@ -920,6 +896,12 @@ namespace WPFDB.ViewModel
         public void AddPersonConference()
         {
             Conference c = DefaultManager.Instance.DefaultConference;
+
+            // Выводим окно
+
+            // Проверяем, есть ли конференция в списке у человека
+
+
             var pc = DataManager.Instance.AddPersonConference(Model, c);
             AllPersonConferences.Add(pc);
             CurrentPersonConference = AllPersonConferences.LastOrDefault();

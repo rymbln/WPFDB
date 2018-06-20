@@ -8,6 +8,12 @@ using WPFDB.Common;
 
 namespace WPFDB.Model
 {
+    public partial class GeoBase: EntityObject
+    {
+        public string Text { get { return this.CityName + " - " + this.RegionName + " " + this.RegionTypeFull; } }
+    }
+
+
     public partial class Abstract : EntityObject
     {
 

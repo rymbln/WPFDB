@@ -16,10 +16,10 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" Text="Email:" />
-                <TextBox Grid.Column="1" Text="{Binding Path=Name}" HorizontalAlignment="Stretch"
+                <TextBox Grid.Column="1" Text="{Binding Path=Name}" MinWidth="100" HorizontalAlignment="Stretch"
                          />
                 <TextBlock Grid.Column="2" Text="Тип:" />
-                <ComboBox Grid.Column="3" Width="60" 
+                <ComboBox Grid.Column="3" MinWidth="60" 
                           HorizontalAlignment="Stretch"
                           ItemsSource="{Binding Path=ContactTypeLookup}" 
                           SelectedValue="{Binding Path=ContactType}" 

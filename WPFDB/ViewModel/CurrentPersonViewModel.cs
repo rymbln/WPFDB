@@ -22,39 +22,88 @@ namespace WPFDB.ViewModel
         }
         public string Rank
         {
-            get { return ActualConference == null ? "" : ActualConference.PersonConferences_Detail.Rank.Name; }
+            get
+            {
+                if (ActualConference != null)
+                {
+                    if (ActualConference.PersonConferences_Detail == null)
+                    {
+                        return "";
+                    }
+                    else
+                    {
+                        return ActualConference.PersonConferences_Detail == null ? "" : ActualConference.PersonConferences_Detail.Rank.Name;
+                    }
+                }
+                else
+                {
+                    return "";
+                }
+            }
         }
         public string IsArrive
         {
             get
             {
-                if (ActualConference == null)
+                if (ActualConference != null)
                 {
-                    return "";
+                    if (ActualConference.PersonConferences_Detail == null)
+                    {
+                        return "";
+                    }
+                    else
+                    {
+                        return ActualConference.PersonConferences_Detail.IsArrive ? "Да" : "Нет";
+                    }
                 }
                 else
                 {
-                    return ActualConference.PersonConferences_Detail.IsArrive ? "Да" : "Нет";
+                    return "";
                 }
             }
         }
         public DateTime? DateArrive
         {
-            get { return ActualConference == null ? null : ActualConference.PersonConferences_Detail.DateArrive; }
+            get
+            {
+                if (ActualConference != null)
+                {
+                    if (ActualConference.PersonConferences_Detail == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return ActualConference.PersonConferences_Detail.DateArrive;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         public string IsBadge
         {
             get
             {
-                if (ActualConference == null)
+                if (ActualConference != null)
                 {
-                    return "";
+                    if (ActualConference.PersonConferences_Detail == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return ActualConference.PersonConferences_Detail.IsBadge ? "Да" : "Нет";
+                    }
                 }
                 else
                 {
-                    return ActualConference.PersonConferences_Detail.IsBadge ? "Да" : "Нет";
+                    return null;
                 }
+
             }
         }
 
@@ -62,17 +111,68 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                return ActualConference == null ? "" : ActualConference.PersonConferences_Detail.Company.Name;
+
+                if (ActualConference != null)
+                {
+                    if (ActualConference.PersonConferences_Detail == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return ActualConference.PersonConferences_Detail.Company.Name;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+
             }
         }
 
         public string PaymentType
         {
-            get { return ActualConference == null ? "" : ActualConference.PersonConferences_Payment.PaymentType.Name; }
+            get
+            {
+                if (ActualConference != null)
+                {
+                    if (ActualConference.PersonConferences_Payment == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return ActualConference.PersonConferences_Payment.PaymentType.Name;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
         public DateTime? PaymentDate
         {
-            get { return ActualConference == null ? null : ActualConference.PersonConferences_Payment.PaymentDate; }
+            get
+            {
+
+                if (ActualConference != null)
+                {
+                    if (ActualConference.PersonConferences_Payment == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return ActualConference.PersonConferences_Payment.PaymentDate; ;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
         public string PaymentDocument
         {
@@ -86,25 +186,67 @@ namespace WPFDB.ViewModel
                 }
                 else
                 {
-                    var str = ActualConference.PersonConferences_Payment.PaymentDocument;
-
-                    if (ActualConference.PersonConferences_Payment.OrderNumber > 0)
+                    if (ActualConference.PersonConferences_Payment == null)
                     {
-                        str = str + string.Format(" (Ордер № {0})", ActualConference.PersonConferences_Payment.OrderNumber);
+                        return null;
                     }
-                    return str;
+                    else
+                    {
+                        var str = ActualConference.PersonConferences_Payment.PaymentDocument;
+
+                        if (ActualConference.PersonConferences_Payment.OrderNumber > 0)
+                        {
+                            str = str + string.Format(" (Ордер № {0})", ActualConference.PersonConferences_Payment.OrderNumber);
+                        }
+                        return str;
+                    }
+
                 }
             }
         }
 
         public string PaymentCompany
         {
-            get { return ActualConference == null ? "" : ActualConference.PersonConferences_Payment.Company.Name; }
+            get
+            {
+                if (ActualConference != null)
+                {
+                    if (ActualConference.PersonConferences_Payment == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return ActualConference.PersonConferences_Payment.Company.Name;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         public string Money
         {
-            get { return ActualConference == null ? "" : ActualConference.PersonConferences_Payment.Money.ToString(); }
+            get
+            {
+                if (ActualConference != null)
+                {
+                    if (ActualConference.PersonConferences_Payment == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return ActualConference.PersonConferences_Payment.Money.ToString();
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         public ScienceDegree ScienceDegree
@@ -338,8 +480,24 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                var conferences = DataManager.Instance.GetConferenceForPersonRegistered(Model.Id);
-                return conferences.Select(conference => conference.Conference.Name + " (" + conference.PersonConferences_Detail.Rank.Name + ")").ToList();
+                var list = new List<string>();
+                try
+                {
+                    var conferences = DataManager.Instance.GetConferenceForPersonRegistered(Model.Id);
+                    if (conferences.Count() > 0)
+                    {
+                        var details =
+                        list = conferences.Select(conference => conference.Conference.Name + " (" + conference.PersonConferences_Detail.Rank.Name + ")").ToList();
+                    }
+
+                }
+                catch
+                {
+
+                }
+
+                return list;
+
             }
         }
 
@@ -347,8 +505,20 @@ namespace WPFDB.ViewModel
         {
             get
             {
-                var conferences = DataManager.Instance.GetConferenceForPersonArrived(Model.Id);
-                return conferences.Select(conference => conference.Conference.Name + " (" + conference.PersonConferences_Detail.Rank.Name + ")").ToList();
+                var list = new List<string>();
+                try
+                {
+                    var conferences = DataManager.Instance.GetConferenceForPersonArrived(Model.Id);
+                    if (conferences.Count() > 0)
+                    {
+                        list = conferences.Select(conference => conference.Conference.Name + " (" + conference.PersonConferences_Detail.Rank.Name + ")").ToList();
+                    }
+                }
+                catch
+                {
+
+                }
+                return list;
             }
         }
 

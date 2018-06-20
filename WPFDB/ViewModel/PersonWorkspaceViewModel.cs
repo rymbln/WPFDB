@@ -47,6 +47,10 @@ namespace WPFDB.ViewModel
             OpenPersonCommand = new DelegateCommand((o) => OpenPerson());
             ToogleConferenceFilterCommand = new DelegateCommand(o => ToggleConferenceFilter());
 
+            SetPayment1200Command = new DelegateCommand(o => SetPayment(1200), o => CurrentPerson != null);
+            SetPayment1000Command = new DelegateCommand(o => SetPayment(1000), o => CurrentPerson != null);
+            SetPayment600Command = new DelegateCommand(o => SetPayment(600), o => CurrentPerson != null);
+
         }
 
         public ICommand AddPersonCommand { get; private set; }
@@ -55,6 +59,10 @@ namespace WPFDB.ViewModel
         public ICommand OpenPersonCommand { get; private set; }
         public ICommand ApplyFiltersCommand { get; private set; }
         public ICommand ToogleConferenceFilterCommand { get; private set; }
+
+        public ICommand SetPayment1200Command { get; private set; }
+        public ICommand SetPayment1000Command { get; private set; }
+        public ICommand SetPayment600Command { get; private set; }
 
 
 
@@ -65,6 +73,17 @@ namespace WPFDB.ViewModel
         private void ToggleConferenceFilter()
         {
             IsFilterConference = !IsFilterConference;
+        }
+
+        private void SetPayment( int payment)
+        {
+            // Проверяем, есть ли активная конференция
+
+            // Проверяем, есть ли учетная запись конференции у выделенного человека
+
+            // Проверяем, есть ли оплата
+
+            // Проставляем оплату
         }
 
         public Conference ConferenceFilter
@@ -138,9 +157,14 @@ namespace WPFDB.ViewModel
 
         private void DeleteCurrentPerson()
         {
-            DataManager.Instance.RemovePerson(CurrentPerson);
-            AllPersons.Remove(CurrentPerson);
-            OnPropertyChanged("AllPersons");
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show(string.Format("Вы действительно хотите удалить {0}?", CurrentPerson.FullName), "Подтвердите удаление", System.Windows.MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                DataManager.Instance.RemovePerson(CurrentPerson);
+                AllPersons.Remove(CurrentPerson);
+                OnPropertyChanged("AllPersons");
+            }
+                
             //   CurrentPerson = null;
 
         }

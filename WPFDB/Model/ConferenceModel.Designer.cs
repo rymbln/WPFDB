@@ -544,6 +544,22 @@ namespace WPFDB.Model
             }
         }
         private ObjectSet<Printer> _Printers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<GeoBase> GeoBases
+        {
+            get
+            {
+                if ((_GeoBases == null))
+                {
+                    _GeoBases = base.CreateObjectSet<GeoBase>("GeoBases");
+                }
+                return _GeoBases;
+            }
+        }
+        private ObjectSet<GeoBase> _GeoBases;
 
         #endregion
 
@@ -771,6 +787,14 @@ namespace WPFDB.Model
         public void AddToPrinters(Printer printer)
         {
             base.AddObject("Printers", printer);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the GeoBases EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGeoBases(GeoBase geoBase)
+        {
+            base.AddObject("GeoBases", geoBase);
         }
 
         #endregion
@@ -4350,6 +4374,374 @@ namespace WPFDB.Model
                 }
             }
         }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ConferenceModel", Name="GeoBase")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class GeoBase : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new GeoBase object.
+        /// </summary>
+        /// <param name="cityId">Initial value of the CityId property.</param>
+        public static GeoBase CreateGeoBase(global::System.Int32 cityId)
+        {
+            GeoBase geoBase = new GeoBase();
+            geoBase.CityId = cityId;
+            return geoBase;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CityId
+        {
+            get
+            {
+                return _CityId;
+            }
+            set
+            {
+                if (_CityId != value)
+                {
+                    OnCityIdChanging(value);
+                    ReportPropertyChanging("CityId");
+                    _CityId = StructuralObject.SetValidValue(value, "CityId");
+                    ReportPropertyChanged("CityId");
+                    OnCityIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _CityId;
+        partial void OnCityIdChanging(global::System.Int32 value);
+        partial void OnCityIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String CityFias
+        {
+            get
+            {
+                return _CityFias;
+            }
+            set
+            {
+                OnCityFiasChanging(value);
+                ReportPropertyChanging("CityFias");
+                _CityFias = StructuralObject.SetValidValue(value, true, "CityFias");
+                ReportPropertyChanged("CityFias");
+                OnCityFiasChanged();
+            }
+        }
+        private global::System.String _CityFias;
+        partial void OnCityFiasChanging(global::System.String value);
+        partial void OnCityFiasChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String CityName
+        {
+            get
+            {
+                return _CityName;
+            }
+            set
+            {
+                OnCityNameChanging(value);
+                ReportPropertyChanging("CityName");
+                _CityName = StructuralObject.SetValidValue(value, true, "CityName");
+                ReportPropertyChanged("CityName");
+                OnCityNameChanged();
+            }
+        }
+        private global::System.String _CityName;
+        partial void OnCityNameChanging(global::System.String value);
+        partial void OnCityNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String CityType
+        {
+            get
+            {
+                return _CityType;
+            }
+            set
+            {
+                OnCityTypeChanging(value);
+                ReportPropertyChanging("CityType");
+                _CityType = StructuralObject.SetValidValue(value, true, "CityType");
+                ReportPropertyChanged("CityType");
+                OnCityTypeChanged();
+            }
+        }
+        private global::System.String _CityType;
+        partial void OnCityTypeChanging(global::System.String value);
+        partial void OnCityTypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String CityTypeFull
+        {
+            get
+            {
+                return _CityTypeFull;
+            }
+            set
+            {
+                OnCityTypeFullChanging(value);
+                ReportPropertyChanging("CityTypeFull");
+                _CityTypeFull = StructuralObject.SetValidValue(value, true, "CityTypeFull");
+                ReportPropertyChanged("CityTypeFull");
+                OnCityTypeFullChanged();
+            }
+        }
+        private global::System.String _CityTypeFull;
+        partial void OnCityTypeFullChanging(global::System.String value);
+        partial void OnCityTypeFullChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> CityPostalCode
+        {
+            get
+            {
+                return _CityPostalCode;
+            }
+            set
+            {
+                OnCityPostalCodeChanging(value);
+                ReportPropertyChanging("CityPostalCode");
+                _CityPostalCode = StructuralObject.SetValidValue(value, "CityPostalCode");
+                ReportPropertyChanged("CityPostalCode");
+                OnCityPostalCodeChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _CityPostalCode;
+        partial void OnCityPostalCodeChanging(Nullable<global::System.Int32> value);
+        partial void OnCityPostalCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String RegionFias
+        {
+            get
+            {
+                return _RegionFias;
+            }
+            set
+            {
+                OnRegionFiasChanging(value);
+                ReportPropertyChanging("RegionFias");
+                _RegionFias = StructuralObject.SetValidValue(value, true, "RegionFias");
+                ReportPropertyChanged("RegionFias");
+                OnRegionFiasChanged();
+            }
+        }
+        private global::System.String _RegionFias;
+        partial void OnRegionFiasChanging(global::System.String value);
+        partial void OnRegionFiasChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String RegionName
+        {
+            get
+            {
+                return _RegionName;
+            }
+            set
+            {
+                OnRegionNameChanging(value);
+                ReportPropertyChanging("RegionName");
+                _RegionName = StructuralObject.SetValidValue(value, true, "RegionName");
+                ReportPropertyChanged("RegionName");
+                OnRegionNameChanged();
+            }
+        }
+        private global::System.String _RegionName;
+        partial void OnRegionNameChanging(global::System.String value);
+        partial void OnRegionNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String RegionType
+        {
+            get
+            {
+                return _RegionType;
+            }
+            set
+            {
+                OnRegionTypeChanging(value);
+                ReportPropertyChanging("RegionType");
+                _RegionType = StructuralObject.SetValidValue(value, true, "RegionType");
+                ReportPropertyChanged("RegionType");
+                OnRegionTypeChanged();
+            }
+        }
+        private global::System.String _RegionType;
+        partial void OnRegionTypeChanging(global::System.String value);
+        partial void OnRegionTypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String RegionTypeFull
+        {
+            get
+            {
+                return _RegionTypeFull;
+            }
+            set
+            {
+                OnRegionTypeFullChanging(value);
+                ReportPropertyChanging("RegionTypeFull");
+                _RegionTypeFull = StructuralObject.SetValidValue(value, true, "RegionTypeFull");
+                ReportPropertyChanged("RegionTypeFull");
+                OnRegionTypeFullChanged();
+            }
+        }
+        private global::System.String _RegionTypeFull;
+        partial void OnRegionTypeFullChanging(global::System.String value);
+        partial void OnRegionTypeFullChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> RegionPostalCode
+        {
+            get
+            {
+                return _RegionPostalCode;
+            }
+            set
+            {
+                OnRegionPostalCodeChanging(value);
+                ReportPropertyChanging("RegionPostalCode");
+                _RegionPostalCode = StructuralObject.SetValidValue(value, "RegionPostalCode");
+                ReportPropertyChanged("RegionPostalCode");
+                OnRegionPostalCodeChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _RegionPostalCode;
+        partial void OnRegionPostalCodeChanging(Nullable<global::System.Int32> value);
+        partial void OnRegionPostalCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String latitude
+        {
+            get
+            {
+                return _latitude;
+            }
+            set
+            {
+                OnlatitudeChanging(value);
+                ReportPropertyChanging("latitude");
+                _latitude = StructuralObject.SetValidValue(value, true, "latitude");
+                ReportPropertyChanged("latitude");
+                OnlatitudeChanged();
+            }
+        }
+        private global::System.String _latitude;
+        partial void OnlatitudeChanging(global::System.String value);
+        partial void OnlatitudeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String longitude
+        {
+            get
+            {
+                return _longitude;
+            }
+            set
+            {
+                OnlongitudeChanging(value);
+                ReportPropertyChanging("longitude");
+                _longitude = StructuralObject.SetValidValue(value, true, "longitude");
+                ReportPropertyChanged("longitude");
+                OnlongitudeChanged();
+            }
+        }
+        private global::System.String _longitude;
+        partial void OnlongitudeChanging(global::System.String value);
+        partial void OnlongitudeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ym_geocode
+        {
+            get
+            {
+                return _ym_geocode;
+            }
+            set
+            {
+                Onym_geocodeChanging(value);
+                ReportPropertyChanging("ym_geocode");
+                _ym_geocode = StructuralObject.SetValidValue(value, true, "ym_geocode");
+                ReportPropertyChanged("ym_geocode");
+                Onym_geocodeChanged();
+            }
+        }
+        private global::System.String _ym_geocode;
+        partial void Onym_geocodeChanging(global::System.String value);
+        partial void Onym_geocodeChanged();
 
         #endregion
 

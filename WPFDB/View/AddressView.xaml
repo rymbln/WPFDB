@@ -13,6 +13,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -23,32 +24,38 @@
 
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Тип:" />
-                <ComboBox Grid.Row="0" Grid.Column="1" Style="{StaticResource ComboBoxSmall}" HorizontalAlignment="Stretch"
+                <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="50" Style="{StaticResource ComboBoxSmall}" HorizontalAlignment="Stretch"
                           ItemsSource="{Binding Path=ContactTypeLookup}" 
                           SelectedValue="{Binding Path=ContactType}" 
                           SelectedValuePath="." 
-                          DisplayMemberPath="Name" 
-                     />
+                          DisplayMemberPath="Name"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Город:" />
+                <TextBox Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Stretch"
+                         Text="{Binding Path=CityName, UpdateSourceTrigger=LostFocus}" />
 
-                <TextBlock Grid.Row="1" Grid.Column="2" Text="Регион:" />
-                <TextBox Grid.Row="1" Grid.Column="3"   HorizontalAlignment="Stretch"
+                <ComboBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" 
+                          ItemsSource="{Binding Path=CitiesLookup, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedValue="{Binding Path=CitiesLookupSelected, UpdateSourceTrigger=PropertyChanged}"
+                          DisplayMemberPath="Text"
+                          />
+
+                <TextBlock Grid.Row="4" Grid.Column="2" Text="Регион:" />
+                <TextBox Grid.Row="4" Grid.Column="3"   HorizontalAlignment="Stretch"
                          Text="{Binding Path=RegionName}" />
 
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Страна:" />
-                <TextBox Grid.Row="1" Grid.Column="1"   HorizontalAlignment="Stretch"
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Страна:" />
+                <TextBox Grid.Row="4" Grid.Column="1"  MinWidth="50" HorizontalAlignment="Stretch"
                          Text="{Binding Path=CountryName}"  />
 
 
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Индекс:" />
-                <TextBox Grid.Row="2" Grid.Column="1"   HorizontalAlignment="Stretch"
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Индекс:" />
+                <TextBox Grid.Row="3" Grid.Column="1" MinWidth="50"  HorizontalAlignment="Stretch"
                          Text="{Binding Path=ZipCode}" />
 
-                <TextBlock Grid.Row="2" Grid.Column="2" Text="Город:" />
-                <TextBox Grid.Row="2" Grid.Column="3"  HorizontalAlignment="Stretch"
-                         Text="{Binding Path=CityName}" />
+            
 
-                <TextBlock Grid.Row="3" Grid.Column="0" Text="Адрес:" />
-                <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch"
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Адрес:" />
+                <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" HorizontalAlignment="Stretch"
                          Text="{Binding Path=StreetHouseName}" />
 
 

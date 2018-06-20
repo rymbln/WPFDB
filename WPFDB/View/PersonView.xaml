@@ -185,9 +185,11 @@
                     <TabItem.Header>Контактные данные</TabItem.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" MinWidth="400"/>
+                            <ColumnDefinition Width="3" />
+                            <ColumnDefinition Width="*" MinWidth="200" MaxWidth="300"/>
+                            <ColumnDefinition Width="3" />
+                            <ColumnDefinition Width="*" MinWidth="200" MaxWidth="300"/>
                         </Grid.ColumnDefinitions>
                         <HeaderedContentControl Grid.Column="0"  Style="{StaticResource SubDisplayArea}" Margin="2">
                             <HeaderedContentControl.Header>
@@ -215,7 +217,9 @@
                                 </StackPanel>
                             </ScrollViewer>
                         </HeaderedContentControl>
-                        <HeaderedContentControl Grid.Column="1" Style="{StaticResource SubDisplayArea}" Margin="2">
+                        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        <GridSplitter Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        <HeaderedContentControl Grid.Column="2" Style="{StaticResource SubDisplayArea}" Margin="2">
                             <HeaderedContentControl.Header>
                                 Emails
                             </HeaderedContentControl.Header>
@@ -240,7 +244,7 @@
                                 </StackPanel>
                             </ScrollViewer>
                         </HeaderedContentControl>
-                        <HeaderedContentControl Grid.Column="2" Style="{StaticResource SubDisplayArea}" Margin="2">
+                        <HeaderedContentControl Grid.Column="4" Style="{StaticResource SubDisplayArea}" Margin="2">
                             <HeaderedContentControl.Header>
                                 Телефоны
                             </HeaderedContentControl.Header>
@@ -287,6 +291,13 @@
                                 <Separator/>
                                 <Button Command="{Binding PrintOrderCommand}" Content="Печать ордера" ToolTip="{x:Static p:Resources.Save}" HorizontalAlignment="Right"/>
                                 <Separator/>
+                                <ComboBox Grid.Column="1" Grid.Row="4" 
+                                  HorizontalAlignment="Stretch"
+                                  SelectedValuePath="." 
+                                  Width="300" 
+                                  SelectedItem="{Binding Path=ConferenceForInsert, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" 
+                                  ItemsSource="{Binding Path=AvailableConferencesCollection}" 
+                                  DisplayMemberPath="Name" />
                             </ToolBar>
                         </ToolBarTray>
                         <Grid>

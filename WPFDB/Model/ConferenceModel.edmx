@@ -161,6 +161,27 @@
           <Property Name="DateUpdate" Type="datetime" />
           <Property Name="User" Type="nvarchar(max)" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ConferenceNew.dbo.GeoBase' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GeoBase">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="int" Nullable="false" />
+          <Property Name="CityFias" Type="nvarchar" MaxLength="255" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="255" />
+          <Property Name="CityType" Type="nvarchar" MaxLength="255" />
+          <Property Name="CityTypeFull" Type="nvarchar" MaxLength="255" />
+          <Property Name="CityPostalCode" Type="int" />
+          <Property Name="RegionFias" Type="nvarchar" MaxLength="255" />
+          <Property Name="RegionName" Type="nvarchar" MaxLength="255" />
+          <Property Name="RegionType" Type="nvarchar" MaxLength="255" />
+          <Property Name="RegionTypeFull" Type="nvarchar" MaxLength="255" />
+          <Property Name="RegionPostalCode" Type="int" />
+          <Property Name="latitude" Type="nvarchar" MaxLength="255" />
+          <Property Name="longitude" Type="nvarchar" MaxLength="255" />
+          <Property Name="ym_geocode" Type="nvarchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="Iacmacs">
           <Key>
             <PropertyRef Name="PersonId" />
@@ -750,6 +771,24 @@
           <EntitySet Name="Specialities" EntityType="Self.Specialities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GeoBase" EntityType="Self.GeoBase" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[GeoBase].[CityId] AS [CityId], 
+[GeoBase].[CityFias] AS [CityFias], 
+[GeoBase].[CityName] AS [CityName], 
+[GeoBase].[CityType] AS [CityType], 
+[GeoBase].[CityTypeFull] AS [CityTypeFull], 
+[GeoBase].[CityPostalCode] AS [CityPostalCode], 
+[GeoBase].[RegionFias] AS [RegionFias], 
+[GeoBase].[RegionName] AS [RegionName], 
+[GeoBase].[RegionType] AS [RegionType], 
+[GeoBase].[RegionTypeFull] AS [RegionTypeFull], 
+[GeoBase].[RegionPostalCode] AS [RegionPostalCode], 
+[GeoBase].[latitude] AS [latitude], 
+[GeoBase].[longitude] AS [longitude], 
+[GeoBase].[ym_geocode] AS [ym_geocode]
+FROM [dbo].[GeoBase] AS [GeoBase]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_AbstractAbstractWork" Association="Self.FK_AbstractAbstractWork">
             <End Role="Abstracts" EntitySet="Abstracts" />
             <End Role="AbstractWorks" EntitySet="AbstractWorks" />
@@ -1000,6 +1039,7 @@
             <End Role="BadgesDefault" EntitySet="BadgesDefaults" />
           </AssociationSet>
           <EntitySet Name="Printers" EntityType="ConferenceModel.Printer" />
+          <EntitySet Name="GeoBases" EntityType="ConferenceModel.GeoBase" />
           </EntityContainer>
         <EntityType Name="Person">
           <Key>
@@ -1771,6 +1811,25 @@
           <Property Name="DocumentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PrinterName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="GeoBase">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="CityFias" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CityName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CityType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CityTypeFull" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CityPostalCode" Type="Int32" />
+          <Property Name="RegionFias" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RegionName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RegionType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RegionTypeFull" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RegionPostalCode" Type="Int32" />
+          <Property Name="latitude" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="longitude" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ym_geocode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2186,6 +2245,26 @@
                 <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
                 <ScalarProperty Name="ComputerName" ColumnName="ComputerName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GeoBases">
+            <EntityTypeMapping TypeName="ConferenceModel.GeoBase">
+              <MappingFragment StoreEntitySet="GeoBase">
+                <ScalarProperty Name="ym_geocode" ColumnName="ym_geocode" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="RegionPostalCode" ColumnName="RegionPostalCode" />
+                <ScalarProperty Name="RegionTypeFull" ColumnName="RegionTypeFull" />
+                <ScalarProperty Name="RegionType" ColumnName="RegionType" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="RegionFias" ColumnName="RegionFias" />
+                <ScalarProperty Name="CityPostalCode" ColumnName="CityPostalCode" />
+                <ScalarProperty Name="CityTypeFull" ColumnName="CityTypeFull" />
+                <ScalarProperty Name="CityType" ColumnName="CityType" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CityFias" ColumnName="CityFias" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

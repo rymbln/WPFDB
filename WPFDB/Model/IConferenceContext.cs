@@ -59,7 +59,9 @@ namespace WPFDB.Data
 
         ObjectSet<Printer> Printers { get; }
 
-     //   ObjectSet<BadgeElementType> BadgeElementTypes { get; }
+        ObjectSet<GeoBase> GeoBases { get; }
+
+        //   ObjectSet<BadgeElementType> BadgeElementTypes { get; }
 
         //ObjectSet<PersonConferences_Detail> PersonConferenceDetails { get; }
 

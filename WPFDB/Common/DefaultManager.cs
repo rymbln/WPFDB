@@ -25,7 +25,7 @@ namespace WPFDB.Common
         public List<ItemIntName> GetLogicLookup()
         {
             var lst = new List<ItemIntName>();
-         //   lst.Add(new ItemIntName(-1,"---"));
+            //   lst.Add(new ItemIntName(-1,"---"));
             lst.Add(new ItemIntName(1, "Да"));
             lst.Add(new ItemIntName(0, "Нет"));
             return lst;
@@ -972,13 +972,53 @@ namespace WPFDB.Common
             pcd.IsAbstract = false;
             pcd.IsArrive = false;
             pcd.IsBadge = false;
+            pcd.DateArrive = null;
             pcd.IsNeedBadge = true;
             pcd.Rank = DefaultRank;
             pcd.Company = DefaultCompany;
             return pcd;
         }
 
+        public PersonConferences_Detail DefaultPersonConferenceDetailRegistration(Guid personConferenceId)
+        {
+
+            if (personConferenceId == null)
+            {
+                throw new ArgumentNullException("personConferenceId");
+            }
+            var pcd = DataManager.Instance.CreateObject<PersonConferences_Detail>();
+            pcd.PersonConferenceId = personConferenceId;
+            pcd.IsAutoreg = false;
+            pcd.IsAbstract = false;
+            pcd.IsArrive = true;
+            pcd.IsBadge = false;
+            pcd.IsNeedBadge = false;
+            pcd.DateArrive = DateTime.Now;
+            pcd.Rank = DefaultRank;
+            pcd.Company = DefaultCompany;
+            return pcd;
+        }
+
         public PersonConferences_Payment DefaultPersonConferencePayment(Guid personConferenceId)
+        {
+            if (personConferenceId == null)
+            {
+                throw new ArgumentNullException("personConferenceId");
+            }
+            var pcp = DataManager.Instance.CreateObject<PersonConferences_Payment>();
+            pcp.PersonConferenceId = personConferenceId;
+            pcp.Company = DefaultCompany;
+            pcp.IsComplect = false;
+            pcp.Money = 0;
+            pcp.OrderNumber = 0;
+            pcp.OrderStatus = DefaultOrderStatus;
+            pcp.PaymentType = DefaultPaymentType;
+            pcp.PaymentDate = null;
+            pcp.PaymentDocument = "---";
+            return pcp;
+        }
+
+        public PersonConferences_Payment DefaultPersonConferencePaymentRegistration(Guid personConferenceId)
         {
             if (personConferenceId == null)
             {
@@ -1034,16 +1074,7 @@ namespace WPFDB.Common
                 DataManager.Instance.AddPerson(p);
                 DataManager.Instance.Save();
 
-                //      var pc = DataManager.Instance.CreateObject<PersonConference>();
-                //     pc.PersonConferenceId = GuidComb.Generate();
-                //  pc.PersonId = p.Id;
-                // pc.Conference = DefaultConference;
-
-                //   pc.PersonConferences_Payment = DefaultPersonConferencePayment(pc.PersonConferenceId);
-                //   pc.PersonConferences_Detail = DefaultPersonConferenceDetail(pc.PersonConferenceId);
-
-                DataManager.Instance.AddPersonConference(p, DefaultConference);
-                DataManager.Instance.Save();
+         
                 return p;
             }
         }

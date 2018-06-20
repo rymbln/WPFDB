@@ -24,5 +24,10 @@ namespace WPFDB.View
         {
             InitializeComponent();
         }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
